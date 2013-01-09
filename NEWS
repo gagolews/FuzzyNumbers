@@ -1,0 +1,35 @@
+FuzzyNumbers Package NEWS
+
+***************************************************************************
+
+0.03 /under development/
+
+* ...
+
+***************************************************************************
+
+0.02 /2012-12-27/
+
+* approx.invert(): a new function to find the numerical
+  inverse of a given side/alpha-cut generating function
+  (by default via Hermite monotonic spline interpolation)
+
+* convert.side(), convert.alpha():
+  new functions to convert sides and alpha cuts
+  to side generating funs and alpha cut generators
+
+* FuzzyNumber class validity check for lower, upper, left, right:
+   * checks whether each function is properly vectorized
+      and gives numeric results
+   * does not check for the number of formal arguments,
+      but just uses the first from the list
+
+* suggests `testthat`
+
+* each object has been documented
+
+***************************************************************************
+
+0.01 /July 2012/
+
+* initial release

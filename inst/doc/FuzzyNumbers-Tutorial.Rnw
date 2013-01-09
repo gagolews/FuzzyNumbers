@@ -1,0 +1,4 @@
+\documentclass[10pt]{article}
+%\VignetteIndexEntry{FuzzyNumbers-Tutorial}
+\begin{document}
+\end{document}

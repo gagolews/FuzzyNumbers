@@ -1,0 +1,12 @@
+citHeader("To cite package 'FuzzyNumbers' in publications use:")
+
+citEntry(entry = "Manual",
+  title        = "FuzzyNumbers Package: Tools to deal with fuzzy numbers in R",
+  author       = personList(as.person("Marek Gagolewski")),
+  year         = "2012",
+  url          = "http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/",
+  textVersion  =
+  paste("Gagolewski M. (2012).",
+        "FuzzyNumbers Package: Tools to deal with fuzzy numbers in R.",
+        "http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers.")
+)

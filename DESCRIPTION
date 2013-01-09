@@ -1,0 +1,52 @@
+Package: FuzzyNumbers
+License: LGPL (>= 3)
+Maintainer: Marek Gagolewski <gagolews@ibspan.waw.pl>
+BugReports: http://r-forge.r-project.org/tracker/?atid=5289&group_id=1408
+LazyData: true
+Title: Tools to deal with fuzzy numbers in R
+Type: Package
+Author: Marek Gagolewski
+Authors@R: c(
+    person("Marek", "Gagolewski", role = c("aut", "cre"),
+    email = "gagolews@ibspan.waw.pl"))
+Description: The FuzzyNumbers package provides S4 classes and methods
+    to deal with Fuzzy Numbers. It allows for computations of arithmetic
+    operations on FNs, approximation by trapezoidal and piecewise linear FNs,
+    random FN generation, etc.
+Version: 0.03
+URL: http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/
+Date: 2012-12-28
+Depends:
+    R (>= 2.15.0),
+    graphics,
+    methods
+Suggests:
+    testthat
+Collate:
+    'FuzzyNumbers-package.R'
+    'FuzzyNumber.R'
+    'TrapezoidalFuzzyNumber.R'
+    'PiecewiseLinearFuzzyNumber.R'
+    'PowerFuzzyNumber.R'
+    'DiscontinuousFuzzyNumber.R'
+    'Extract-methods.R'
+    'invert-generators.R'
+    'integrate.R'
+    'evaluate-methods.R'
+    'distance-methods.R'
+    'Arithmetic-methods.R'
+    'convert-generators.R'
+    'core-methods.R'
+    'alphacut-methods.R'
+    'alphaInterval-methods.R'
+    'expectedInterval-methods.R'
+    'ambiguity-methods.R'
+    'expectedValue-methods.R'
+    'supp-methods.R'
+    'value-methods.R'
+    'weightedExpectedValue-methods.R'
+    'width-methods.R'
+    'plot-methods.R'
+    'show-methods.R'
+    'piecewiseLinearApproximation-methods.R'
+    'trapezoidalApproximation-methods.R'
