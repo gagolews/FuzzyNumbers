@@ -27,13 +27,17 @@ The package aims to provide the following functionality:
 *    Aggregation of fuzzy numbers [TO DO],
 *    Ranking of fuzzy numbers [TO DO].
 
+* * *
 
 **Homepage**: http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
-**R-forge** build: http://r-forge.r-project.org/projects/fuzzynumbers/
+**Tutorial**: http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/doc/FuzzyNumbers-Tutorial.pdf
 
+**On-line manual**: http://www.ibspan.waw.pl/~gagolews/?page=resources&subpage=FuzzyNumbers&manpage=00Index
+
+* * *
 
 **Author**: Marek Gągolewski <gagolews at ibspan.waw.pl>
 
