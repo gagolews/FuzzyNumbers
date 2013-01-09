@@ -38,7 +38,7 @@ R-forge build: http://r-forge.r-project.org/projects/fuzzynumbers/
 *Author*: Marek Gągolewski <gagolews at ibspan.waw.pl>
 
 To *cite* package *FuzzyNumbers* in publications please use:
-Gagolewski M. (2012). /*FuzzyNumbers* Package: Tools to deal with fuzzy numbers in R/.
+Gagolewski M. (2012). *FuzzyNumbers* Package: Tools to deal with fuzzy numbers in R.
 http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers.
 
 A BibTeX entry for LaTeX users is:
