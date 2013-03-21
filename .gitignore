@@ -19,3 +19,13 @@ FuzzyNumbers.Rproj
 *~
 *.backup
 *.bak
+
+
+# LaTeX/knitr aux stuff
+cache-knitr
+figures-knitr
+*.aux
+*.log
+*.toc
+*.out
+src/vignette-Tutorial/FuzzyNumbers-Tutorial.tex

@@ -1,4 +1,12 @@
-\documentclass[10pt]{article}
-%\VignetteIndexEntry{FuzzyNumbers-Tutorial}
+\documentclass[11pt]{article}
+%\VignetteIndexEntry{A Guide to the FuzzyNumbers Package}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \begin{document}
+
 \end{document}
