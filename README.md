@@ -29,28 +29,30 @@ The package aims to provide the following functionality:
 
 * * *
 
-**Homepage**: http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers
+**Homepage**: http://www.rexamine.com/resources/fuzzynumbers/
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
-**Tutorial**: http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/doc/FuzzyNumbers-Tutorial.pdf
+**Tutorial**: t.b.d.
 
-**On-line manual**: http://www.ibspan.waw.pl/~gagolews/?page=resources&subpage=FuzzyNumbers&manpage=00Index
+**On-line manual**: t.b.d.
 
 * * *
 
-**Author**: Marek Gągolewski <gagolews at ibspan.waw.pl>
+**Author**: Marek Gągolewski <gagolews at rexamine dot com>
 
 To **cite** package **FuzzyNumbers** in publications please use:
 > "Gagolewski M. (2013). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
-http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers."
+http://www.rexamine.com/resources/fuzzynumbers/."
 
 A BibTeX entry for LaTeX users is:
 
-    @Manual{,
-      title = {**FuzzyNumbers** Package: Tools to deal with fuzzy numbers in R},
-      author = {Marek Gagolewski},
-      year = {2013},
-      url = {http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/},
-    }
+```
+@Manual{FuzzyNumbersPkgR,
+   title = {**FuzzyNumbers** Package: Tools to deal with fuzzy numbers in R},
+   author = {Marek Gagolewski},
+   year = {2013},
+   url = {http://www.rexamine.com/resources/fuzzynumbers/}
+}
+```
 
