@@ -1,6 +1,6 @@
 ## This file is part of the FuzzyNumbers library.
 ##
-## Copyright 2012 Marek Gagolewski
+## Copyright 2012-2013 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify
@@ -61,13 +61,13 @@
 #' }
 #'
 #' Please feel free to send any comments and feature requests to the author
-#' (see his homepage at \url{http://www.ibspan.waw.pl/~gagolews}).
+#' (see his homepage at \url{http://staff.rexamine.com/gagolews/}).
 #'
 #' For a complete list of classes and methods
-#' call \code{library(help="FuzzyNumbers")}.
+#' call \code{help(package="FuzzyNumbers")}.
 #' Moreover, you will surely be interested in a step-by-step guide to the
 #' package usage and features which is available at
-#' \url{http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/doc/FuzzyNumbers-Tutorial.pdf}.
+#' \url{https://github.com/Rexamine/FuzzyNumbers/blob/master/inst/doc/FuzzyNumbers-Tutorial.pdf?raw=true}.
 #' \cr\cr
 #'
 #' \bold{Keywords}: Fuzzy Numbers, Fuzzy Sets, Shadowed Sets,
@@ -77,9 +77,9 @@
 #' @name FuzzyNumbers-package
 #' @docType package
 #' @title Tools to deal with fuzzy numbers in R
-#' @author Marek Gagolewski \email{gagolews@@ibspan.waw.pl}
+#' @author Marek Gagolewski \email{gagolews@@rexamine.com}
 #' @references
-#' \pkg{FuzzyNumbers} Homepage, \url{http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/}.\cr
+#' \pkg{FuzzyNumbers} Homepage, \url{http://www.rexamine.com/resources/fuzzynumbers/}.\cr
 #' Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
 #' preserving the expected interval, Fuzzy Sets and Systems 159, pp. 1327-1344.\cr
 #' Ban A.I. (2009), On the nearest parametric approximation of a fuzzy number - Revisited,
@@ -92,14 +92,14 @@
 #' Fuzzy Sets and Systems 93, pp. 125-135.\cr
 #' Dubois D., Prade H. (1978), Operations on fuzzy numbers, Int. J. Syst. Sci. 9, pp. 613-626.\cr
 #' Dubois D., Prade H. (1987), The mean value of a fuzzy number, Fuzzy Sets and Systems 24, pp. 279-300.\cr
-#' Gagolewski M. (2012), A Guide to the \code{FuzzyNumbers} Package for R,
-#' \url{http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/doc/FuzzyNumbers-Tutorial.pdf}, 2012.\cr
+#' Gagolewski M. (2013), A Guide to the \code{FuzzyNumbers} Package for R,
+#' \url{https://github.com/Rexamine/FuzzyNumbers/blob/master/inst/doc/FuzzyNumbers-Tutorial.pdf?raw=true}.\cr
 #' Grzegorzewski P. (2010), Algorithms for trapezoidal approximations of fuzzy numbers
 #' preserving the expected interval, In: Bouchon-Meunier B. et al (Eds.),
 #' Foundations of Reasoning Under Uncertainty, Springer, pp. 85-98.\cr
 #' Grzegorzewski P. (1998), Metrics and orders in space of fuzzy numbers,
 #' Fuzzy Sets and Systems 97, pp. 83-94.\cr
-#' Grzegorzewski P, Pasternak-Winiarska K. (2011), Trapezoidal approximations of fuzzy numbers
+#' Grzegorzewski P,. Pasternak-Winiarska K. (2011), Trapezoidal approximations of fuzzy numbers
 #' with restrictions on the support and core, Proc. EUSFLAT/LFA 2011, Atlantic Press, pp. 749-756.\cr
 #' Klir G.J., Yuan B. (1995), Fuzzy sets and fuzzy logic. Theory and applications, Prentice Hall, New Jersey.\cr
 #' Stefanini L., Sorini L. (2009), Fuzzy arithmetic with parametric LR fuzzy numbers,

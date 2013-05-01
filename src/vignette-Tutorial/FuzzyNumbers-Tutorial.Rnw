@@ -88,16 +88,16 @@
 {\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.03-devel} Package for \R}
 
 \bigskip
-{\large Marek Gagolewski}
+{\large Marek Gagolewski${}^{1,2}$}
 
-Systems Research Institute, Polish Academy of Sciences
+${}^{1}$ Systems Research Institute, Polish Academy of Sciences
 
 ul. Newelska 6, 01-447 Warsaw, Poland
 
-Email: gagolews@ibspan.waw.pl
+${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
-\href{http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/}%
-{www.ibspan.waw.pl/$\sim$gagolews/Fuzzy\-Numbers/}
+\href{http://www.rexamine.com/resources/fuzzynumbers/}%
+{www.rexamine.com/resources/fuzzynumbers/}
 
 \bigskip
 \today
@@ -1673,7 +1673,7 @@ Dubois D., Prade H., The mean value of a fuzzy number, \textit{Fuzzy Sets and Sy
 
 \bibitem{FuzzyNumbersHome}
 Gagolewski M., \package{FuzzyNumbers}: Tools to deal with fuzzy numbers in \R,
-\href{http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/}{www.ibspan.waw.pl/$\sim$gagolews/Fuzzy\-Numbers/},
+\href{http://www.rexamine.com/resources/fuzzynumbers/}{www.rexamine.com/resources/fuzzynumbers/},
 2012.
 
 \bibitem{Grzegorzewski1998}
@@ -1686,7 +1686,7 @@ preserving the expected interval}, In: Bouchon-Meunier B. et al (Eds.),
 \textit{Foundations of Reasoning Under Uncertainty}, Springer, 2010, pp.~85--98.
 
 \bibitem{GrzegorzewskiPasternak2011}
-Grzegorzewski P, Pasternak-Winiarska K., \textit{Trapezoidal approximations of fuzzy numbers
+Grzegorzewski P., Pasternak-Winiarska K., \textit{Trapezoidal approximations of fuzzy numbers
 with restrictions on the support and core},
 In: \textit{Proc. EUSFLAT/LFA 2011}, Atlantic Press, 2011, pp.~749--756.
 

@@ -1,10 +1,6 @@
 Package: FuzzyNumbers
-License: LGPL (>= 3)
-Maintainer: Marek Gagolewski <gagolews@rexamine.com>
-LazyData: true
 Title: Tools to deal with fuzzy numbers in R
 Type: Package
-Author: Marek Gagolewski
 Authors@R: c(
     person("Marek", "Gagolewski", role = c("aut", "cre"),
     email = "gagolews@rexamine.com"))
@@ -13,9 +9,11 @@ Description: The FuzzyNumbers package provides S4 classes and methods
     operations on FNs, approximation by trapezoidal and piecewise linear FNs,
     random FN generation, etc.
 Version: 0.03
+Date: 2013-05-01
 URL: http://www.rexamine.com/resources/fuzzynumbers/
 BugReports: https://github.com/Rexamine/FuzzyNumbers/issues
-Date: 2013-03-28
+License: LGPL (>= 3)
+LazyData: true
 Depends:
     R (>= 2.12.0),
     graphics,
