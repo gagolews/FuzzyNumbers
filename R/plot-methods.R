@@ -19,6 +19,10 @@
 
 
 
+if (!isGeneric("plot"))
+   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
+
+
 #' Plot a fuzzy number
 #'
 #' Note that if \code{from} > \code{a1} then it is set to \code{a1}.

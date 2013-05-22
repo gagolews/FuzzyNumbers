@@ -4,6 +4,9 @@ FuzzyNumbers Package NEWS
 
 0.03 /under development/
 
+* Added a call to  setGeneric("plot", function(x, y, ...) ...
+  to avoid a warning on install
+
 * ...
 
 ***************************************************************************

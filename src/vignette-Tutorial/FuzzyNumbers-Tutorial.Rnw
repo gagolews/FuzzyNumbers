@@ -1183,15 +1183,44 @@ diff(supp(A))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Operations on fuzzy numbers}\label{Sec:Operations}
+\section{Arithmetic operations on fuzzy numbers}\label{Sec:Operations}
 
 
-TO BE DONE....
+Let $A,B$ be arbitrary FNs. We define the sum $A+B$  for every
+$\alpha \in \lbrack 0,1]$ as:%
+\[
+\left( A+B\right) _{\alpha }=A_{\alpha }+B_{\alpha }=\left[ A_{L}\left(
+\alpha \right) +B_{L}\left( \alpha \right) ,A_{U}\left( \alpha \right)
++B_{U}\left( \alpha \right) \right],
+\]%
+see \cite{DuboisPrade1978,DiamondKloeden1994}.
+Moreover, for $\lambda \in \mathbb{R}$,
+the scalar multiplication is given by:
+\[
+\left( \lambda \cdot A\right) _{\alpha }=\lambda A_{\alpha }=\left\{ 
+\begin{array}{ll}
+\left[ \lambda A_{L}\left( \alpha \right) ,\lambda A_{U}\left( \alpha
+\right) \right] , & \text{if }\lambda \geq 0, \\ 
+\left[ \lambda A_{U}\left( \alpha \right) ,\lambda A_{L}\left( \alpha
+\right) \right] , & \text{if }\lambda <0,%
+\end{array}%
+\right. 
+\]%
+for each $\alpha \in \lbrack 0,1]$.
 
 
+In \package{FuzzyNumbers}, we have defined
+the \texttt{+}, \texttt{-}, and \texttt{*} operators,
+which implements the above-mentioned operations.
 
-
-
+<<addition>>=
+A <- TrapezoidalFuzzyNumber(0, 1, 1, 2)
+B <- TrapezoidalFuzzyNumber(1, 2, 2, 3)
+plot(A, xlim=c(0,6))
+plot(B, add=TRUE, col=2, lty=2)
+plot(A+B, add=TRUE, col=4, lty=4)
+legend("topright", c("A", "B", "A+B"), lty=c(1,2,4), col=c(1,2,4))
+@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1642,6 +1671,16 @@ Jan Caha, and Pablo Villacorta Iglesias
 for stimulating discussion.
 
 
+
+The contribution of Marek Gagolewski was partially supported
+by the European Union from resources of the European Social Fund, Project PO KL 
+``Information technologies: Research and their interdisciplinary
+applications'', agreement UDA-POKL.04.01.01-00-051/10-00 (March-June 2013),
+and by FNP START Scholarship from the Foundation for Polish Science (2013).
+
+
+
+
 \begin{thebibliography}{100}
 \bibitem{Ban2008}
 Ban A.I., Approximation of fuzzy numbers by trapezoidal fuzzy numbers
@@ -1663,6 +1702,9 @@ Coroianu L., Gagolewski M., Grzegorzewski P.,
 \bibitem{DelgadoETAL1998}
 Delgado M., Vila M.A., Voxman W., On a canonical representation of a fuzzy number,
 \textit{Fuzzy Sets and Systems} \textbf{93}, 1998, pp.~125--135.
+
+\bibitem{DiamondKloeden1994} P. Diamond, P. Kloeden, Metric Spaces of Fuzzy
+Sets. Theory and Applications. World Scientific, Singapore, 1994.
 
 \bibitem{DuboisPrade1978}
 Dubois D., Prade H., Operations on fuzzy numbers, \textit{Int. J. Syst. Sci.} \textbf{9}, 1978, pp.~613--626.

@@ -53,7 +53,7 @@
 #'      \code{\link{value}}, \code{\link{trapezoidalApproximation}},
 #'      \code{\link{piecewiseLinearApproximation}}),
 #'    \item Visualization of FNs (see \code{\link{plot}}),
-#'    \item Operations on FNs [TO DO],
+#'    \item Basic Operations on FNs,
 #'    \item Aggregation of FNs [TO DO],
 #'    \item Ranking of FNs [TO DO],
 #'    \item Random FN generation [TO DO],

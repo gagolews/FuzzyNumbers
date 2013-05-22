@@ -23,7 +23,7 @@ The package aims to provide the following functionality:
 *    Random fuzzy numbers generation [TO DO],
 *    Defuzzification and Approximation of Fuzzy Numbers by Triangular and Piecewise Linear fuzzy numbers,
 *    Visualization of fuzzy numbers,
-*    Operations on fuzzy numbers [TO DO],
+*    Basic Operations on fuzzy numbers,
 *    Aggregation of fuzzy numbers [TO DO],
 *    Ranking of fuzzy numbers [TO DO].
 

@@ -176,7 +176,7 @@ FuzzyNumber <- function(a1, a2, a3, a4,
    .Object
 }
 
-#' Coverts a trapezoidal or a piecewise linear fuzzy number object to a (general) FuzzyNumber
+#' Coverts a special-type  fuzzy number object to a (general) FuzzyNumber
 #'
 #' FuzzyNumber is the base class for all FNs.
 #' Note that some functions for TFNs or PLFNs (more specific FNs)
@@ -188,7 +188,8 @@ FuzzyNumber <- function(a1, a2, a3, a4,
 #' @export
 #' @seealso \code{\link{FuzzyNumber-class}},
 #' \code{\link{TrapezoidalFuzzyNumber-class}},
-#' \code{\link{PiecewiseLinearFuzzyNumber-class}}
+#' \code{\link{PiecewiseLinearFuzzyNumber-class}},
+#' \code{\link{PowerFuzzyNumber-class}}
 as.FuzzyNumber <- function(object)
 {
    if (!inherits(object, "FuzzyNumber"))
