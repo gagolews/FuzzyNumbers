@@ -7,6 +7,8 @@ FuzzyNumbers Package NEWS
 * Added a call to  setGeneric("plot", function(x, y, ...) ...
   to avoid a warning on install
 
+* New methods: as.character(); also used by show()
+
 * ...
 
 ***************************************************************************

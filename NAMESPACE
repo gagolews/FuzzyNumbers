@@ -1,4 +1,7 @@
 export(approx.invert)
+export(as.character.FuzzyNumber)
+export(as.character.PiecewiseLinearFuzzyNumber)
+export(as.character.PowerFuzzyNumber)
 export(as.FuzzyNumber)
 export(as.PiecewiseLinearFuzzyNumber)
 export(convert.alpha)

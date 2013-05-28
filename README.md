@@ -39,7 +39,8 @@ Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 * * *
 
-**Author**: Marek Gągolewski <gagolews at rexamine dot com>
+**Author**: Marek Gągolewski <gagolews at rexamine dot com>,
+with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:
 > "Gagolewski M. (2013). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  

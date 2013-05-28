@@ -3,13 +3,15 @@ Title: Tools to deal with fuzzy numbers in R
 Type: Package
 Authors@R: c(
     person("Marek", "Gagolewski", role = c("aut", "cre"),
-    email = "gagolews@rexamine.com"))
+    email = "gagolews@rexamine.com"),
+    person("Jan", "Caha", role = "ctb",
+    email = "jan.caha@upol.cz"))
 Description: The FuzzyNumbers package provides S4 classes and methods
     to deal with Fuzzy Numbers. It allows for computations of arithmetic
     operations on FNs, approximation by trapezoidal and piecewise linear FNs,
     random FN generation, etc.
 Version: 0.03
-Date: 2013-05-22
+Date: 2013-05-28
 URL: http://www.rexamine.com/resources/fuzzynumbers/
 BugReports: https://github.com/Rexamine/FuzzyNumbers/issues
 License: LGPL (>= 3)
@@ -48,3 +50,4 @@ Collate:
     'show-methods.R'
     'piecewiseLinearApproximation-methods.R'
     'trapezoidalApproximation-methods.R'
+    'as.character-methods.R'
