@@ -1,12 +1,12 @@
 citHeader("To cite package 'FuzzyNumbers' in publications use:")
 
 citEntry(entry = "Manual",
-  title        = "FuzzyNumbers Package: Tools to deal with fuzzy numbers in R",
-  author       = personList(as.person("Marek Gagolewski")),
-  year         = "2012",
-  url          = "http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers/",
+  title        = "FuzzyNumbers Package: Tools to Deal with Fuzzy Numbers in R",
+  author       = personList(as.person("Marek Gagolewski"), as.person("Anna Cena")),
+  year         = "2013",
+  url          = "http://www.rexamine.com/resources/fuzzynumbers/",
   textVersion  =
-  paste("Gagolewski M. (2012).",
-        "FuzzyNumbers Package: Tools to deal with fuzzy numbers in R.",
-        "http://www.ibspan.waw.pl/~gagolews/FuzzyNumbers.")
+  paste("Gagolewski M. (2013).",
+        "FuzzyNumbers Package: Tools to Deal with Fuzzy Numbers in R.",
+        "http://www.rexamine.com/resources/fuzzynumbers/.")
 )

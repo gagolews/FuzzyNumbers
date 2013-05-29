@@ -2,7 +2,6 @@
 man/*.Rd
 
 # R/RStudio files:
-.Rbuildignore
 FuzzyNumbers.Rproj
 .Rproj.user
 .Rhistory
@@ -28,4 +27,5 @@ figures-knitr
 *.log
 *.toc
 *.out
-src/vignette-Tutorial/FuzzyNumbers-Tutorial.tex
+inst/doc/vignette-Tutorial/FuzzyNumbers-Tutorial.tex
+inst/doc/vignette-Tutorial/FuzzyNumbers-Tutorial.pdf
