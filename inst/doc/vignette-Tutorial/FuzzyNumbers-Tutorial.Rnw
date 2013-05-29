@@ -853,7 +853,7 @@ We also have:
 These fuzzy numbers are another natural generalization of trapezoidal FNs.
 
 An example:
-<<fig.keep='none'>>=
+<<PowerEx1a,fig.keep='none'>>=
 X <- PowerFuzzyNumber(-3, -1, 1, 3, p.left=2, p.right=0.1)
 class(X)
 X
@@ -861,10 +861,17 @@ plot(X)
 @
 
 \begin{center}
-<<echo=FALSE>>=
+<<PowerEx1b,dependson='PowerEx1a',echo=FALSE>>=
 plot(X, type='l', xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
+
+We have:
+\begin{quote}
+<<PowerEx1c,dependson='PowerEx1b',results='asis',echo=FALSE>>=
+cat(as.character(X, toLaTeX=TRUE, varnameLaTeX='X'))
+@
+\end{quote}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1710,7 +1717,7 @@ to allow for greater number of iterations.
 \section{NEWS/CHANGELOG}
 
 <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
-cat(readLines('../../NEWS'), sep='\n')
+cat(readLines('../../../NEWS'), sep='\n')
 @
 
 

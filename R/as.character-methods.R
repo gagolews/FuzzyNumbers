@@ -250,8 +250,46 @@ as.character.TrapezoidalFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="
 #' @rdname as.character-methods
 #' @export
 as.character.PowerFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
-   sprintf("Fuzzy number given by power functions, and:\n   support=[%g,%g],\n      core=[%g,%g].\n",
-               x@a1, x@a4, x@a2, x@a3)
+   if (identical(toLaTeX, FALSE)) {
+      sprintf("Fuzzy number given by power functions, and:\n   support=[%g,%g],\n      core=[%g,%g].\n",
+              x@a1, x@a4, x@a2, x@a3)
+   }
+   else {
+      res <- sprintf(paste(
+         "\\[",
+         "\\mu_{%s}(x) = \\left\\{",
+         "\\begin{array}{lll}",
+         "0      & \\text{for} & x\\in(-\\infty,%g), \\\\",
+         "((x%+g)/%g)^{%g} & \\text{for} & x\\in[%g,%g), \\\\",
+         "1      & \\text{for} & x\\in[%g,%g], \\\\",
+         "((%g-x)/%g)^{%g} & \\text{for} & x\\in(%g,%g], \\\\",
+         "0      & \\text{for} & x\\in(%g,+\\infty), \\\\",
+         "\\end{array}",
+         "\\right.",
+         "\\]",
+         sep="\n"),
+         varnameLaTeX,
+         x@a1,
+         -x@a1, x@a2-x@a1, x@p.left, x@a1, x@a2,
+         x@a2, x@a3,
+         x@a4, x@a4-x@a3, x@p.right, x@a3, x@a4,
+         x@a4
+      )
+      
+      res <- paste(res, "\n", sep="")
+      
+      res <- paste(res, sprintf(paste(
+         "\\[",
+         "{%s}_\\alpha = [%g%+g\\,\\alpha^{%g}, %g%+g\\,(1-\\alpha^{%g})].",
+         "\\]",
+         sep="\n"),
+                                varnameLaTeX, 
+                                x@a1, x@a2-x@a1, 1/x@p.left,
+                                x@a3, x@a4-x@a3, 1/x@p.right
+      ), sep="\n")
+      
+      res
+   }
 }
 
 
