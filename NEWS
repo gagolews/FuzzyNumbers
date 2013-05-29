@@ -7,7 +7,9 @@ FuzzyNumbers Package NEWS
 * Added a call to  setGeneric("plot", function(x, y, ...) ...
   to avoid a warning on install
 
-* New methods: as.character(); also used by show()
+* New methods: as.character(); also used by show().
+  This function also allows to generate LaTeX code defining the FN
+  (toLaTeX arg thanks to Jan Caha).
 
 * ...
 

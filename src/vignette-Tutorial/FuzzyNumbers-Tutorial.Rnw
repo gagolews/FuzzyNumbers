@@ -472,6 +472,8 @@ legend("topright", c("$\\mu_{A1}$", "$\\mu_{A2}$"),
 \end{center}
 
 
+
+
 \paragraph{Remark.}
 The \func{convert.alpha()} function
 works similarly to \func{convert.side()}.
@@ -866,10 +868,9 @@ calling \texttt{?plot}, \texttt{?plot.default}, \texttt{?curve},
 \texttt{?legend}, \texttt{?text} (some of these functions have
 already been called in this tutorial).
 
-In this and subsequent sections we consider the following fuzzy number
-for the sake of illustration:
+Let us consider the following FN:
 
-<<fig.keep='none'>>=
+<<depicting1a,fig.keep='none'>>=
 A <- FuzzyNumber(-5, 3, 6, 20,
     left=function(x) pbeta(x,0.4,3),
    right=function(x) 1-x^(1/4),
@@ -880,12 +881,12 @@ plot(A)
 @
 
 \begin{center}
-<<echo=FALSE>>=
+<<depicting1b,dependson='depicting1a',echo=FALSE>>=
 plot(A, xlab="$x$", ylab="$\\alpha$")
 @
 \end{center}
 
-\bigskip
+\paragraph{Plotting issues: discretization.}
 Side functions or $\alpha$-cut bounds of objects of the \texttt{FuzzyNumber}
 class (not including its derivatives) when plotted are naively
 approximated by piecewise linear functions with equidistant knots
@@ -898,14 +899,14 @@ accurate).
 All three calls to the \texttt{plot()} method below depict the membership
 function of the same fuzzy number, but with different accuracy.
 
-<<fig.keep='none'>>=
+<<depicting1c,dependson='depicting1b',fig.keep='none'>>=
 plot(A, n=3, type='b')
 plot(A, n=6, add=TRUE,  lty=2, col=2, type='b', pch=2)
 plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 @
 
 \begin{center}
-<<echo=FALSE>>=
+<<depicting1d,dependson='depicting1c',echo=FALSE>>=
 plot(A, n=3, type='b', xlab="$x$", ylab="$\\alpha$")
 plot(A, n=6, add=TRUE, lty=2, col=2, type='b', pch=2)
 plot(A, n=101, add=TRUE, lty=4, col=4) # default n
@@ -915,7 +916,7 @@ plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 
 
 
-\bigskip
+\paragraph{Making use of different generating functions' types.}
 Please note (if you have not already) that to draw the membership
 function we do not need to provide necessarily the FN with side generators:
 the $\alpha$-cuts will also suffice.
@@ -924,13 +925,13 @@ representation of the FN and use the kind representation it has.
 It both types of generators are given then side functions are used.
 If we want to, for some reasons, use $\alpha$-cuts, then we may do as follows:
 
-<<fig.keep='none'>>=
+<<depicting1e,dependson='depicting1d',fig.keep='none'>>=
 plot(A, n=3, at.alpha=numeric(0), type='b') # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use sides
 @
 
 \begin{center}
-<<echo=FALSE>>=
+<<depicting1f,dependson='depicting1e',echo=FALSE>>=
 plot(A, n=3, at.alpha=numeric(0), type='b', xlab="$x$", ylab="$\\alpha$") # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
 @
@@ -939,21 +940,47 @@ plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
 \bigskip
 We may also illustrate an $\alpha$-cut representation of a fuzzy number:
 
-<<fig.keep='none'>>=
+<<depicting1g,dependson='depicting1f',fig.keep='none'>>=
 plot(A, draw.alphacuts=TRUE)
 @
 
 \begin{center}
-<<echo=FALSE>>=
+<<depicting1h,dependson='depicting1g',echo=FALSE>>=
 plot(A, draw.alphacuts=TRUE, ylab="$x$", xlab="$\\alpha$")
 @
 \end{center}
 
 
-\bigskip
+\paragraph{Conversion to \LaTeX.}
+Another way to depict a FN is to\dots give a mathematical expression
+which defines it.
+
+<<depicting1i,dependson='depicting1h',eval=FALSE>>=
+cat(as.character(A, toLaTeX=TRUE))
+@
+
+\noindent This gives the following \LaTeX{} code\dots
+\begin{verbatim}
+<<depicting1i2,dependson='depicting1i',results='asis',echo=FALSE>>=
+cat(as.character(A, toLaTeX=TRUE))
+@
+\end{verbatim}
+
+\noindent \dots and, after compiling:
+
+\begin{quote}
+<<depicting1i3,dependson='depicting1i',results='asis',echo=FALSE>>=
+cat(as.character(A, toLaTeX=TRUE))
+@
+\end{quote}
+
+\noindent
+The code may of course be modified to suit your needs.
+
+\paragraph{Tuning your figures.}
 Finally, we leave you with a quite complex example from one of our papers:
 
-<<fig.keep='none'>>=
+<<depicting2a,fig.keep='none'>>=
 X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1,
    knot.alpha=0.6, knot.left=0.3, knot.right=4)
 
@@ -975,7 +1002,7 @@ plot(X, add=TRUE, type='p', from=-1, to=6)
 @
 
 \begin{center}
-<<echo=FALSE>>=
+<<depicting2b,dependson='depicting2a',echo=FALSE>>=
 X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1, knot.alpha=0.6, knot.left=0.3, knot.right=4)
 
 plot.default(NA, xlab="$x$", ylab="$\\mu_S(x)$", xlim=c(-0.3,5.3), ylim=c(0,1))
@@ -1011,8 +1038,16 @@ higher level of skills\dots and patience.
 \section{Basic computations on and characteristics of  fuzzy numbers}
 
 
+In this section we consider the following FN:
 
-
+<<comput1a,fig.keep='none'>>=
+A <- FuzzyNumber(-5, 3, 6, 20,
+    left=function(x) pbeta(x,0.4,3),
+   right=function(x) 1-x^(1/4),
+   lower=function(alpha) qbeta(alpha,0.4,3),
+   upper=function(alpha) (1-alpha)^4
+)
+@
 
 
 \subsection{Support and core, and other $\alpha$-cuts}
@@ -1020,7 +1055,7 @@ higher level of skills\dots and patience.
 The support of $A$, i.e.~$\mathrm{supp}(A)=[\mathtt{a1}, \mathtt{a4}]$,
 may be obtained by calling:
 
-<<>>=
+<<comput1b,dependson='comput1a'>>=
 supp(A)
 @
 
@@ -1028,14 +1063,14 @@ supp(A)
 We get the core of $A$, i.e.~$\mathrm{core}(A)=[\mathtt{a2}, \mathtt{a3}]$,
 with:
 
-<<>>=
+<<comput1c,dependson='comput1b'>>=
 core(A)
 @
 
 \noindent
 To compute arbitrary $\alpha$-cuts we use:
 
-<<>>=
+<<comput1d,dependson='comput1c'>>=
 alphacut(A, 0) # same as supp(A) (if alpha-cut generators are defined)
 alphacut(A, 1) # same as core(A)
 alphacut(A, c(0,0.5,1))
@@ -1053,7 +1088,7 @@ or $\alpha=1$.
 If side generators are defined, we may calculate
 the values of the membership function at different points by calling:
 
-<<>>=
+<<comput1e,dependson='comput1d'>>=
 evaluate(A, 1)
 evaluate(A, c(-3,0,3))
 evaluate(A, seq(-1, 2, by=0.5))
@@ -1077,7 +1112,7 @@ Let us first introduce the notion of the \textit{expected interval} of $A$
 \noindent
 To compute the expected interval of $A$ we call:
 
-<<>>=
+<<comput1f,dependson='comput1e'>>=
 expectedInterval(A)
 @
 
@@ -1101,7 +1136,7 @@ of a fuzzy number. It is given by:
 \noindent
 Let us calculate $\mathrm{EV}(A)$.
 
-<<>>=
+<<comput1g,dependson='comput1f'>>=
 expectedValue(A)
 @
 
@@ -1121,7 +1156,7 @@ It is easily seen that $\mathrm{EV}_{0.5}(A)=\mathrm{EV}(A)$.
 \noindent
 Some examples:
 
-<<>>=
+<<comput1h,dependson='comput1g'>>=
 weightedExpectedValue(A, 0.5) # equivalent to expectedValue(A)
 weightedExpectedValue(A, 0.25)
 @
@@ -1135,7 +1170,7 @@ The \textit{value} of $A$ \cite{DelgadoETAL1998} is defined by:
 \noindent
 It may be calculated by calling:
 
-<<>>=
+<<comput1i,dependson='comput1h'>>=
 value(A)
 @
 
@@ -1155,7 +1190,7 @@ The \textit{width} of $A$ \cite{Chanas2001} is defined as:
 \noindent
 An example:
 
-<<>>=
+<<comput1j,dependson='comput1i'>>=
 width(A)
 @
 
@@ -1165,7 +1200,7 @@ The \textit{ambiguity} of $A$ \cite{DelgadoETAL1998} is defined as:
 \mathrm{amb}(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha.
 \end{equation}
 
-<<>>=
+<<comput1k,dependson='comput1j'>>=
 ambiguity(A)
 @
 
@@ -1173,7 +1208,7 @@ ambiguity(A)
 Additionally, to express ``nonspecificity'' of a fuzzy number
 we may use e.g.~the width of its support:
 
-<<>>=
+<<comput1l,dependson='comput1k'>>=
 diff(supp(A))
 @
 

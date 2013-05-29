@@ -20,8 +20,10 @@
 
 #' Print Basic Information on a Fuzzy Number
 #'
-#' Calls \code{\link{as.character}} and displays the result
-#' on the screen.
+#' Calls \code{\link{as.character}} (with default arguments)
+#' and displays the result on the screen.
+#' 
+#' @param object FuzzyNumber to be printed out
 #' 
 #' @exportMethod show
 #' @name show

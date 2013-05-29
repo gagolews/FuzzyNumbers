@@ -21,13 +21,53 @@
 
 #' Get Basic Information on a Fuzzy Number in a String
 #'
+#'
+#' @param x FuzzyNumber to be described
+#' @param toLaTeX logical; should LaTeX code be output?
+#' 
+#' @return character vector
+#' 
+#' @details
+#' Thanks to Jan Caha for suggesting the \code{toLaTeX} arg.
+#' 
 #' @aliases as.character,FuzzyNumber-method
 #' @rdname as.character-methods
 #' @family FuzzyNumber-method
 #' @export
-as.character.FuzzyNumber <- function(x, ...) {
-   sprintf("Fuzzy number with:\n   support=[%g,%g],\n      core=[%g,%g].\n",
+as.character.FuzzyNumber <- function(x, toLaTeX=FALSE, ...) {
+   if (identical(toLaTeX, FALSE)) {
+      sprintf("Fuzzy number with:\n   support=[%g,%g],\n      core=[%g,%g].\n",
                x@a1, x@a4, x@a2, x@a3)
+   }
+   else {
+      res <- sprintf("
+\\[
+   \\mu_A(x) = \\left\\{
+      \\begin{array}{lll}
+      0      & \\text{for} & x\\in(-\\infty,%g], \\\\
+      l_A(x) & \\text{for} & x\\in[%g,%g), \\\\
+      1      & \\text{for} & x\\in[%g,%g], \\\\
+      r_A(x) & \\text{for} & x\\in(%g,%g], \\\\
+      0      & \\text{for} & x\\in(%g,+\\infty), \\\\
+      \\end{array}
+   \\right.
+\\]
+where $l_A=\\mathtt{left}_A((x%+g)/%g)$,
+$r_A=\\mathtt{right}_A((x%+g)/%g)$.
+      ", x@a1, x@a1, x@a2, x@a2, x@a3, x@a3, x@a4, x@a4, -x@a1, x@a2-x@a1, -x@a3, x@a4-x@a3
+      )
+      
+      res <- paste(res, sprintf("
+\\[
+   A_\\alpha = [A_L(\\alpha), A_U(\\alpha)],
+\\]
+where $A_L(\\alpha)=%g%+g\\,\\mathtt{lower}_A(\\alpha)$,
+$A_U(\\alpha)=%g%+g\\,\\mathtt{upper}_A(\\alpha)$.
+      ", x@a1, x@a2-x@a1, x@a3, x@a4-x@a3
+      ), collapse="\n")
+      
+      res
+   }
 }
 
 

@@ -77,7 +77,7 @@
 #' @name FuzzyNumbers-package
 #' @docType package
 #' @title Tools to deal with fuzzy numbers in R
-#' @author Marek Gagolewski \email{gagolews@@rexamine.com}
+#' @author Marek Gagolewski \email{gagolews@@rexamine.com}, with contributions from Jan Caha
 #' @references
 #' \pkg{FuzzyNumbers} Homepage, \url{http://www.rexamine.com/resources/fuzzynumbers/}.\cr
 #' Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
