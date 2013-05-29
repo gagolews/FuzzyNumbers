@@ -20,11 +20,11 @@ about objects through numbers, e.g. "I'm about 180 cm tall" or
 The package aims to provide the following functionality:
 
 *    Representation of arbitrary fuzzy numbers (including FNs with discontinuous side functions and/or alpha-cuts), as well as their particular types, e.g. trapezoidal and piecewise linear fuzzy numbers,
-*    Random fuzzy numbers generation [TO DO],
 *    Defuzzification and Approximation of Fuzzy Numbers by Triangular and Piecewise Linear fuzzy numbers,
 *    Visualization of fuzzy numbers,
-*    Basic Operations on fuzzy numbers,
+*    Basic arithmetic operations on fuzzy numbers,
 *    Aggregation of fuzzy numbers [TO DO],
+*    Random fuzzy numbers generation [TO DO],
 *    Ranking of fuzzy numbers [TO DO].
 
 * * *
@@ -39,7 +39,7 @@ Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 * * *
 
-**Author**: Marek Gągolewski <gagolews at rexamine dot com>,
+**Author**: Marek Gągolewski [gagolews at rexamine dot com],
 with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:

@@ -24,6 +24,7 @@
 #'
 #' @param x FuzzyNumber to be described
 #' @param toLaTeX logical; should LaTeX code be output?
+#' @param varnameLaTeX character; variable name to be included in equations
 #' 
 #' @return character vector
 #' 
@@ -34,37 +35,49 @@
 #' @rdname as.character-methods
 #' @family FuzzyNumber-method
 #' @export
-as.character.FuzzyNumber <- function(x, toLaTeX=FALSE, ...) {
+as.character.FuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    if (identical(toLaTeX, FALSE)) {
       sprintf("Fuzzy number with:\n   support=[%g,%g],\n      core=[%g,%g].\n",
-               x@a1, x@a4, x@a2, x@a3)
+              x@a1, x@a4, x@a2, x@a3)
    }
    else {
-      res <- sprintf("
-\\[
-   \\mu_A(x) = \\left\\{
-      \\begin{array}{lll}
-      0      & \\text{for} & x\\in(-\\infty,%g], \\\\
-      l_A(x) & \\text{for} & x\\in[%g,%g), \\\\
-      1      & \\text{for} & x\\in[%g,%g], \\\\
-      r_A(x) & \\text{for} & x\\in(%g,%g], \\\\
-      0      & \\text{for} & x\\in(%g,+\\infty), \\\\
-      \\end{array}
-   \\right.
-\\]
-where $l_A=\\mathtt{left}_A((x%+g)/%g)$,
-$r_A=\\mathtt{right}_A((x%+g)/%g)$.
-      ", x@a1, x@a1, x@a2, x@a2, x@a3, x@a3, x@a4, x@a4, -x@a1, x@a2-x@a1, -x@a3, x@a4-x@a3
+      res <- sprintf(
+"\\[
+\\mu_{%s}(x) = \\left\\{
+\\begin{array}{lll}
+0      & \\text{for} & x\\in(-\\infty,%g), \\\\
+l_{%s}(x) & \\text{for} & x\\in[%g,%g), \\\\
+1      & \\text{for} & x\\in[%g,%g], \\\\
+r_{%s}(x) & \\text{for} & x\\in(%g,%g], \\\\
+0      & \\text{for} & x\\in(%g,+\\infty), \\\\
+\\end{array}
+\\right.
+\\]",
+         varnameLaTeX,
+         x@a1,
+         varnameLaTeX, x@a1, x@a2,
+         x@a2, x@a3,
+         varnameLaTeX, x@a3, x@a4,
+         x@a4
       )
       
-      res <- paste(res, sprintf("
-\\[
-   A_\\alpha = [A_L(\\alpha), A_U(\\alpha)],
-\\]
-where $A_L(\\alpha)=%g%+g\\,\\mathtt{lower}_A(\\alpha)$,
-$A_U(\\alpha)=%g%+g\\,\\mathtt{upper}_A(\\alpha)$.
-      ", x@a1, x@a2-x@a1, x@a3, x@a4-x@a3
+      res <- paste(res, sprintf(
+"where $l_{%s}=\\mathtt{left}_A((x%+g)/%g)$,
+$r_{%s}=\\mathtt{right}_A((x%+g)/%g)$.", 
+        varnameLaTeX, -x@a1, x@a2-x@a1,
+        varnameLaTeX, -x@a3, x@a4-x@a3
       ), collapse="\n")
+      
+      res <- paste(res, sprintf(
+"\\[
+{%s}_\\alpha = [{%s}_L(\\alpha), {%s}_U(\\alpha)],
+\\]
+where ${%s}_L(\\alpha)=%g%+g\\,\\mathtt{lower}_{%s}(\\alpha)$,
+      ${%s}_U(\\alpha)=%g%+g\\,\\mathtt{upper}_{%s}(\\alpha)$.",
+        varnameLaTeX, varnameLaTeX, varnameLaTeX, 
+        varnameLaTeX, x@a1, x@a2-x@a1, varnameLaTeX, 
+        varnameLaTeX, x@a3, x@a4-x@a3, varnameLaTeX
+      ), collapse="\n\n")
       
       res
    }
@@ -73,12 +86,14 @@ $A_U(\\alpha)=%g%+g\\,\\mathtt{upper}_A(\\alpha)$.
 
 
 
+
 #' @aliases as.character,PiecewiseLinearFuzzyNumber-method
 #' @rdname as.character-methods
 #' @export
-as.character.PiecewiseLinearFuzzyNumber <- function(x, ...) {
+as.character.PiecewiseLinearFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    sprintf("Piecewise linear fuzzy number with %g knot(s),\n   support=[%g,%g],\n      core=[%g,%g].\n",
                x@knot.n, x@a1, x@a4, x@a2, x@a3)
+   
 }
 
 
@@ -87,10 +102,44 @@ as.character.PiecewiseLinearFuzzyNumber <- function(x, ...) {
 
 #' @aliases as.character,TrapezoidalFuzzyNumber-method
 #' @rdname as.character-methods
-#' @exports
-as.character.TrapezoidalFuzzyNumber <- function(x, ...) {
-   sprintf("Trapezoidal fuzzy number with:\n   support=[%g,%g],\n      core=[%g,%g].\n",
-               x@a1, x@a4, x@a2, x@a3)
+#' @export
+as.character.TrapezoidalFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
+   if (identical(toLaTeX, FALSE)) {
+      sprintf("Trapezoidal fuzzy number with:\n   support=[%g,%g],\n      core=[%g,%g].\n",
+              x@a1, x@a4, x@a2, x@a3)
+   }
+   else {
+      res <- sprintf(
+"\\[
+\\mu_{%s}(x) = \\left\\{
+\\begin{array}{lll}
+0      & \\text{for} & x\\in(-\\infty,%g), \\\\
+(x%+g)/%g & \\text{for} & x\\in[%g,%g), \\\\
+1      & \\text{for} & x\\in[%g,%g], \\\\
+(%g-x)/%g & \\text{for} & x\\in(%g,%g], \\\\
+0      & \\text{for} & x\\in(%g,+\\infty). \\\\
+\\end{array}
+\\right.
+\\]", 
+         varnameLaTeX,
+         x@a1, 
+         -x@a1, x@a2-x@a1, x@a1, x@a2, 
+         x@a2, x@a3, 
+         x@a4, x@a4-x@a3, x@a3, x@a4, 
+         x@a4
+      )
+      
+      res <- paste(res, sprintf(
+"\\[
+{%s}_\\alpha = [%g%+g\\,\\alpha, %g%+g\\,\\alpha].
+\\]",
+         varnameLaTeX,
+         x@a1, x@a2-x@a1,
+         x@a4, -(x@a4-x@a3)
+      ), collapse="\n\n")
+      
+      res
+   }
 }
 
 
@@ -100,7 +149,11 @@ as.character.TrapezoidalFuzzyNumber <- function(x, ...) {
 #' @aliases as.character,PowerFuzzyNumber-method
 #' @rdname as.character-methods
 #' @export
-as.character.PowerFuzzyNumber <- function(x, ...) {
+as.character.PowerFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    sprintf("Fuzzy number given by power functions, and:\n   support=[%g,%g],\n      core=[%g,%g].\n",
                x@a1, x@a4, x@a2, x@a3)
 }
+
+
+
+
