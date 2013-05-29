@@ -119,34 +119,34 @@ days -- any suggestions are welcome!}
 <<echo=FALSE,results='hide',warning=FALSE,message=FALSE,cache=FALSE>>=
 options(digits=7)
 options(width=73)
-require("knitr")
-require("tikzDevice")
+require('knitr')
+require('tikzDevice')
 
-options(tikzDefaultEngine = "pdftex")
+options(tikzDefaultEngine = 'pdftex')
 
 options(tikzLatexPackages = c( # dolaczanie uzywanych pakietow TeX-a
-   "\\usepackage{amsmath,amssymb,amsfonts}", # pakiety AMS
-   "\\usepackage{tikz}",
-#   "\\usepackage[MeX,T1,plmath]{polski}", # obsluga m.in. polskich ogonkow
-   "\\usepackage[utf8]{inputenc}",
-   "\\usepackage[T1]{fontenc}",
-   "\\usetikzlibrary{calc}",
-   "\\usepackage[english]{babel}",
-   "\\selectlanguage{english}",
-   "\\usepackage{standalone}"
+   '\\usepackage{amsmath,amssymb,amsfonts}', # pakiety AMS
+   '\\usepackage{tikz}',
+#   '\\usepackage[MeX,T1,plmath]{polski}', # obsluga m.in. polskich ogonkow
+   '\\usepackage[utf8]{inputenc}',
+   '\\usepackage[T1]{fontenc}',
+   '\\usetikzlibrary{calc}',
+   '\\usepackage[english]{babel}',
+   '\\selectlanguage{english}',
+   '\\usepackage{standalone}'
 ))
 
-options(tikzMetricsDictionary="/home/gagolews/R/tikzMetrics")
+options(tikzMetricsDictionary='/home/gagolews/R/tikzMetrics')
 
-options(tikzDocumentDeclaration = "\\documentclass[11pt]{standalone}\n")
+options(tikzDocumentDeclaration = '\\documentclass[11pt]{standalone}\n')
 
 options(tikzMetricPackages = c(
-   "\\usepackage[utf8]{inputenc}",
-   "\\usepackage[T1]{fontenc}",
-   "\\usepackage{amsmath,amssymb,amsfonts}",
-   "\\usetikzlibrary{calc}",
-   "\\usepackage[english]{babel}",
-   "\\selectlanguage{english}"
+   '\\usepackage[utf8]{inputenc}',
+   '\\usepackage[T1]{fontenc}',
+   '\\usepackage{amsmath,amssymb,amsfonts}',
+   '\\usetikzlibrary{calc}',
+   '\\usepackage[english]{babel}',
+   '\\selectlanguage{english}'
 ))
 
 
@@ -170,7 +170,7 @@ opts_chunk$set(
    size='small'
 )
 
-# knit_theme$set(knit_theme$get("solarized-light"))
+# knit_theme$set(knit_theme$get('solarized-light'))
 @
 
 % \definecolor{fgcolor}{gray}{0}
@@ -229,7 +229,7 @@ conveniently and effectively. To install its latest ``official'' release
 available on \textit{CRAN} we type:
 
 <<eval=FALSE>>=
-install.packages("FuzzyNumbers")
+install.packages('FuzzyNumbers')
 @
 
 \noindent
@@ -245,14 +245,14 @@ Each session with \package{FuzzyNumbers} should be preceded by
 a call to:
 
 <<libraryFuzzyNumbers,results='hide',warning=FALSE,message=FALSE>>=
-library("FuzzyNumbers") # Load the package
+library('FuzzyNumbers') # Load the package
 @
 
 \bigskip
 To view the main page of the manual we type:
 
 <<helpFuzzyNumbers,eval=FALSE>>=
-library(help="FuzzyNumbers")
+library(help='FuzzyNumbers')
 @
 
 \noindent
@@ -350,7 +350,7 @@ plot(A1)
 
 \begin{center}
 <<A1ex5,dependson='A1ex',echo=FALSE>>=
-plot(A1, xlab="$x$", ylab="$\\alpha$", main="")
+plot(A1, xlab='$x$', ylab='$\\alpha$', main='')
 @
 \end{center}
 
@@ -360,7 +360,7 @@ then we will be interested in storing them as PDF files.
 This may be done by calling:
 
 <<A1ex6,dependson='A1ex',eval=FALSE>>=
-pdf("figure1.pdf", width=8, height=5) # create file
+pdf('figure1.pdf', width=8, height=5) # create file
 plot(A1)
 dev.off() # close graphical device and save the file
 @
@@ -379,8 +379,8 @@ and $g: [a_3,a_4]=[-1,10]\to[1,0]$,
 for example:
 
 <<ExFconvert>>=
-f <- splinefun(c(-4,-3.5,-3,-2.2,-2), c(0,0.4,0.7,0.9,1), method="monoH.FC")
-g <- splinefun(c(-1,0,10), c(1,0.5,0), method="monoH.FC")
+f <- splinefun(c(-4,-3.5,-3,-2.2,-2), c(0,0.4,0.7,0.9,1), method='monoH.FC')
+g <- splinefun(c(-1,0,10), c(1,0.5,0), method='monoH.FC')
 @
 
 Let us convert them to side \textit{generating} functions, which shall be
@@ -404,7 +404,7 @@ B <- FuzzyNumber(10,20,20,30,
     left=convert.side(f, -4, -2),
    right=convert.side(g, -1, 10)
 )
-plot(B, xlab="$x$", ylab="$\\alpha$")
+plot(B, xlab='$x$', ylab='$\\alpha$')
 @
 
 \begin{center}
@@ -456,18 +456,18 @@ A2 <- FuzzyNumber(1, 3, 4, 7,
    lower=function(alpha) pbeta(alpha, 5, 9), # CDF of a beta distr.
    upper=function(alpha) pexp(1/alpha-1) # transformed CDF of an exp. distr.
 )
-plot(A1, col="blue")
-plot(A2, col="red", lty=2, add=TRUE)
-legend("topright", c(expression(mu[A1]), expression(mu[A2])),
-   col=c("blue", "red"), lty=c(1,2));
+plot(A1, col='blue')
+plot(A2, col='red', lty=2, add=TRUE)
+legend('topright', c(expression(mu[A1]), expression(mu[A2])),
+   col=c('blue', 'red'), lty=c(1,2));
 @
 
 \begin{center}
 <<alphacutEx2,dependson='alphacutEx',echo=FALSE>>=
-plot(A1, col="blue", xlab="$x$", ylab="$\\alpha$")
-plot(A2, col="red", lty=2, add=TRUE)
-legend("topright", c("$\\mu_{A1}$", "$\\mu_{A2}$"),
-   col=c("blue", "red"), lty=c(1,2));
+plot(A1, col='blue', xlab='$x$', ylab='$\\alpha$')
+plot(A2, col='red', lty=2, add=TRUE)
+legend('topright', c('$\\mu_{A1}$', '$\\mu_{A2}$'),
+   col=c('blue', 'red'), lty=c(1,2));
 @
 \end{center}
 
@@ -503,7 +503,7 @@ plot(A3)
 
 \begin{center}
 <<A3deffig2,dependson='A3def',echo=FALSE>>=
-plot(A3, xlab="$x$", ylab="$\\alpha$", shadowcol="gray")
+plot(A3, xlab='$x$', ylab='$\\alpha$', shadowcol='gray')
 @
 \end{center}
 
@@ -545,10 +545,10 @@ would have used it in his/her algorithms and wondered why everything
 runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 
 <<alphacutEx5,dependson='alphacutEx'>>=
-A2["lower"]
-A2["upper"]
-A2["left"]
-A2["right"]
+A2['lower']
+A2['upper']
+A2['left']
+A2['right']
 @
 
 \noindent
@@ -569,10 +569,10 @@ to \textit{interpolate} generating functions of one type
 to get some crude numeric approximations of their inverses.
 These are simple wrappers to \R's \func{approxfun()}
 (piecewise linear interpolation,
-the \str{"{}linear"{}} \argument{method})
+the \str{'{}linear'{}} \argument{method})
 and \func{splinefun()} (monotonic
-splines: \argument{method}s \str{"{}hyman{}"}
-and \str{"{}monoH.FC"{}}; the latter is
+splines: \argument{method}s \str{'{}hyman{}'}
+and \str{'{}monoH.FC'{}}; the latter is
 default and recommended).
 They are available as the \func{approx.invert()}
 function\footnote{The
@@ -596,8 +596,8 @@ A4 <- FuzzyNumber(-2, 0, 0, 2,
 )
 
 x <- seq(0,1,length.out=1e5)
-max(abs(qbeta(x, 1, 2) - A4["lower"](x)))     # sup-error
-max(abs(qbeta(1-x, 1, 0.1) - A4["upper"](x))) # sup-error
+max(abs(qbeta(x, 1, 2) - A4['lower'](x)))     # sup-error
+max(abs(qbeta(1-x, 1, 0.1) - A4['upper'](x))) # sup-error
 @
 
 \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
@@ -653,7 +653,7 @@ plot(T1)
 
 \begin{center}
 <<TrapEx1d,dependson='TrapEx1c',echo=FALSE>>=
-plot(T1, xlab="$x$", ylab="$\\alpha$")
+plot(T1, xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
 
@@ -673,24 +673,24 @@ Thus, is we wanted to define a trapezoidal FN next time, we would rather
 not do it like with $A_1$ but as with $T_1$.
 
 <<TrapEx1e,dependson='TrapEx1d'>>=
-T1["lower"]
-T1["upper"]
-T1["left"]
-T1["right"]
+T1['lower']
+T1['upper']
+T1['left']
+T1['right']
 @
 
 
 Thus, we have:
 \begin{quote}
 <<TrapEx1f,dependson='TrapEx1e',results='asis',echo=FALSE>>=
-cat(as.character(T1, toLaTeX=TRUE, varnameLaTeX="T_1"))
+cat(as.character(T1, toLaTeX=TRUE, varnameLaTeX='T_1'))
 @
 \end{quote}
 
 \noindent
 Note that the above equations have been atomatically generated by \package{knitr}
 and \LaTeX{} by
-calling \texttt{\func{cat}(\func{as.character}(T1, \argument{toLaTeX=}TRUE, \argument{varnameLaTeX=}\str{"{}T\_1"{}}))},
+calling \texttt{\func{cat}(\func{as.character}(T1, \argument{toLaTeX=}TRUE, \argument{varnameLaTeX=}\str{'{}T\_1'{}}))},
 see Sec.~\ref{Sec:Depicting}.
 
 \bigskip\noindent
@@ -752,22 +752,22 @@ and $(\alpha_1,\dots,\alpha_{n+2})=(0,\mathtt{knot.alpha},1)$.
 \bigskip
 PLFNs in our package are represented by the \texttt{PiecewiseLinearFuzzyNumber} class.
 
-<< fig.keep='none'>>=
-P1 <- PiecewiseLinearFuzzyNumber(0, 1, 2, 3,
-   knot.n=1, knot.alpha=0.25, knot.left=0.5, knot.right=2.25)
+<<PLFNEx1a,fig.keep='none'>>=
+P1 <- PiecewiseLinearFuzzyNumber(1, 2, 3, 4,
+   knot.n=1, knot.alpha=0.25, knot.left=1.5, knot.right=3.25)
 class(P1)
 P1
-P2 <- PiecewiseLinearFuzzyNumber(0, 1, 2, 3,
+P2 <- PiecewiseLinearFuzzyNumber(1, 2, 3, 4,
    knot.n=2, knot.alpha=c(0.25,0.6),
-   knot.left=c(0.5,0.8), knot.right=c(2.25, 2.5))
+   knot.left=c(1.5,1.8), knot.right=c(3.25, 3.5))
 P2
 plot(P1, type='b')
 plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE)
 @
 
 \begin{center}
-<<echo=FALSE>>=
-plot(P1, type='b', xlab="$x$", ylab="$\\alpha$")
+<<PLFNEx1b,dependson='PLFNEx1a',echo=FALSE>>=
+plot(P1, type='b', xlab='$x$', ylab='$\\alpha$')
 plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE)
 @
 \end{center}
@@ -776,10 +776,17 @@ The following operators return matrices with all knots of a PLFN.
 Each of them have three columns, in order: $\alpha$-cuts,
 left side coordinates, and right side coordinates.
 
-<<>>=
-P2["knots"]
-P2["allknots"] # including a1,a2,a3,a4
+<<PLFNEx1c,dependson='PLFNEx1b',>>=
+P1['knots']
+P1['allknots'] # including a1,a2,a3,a4
 @
+
+We have, for example:
+\begin{quote}
+<<PLFNEx1d,dependson='PLFNEx1c',results='asis',echo=FALSE>>=
+cat(as.character(P1, toLaTeX=TRUE, varnameLaTeX='P_1'))
+@
+\end{quote}
 
 \bigskip
 If \texttt{knot.n} is equal to 0 or all left and right knots lie on common lines,
@@ -791,34 +798,34 @@ If, however, we wanted to convert an object
 of the first mentioned class to the other,
 we would do that by calling:
 
-<<fig.keep='none'>>=
+<<PLFNEx2a,fig.keep='none'>>=
 alpha <- c(0.2, 0.3, 0.5, 0.6, 0.9);
 P3 <- as.PiecewiseLinearFuzzyNumber(T1,
          knot.n=5, knot.alpha=alpha);
 P3
 plot(P3)
-abline(h=alpha, col="gray", lty=2)
-abline(v=P3["knot.left"], col="gray", lty=3)
-abline(v=P3["knot.right"], col="gray", lty=3)
-text(7, alpha, sprintf("a=%g", alpha), pos=3)
+abline(h=alpha, col='gray', lty=2)
+abline(v=P3['knot.left'], col='gray', lty=3)
+abline(v=P3['knot.right'], col='gray', lty=3)
+text(7, alpha, sprintf('a=%g', alpha), pos=3)
 @
 
 \begin{center}
-<<echo=FALSE>>=
-plot(P3, type='b', xlab="$x$", ylab="$\\alpha$")
-abline(h=alpha, col="gray", lty=2)
-abline(v=P3["knot.left"], col="gray", lty=3)
-abline(v=P3["knot.right"], col="gray", lty=3)
-text(7, alpha, sprintf("$\\alpha=%g$", alpha), pos=3)
+<<PLFNEx2b,dependson='PLFNEx2a',echo=FALSE>>=
+plot(P3, type='b', xlab='$x$', ylab='$\\alpha$')
+abline(h=alpha, col='gray', lty=2)
+abline(v=P3['knot.left'], col='gray', lty=3)
+abline(v=P3['knot.right'], col='gray', lty=3)
+text(7, alpha, sprintf('$\\alpha=%g$', alpha), pos=3)
 @
 \end{center}
 
 \noindent
 More generally, each PLFN or TFN may be converted
 to a direct \texttt{FuzzyNumber} class instance if needed
-(hope we will newer not).
+(hope we will never not).
 
-<<>>=
+<<PLFNEx2c,dependson='PLFNEx2b',>>=
 (as.FuzzyNumber(P3))
 @
 
@@ -855,7 +862,7 @@ plot(X)
 
 \begin{center}
 <<echo=FALSE>>=
-plot(X, type='l', xlab="$x$", ylab="$\\alpha$")
+plot(X, type='l', xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
 
@@ -892,7 +899,7 @@ plot(A)
 
 \begin{center}
 <<depicting1b,dependson='depicting1a',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
+plot(A, xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
 
@@ -917,7 +924,7 @@ plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 
 \begin{center}
 <<depicting1d,dependson='depicting1c',echo=FALSE>>=
-plot(A, n=3, type='b', xlab="$x$", ylab="$\\alpha$")
+plot(A, n=3, type='b', xlab='$x$', ylab='$\\alpha$')
 plot(A, n=6, add=TRUE, lty=2, col=2, type='b', pch=2)
 plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 @
@@ -942,7 +949,7 @@ plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use sides
 
 \begin{center}
 <<depicting1f,dependson='depicting1e',echo=FALSE>>=
-plot(A, n=3, at.alpha=numeric(0), type='b', xlab="$x$", ylab="$\\alpha$") # use alpha-cuts
+plot(A, n=3, at.alpha=numeric(0), type='b', xlab='$x$', ylab='$\\alpha$') # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
 @
 \end{center}
@@ -956,7 +963,7 @@ plot(A, draw.alphacuts=TRUE)
 
 \begin{center}
 <<depicting1h,dependson='depicting1g',echo=FALSE>>=
-plot(A, draw.alphacuts=TRUE, ylab="$x$", xlab="$\\alpha$")
+plot(A, draw.alphacuts=TRUE, ylab='$x$', xlab='$\\alpha$')
 @
 \end{center}
 
@@ -966,13 +973,13 @@ Another way to depict a FN is to\dots give a mathematical expression
 which defines it.
 
 <<depicting1i,dependson='depicting1h',eval=FALSE>>=
-cat(as.character(A, toLaTeX=TRUE, varnameLaTeX="A"))
+cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 
 \noindent This gives the following \LaTeX{} code\dots
 \begin{verbatim}
 <<depicting1i2,dependson='depicting1i',results='asis',echo=FALSE>>=
-cat(as.character(A, toLaTeX=TRUE, varnameLaTeX="A"))
+cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 \end{verbatim}
 
@@ -980,7 +987,7 @@ cat(as.character(A, toLaTeX=TRUE, varnameLaTeX="A"))
 
 \begin{quote}
 <<depicting1i3,dependson='depicting1i',results='asis',echo=FALSE>>=
-cat(as.character(A, toLaTeX=TRUE, varnameLaTeX="A"))
+cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 \end{quote}
 
@@ -994,18 +1001,18 @@ Finally, we leave you with a quite complex example from one of our papers:
 X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1,
    knot.alpha=0.6, knot.left=0.3, knot.right=4)
 
-plot.default(NA, xlab="$x$", ylab="$\\mu_S(x)$",
+plot.default(NA, xlab='$x$', ylab='$\\mu_S(x)$',
    xlim=c(-0.3,5.3), ylim=c(0,1)) # empty window
 
-xpos <- c(X["a1"], X["knot.left"],  X["a2"],
-          X["a3"], X["knot.right"], X["a4"]);
-xlab <- c("$s_1$", "$s_2$", "$s_3$",
-          "$s_4$", "$s_5$", "$s_6$");
-abline(v=xpos, col="gray", lty=3)
+xpos <- c(X['a1'], X['knot.left'],  X['a2'],
+          X['a3'], X['knot.right'], X['a4']);
+xlab <- c('$s_1$', '$s_2$', '$s_3$',
+          '$s_4$', '$s_5$', '$s_6$');
+abline(v=xpos, col='gray', lty=3)
 text(xpos, 1.05, xlab, pos=3, xpd=TRUE)
 
-abline(h=c(0, X["knot.alpha"], 1), col="gray", lty=2)
-text(5.55, X["knot.alpha"], sprintf("$\\alpha_0$"), pos=4, xpd=TRUE)
+abline(h=c(0, X['knot.alpha'], 1), col='gray', lty=2)
+text(5.55, X['knot.alpha'], sprintf('$\\alpha_0$'), pos=4, xpd=TRUE)
 
 plot(X, add=TRUE, type='l', from=-1, to=6)
 plot(X, add=TRUE, type='p', from=-1, to=6)
@@ -1015,15 +1022,15 @@ plot(X, add=TRUE, type='p', from=-1, to=6)
 <<depicting2b,dependson='depicting2a',echo=FALSE>>=
 X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1, knot.alpha=0.6, knot.left=0.3, knot.right=4)
 
-plot.default(NA, xlab="$x$", ylab="$\\mu_S(x)$", xlim=c(-0.3,5.3), ylim=c(0,1))
+plot.default(NA, xlab='$x$', ylab='$\\mu_S(x)$', xlim=c(-0.3,5.3), ylim=c(0,1))
 
-xpos <- c(X["a1"], X["knot.left"], X["a2"], X["a3"], X["knot.right"], X["a4"]);
-xlab <- c("$s_1$", "$s_2$", "$s_3$", "$s_4$", "$s_5$", "$s_6$");
-abline(v=xpos, col="gray", lty=3)
+xpos <- c(X['a1'], X['knot.left'], X['a2'], X['a3'], X['knot.right'], X['a4']);
+xlab <- c('$s_1$', '$s_2$', '$s_3$', '$s_4$', '$s_5$', '$s_6$');
+abline(v=xpos, col='gray', lty=3)
 text(xpos, 1.05, xlab, pos=3, xpd=TRUE)
 
-abline(h=c(0, X["knot.alpha"], 1), col="gray", lty=2)
-text(5.55, X["knot.alpha"], sprintf("$\\alpha_0$"), pos=4, xpd=TRUE)
+abline(h=c(0, X['knot.alpha'], 1), col='gray', lty=2)
+text(5.55, X['knot.alpha'], sprintf('$\\alpha_0$'), pos=4, xpd=TRUE)
 
 plot(X, add=TRUE, type='l', from=-1, to=6)
 plot(X, add=TRUE, type='p', from=-1, to=6)
@@ -1264,7 +1271,7 @@ B <- TrapezoidalFuzzyNumber(1, 2, 2, 3)
 plot(A, xlim=c(0,6))
 plot(B, add=TRUE, col=2, lty=2)
 plot(A+B, add=TRUE, col=4, lty=4)
-legend("topright", c("A", "B", "A+B"), lty=c(1,2,4), col=c(1,2,4))
+legend('topright', c('A', 'B', 'A+B'), lty=c(1,2,4), col=c(1,2,4))
 @
 
 
@@ -1325,20 +1332,20 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 @
 
 
-\subsubsection{Na\"{i}ve Approximation}
+\subsubsection{Na\'{i}ve Approximation}
 
-The \texttt{"Naive"} method generates a trapezoidal FN with the same
+The \texttt{'Naive'} method generates a trapezoidal FN with the same
 core and support as $A$.
 
 <<ApproxExA_naive,dependson='ApproxExA',fig.keep='none'>>=
-(T1 <- trapezoidalApproximation(A, method="Naive"))
+(T1 <- trapezoidalApproximation(A, method='Naive'))
 distance(A, T1)
 @
 
 \begin{center}
 <<ApproxExA_naive2,dependson='ApproxExA_naive',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(T1, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(T1, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
    col=c('black', 'red'), lty=c(1,2))
 @
@@ -1350,21 +1357,21 @@ legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
 
 % $L_2$ distance....
 
-The \texttt{"NearestEuclidean"} method
+The \texttt{'NearestEuclidean'} method
 gives the nearest $L_2$-approximation of $A$
 \cite[Corollary 8]{Ban2009}.
 
 % TO BE DONE...
 
 <<ApproxExA_L2n,dependson='ApproxExA',fig.keep='none'>>=
-(T2 <- trapezoidalApproximation(A, method="NearestEuclidean"))
+(T2 <- trapezoidalApproximation(A, method='NearestEuclidean'))
 distance(A, T2)
 @
 
 \begin{center}
 <<ApproxExA_naiveL2n2,dependson='ApproxExA_L2n',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(T2, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(T2, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
    col=c('black', 'red'), lty=c(1,2))
 @
@@ -1374,17 +1381,17 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 \subsubsection{Expected Interval Preserving Approximation}
 
 
-The \texttt{"ExpectedIntervalPreserving"} method
+The \texttt{'ExpectedIntervalPreserving'} method
 gives the nearest $L_2$-approximation of $A$
 preserving the expected interval \cite{Ban2008,Grzegorzewski2010,Yeh2008}.
 Note that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
 we get the same result as in
-the \texttt{"NearestEuclidean"} method.
+the \texttt{'NearestEuclidean'} method.
 
 % TO BE DONE...
 
 <<ApproxExA_ExpInt,dependson='ApproxExA',fig.keep='none'>>=
-(T3 <- trapezoidalApproximation(A, method="ExpectedIntervalPreserving"))
+(T3 <- trapezoidalApproximation(A, method='ExpectedIntervalPreserving'))
 distance(A, T3)
 expectedInterval(A)
 expectedInterval(T3)
@@ -1392,8 +1399,8 @@ expectedInterval(T3)
 
 % \begin{center}
 <<ApproxExA_ExpInt2,dependson='ApproxExA_ExpInt',eval=FALSE,echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(T3, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(T3, col='red', lty=2, add=TRUE)
 @
 % \end{center}
 
@@ -1410,19 +1417,19 @@ cf.~\cite{GrzegorzewskiPasternak2011}.
 (B  <- FuzzyNumber(1, 2, 3, 45,
    lower=function(x) sqrt(x),
    upper=function(x) 1-sqrt(x)))
-(TB1 <- trapezoidalApproximation(B, "NearestEuclidean"))
-(TB2 <- trapezoidalApproximation(B, "ExpectedIntervalPreserving"))
+(TB1 <- trapezoidalApproximation(B, 'NearestEuclidean'))
+(TB2 <- trapezoidalApproximation(B, 'ExpectedIntervalPreserving'))
 distance(B, TB1)
 distance(B, TB2)
 @
 
 \begin{center}
 <<ApproxExA_ExpInt3Fig,dependson='ApproxExA_ExpInt3',echo=FALSE>>=
-plot(B, xlab="$x$", ylab="$\\alpha$", log='x', xlim=c(0.9,46))
-plot(TB1, col="red",  lty=2, add=TRUE)
-plot(TB2, col="blue", lty=3, add=TRUE)
-legend("topright", c("$\\mu_{B}$", "$\\mu_{TB_1}$", "$\\mu_{TB_2}$"),
-   col=c("black", "red", "blue"), lty=c(1,2,3));
+plot(B, xlab='$x$', ylab='$\\alpha$', log='x', xlim=c(0.9,46))
+plot(TB1, col='red',  lty=2, add=TRUE)
+plot(TB2, col='blue', lty=3, add=TRUE)
+legend('topright', c('$\\mu_{B}$', '$\\mu_{TB_1}$', '$\\mu_{TB_2}$'),
+   col=c('black', 'red', 'blue'), lty=c(1,2,3));
 @
 \end{center}
 
@@ -1430,7 +1437,7 @@ legend("topright", c("$\\mu_{B}$", "$\\mu_{TB_1}$", "$\\mu_{TB_2}$"),
 \subsubsection{Approximation with Restrictions on Support and Core}
 
 
-The \texttt{"SupportCoreRestricted"} method was proposed in \cite{GrzegorzewskiPasternak2011}.
+The \texttt{'SupportCoreRestricted'} method was proposed in \cite{GrzegorzewskiPasternak2011}.
 It gives the $L_2$-nearest trapezoidal approximation with constraints
 $\mathrm{core}(A) \subseteq \mathrm{core}(\mathcal{T}(A))$
 and $\mathrm{supp}(\mathcal{T}(A)) \subseteq \mathrm{supp}(A)$,
@@ -1438,14 +1445,14 @@ i.e.~for which each point that surely belongs to $A$ also belongs to $\mathcal{T
 and each point that surely does not belong to $A$ also does not belong to $\mathcal{T}(A)$.
 
 <<ApproxExA_RestrSuppCore,dependson='ApproxExA',fig.keep='none'>>=
-(T4 <- trapezoidalApproximation(A, method="SupportCoreRestricted"))
+(T4 <- trapezoidalApproximation(A, method='SupportCoreRestricted'))
 distance(A, T4)
 @
 
 \begin{center}
 <<ApproxExA_RestrSuppCore2,dependson='ApproxExA_RestrSuppCore',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(T4, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(T4, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', 'Supp\\&core restr.\napproximation'),
    col=c('black', 'red'), lty=c(1,2))
 @
@@ -1474,23 +1481,23 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 @
 
 
-\subsubsection{Na\"{i}ve Approximation}
+\subsubsection{Na\'{i}ve Approximation}
 
-The \texttt{"Naive"} method generates a PLFN with the same
+The \texttt{'Naive'} method generates a PLFN with the same
 core and support as $A$ and with sides interpolating the membership function
 of $A$ at given $\alpha$-cuts.
 
 <<ApproxPLFNNaive,dependson='ApproxExAPLFN',fig.keep='none'>>=
-P1 <- piecewiseLinearApproximation(A, method="Naive",
+P1 <- piecewiseLinearApproximation(A, method='Naive',
          knot.n=1, knot.alpha=0.5)
-P1["allknots"]
+P1['allknots']
 print(distance(A, P1), 8)
 @
 
 \begin{center}
 <<ApproxPLFNNaive2,dependson='ApproxPLFNNaive',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(P1, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(P1, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
    col=c('black', 'red'), lty=c(1,2))
 @
@@ -1508,15 +1515,15 @@ is used.
 
 <<ApproxPLFNNearest,dependson='ApproxExAPLFN',fig.keep='none'>>=
 system.time(P2 <- piecewiseLinearApproximation(A,
-   method="NearestEuclidean", knot.n=1, knot.alpha=0.5))
-print(P2["allknots"], 6)
+   method='NearestEuclidean', knot.n=1, knot.alpha=0.5))
+print(P2['allknots'], 6)
 print(distance(A, P2), 12)
 @
 
 \begin{center}
 <<ApproxPLFNNearest2,dependson='ApproxPLFNNearest',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(P2, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(P2, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
    col=c('black', 'red'), lty=c(1,2))
 @
@@ -1547,9 +1554,9 @@ d1 <- numeric(length(a)) # distances #1 (to be calculated)
 d2 <- numeric(length(a)) # distances #2 (to be calculated)
 for (i in 1:length(a))
 {
-   P1 <- piecewiseLinearApproximation(A1, method="NearestEuclidean",
+   P1 <- piecewiseLinearApproximation(A1, method='NearestEuclidean',
             knot.n=1, knot.alpha=a[i])
-   P2 <- piecewiseLinearApproximation(A2, method="NearestEuclidean",
+   P2 <- piecewiseLinearApproximation(A2, method='NearestEuclidean',
             knot.n=1, knot.alpha=a[i])
 
    d1[i] <- distance(A1, P1)
@@ -1566,8 +1573,8 @@ at some $\alpha$ (but it is in theory).
 
 \begin{center}
 <<PLFNApproxNeares_error2,dependson='PLFNApproxNeares_error',echo=FALSE>>=
-matplot(a, cbind(d1, d2), type='l', xlab="$\\alpha$", ylab="")
-legend("top", c("$d(A_1,P_1)$", "$d(A_2,P_2)$"), lty=c(1,2), col=c(1,2))
+matplot(a, cbind(d1, d2), type='l', xlab='$\\alpha$', ylab='')
+legend('top', c('$d(A_1,P_1)$', '$d(A_2,P_2)$'), lty=c(1,2), col=c(1,2))
 @
 \end{center}
 
@@ -1591,7 +1598,7 @@ a <- seq(1e-9, 1-1e-9, length.out=100) # many alphas from (0,1)
 d <- numeric(length(a)) # distances (to be calculated)
 for (i in 1:length(a))
 {
-   P1 <- piecewiseLinearApproximation(A1, method="NearestEuclidean",
+   P1 <- piecewiseLinearApproximation(A1, method='NearestEuclidean',
             knot.n=1, knot.alpha=a[i])
    d[i] <- distance(A1, P1)
 }
@@ -1600,7 +1607,7 @@ plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)));
 
 \begin{center}
 <<BestKnotAlphaPLFN3,dependson='BestKnotAlphaPLFN2',echo=FALSE>>=
-plot(a, d, type='l', xlab="$\\alpha$", ylab="$D_{A_1}(\\alpha)$");
+plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A_1}(\\alpha)$');
 @
 \end{center}
 
@@ -1616,12 +1623,12 @@ for (i in 1:5) # 5 iterations
    optim(a0,
       function(a)
       {
-         P1 <- piecewiseLinearApproximation(A1, method="NearestEuclidean",
+         P1 <- piecewiseLinearApproximation(A1, method='NearestEuclidean',
                                              knot.n=1, knot.alpha=a)
 
          distance(A1, P1);
-      }, method="L-BFGS-B", lower=1e-9, upper=1-1e-9) -> res;
-   cat(sprintf("%.9f %6g %.9f %.9f\n", a0, res$counts[1], res$par, res$value));
+      }, method='L-BFGS-B', lower=1e-9, upper=1-1e-9) -> res;
+   cat(sprintf('%.9f %6g %.9f %.9f\n', a0, res$counts[1], res$par, res$value));
 }
 @
 
@@ -1643,8 +1650,8 @@ TO BE DONE... WORK  ON AN EXACT ALGORITHM IS IN PROGRESS.....
 
 <<ApproxMethodPLFN1,dependson='ApproxExAPLFN',fig.keep='none'>>=
 system.time(P3 <- piecewiseLinearApproximation(A,
-   method="ApproximateNearestEuclidean", knot.n=1, knot.alpha=0.5))
-print(P3["allknots"], 6)
+   method='ApproximateNearestEuclidean', knot.n=1, knot.alpha=0.5))
+print(P3['allknots'], 6)
 print(distance(A, P3), digits=12)
 @
 \noindent
@@ -1655,14 +1662,14 @@ Another example:
 
 <<ApproxMethodPLFN2,dependson='ApproxExAPLFN',fig.keep='none'>>=
 system.time(P4 <- piecewiseLinearApproximation(A,
-   method="ApproximateNearestEuclidean", knot.n=4,
+   method='ApproximateNearestEuclidean', knot.n=4,
    knot.alpha=c(0.2, 0.3, 0.7, 0.9), verbose=TRUE))
 @
 
 \begin{center}
 <<ApproxMethodPLFN3,dependson='ApproxMethodPLFN2',echo=FALSE>>=
-plot(A, xlab="$x$", ylab="$\\alpha$")
-plot(P4, col="red", lty=2, add=TRUE)
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(P4, col='red', lty=2, add=TRUE)
 print(distance(A, P4), digits=12)
 @
 \end{center}
@@ -1678,22 +1685,22 @@ to allow for greater number of iterations.
 #    lower=function(x) sqrt(x), upper=function(x) (1-x)^10)
 #
 # X1 <- piecewiseLinearApproximation(B, knot.n=1, knot.alpha=c(0.5),
-#    method="NearestEuclidean", verbose=TRUE)
-# round(X1["allknots"],3)
+#    method='NearestEuclidean', verbose=TRUE)
+# round(X1['allknots'],3)
 # distance(B, X1)
 #
 # X2 <- piecewiseLinearApproximation(B,
 #    knot.n=1, knot.alpha=c(0.5),
-#    method="ApproximateNearestEuclidean",
+#    method='ApproximateNearestEuclidean',
 #    optim.control=list(maxit=5000), verbose=TRUE)
-# round(X2["allknots"],3)
+# round(X2['allknots'],3)
 # distance(B, X2) # :-(
 #
 # plot(B, lwd=2)
 # plot(X2, add=TRUE, col=4, lty=2)
 # plot(X1, add=TRUE, col=2)
-# legend("topright",
-#    c("Original", "Best PLFN (approximate)", "Best PLFN (exact)"),
+# legend('topright',
+#    c('Original', 'Best PLFN (approximate)', 'Best PLFN (exact)'),
 #    col=c(1,4,2), lty=c(1,2,1), lwd=c(2,1,1));
 @
 
@@ -1702,8 +1709,8 @@ to allow for greater number of iterations.
 
 \section{NEWS/CHANGELOG}
 
-<<NEWSread,comment="",echo=FALSE,cache=FALSE>>=
-cat(readLines("../../NEWS"), sep="\n")
+<<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
+cat(readLines('../../NEWS'), sep='\n')
 @
 
 
