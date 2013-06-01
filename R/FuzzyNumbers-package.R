@@ -19,9 +19,6 @@
 
 #' \pkg{FuzzyNumbers} is an open source (LGPL 3) package for R.
 #' It provides S4 classes and methods to deal with Fuzzy Numbers
-#' and allows for computations of arithmetic operations on FNs,
-#' approximation by trapezoidal and piecewise linear FNs,
-#' random fuzzy numbers generation [TO DO] etc.
 #' The package may be used by the practitioners as well as by the researchers
 #' in fuzzy numbers theory (e.g. for testing new algorithms,
 #' generating numerical examples, preparing figures).
@@ -48,12 +45,12 @@
 #'    \item Representation of arbitrary fuzzy numbers
 #' (including FNs with discontinuous side functions and/or alpha-cuts),
 #' as well as their particular types, e.g. trapezoidal and piecewise linear fuzzy numbers,
-#'    \item Defuzzification and Approximation by Triangular
-#'      and Piecewise Linear FNs (see e.g. \code{\link{expectedValue}},
+#'    \item Defuzzification and approximation by triangular
+#'      and piecewise linear FNs (see e.g. \code{\link{expectedValue}},
 #'      \code{\link{value}}, \code{\link{trapezoidalApproximation}},
 #'      \code{\link{piecewiseLinearApproximation}}),
 #'    \item Visualization of FNs (see \code{\link{plot}}),
-#'    \item Basic Operations on FNs,
+#'    \item Basic operations on FNs,
 #'    \item Aggregation of FNs [TO DO],
 #'    \item Ranking of FNs [TO DO],
 #'    \item Random FN generation [TO DO],
@@ -67,8 +64,10 @@
 #' call \code{help(package="FuzzyNumbers")}.
 #' Moreover, you will surely be interested in a step-by-step guide to the
 #' package usage and features which is available at
-#' \url{https://github.com/Rexamine/FuzzyNumbers/blob/master/inst/doc/FuzzyNumbers-Tutorial.pdf?raw=true}.
+#' \url{http://github.com/Rexamine/FuzzyNumbers/raw/master/inst/doc/FuzzyNumbers-Tutorial.pdf}.
 #' \cr\cr
+#'
+#'
 #'
 #' \bold{Keywords}: Fuzzy Numbers, Fuzzy Sets, Shadowed Sets,
 #' Trapezoidal Approximation, Piecewise Linear Approximation,
@@ -87,7 +86,7 @@
 #' Chanas S. (2001), On the interval approximation of a fuzzy number,
 #' Fuzzy Sets and Systems 122, pp. 353-356.\cr
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
-#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, to appear in Fuzzy Sets and Systems.\cr
+#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, Fuzzy Sets and Systems, 2013, doi:10.1016/j.fss.2013.02.005.\cr
 #' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
 #' Fuzzy Sets and Systems 93, pp. 125-135.\cr
 #' Dubois D., Prade H. (1978), Operations on fuzzy numbers, Int. J. Syst. Sci. 9, pp. 613-626.\cr
