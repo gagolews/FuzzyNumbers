@@ -1,6 +1,6 @@
 ## This file is part of the FuzzyNumbers library.
 ##
-## Copyright 2012 Marek Gagolewski
+## Copyright 2012-2013 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify
@@ -116,6 +116,13 @@ setMethod(
 #'
 #' For convenience, objects of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
 #' may be created with this function.
+#' 
+#' If \code{a1}, \code{a2}, \code{a3}, and \code{a4} are missing,
+#' then \code{knot.left} and \code{knot.right} may be of length \code{knot.n+2}.
+#' 
+#' If \code{knot.n} is not given, then it guessed from \code{length(knot.left)}.
+#' If \code{knot.alpha} is missing, then the knots will be equally distributed
+#' on the interval [0,1].
 #'
 #' @param a1 a number specyfing left bound of the support
 #' @param a2 a number specyfing left bound of the core
@@ -125,15 +132,34 @@ setMethod(
 #' @param knot.alpha \code{knot.n} alpha-cut values at knots
 #' @param knot.left \code{knot.n} knots on the left side; a nondecreasingly sorted vector with elements in [\code{a1},\code{a2}]
 #' @param knot.right \code{knot.n} knots on the right side; a nondecreasingly sorted vector with elements in [\code{a3},\code{a4}]
-#' @return Object of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
+#' @return An object of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}.
 #' @export
 PiecewiseLinearFuzzyNumber <- function(a1, a2, a3, a4,
    knot.n=0, knot.alpha=numeric(0),
    knot.left=numeric(0), knot.right=numeric(0))
 {
-   .Object <- new("PiecewiseLinearFuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
-         knot.n=knot.n, knot.alpha=knot.alpha, knot.left=knot.left, knot.right=knot.right)
-   .Object
+   stopifnot(length(knot.left) == length(knot.right))
+   
+   if (missing(a1) && missing(a2) && missing(a3) && missing(a4)) {
+      if (missing(knot.n))
+         knot.n <- length(knot.left)-2
+      
+      if (missing(knot.alpha))
+         knot.alpha <- seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)]
+      
+      new("PiecewiseLinearFuzzyNumber", a1=knot.left[1], a2=knot.left[knot.n+2], a3=knot.right[1], a4=knot.right[knot.n+2],
+          knot.n=knot.n, knot.alpha=knot.alpha, knot.left=knot.left[-c(1,knot.n+2)], knot.right=knot.right[-c(1,knot.n+2)])
+   }
+   else {
+      if (missing(knot.n))
+         knot.n <- length(knot.left)
+      
+      if (missing(knot.alpha))
+         knot.alpha <- seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)]
+      
+      new("PiecewiseLinearFuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
+            knot.n=knot.n, knot.alpha=knot.alpha, knot.left=knot.left, knot.right=knot.right)
+   }
 }
 
 

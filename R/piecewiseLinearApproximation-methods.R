@@ -44,7 +44,7 @@ setGeneric("piecewiseLinearApproximation", function(object, ...) standardGeneric
 #' @param verbose logical
 #' @param ... further arguments passed to \code{\link{integrateAlpha}}
 #' @param knot.n number of knots
-#' @param knot.alpha alpha-cuts for knots
+#' @param knot.alpha alpha-cuts for knots (defaults to equally distributed knots)
 #' @param optim.control a list of control params for \code{\link{optim}}
 #' 
 #' @exportMethod piecewiseLinearApproximation
@@ -67,7 +67,7 @@ setMethod(
       object,
       method=c("NearestEuclidean","ApproximateNearestEuclidean","Naive"),
       knot.n=1,
-      knot.alpha=0.5,
+      knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
       optim.control=list(),
 #       optim.method=c("Nelder-Mead"),
       verbose=FALSE,

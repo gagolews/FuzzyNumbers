@@ -106,7 +106,7 @@ ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
 \medskip
 \textit{The package, as well as this tutorial, is still in its early
-days -- any suggestions are welcome!}
+days -- any suggestions and contributions are welcome!}
 \end{center}
 
 
@@ -201,32 +201,48 @@ opts_chunk$set(
 Fuzzy set theory lets us effectively and quite intuitively represent
 imprecise or vague information. Fuzzy numbers (FNs), introduced
 by Dubois and Prade in \cite{DuboisPrade1978}, form a particular
-subclass of fuzzy sets of the real line. They play a significant role
-in many important theoretical and practical considerations
+subclass of fuzzy sets of the real line.
+Formally, a fuzzy set $A$
+with membership function $\mu_A:\mathbb{R}\to[0,1]$
+is a fuzzy number, if it possess at least the three following properties:
+\begin{itemize}
+\item[(i)] it is a normalized fuzzy set,
+i.e.~$\mu_A(x_0)=1$ for some $x_0\in\mathbb{R}$,
+\item[(ii)] it is fuzzy convex, i.e.~for any $x_1,x_2\in\mathbb{R}$
+and $\lambda\in[0,1]$ it holds
+$\mu_A(\lambda x_1 + (1-\lambda) x_2) \ge \mu_A(x_1)\wedge \mu_A(x_2)$,
+\item[(iii)] the support of $A$ is bounded,
+where $\mathrm{supp}(A) = \mathrm{cl}(\{x\in\mathbb{R}: \mu_A(x)>0\})$.
+\end{itemize}
+Fuzzy numbers play a significant role
+in many practical applications
 (cf.~\cite{KlirYuan1995:fuzzybook})
 since we often describe our knowledge about objects
 through numbers, e.g. ``I'm about 180 cm tall''
 or ``The rocket was launched between 2 and 3 p.m.''.
 
-\R is a free, open sourced software environment
-for statistical computing and graphics, which
-includes an implementation
-of a very powerful and quite popular high-level language called \lang{S}.
-It runs on all major operating systems, i.e.~\os{Windows},
-\os{Linux}, and \os{MacOS X}.
-To install \R and/or find some information on the \lang{S} language
-please visit \R Project's Homepage at \href{http://www.R-project.org}{www.R-project.org}.
-Perhaps you may also wish to install  \program{RStudio},
-a convenient development environment for \R.
-It is available at \href{http://rstudio.org/}{www.rsudio.org}.
+
 
 
 \bigskip
 \package{FuzzyNumbers} is an Open Source (licensed under GNU LGPL 3)
-package for \R$\ge$ 2.12 to which anyone can contribute.
-It has been created in order to deal with fuzzy numbers
-conveniently and effectively. To install its latest ``official'' release 
-available on \textit{CRAN} we type:
+package for \R -- a free, open sourced software environment
+for statistical computing and graphics, which
+includes an implementation
+of a very powerful and quite popular high-level language called \lang{S}.
+and runs on all major operating systems, i.e.~\os{Windows},
+\os{Linux}, and \os{MacOS X}\footnote{%
+To install \R and/or find some information on the \lang{S} language
+please visit \R Project's Homepage at \href{http://www.R-project.org}{www.R-project.org}.
+Perhaps you may also wish to install  \program{RStudio},
+a convenient development environment for \R.
+It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
+
+
+\package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
+conveniently and effectively.
+To install latest ``official'' release of the 
+package available on \textit{CRAN} we type:
 
 <<eval=FALSE>>=
 install.packages('FuzzyNumbers')
@@ -234,10 +250,7 @@ install.packages('FuzzyNumbers')
 
 \noindent
 Alternatively, we may fetch its current development snapshot
-(without man pages, but see our homepage\footnote{%
-\href{http://www.ibspan.waw.pl/~gagolews/?page=resources&subpage=FuzzyNumbers&manpage=00Index}%
-{www.ibspan.waw.pl/$\sim$gagolews/?page=resources\&subpage=FuzzyNumbers\&manpage=00Index}.}) 
-from \textit{GitHub}.
+from \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.
 
 
 \bigskip
@@ -459,7 +472,7 @@ A2 <- FuzzyNumber(1, 3, 4, 7,
 plot(A1, col='blue')
 plot(A2, col='red', lty=2, add=TRUE)
 legend('topright', c(expression(mu[A1]), expression(mu[A2])),
-   col=c('blue', 'red'), lty=c(1,2));
+   col=c('blue', 'red'), lty=c(1,2))
 @
 
 \begin{center}
@@ -467,7 +480,7 @@ legend('topright', c(expression(mu[A1]), expression(mu[A2])),
 plot(A1, col='blue', xlab='$x$', ylab='$\\alpha$')
 plot(A2, col='red', lty=2, add=TRUE)
 legend('topright', c('$\\mu_{A1}$', '$\\mu_{A2}$'),
-   col=c('blue', 'red'), lty=c(1,2));
+   col=c('blue', 'red'), lty=c(1,2))
 @
 \end{center}
 
@@ -789,6 +802,21 @@ cat(as.character(P1, toLaTeX=TRUE, varnameLaTeX='P_1'))
 \end{quote}
 
 \bigskip
+If you want to obtain a PLFN with equally distributed knots, then
+you may use the more convenient version of
+the \func{PiecewiseLinearFuzzyNumber()} function.
+
+<<PLFNEx3>>=
+PiecewiseLinearFuzzyNumber(knot.left=c(0,0.5,0.7,1),
+                           knot.right=c(2,2.2,2.4,3))['allknots']
+@
+
+\noindent
+Note that if $a_1,\dots, a_4$ are omitted, then they are taken
+from \argument{knot.left} and \argument{knot.right}
+(their lengths should then be equal to \argument{knot.n}+2).
+
+\bigskip
 If \texttt{knot.n} is equal to 0 or all left and right knots lie on common lines,
 then a PLFN reduces to a TFN.
 Please note that, however, the \texttt{TrapezoidalFuzzyNumber} class
@@ -799,9 +827,9 @@ of the first mentioned class to the other,
 we would do that by calling:
 
 <<PLFNEx2a,fig.keep='none'>>=
-alpha <- c(0.2, 0.3, 0.5, 0.6, 0.9);
+alpha <- c(0.2, 0.3, 0.5, 0.6, 0.9)
 P3 <- as.PiecewiseLinearFuzzyNumber(T1,
-         knot.n=5, knot.alpha=alpha);
+         knot.n=5, knot.alpha=alpha)
 P3
 plot(P3)
 abline(h=alpha, col='gray', lty=2)
@@ -1012,9 +1040,9 @@ plot.default(NA, xlab='$x$', ylab='$\\mu_S(x)$',
    xlim=c(-0.3,5.3), ylim=c(0,1)) # empty window
 
 xpos <- c(X['a1'], X['knot.left'],  X['a2'],
-          X['a3'], X['knot.right'], X['a4']);
+          X['a3'], X['knot.right'], X['a4'])
 xlab <- c('$s_1$', '$s_2$', '$s_3$',
-          '$s_4$', '$s_5$', '$s_6$');
+          '$s_4$', '$s_5$', '$s_6$')
 abline(v=xpos, col='gray', lty=3)
 text(xpos, 1.05, xlab, pos=3, xpd=TRUE)
 
@@ -1031,8 +1059,8 @@ X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1, knot.alpha=0.6, knot.left=
 
 plot.default(NA, xlab='$x$', ylab='$\\mu_S(x)$', xlim=c(-0.3,5.3), ylim=c(0,1))
 
-xpos <- c(X['a1'], X['knot.left'], X['a2'], X['a3'], X['knot.right'], X['a4']);
-xlab <- c('$s_1$', '$s_2$', '$s_3$', '$s_4$', '$s_5$', '$s_6$');
+xpos <- c(X['a1'], X['knot.left'], X['a2'], X['a3'], X['knot.right'], X['a4'])
+xlab <- c('$s_1$', '$s_2$', '$s_3$', '$s_4$', '$s_5$', '$s_6$')
 abline(v=xpos, col='gray', lty=3)
 text(xpos, 1.05, xlab, pos=3, xpd=TRUE)
 
@@ -1244,8 +1272,19 @@ diff(supp(A))
 
 \section{Arithmetic Operations on Fuzzy Numbers}\label{Sec:Operations}
 
+The basic binary arithmetic operations for FNs are often defined
+by means of the so-called extension principle 
+(see \cite{KlirYuan1995:fuzzybook})
+and interval arithmetic.
+For each $\alpha\in[0,1]$:
+\[
+   (A \circledast B)_\alpha
+   = A_\alpha \circledast B_\alpha,
+\]
+where $\circledast=+,-,*$ or $/$,
+and $A,B$ are arbitrary FNs.
 
-Let $A,B$ be arbitrary FNs. We define the sum $A+B$  for every
+For example, we define the sum $A+B$  for every
 $\alpha \in \lbrack 0,1]$ as:%
 \[
 \left( A+B\right) _{\alpha }=A_{\alpha }+B_{\alpha }=\left[ A_{L}\left(
@@ -1268,9 +1307,21 @@ the scalar multiplication is given by:
 for each $\alpha \in \lbrack 0,1]$.
 
 
-In \package{FuzzyNumbers}, we have defined
-the \texttt{+}, \texttt{-}, and \texttt{*} operators,
-which implements the above-mentioned operations.
+In the \package{FuzzyNumbers} package we have defined
+the \texttt{+}, \texttt{-}, \texttt{*} and \texttt{/} operators,
+which implements the basic arithmetic operations
+as defined in \cite{KlirYuan1995:fuzzybook}.
+
+Currently all the operations are available
+for piecewise linear FNs only,
+and addition and scalar multiplication
+is additionally implemented for trapezoidal FNs.
+Note that the computer arithmetic has anyway
+a discrete nature, and a PLFN with large number
+of knots often approximates (cf.~Sec.~\ref{Sec:Approximation})
+an arbitrary FN sufficiently well.
+The computations are always exact (well, up to the computer
+floating-point arithmetic errors) at knots.
 
 <<addition>>=
 A <- TrapezoidalFuzzyNumber(0, 1, 1, 2)
@@ -1281,6 +1332,15 @@ plot(A+B, add=TRUE, col=4, lty=4)
 legend('topright', c('A', 'B', 'A+B'), lty=c(1,2,4), col=c(1,2,4))
 @
 
+
+<<ops2>>=
+A <- piecewiseLinearApproximation(PowerFuzzyNumber(1,2,3,4,p.left=2,p.right=0.5),
+   method="Naive", knot.n=20)
+B <- piecewiseLinearApproximation(PowerFuzzyNumber(2,3,4,5,p.left=0.1,p.right=3),
+   method="Naive", knot.n=40)
+A+A # the same as 2*A
+A+B # note the number of knots has increased
+@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1436,7 +1496,7 @@ plot(B, xlab='$x$', ylab='$\\alpha$', log='x', xlim=c(0.9,46))
 plot(TB1, col='red',  lty=2, add=TRUE)
 plot(TB2, col='blue', lty=3, add=TRUE)
 legend('topright', c('$\\mu_{B}$', '$\\mu_{TB_1}$', '$\\mu_{TB_2}$'),
-   col=c('black', 'red', 'blue'), lty=c(1,2,3));
+   col=c('black', 'red', 'blue'), lty=c(1,2,3))
 @
 \end{center}
 
@@ -1609,12 +1669,12 @@ for (i in 1:length(a))
             knot.n=1, knot.alpha=a[i])
    d[i] <- distance(A1, P1)
 }
-plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)));
+plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)))
 @
 
 \begin{center}
 <<BestKnotAlphaPLFN3,dependson='BestKnotAlphaPLFN2',echo=FALSE>>=
-plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A_1}(\\alpha)$');
+plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A_1}(\\alpha)$')
 @
 \end{center}
 
@@ -1626,16 +1686,16 @@ We only know that the distance function is continuous.
 <<BestKnotAlphaPLFN4,dependson='BestKnotAlphaPLFN3',warning=FALSE>>=
 for (i in 1:5) # 5 iterations
 {
-   a0 <- runif(1,0,1); # random starting point
+   a0 <- runif(1,0,1) # random starting point
    optim(a0,
       function(a)
       {
          P1 <- piecewiseLinearApproximation(A1, method='NearestEuclidean',
                                              knot.n=1, knot.alpha=a)
 
-         distance(A1, P1);
-      }, method='L-BFGS-B', lower=1e-9, upper=1-1e-9) -> res;
-   cat(sprintf('%.9f %6g %.9f %.9f\n', a0, res$counts[1], res$par, res$value));
+         distance(A1, P1)
+      }, method='L-BFGS-B', lower=1e-9, upper=1-1e-9) -> res
+   cat(sprintf('%.9f %6g %.9f %.9f\n', a0, res$counts[1], res$par, res$value))
 }
 @
 
@@ -1708,7 +1768,7 @@ to allow for greater number of iterations.
 # plot(X1, add=TRUE, col=2)
 # legend('topright',
 #    c('Original', 'Best PLFN (approximate)', 'Best PLFN (exact)'),
-#    col=c(1,4,2), lty=c(1,2,1), lwd=c(2,1,1));
+#    col=c(1,4,2), lty=c(1,2,1), lwd=c(2,1,1))
 @
 
 
