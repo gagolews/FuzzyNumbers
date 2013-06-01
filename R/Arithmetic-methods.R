@@ -23,12 +23,19 @@
 #' trapezoidal fuzzy numbers addition, subtraction, and multiplication
 #' by scalar; 
 #' piecewise linear fuzzy numbers addition, substraction,
-#' and multiplication by scalar
+#' multiplication and division, and multiplication by scalar.
 #' 
 #' using the extension principle and interval-based arithmetic operations
 #' 
+#' Note that in theory the class of PLFNs is not closed
+#' under the operations * and /.
+#' However, if you operate on a large number of knots,
+#' the results should be satisfactory.
 #' 
-#' 
+#' @details
+#' Thanks to Jan Caha for suggestions on PiecewiseLinearFuzzyNumber
+#' operations.
+#'
 #' @return A fuzzy number
 #' @exportMethod *
 #' @name Arithmetic
@@ -199,4 +206,87 @@ setMethod("-",
                                  knot.right=c(e1@a3,e1@knot.right,e1@a4)-rev(c(e2@a1,e2@knot.left,e2@a2))
       )
    }
+)
+
+
+
+
+
+#' @exportMethod *
+#' @name Arithmetic
+#' @rdname Arithmetic-methods
+#' @docType methods
+#' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
+setMethod("*",
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
+   function (e1, e2)
+   {
+      knot.alpha <- unique(sort(c(e1@knot.alpha, e2@knot.alpha)))
+      knot.n <- length(knot.alpha)
+      
+      if (!isTRUE(all.equal(e1@knot.alpha, knot.alpha))) # "naive" approximation is all we need (exactly)
+         e1 <- piecewiseLinearApproximation(e1, method="Naive", knot.n=knot.n, knot.alpha=knot.alpha)
+      
+      if (!isTRUE(all.equal(e2@knot.alpha, knot.alpha))) # "naive" approximation is all we need (exactly)
+         e2 <- piecewiseLinearApproximation(e2, method="Naive", knot.n=knot.n, knot.alpha=knot.alpha)
+      
+      e1l <- c(e1@a1,e1@knot.left,e1@a2)
+      e2l <- c(e2@a1,e2@knot.left,e2@a2)
+      e1r <- rev(c(e1@a3,e1@knot.right,e1@a4))
+      e2r <- rev(c(e2@a3,e2@knot.right,e2@a4))
+      
+      p1 <- e1l*e2l
+      p2 <- e1l*e2r
+      p3 <- e1r*e2l
+      p4 <- e1r*e2r
+      
+      # using the extension principle and interval-based arithmetic operations
+      PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,
+                               knot.left=pmin(p1, p2, p3, p4),
+                               knot.right=rev(pmax(p1, p2, p3, p4))
+      )
+   }
+)
+
+
+
+
+
+#' @exportMethod /
+#' @name Arithmetic
+#' @rdname Arithmetic-methods
+#' @docType methods
+#' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
+setMethod("/",
+    signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
+    function (e1, e2)
+    {
+       if (e2@a1 <= 0 && e2@a4 >= 0)
+          stop("division by zero")
+
+       knot.alpha <- unique(sort(c(e1@knot.alpha, e2@knot.alpha)))
+       knot.n <- length(knot.alpha)
+       
+       if (!isTRUE(all.equal(e1@knot.alpha, knot.alpha))) # "naive" approximation is all we need (exactly)
+          e1 <- piecewiseLinearApproximation(e1, method="Naive", knot.n=knot.n, knot.alpha=knot.alpha)
+       
+       if (!isTRUE(all.equal(e2@knot.alpha, knot.alpha))) # "naive" approximation is all we need (exactly)
+          e2 <- piecewiseLinearApproximation(e2, method="Naive", knot.n=knot.n, knot.alpha=knot.alpha)
+       
+       e1l <- c(e1@a1,e1@knot.left,e1@a2)
+       e2r <- 1.0/c(e2@a1,e2@knot.left,e2@a2)
+       e1r <- rev(c(e1@a3,e1@knot.right,e1@a4))
+       e2l <- 1.0/rev(c(e2@a3,e2@knot.right,e2@a4))
+       
+       p1 <- e1l*e2l
+       p2 <- e1l*e2r
+       p3 <- e1r*e2l
+       p4 <- e1r*e2r
+       
+       # using the extension principle and interval-based arithmetic operations
+       PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,
+                                  knot.left=pmin(p1, p2, p3, p4),
+                                  knot.right=rev(pmax(p1, p2, p3, p4))
+       )
+    }
 )

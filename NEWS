@@ -11,7 +11,7 @@ FuzzyNumbers Package NEWS
   This function also allows to generate LaTeX code defining the FN
   (toLaTeX arg thanks to Jan Caha).
 
-* New binary arithmetic operators for PiecewiseLinearFuzzyNumbers: +,-
+* New binary arithmetic operators for PiecewiseLinearFuzzyNumbers: +,-,*,/
 
 * piecewiseLinearApproximation() argument knot.alpha
   now defaults to equally distributed knots (via given knot.n)

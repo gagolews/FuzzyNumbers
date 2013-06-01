@@ -1323,13 +1323,18 @@ an arbitrary FN sufficiently well.
 The computations are always exact (well, up to the computer
 floating-point arithmetic errors) at knots.
 
+In theory the class of PLFNs is not closed
+under the operations \texttt{*} and \texttt{/}.
+However, if you operate on a large number of knots,
+the results should be satisfactory.
+
 <<addition>>=
 A <- TrapezoidalFuzzyNumber(0, 1, 1, 2)
 B <- TrapezoidalFuzzyNumber(1, 2, 2, 3)
-plot(A, xlim=c(0,6))
+plot(A, xlim=c(0,6), xlab='$x$', ylab='$\\alpha$')
 plot(B, add=TRUE, col=2, lty=2)
 plot(A+B, add=TRUE, col=4, lty=4)
-legend('topright', c('A', 'B', 'A+B'), lty=c(1,2,4), col=c(1,2,4))
+legend('topright', c('$A$', '$B$', '$A+B$'), lty=c(1,2,4), col=c(1,2,4))
 @
 
 
