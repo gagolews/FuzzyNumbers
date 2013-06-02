@@ -19,13 +19,26 @@
 
 #' Arithmetic operations on fuzzy numbers
 #' 
-#' Currently implemented:
-#' trapezoidal fuzzy numbers addition, subtraction, and multiplication
-#' by scalar; 
-#' piecewise linear fuzzy numbers addition, substraction,
-#' multiplication and division, and multiplication by scalar.
+#' Applies arithmetic operations using the extension principle 
+#' and interval-based calculations.
 #' 
-#' using the extension principle and interval-based arithmetic operations
+#' 
+#' @section Methods:
+#' \describe{
+#'      \item{\code{signature(e1 = "TrapezoidalFuzzyNumber", e2 = "numeric")}}{
+#'      Operators: \code{*}}
+#'      \item{\code{signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric")}}{
+#'      Operators: \code{*}}
+#'      \item{\code{signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"}}{
+#'      Operators: \code{+}, \code{-}, \code{*}, \code{/}}
+#'      \item{\code{signature(e1 = "TrapezoidalFuzzyNumber", e2 = "TrapezoidalFuzzyNumber")}}{
+#'      Operators: \code{+}, \code{-}}
+#'      \item{\code{signature(e1 = "numeric", e2 = "FuzzyNumber")}}{
+#'      Operators: \code{*}, \code{+}, \code{-}, which call corresponding operations for \code{(e2, e1)}}
+#' }
+#' 
+#' 
+#' 
 #' 
 #' Note that in theory the class of PLFNs is not closed
 #' under the operations * and /.
@@ -33,16 +46,24 @@
 #' the results should be satisfactory.
 #' 
 #' @details
-#' Thanks to Jan Caha for suggestions on PiecewiseLinearFuzzyNumber
-#' operations.
+#' Thanks to Jan Caha for suggestions on PLFN operations.
 #'
-#' @return A fuzzy number
-#' @exportMethod *
+#' @return A fuzzy number object.
+#' 
+
 #' @name Arithmetic
 #' @rdname Arithmetic-methods
 #' @docType methods
 #' @family FuzzyNumber-method
+#' @family PiecewiseLinearFuzzyNumber-method
+#' @family TrapezoidalFuzzyNumber-method
+invisible(NULL)
+
+
+
+#' @exportMethod *
 #' @aliases *,numeric,FuzzyNumber-method
+#' @rdname Arithmetic-methods
 setMethod("*",
    signature(e1 = "numeric", e2 = "FuzzyNumber"),
    function (e1, e2)
@@ -52,11 +73,37 @@ setMethod("*",
 )
 
 
-#' @exportMethod *
-#' @name Arithmetic
+
+#' @exportMethod +
 #' @rdname Arithmetic-methods
-#' @docType methods
+#' @aliases +,numeric,FuzzyNumber-method
+setMethod("+",
+          signature(e1 = "numeric", e2 = "FuzzyNumber"),
+          function (e1, e2)
+          {
+             e2+e1
+          }
+)
+
+
+
+#' @exportMethod -
+#' @rdname Arithmetic-methods
+#' @aliases -,numeric,FuzzyNumber-method
+setMethod("-",
+          signature(e1 = "numeric", e2 = "FuzzyNumber"),
+          function (e1, e2)
+          {
+             e2*(-1) + e1
+          }
+)
+
+
+
+
+#' @exportMethod *
 #' @aliases *,TrapezoidalFuzzyNumber,numeric-method
+#' @family TrapezoidalFuzzyNumber-method
 setMethod("*",
    signature(e1 = "TrapezoidalFuzzyNumber", e2 = "numeric"),
    function (e1, e2)
@@ -75,9 +122,7 @@ setMethod("*",
 
 
 #' @exportMethod *
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases *,PiecewiseLinearFuzzyNumber,numeric-method
 setMethod("*",
    signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"),
@@ -107,9 +152,7 @@ setMethod("*",
 
 
 #' @exportMethod +
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases +,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
 setMethod("+",
    signature(e1 = "TrapezoidalFuzzyNumber", e2 = "TrapezoidalFuzzyNumber"),
@@ -122,9 +165,7 @@ setMethod("+",
 
 
 #' @exportMethod -
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases -,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
 setMethod("-",
    signature(e1 = "TrapezoidalFuzzyNumber", e2 = "TrapezoidalFuzzyNumber"),
@@ -140,9 +181,7 @@ setMethod("-",
 
 
 #' @exportMethod -
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases -,FuzzyNumber,ANY-method
 setMethod("-",
    signature(e1 = "FuzzyNumber"),
@@ -155,9 +194,7 @@ setMethod("-",
 
 
 #' @exportMethod +
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
 setMethod("+",
    signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"),
@@ -183,9 +220,7 @@ setMethod("+",
 
 
 #' @exportMethod -
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
 setMethod("-",
    signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
@@ -213,9 +248,7 @@ setMethod("-",
 
 
 #' @exportMethod *
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
 setMethod("*",
    signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
@@ -253,9 +286,7 @@ setMethod("*",
 
 
 #' @exportMethod /
-#' @name Arithmetic
 #' @rdname Arithmetic-methods
-#' @docType methods
 #' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
 setMethod("/",
     signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 

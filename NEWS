@@ -22,7 +22,19 @@ FuzzyNumbers Package NEWS
   If \code{knot.alpha} is missing, then the knots will be equally distributed
   on the interval [0,1].
 
+* New function: fapply() - applies a function on a PLFN
+  using the extension principle
+
+* as.PiecewiseLinearFuzzyNumber is now an S4 method,
+  and can be called on objects of type numeric, as well as on
+  various FNs
+
 * ...
+
+* The FuzzyNumbers Tutorial has been properly included
+  as the package's vignette
+
+* Man pages update & cleanup
 
 ***************************************************************************
 
@@ -46,8 +58,10 @@ FuzzyNumbers Package NEWS
 
 * each object has been documented
 
+* first CRAN release
+
 ***************************************************************************
 
-0.01 /July 2012/
+0.01 /2012-07-01/
 
 * initial release

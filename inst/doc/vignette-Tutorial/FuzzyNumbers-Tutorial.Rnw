@@ -1270,7 +1270,9 @@ diff(supp(A))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Arithmetic Operations on Fuzzy Numbers}\label{Sec:Operations}
+\section{Operations on Fuzzy Numbers}\label{Sec:Operations}
+
+\subsection{Arithmetic Operations}
 
 The basic binary arithmetic operations for FNs are often defined
 by means of the so-called extension principle 
@@ -1307,10 +1309,22 @@ the scalar multiplication is given by:
 for each $\alpha \in \lbrack 0,1]$.
 
 
+
 In the \package{FuzzyNumbers} package we have defined
 the \texttt{+}, \texttt{-}, \texttt{*} and \texttt{/} operators,
 which implements the basic arithmetic operations
 as defined in \cite{KlirYuan1995:fuzzybook}.
+
+
+<<addition>>=
+A <- TrapezoidalFuzzyNumber(0, 1, 1, 2)
+B <- TrapezoidalFuzzyNumber(1, 2, 2, 3)
+plot(A, xlim=c(0,6), xlab='$x$', ylab='$\\alpha$')
+plot(B, add=TRUE, col=2, lty=2)
+plot(A+B, add=TRUE, col=4, lty=4)
+legend('topright', c('$A$', '$B$', '$A+B$'), lty=c(1,2,4), col=c(1,2,4))
+@
+
 
 Currently all the operations are available
 for piecewise linear FNs only,
@@ -1328,14 +1342,6 @@ under the operations \texttt{*} and \texttt{/}.
 However, if you operate on a large number of knots,
 the results should be satisfactory.
 
-<<addition>>=
-A <- TrapezoidalFuzzyNumber(0, 1, 1, 2)
-B <- TrapezoidalFuzzyNumber(1, 2, 2, 3)
-plot(A, xlim=c(0,6), xlab='$x$', ylab='$\\alpha$')
-plot(B, add=TRUE, col=2, lty=2)
-plot(A+B, add=TRUE, col=4, lty=4)
-legend('topright', c('$A$', '$B$', '$A+B$'), lty=c(1,2,4), col=c(1,2,4))
-@
 
 
 <<ops2>>=
@@ -1346,6 +1352,28 @@ B <- piecewiseLinearApproximation(PowerFuzzyNumber(2,3,4,5,p.left=0.1,p.right=3)
 A+A # the same as 2*A
 A+B # note the number of knots has increased
 @
+
+
+
+\subsection{Applying Functions}
+
+
+To apply any monotonic transformation on a piecewise
+linear fuzzy number,
+using the extension principle, we call \func{fapply()}.
+
+<<fapply>>=
+A <- as.PiecewiseLinearFuzzyNumber(TrapezoidalFuzzyNumber(0,1,2,3), knot.n=100)
+plot(fapply(A, function(x) log(x+1)^0.5), xlab='$x$', ylab='$\\alpha$')
+legend('topleft', '$\\sqrt{\\log(A+1)}$', lty=1)
+@
+
+\noindent
+The operation being applied should be a properly
+vectorized \R function object.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
