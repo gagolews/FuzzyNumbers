@@ -1358,9 +1358,8 @@ A+B # note the number of knots has increased
 \subsection{Applying Functions}
 
 
-To apply any monotonic transformation on a piecewise
-linear fuzzy number,
-using the extension principle, we call \func{fapply()}.
+To apply a monotonic transformation on a piecewise linear fuzzy number
+(using the extension principle) we call \func{fapply()}.
 
 <<fapply>>=
 A <- as.PiecewiseLinearFuzzyNumber(TrapezoidalFuzzyNumber(0,1,2,3), knot.n=100)

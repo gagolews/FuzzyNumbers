@@ -17,7 +17,7 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' S4 class representing a piecewise linear fuzzy number
+#' S4 Class Representing a Piecewise Linear Fuzzy Number
 #'
 #' A piecewise linear fuzzy number (PLFN) has side functions
 #' and alpha-cut bounds that linearly interpolate a given set of points
@@ -66,59 +66,61 @@ setClass(
       if (object@knot.n != length(object@knot.alpha)) return("length of `knot.alpha' should be equal to `knot.n'")
       if (object@knot.n != length(object@knot.left))  return("length of `knot.left' should be equal to `knot.n'")
       if (object@knot.n != length(object@knot.right)) return("length of `knot.right' should be equal to `knot.n'")
-
+      
       if (object@knot.n > 0)
       {
          if (is.unsorted(object@knot.left))  return("`knot.left' should be sorted nondecreasingly")
          if (is.unsorted(object@knot.right)) return("`knot.right' should be sorted nondecreasingly")
-
+         
          if (!is.finite(object@knot.left)  || any(object@knot.left < object@a1 | object@knot.left > object@a2))
             return("`knot.left' should be a vector with elements in [a1,a2]")
          if (!is.finite(object@knot.right) || any(object@knot.right < object@a3 | object@knot.left > object@a4))
             return("`knot.right' should be a vector with elements in [a3,a4]")
-
+         
          if (any(diff(object@knot.alpha) <= 0)) return("`knot.alpha' should be sorted nondecreasingly and be unique");
          if (!is.finite(object@knot.alpha) || any(object@knot.alpha < 0 | object@knot.alpha > 1))
             return("`knot.alpha' should be a vector with elements in [0,1]")
       }
-
+      
       return(TRUE)
    },
    contains="FuzzyNumber"
 )
 
-# not exported
+
+
+
 setMethod(
    f="initialize",
    signature("PiecewiseLinearFuzzyNumber"),
    definition=function(.Object, ...)
    {
       .Object <- callNextMethod()
-
+      
       kl <- c(0,(.Object@knot.left -.Object@a1)/(.Object@a2-.Object@a1),1)
       kr <- c(0,(.Object@knot.right-.Object@a3)/(.Object@a4-.Object@a3),1)
-
+      
       al <- c(0,.Object@knot.alpha,1)
       ar <- c(1,rev(.Object@knot.alpha),0)
-
+      
       # be careful for equal knot positions! (ties="ordered" solves that)
       .Object@left  <- approxfun(kl, al, method="linear",
-         yleft=NA, yright=NA, ties="ordered")
+                                 yleft=NA, yright=NA, ties="ordered")
       .Object@right <- approxfun(kr, ar, method="linear",
-         yleft=NA, yright=NA, ties="ordered")
-
+                                 yleft=NA, yright=NA, ties="ordered")
+      
       # no ties to specify - knot.alpha is unique
       .Object@lower <- approxfun(al, kl, method="linear",
-         yleft=NA, yright=NA)
+                                 yleft=NA, yright=NA)
       .Object@upper <- approxfun(ar, kr, method="linear",
-         yleft=NA, yright=NA)
-
+                                 yleft=NA, yright=NA)
+      
       return(.Object)
    }
 )
 
 
-#' Creates a piecewise linear fuzzy number
+#' Creates a Piecewise Linear Fuzzy Number
 #'
 #' For convenience, objects of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
 #' may be created with this function.
@@ -143,8 +145,8 @@ setMethod(
 #' 
 #' @family PiecewiseLinearFuzzyNumber-method
 PiecewiseLinearFuzzyNumber <- function(a1, a2, a3, a4,
-   knot.n=0, knot.alpha=numeric(0),
-   knot.left=numeric(0), knot.right=numeric(0))
+                                       knot.n=0, knot.alpha=numeric(0),
+                                       knot.left=numeric(0), knot.right=numeric(0))
 {
    stopifnot(length(knot.left) == length(knot.right))
    
@@ -166,7 +168,7 @@ PiecewiseLinearFuzzyNumber <- function(a1, a2, a3, a4,
          knot.alpha <- seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)]
       
       new("PiecewiseLinearFuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
-            knot.n=knot.n, knot.alpha=knot.alpha, knot.left=knot.left, knot.right=knot.right)
+          knot.n=knot.n, knot.alpha=knot.alpha, knot.left=knot.left, knot.right=knot.right)
    }
 }
 
@@ -198,65 +200,65 @@ PiecewiseLinearFuzzyNumber <- function(a1, a2, a3, a4,
 #' defaults to uniformly distributed knots
 #' @return Object of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
 #' 
+#' 
+#' @name as.PiecewiseLinearFuzzyNumber
 #' @docType methods
 #' @rdname as.PiecewiseLinearFuzzyNumber
 #' @family TrapezoidalFuzzyNumber-method
 #' @family PiecewiseLinearFuzzyNumber-method
-#' @family FuzzyNumber - method
+#' @family FuzzyNumber-method
+#' @aliases as.PiecewiseLinearFuzzyNumber,TrapezoidalFuzzyNumber-method
+#'          as.PiecewiseLinearFuzzyNumber,numeric-method
+#'          as.PiecewiseLinearFuzzyNumber,FuzzyNumber-method
+#'          as.PiecewiseLinearFuzzyNumber,TrapezoidalFuzzyNumber-method
+#' @exportMethod as.PiecewiseLinearFuzzyNumber
 setGeneric("as.PiecewiseLinearFuzzyNumber",
            function(object, ...) standardGeneric("as.PiecewiseLinearFuzzyNumber"))
 
 
 
-#' @exportMethod as.PiecewiseLinearFuzzyNumber
-#' @rdname as.PiecewiseLinearFuzzyNumber
-#' @aliases as.PiecewiseLinearFuzzyNumber,TrapezoidalFuzzyNumber-method
+
 setMethod(
-f="as.PiecewiseLinearFuzzyNumber",
+   f="as.PiecewiseLinearFuzzyNumber",
    signature(object="TrapezoidalFuzzyNumber"),
    definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
-{
-   stopifnot(length(knot.n) == 1, knot.n >= 0)
-   stopifnot(knot.n == length(knot.alpha)) 
+   {
+      stopifnot(length(knot.n) == 1, knot.n >= 0)
+      stopifnot(knot.n == length(knot.alpha)) 
+      
+      a <- alphacut(object, c(0, knot.alpha, 1))
+      PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]))
+   })
 
-   a <- alphacut(object, c(0, knot.alpha, 1))
-   PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]))
-})
 
 
-
-#' @exportMethod as.PiecewiseLinearFuzzyNumber
-#' @rdname as.PiecewiseLinearFuzzyNumber
-#' @aliases as.PiecewiseLinearFuzzyNumber,numeric-method
 setMethod(
    f="as.PiecewiseLinearFuzzyNumber",
    signature(object="numeric"),
    definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
-{
-   stopifnot(length(object) == 1, is.finite(object))
-   stopifnot(length(knot.n) == 1, knot.n >= 0)
-   stopifnot(knot.n == length(knot.alpha)) 
-   
-   PiecewiseLinearFuzzyNumber(a1=object, a2=object, a3=object, a4=object,
-                  knot.n=knot.n, knot.alpha=knot.alpha, knot.left=rep(object, knot.n), knot.right=rep(object, knot.n))
-})
+   {
+      stopifnot(length(object) == 1, is.finite(object))
+      stopifnot(length(knot.n) == 1, knot.n >= 0)
+      stopifnot(knot.n == length(knot.alpha)) 
+      
+      PiecewiseLinearFuzzyNumber(a1=object, a2=object, a3=object, a4=object,
+                                 knot.n=knot.n, knot.alpha=knot.alpha, 
+                                 knot.left=rep(object, knot.n), 
+                                 knot.right=rep(object, knot.n))
+   })
 
 
-#' @exportMethod as.PiecewiseLinearFuzzyNumber
-#' @rdname as.PiecewiseLinearFuzzyNumber
-#' @aliases as.PiecewiseLinearFuzzyNumber,FuzzyNumber-method
+
 setMethod(
    f="as.PiecewiseLinearFuzzyNumber",
    signature(object="FuzzyNumber"),
    definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
    {
-      stop("This method is only for exact conversion. Use piecewiseLinearApproximation() instead.")
+      stop("as.PiecewiseLinearFuzzyNumber() is only for exact conversion. Use piecewiseLinearApproximation() instead.")
    })
 
 
-#' @exportMethod as.PiecewiseLinearFuzzyNumber
-#' @rdname as.PiecewiseLinearFuzzyNumber
-#' @aliases as.PiecewiseLinearFuzzyNumber,TrapezoidalFuzzyNumber-method
+
 setMethod(
    f="as.PiecewiseLinearFuzzyNumber",
    signature(object="PiecewiseLinearFuzzyNumber"),
@@ -266,7 +268,7 @@ setMethod(
       stopifnot(knot.n == length(knot.alpha))   
       
       if (length(setdiff(object@knot.alpha, knot.alpha)) != 0)
-         stop("This method is only for exact conversion. Use piecewiseLinearApproximation() instead.")
+         stop("as.PiecewiseLinearFuzzyNumber() is only for exact conversion. Use piecewiseLinearApproximation() instead.")
       
       a <- alphacut(object, c(0, knot.alpha, 1))
       PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]))

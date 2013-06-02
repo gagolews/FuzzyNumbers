@@ -17,8 +17,7 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-setGeneric("fapply",
-        function(object, fun, ...) standardGeneric("fapply"))
+
 
 
 
@@ -38,13 +37,18 @@ setGeneric("fapply",
 #' @param fun a monotonic, vectorized R function
 #' @param ... additional arguments passed to \code{fun}
 #' @return a fuzzy number
-#'    
-#' @exportMethod fapply
+#' 
+#' @docType methods
 #' @name fapply
-#' @aliases fapply,PiecewiseLinearFuzzyNumber,function-method
 #' @rdname fapply-methods
 #' @family PiecewiseLinearFuzzyNumber-method
-#' @docType methods
+#' @exportMethod fapply
+#' @aliases fapply,PiecewiseLinearFuzzyNumber,function-method
+setGeneric("fapply",
+           function(object, fun, ...) standardGeneric("fapply"))
+
+
+
 setMethod(
    f="fapply",
    signature(object="PiecewiseLinearFuzzyNumber", fun="function"),

@@ -11,21 +11,23 @@ FuzzyNumbers Package NEWS
   This function also allows to generate LaTeX code defining the FN
   (toLaTeX arg thanks to Jan Caha).
 
-* New binary arithmetic operators for PiecewiseLinearFuzzyNumbers: +,-,*,/
+* New binary arithmetic operators, especially
+   for PiecewiseLinearFuzzyNumbers: +, -, *, /
 
-* piecewiseLinearApproximation() argument knot.alpha
-  now defaults to equally distributed knots (via given knot.n)
+* piecewiseLinearApproximation() and as.PiecewiseLinearFuzzyNumber()
+  argument `knot.alpha` now defaults to equally distributed knots
+  (via given `knot.n`)
 
-* PiecewiseLinearFuzzyNumber() now accepts missing a1, a2, a3, a4,
-  and knot.left, knot.right of length knot.n+2. Moreover, if \code{knot.n}
-  is not given, then it is guessed from \code{length(knot.left)}.
-  If \code{knot.alpha} is missing, then the knots will be equally distributed
+* PiecewiseLinearFuzzyNumber() now accepts missing `a1`, `a2`, `a3`, `a4`,
+  and `knot.left`, `knot.right` of length `knot.n`+2. Moreover, if `knot.n`
+  is not given, then it is guessed from length(knot.left).
+  If `knot.alpha` is missing, then the knots will be equally distributed
   on the interval [0,1].
 
 * New function: fapply() - applies a function on a PLFN
   using the extension principle
 
-* as.PiecewiseLinearFuzzyNumber is now an S4 method,
+* as.PiecewiseLinearFuzzyNumber() is now an S4 method,
   and can be called on objects of type numeric, as well as on
   various FNs
 
