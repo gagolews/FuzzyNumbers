@@ -27,5 +27,7 @@ figures-knitr
 *.log
 *.toc
 *.out
+*.bbl
+*.blg
 inst/doc/vignette-Tutorial/FuzzyNumbers-Tutorial.tex
 inst/doc/vignette-Tutorial/FuzzyNumbers-Tutorial.pdf

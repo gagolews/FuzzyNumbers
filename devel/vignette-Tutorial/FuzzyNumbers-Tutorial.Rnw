@@ -85,7 +85,7 @@
 
 
 \begin{center}
-{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.03-devel} Package for \R}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.3-devel} Package for \R}
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -200,7 +200,7 @@ opts_chunk$set(
 
 Fuzzy set theory lets us effectively and quite intuitively represent
 imprecise or vague information. Fuzzy numbers (FNs), introduced
-by Dubois and Prade in \cite{DuboisPrade1978}, form a particular
+by Dubois and Prade in \cite{DuboisPrade1978:opfn}, form a particular
 subclass of fuzzy sets of the real line.
 Formally, a fuzzy set $A$
 with membership function $\mu_A:\mathbb{R}\to[0,1]$
@@ -269,7 +269,7 @@ library(help='FuzzyNumbers')
 @
 
 \noindent
-For more information please visit the package's homepage \cite{FuzzyNumbersHome}.
+For more information please visit the package's homepage \cite{Gagolewski:FuzzyNumbersHome}.
 In case of any problems, comments, or suggestions feel free to contact the author.
 Good luck!
 
@@ -1155,7 +1155,7 @@ evaluate(A, seq(-1, 2, by=0.5))
 
 
 Let us first introduce the notion of the \textit{expected interval} of $A$
-\cite{DuboisPrade1987}.
+\cite{DuboisPrade1987:meanfn}.
 \begin{eqnarray}
 \mathrm{EI}(A) & := & [\mathrm{EI}_L(A), \mathrm{EI}_U(A)] \\
                & = & \left[ \int_0^1 A_L(\alpha)\,d\alpha, \int_0^1 A_U(\alpha)\,d\alpha \right].
@@ -1214,7 +1214,7 @@ weightedExpectedValue(A, 0.25)
 @
 
 \bigskip
-The \textit{value} of $A$ \cite{DelgadoETAL1998} is defined by:
+The \textit{value} of $A$ \cite{DelgadoETAL1998:canonicalfn} is defined by:
 \begin{equation}
 \mathrm{val}(A) := \int_0^1 \alpha\left(A_L(\alpha)+A_U(\alpha)\right)\,d\alpha.
 \end{equation}
@@ -1234,7 +1234,7 @@ may be used for example to ``defuzzify'' $A$.
 \subsection{Measures of ``Nonspecificity''}
 
 
-The \textit{width} of $A$ \cite{Chanas2001} is defined as:
+The \textit{width} of $A$ \cite{Chanas2001:intervapproxfn} is defined as:
 \begin{equation}
 \mathrm{width}(A) := \mathrm{EI}_U(A) - \mathrm{EI}_L(A).
 \end{equation}
@@ -1247,7 +1247,7 @@ width(A)
 @
 
 \bigskip
-The \textit{ambiguity} of $A$ \cite{DelgadoETAL1998} is defined as:
+The \textit{ambiguity} of $A$ \cite{DelgadoETAL1998:canonicalfn} is defined as:
 \begin{equation}
 \mathrm{amb}(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha.
 \end{equation}
@@ -1293,7 +1293,7 @@ $\alpha \in \lbrack 0,1]$ as:%
 \alpha \right) +B_{L}\left( \alpha \right) ,A_{U}\left( \alpha \right)
 +B_{U}\left( \alpha \right) \right],
 \]%
-see \cite{DuboisPrade1978,DiamondKloeden1994}.
+see \cite{DuboisPrade1978:opfn,DiamondKloeden1994:metricspacesfs}.
 Moreover, for $\lambda \in \mathbb{R}$,
 the scalar multiplication is given by:
 \[
@@ -1389,7 +1389,7 @@ vectorized \R function object.
 
 It seems that the most suitable metric for approximation problems
 is an extension of the Euclidean ($L_2$) distance
-(cf.~\cite{Grzegorzewski1998}), $d$, defined by the equation:
+(cf.~\cite{Grzegorzewski1998:metricsordersfn}), $d$, defined by the equation:
 \begin{equation}
 d^2(A,B) = \int_0^1 \left(A_L(\alpha)-B_L(\alpha)\right)^2\,d\alpha
          + \int_0^1 \left(A_U(\alpha)-B_U(\alpha)\right)^2\,d\alpha.
@@ -1458,7 +1458,7 @@ legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
 
 The \texttt{'NearestEuclidean'} method
 gives the nearest $L_2$-approximation of $A$
-\cite[Corollary 8]{Ban2009}.
+\cite[Corollary 8]{Ban2009:nearestfnrev}.
 
 % TO BE DONE...
 
@@ -1482,7 +1482,7 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 
 The \texttt{'ExpectedIntervalPreserving'} method
 gives the nearest $L_2$-approximation of $A$
-preserving the expected interval \cite{Ban2008,Grzegorzewski2010,Yeh2008}.
+preserving the expected interval \cite{Ban2008:approxpresexpint,Grzegorzewski2010:trapfnapproxexpint,Yeh2008:traptriapprox}.
 Note that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
 we get the same result as in
 the \texttt{'NearestEuclidean'} method.
@@ -1510,7 +1510,7 @@ $\mathrm{Val}(B) < \mathrm{EV}_{1/3}(B)$
 or $\mathrm{Val}(B) > \mathrm{EV}_{2/3}(B)$,
 then it may happen that the core of the output
 and the core of the original fuzzy number $B$ are disjoint,
-cf.~\cite{GrzegorzewskiPasternak2011}.
+cf.~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 
 <<ApproxExA_ExpInt3,fig.keep='none'>>=
 (B  <- FuzzyNumber(1, 2, 3, 45,
@@ -1536,7 +1536,7 @@ legend('topright', c('$\\mu_{B}$', '$\\mu_{TB_1}$', '$\\mu_{TB_2}$'),
 \subsubsection{Approximation with Restrictions on Support and Core}
 
 
-The \texttt{'SupportCoreRestricted'} method was proposed in \cite{GrzegorzewskiPasternak2011}.
+The \texttt{'SupportCoreRestricted'} method was proposed in \cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 It gives the $L_2$-nearest trapezoidal approximation with constraints
 $\mathrm{core}(A) \subseteq \mathrm{core}(\mathcal{T}(A))$
 and $\mathrm{supp}(\mathcal{T}(A)) \subseteq \mathrm{supp}(A)$,
@@ -1609,7 +1609,7 @@ legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
 
 TO BE DONE...
 
-For \texttt{knot.n==1} the method proposed in \cite{CoroianuETAL2012}
+For \texttt{knot.n==1} the method proposed in \cite{CoroianuETAL2012:plfnapprox}
 is used.
 
 <<ApproxPLFNNearest,dependson='ApproxExAPLFN',fig.keep='none'>>=
@@ -1809,7 +1809,7 @@ to allow for greater number of iterations.
 \section{NEWS/CHANGELOG}
 
 <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
-cat(readLines('../../../NEWS'), sep='\n')
+cat(readLines('../../NEWS'), sep='\n')
 @
 
 
@@ -1832,69 +1832,7 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 
 
-\begin{thebibliography}{100}
-\bibitem{Ban2008}
-Ban A.I., Approximation of fuzzy numbers by trapezoidal fuzzy numbers
-preserving the expected interval, \textit{Fuzzy Sets and Systems} \textbf{159}, 2008, pp.~1327--1344.
-
-\bibitem{Ban2009}
-Ban A.I., On the nearest parametric approximation of a fuzzy
-number -- Revisited, \textit{Fuzzy Sets and Systems} \textbf{160}, 2009, pp.~3027--3047.
-
-\bibitem{Chanas2001}
-Chanas S., On the interval approximation of a fuzzy number,
-\textit{Fuzzy Sets and Systems} \textbf{122}, 2001, pp.~353--356.
-
-\bibitem{CoroianuETAL2012}
-Coroianu L., Gagolewski M., Grzegorzewski P.,
-\textit{Nearest Piecewise Linear Approximation of Fuzzy Numbers}, 
-\textit{Fuzzy Sets and Systems}, 2013, doi:10.1016/j.fss.2013.02.005.
-
-\bibitem{DelgadoETAL1998}
-Delgado M., Vila M.A., Voxman W., On a canonical representation of a fuzzy number,
-\textit{Fuzzy Sets and Systems} \textbf{93}, 1998, pp.~125--135.
-
-\bibitem{DiamondKloeden1994} P. Diamond, P. Kloeden, Metric Spaces of Fuzzy
-Sets. Theory and Applications. World Scientific, Singapore, 1994.
-
-\bibitem{DuboisPrade1978}
-Dubois D., Prade H., Operations on fuzzy numbers, \textit{Int. J. Syst. Sci.} \textbf{9}, 1978, pp.~613--626.
-
-\bibitem{DuboisPrade1987}
-Dubois D., Prade H., The mean value of a fuzzy number, \textit{Fuzzy Sets and Systems} \textbf{24}, 1987, pp.~279--300.
-
-
-\bibitem{FuzzyNumbersHome}
-Gagolewski M., \package{FuzzyNumbers}: Tools to deal with fuzzy numbers in \R,
-\href{http://www.rexamine.com/resources/fuzzynumbers/}{www.rexamine.com/resources/fuzzynumbers/},
-2013.
-
-\bibitem{Grzegorzewski1998}
-Grzegorzewski P., Metrics and orders in space of fuzzy numbers,
-\textit{Fuzzy Sets and Systems} \textbf{97}, 1998, pp.~83--94.
-
-\bibitem{Grzegorzewski2010}
-Grzegorzewski P., \textit{Algorithms for trapezoidal approximations of fuzzy numbers
-preserving the expected interval}, In: Bouchon-Meunier B. et al (Eds.),
-\textit{Foundations of Reasoning Under Uncertainty}, Springer, 2010, pp.~85--98.
-
-\bibitem{GrzegorzewskiPasternak2011}
-Grzegorzewski P., Pasternak-Winiarska K., \textit{Trapezoidal approximations of fuzzy numbers
-with restrictions on the support and core},
-In: \textit{Proc. EUSFLAT/LFA 2011}, Atlantic Press, 2011, pp.~749--756.
-
-\bibitem{KlirYuan1995:fuzzybook}
-Klir G.J., Yuan B., \textit{Fuzzy sets and fuzzy logic. {T}heory and applications},
-Prentice Hall, New Jersey, 1995.
-
-\bibitem{StefaniniSorini2009:eusflat}
-Stefanini L., Sorini L., \textit{Fuzzy arithmetic with parametric LR fuzzy numbers},
-In: \textit{Proc. IFSA/EUSFLAT 2009}, pp.~600--605.
-
-\bibitem{Yeh2008}
-Yeh C.-T., Trapezoidal and triangular approximations preserving the expected interval,
-\textit{Fuzzy Sets and Systems} \textbf{159}, 2008, pp.~1345--1353.
-\end{thebibliography}
-
+\bibliographystyle{acm}
+\bibliography{bibliography}
 
 \end{document}
