@@ -1,6 +1,0 @@
-^.*\.Rproj$
-^\.Rproj\.user$
-^inst/doc/vignette-Tutorial
-^\.Rhistory$
-^\.RData$
-^inst/tests

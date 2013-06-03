@@ -2,7 +2,7 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.03 /under development/
+0.3 /under development/
 
 * Added a call to  setGeneric("plot", function(x, y, ...) ...
   to avoid a warning on install
@@ -40,7 +40,7 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.02 /2012-12-27/
+0.2 /2012-12-27/
 
 * approx.invert(): a new function to find the numerical
   inverse of a given side/alpha-cut generating function
@@ -64,6 +64,6 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.01 /2012-07-01/
+0.1 /2012-07-01/
 
 * initial release
