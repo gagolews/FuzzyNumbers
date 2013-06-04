@@ -18,54 +18,83 @@
 
 
 
-
-if (!isGeneric("plot"))
-   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
-
-
-#' Plot a fuzzy number
+#' @title
+#' Plot a Fuzzy Number
 #'
+#' @description
+#' The function aims to provide a similar look-and-feel to the
+#' built-in \code{\link{plot.default}} and \code{\link{curve}} function.
+#' 
+#' @details
 #' Note that if \code{from} > \code{a1} then it is set to \code{a1}.
 #'
 #' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(x = "FuzzyNumber", y = "missing")}}{}
-#'      \item{\code{signature(x = "TrapezoidalFuzzyNumber", y = "missing")}}{}
-#'      \item{\code{signature(x = "PiecewiseLinearFuzzyNumber", y = "missing")}}{}
-#' }
-#' 
 #' @param from numeric;
 #' @param to numeric;
-#' @param n numeric;
-#' @param at.alpha numeric vector;
-#' @param draw.membership.function logical;
-#' @param draw.alphacuts defaults \code{!draw.membership.function}
-#' @param xlab character;
-#' @param ylab character;
-#' @param xlim numeric;
+#' @param n numeric; number of points to probe
+#' @param at.alpha numeric vector; give exact alpha-cuts at which linear interpolation should be done
+#' @param draw.membership.function logical; you want membership function (\code{TRUE}) or alpha-cuts plot (\code{FALSE})?
+#' @param draw.alphacuts logical; defaults \code{!draw.membership.function}
+#' @param xlab character; x-axis label
+#' @param ylab character; y-axis label
+#' @param xlim numeric; 
 #' @param ylim numeric;
-#' @param type character; defaults \code{"l"}
+#' @param type character; defaults \code{"l"}; plot type, e.g.~\code{"l"} for lines, \code{"p"} for points, or \code{"b"} for both
 #' @param col see \code{\link{plot.default}}
 #' @param lty see \code{\link{plot.default}}
 #' @param pch see \code{\link{plot.default}}
 #' @param lwd see \code{\link{plot.default}}
-#' @param shadowintensity for shadowed sets;
-#' @param shadowangle for shadowed sets;
-#' @param shadowcol for shadowed sets;
-#' @param shadowborder for shadowed sets;
-#' @param add logical;
+#' @param shadowintensity numeric; for shadowed sets;
+#' @param shadowangle numeric; for shadowed sets;
+#' @param shadowcol color specification, see \code{\link{plot.default}}; for shadowed sets;
+#' @param shadowborder numeric; for shadowed sets;
+#' @param add logical; add another FuzzyNumber to existing plot?
 #' @param ... further arguments passed to \code{\link{plot.default}}
+#' 
+#' @return nothing really interesting
+#' 
 #' @exportMethod plot
-#' @name plot
-#' @aliases plot,FuzzyNumber,missing-method
-#' @rdname plot-methods
 #' @docType methods
+#' @name plot
 #' @family FuzzyNumber-method
+#' @family PiecewiseLinearFuzzyNumber-method
+#' @family TrapezoidalFuzzyNumber-method
+#' @family DiscontinuousFuzzyNumber-method
+#' 
+#' @rdname plot-methods
+#' 
+#' 
+#' @aliases plot,FuzzyNumber,missing-method
+#'          plot,TrapezoidalFuzzyNumber,missing-method
+#'          plot,PiecewiseLinearFuzzyNumber,missing-method
+#' @usage
+#' \S4method{plot}{FuzzyNumber,missing}(x, y, from=NULL, to=NULL, n=101, at.alpha=NULL,
+#' draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,
+#' xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+#' type="l", col=1, lty=1, pch=1, lwd=1,
+#' shadowdensity=15, shadowangle=45, shadowcol=col, shadowborder=NULL,
+#' add=FALSE, ...)
+#' 
+#' \S4method{plot}{TrapezoidalFuzzyNumber,missing}(x, y, from=NULL, to=NULL,
+#' draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,
+#' xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+#' type="l", col=1, lty=1, pch=1, lwd=1, add=FALSE, ...)
+#' 
+#' \S4method{plot}{PiecewiseLinearFuzzyNumber,missing}(x, y, from=NULL, to=NULL,
+#' draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,
+#' xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+#' type="l", col=1, lty=1, pch=1, lwd=1, add=FALSE, ...)
+#' 
+#' 
 #' @examples
 #' plot(FuzzyNumber(0,1,2,3), col="gray")
 #' plot(FuzzyNumber(0,1,2,3, left=function(x) x^2, right=function(x) 1-x^3), add=TRUE)
 #' plot(FuzzyNumber(0,1,2,3, lower=function(x) x, upper=function(x) 1-x), add=TRUE, col=2)
+if (!isGeneric("plot"))
+   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
+
+
+
 setMethod(
    f="plot",
    signature(x="FuzzyNumber", y="missing"),
@@ -330,6 +359,8 @@ setMethod(
 ## -----------------------------------------------------------------------
          }
       }
+      
+      invisible(NULL)
    }
 )
 
@@ -337,11 +368,7 @@ setMethod(
 
 
 
-#' @exportMethod plot
-#' @name plot
-#' @aliases plot,TrapezoidalFuzzyNumber,missing-method
-#' @rdname plot-methods
-#' @docType methods
+
 setMethod(
    f="plot",
    signature(x="TrapezoidalFuzzyNumber", y="missing"),
@@ -362,11 +389,6 @@ setMethod(
 
 
 
-#' @exportMethod plot
-#' @name plot
-#' @aliases plot,PiecewiseLinearFuzzyNumber,missing-method
-#' @rdname plot-methods
-#' @docType methods
 setMethod(
    f="plot",
    signature(x="PiecewiseLinearFuzzyNumber", y="missing"),
