@@ -809,7 +809,13 @@ x <- \hlfunctioncall{seq}(0,1,length.out=1e5)
 
 \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
 
-... TO BE DONE ....
+We may also consider fuzzy numbers with discontinuous side
+functions or $\alpha$-cut generators.
+To avoid extensive numerical integration inaccuracies 
+(i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
+or plotting problems....
+
+TODO add plot for \texttt{DiscontinuousFuzzyNumber}
 
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -819,14 +825,24 @@ A1 <- \hlfunctioncall{FuzzyNumber}(0,1,1,1,
          upper=\hlfunctioncall{function}(a) 1-a
 ) \hlcomment{# no info on discontinuities}
 
-A2 <- \hlfunctioncall{DiscontinuousFuzzyNumber}(0,1,1,1,
+A2 <- \hlfunctioncall{DiscontinuousFuzzyNumber}(2,3,3,3,
          lower=\hlfunctioncall{function}(a) \hlfunctioncall{floor}(3*a)/3,
          upper=\hlfunctioncall{function}(a) 1-a,
          discontinuities.lower=\hlfunctioncall{c}(0, 1/3, 2/3, 1),
          discontinuities.upper=\hlfunctioncall{numeric}(0)
 ) \hlcomment{# discontinuities info included}
+
+\hlfunctioncall{plot}(A1, xlim=\hlfunctioncall{c}(0,4), xlab=\hlstring{'$x$'}, ylab=\hlstring{'$\textbackslash{}\textbackslash{}alpha$'})
+\hlfunctioncall{plot}(A2, add=TRUE, col=\hlstring{'red'})
 \end{alltt}
 \end{kframe}
+
+{\centering \includegraphics[width=4.5in]{figures-knitr/ExDiscontinuous} 
+
+}
+
+
+
 \end{knitrout}
 
 
@@ -1096,8 +1112,8 @@ P2
 ##       core=[2,3].
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{plot}(P1, type=\hlstring{'b'})
-\hlfunctioncall{plot}(P2, type=\hlstring{'b'}, col=2, lty=2, pch=2, add=TRUE)
+\hlfunctioncall{plot}(P1, type=\hlstring{'b'}, from=0, to=5, xlim=\hlfunctioncall{c}(0.5,4.5))
+\hlfunctioncall{plot}(P2, type=\hlstring{'b'}, col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1222,22 +1238,23 @@ we would do that by calling:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-alpha <- \hlfunctioncall{c}(0.2, 0.3, 0.5, 0.6, 0.9)
-P3 <- \hlfunctioncall{as.PiecewiseLinearFuzzyNumber}(T1,
-         knot.n=5, knot.alpha=alpha)
+alpha <- \hlfunctioncall{c}(0.3, 0.5, 0.7)
+P3 <- \hlfunctioncall{as.PiecewiseLinearFuzzyNumber}(
+   \hlfunctioncall{TrapezoidalFuzzyNumber}(1,2.5,4,7),
+         knot.n=3, knot.alpha=alpha)
 P3
 \end{alltt}
 \begin{verbatim}
-## Piecewise linear fuzzy number with 5 knot(s),
+## Piecewise linear fuzzy number with 3 knot(s),
 ##    support=[1,7],
-##       core=[1.5,4].
+##       core=[2.5,4].
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{plot}(P3)
+\hlfunctioncall{plot}(P3, type=\hlstring{'b'}, from=-1, to=9, xlim=\hlfunctioncall{c}(0,8))
 \hlfunctioncall{abline}(h=alpha, col=\hlstring{'gray'}, lty=2)
 \hlfunctioncall{abline}(v=P3[\hlstring{'knot.left'}], col=\hlstring{'gray'}, lty=3)
 \hlfunctioncall{abline}(v=P3[\hlstring{'knot.right'}], col=\hlstring{'gray'}, lty=3)
-\hlfunctioncall{text}(7, alpha, \hlfunctioncall{sprintf}(\hlstring{'a=%g'}, alpha), pos=3)
+\hlfunctioncall{text}(7.5, alpha, \hlfunctioncall{sprintf}(\hlstring{'a=%g'}, alpha), pos=3)
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1270,7 +1287,7 @@ to a direct \texttt{FuzzyNumber} class instance if needed
 \begin{verbatim}
 ## Fuzzy number with:
 ##    support=[1,7],
-##       core=[1.5,4].
+##       core=[2.5,4].
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2865,9 +2882,9 @@ FuzzyNumbers Package NEWS
 This document has been generated with \LaTeX, \package{knitr} and
 the \package{tikzDevice} package for \R.
 Their authors' wonderful work is fully appreciated.
-Many thanks also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu,
-Jan Caha, and Pablo Villacorta Iglesias
-for stimulating discussion.
+Many thanks to Jan Caha for contributions to the package's source code,
+and also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
+and Pablo Villacorta Iglesias for stimulating discussion.
 
 
 

@@ -615,20 +615,29 @@ max(abs(qbeta(1-x, 1, 0.1) - A4['upper'](x))) # sup-error
 
 \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
 
-... TO BE DONE ....
+We may also consider fuzzy numbers with discontinuous side
+functions or $\alpha$-cut generators.
+To avoid extensive numerical integration inaccuracies 
+(i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
+or plotting problems....
 
-<<fig.keep='none'>>=
+TODO add plot for \texttt{DiscontinuousFuzzyNumber}
+
+<<ExDiscontinuous>>=
 A1 <- FuzzyNumber(0,1,1,1,
          lower=function(a) floor(3*a)/3,
          upper=function(a) 1-a
 ) # no info on discontinuities
 
-A2 <- DiscontinuousFuzzyNumber(0,1,1,1,
+A2 <- DiscontinuousFuzzyNumber(2,3,3,3,
          lower=function(a) floor(3*a)/3,
          upper=function(a) 1-a,
          discontinuities.lower=c(0, 1/3, 2/3, 1),
          discontinuities.upper=numeric(0)
 ) # discontinuities info included
+
+plot(A1, xlim=c(0,4), xlab='$x$', ylab='$\\alpha$')
+plot(A2, add=TRUE, col='red')
 @
 
 % plots.....
@@ -774,14 +783,14 @@ P2 <- PiecewiseLinearFuzzyNumber(1, 2, 3, 4,
    knot.n=2, knot.alpha=c(0.25,0.6),
    knot.left=c(1.5,1.8), knot.right=c(3.25, 3.5))
 P2
-plot(P1, type='b')
-plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE)
+plot(P1, type='b', from=0, to=5, xlim=c(0.5,4.5))
+plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 @
 
 \begin{center}
 <<PLFNEx1b,dependson='PLFNEx1a',echo=FALSE>>=
-plot(P1, type='b', xlab='$x$', ylab='$\\alpha$')
-plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE)
+plot(P1, type='b', xlab='$x$', ylab='$\\alpha$', from=0, to=5, xlim=c(0.5,4.5))
+plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 @
 \end{center}
 
@@ -827,24 +836,25 @@ of the first mentioned class to the other,
 we would do that by calling:
 
 <<PLFNEx2a,fig.keep='none'>>=
-alpha <- c(0.2, 0.3, 0.5, 0.6, 0.9)
-P3 <- as.PiecewiseLinearFuzzyNumber(T1,
-         knot.n=5, knot.alpha=alpha)
+alpha <- c(0.3, 0.5, 0.7)
+P3 <- as.PiecewiseLinearFuzzyNumber(
+   TrapezoidalFuzzyNumber(1,2.5,4,7),
+         knot.n=3, knot.alpha=alpha)
 P3
-plot(P3)
+plot(P3, type='b', from=-1, to=9, xlim=c(0,8))
 abline(h=alpha, col='gray', lty=2)
 abline(v=P3['knot.left'], col='gray', lty=3)
 abline(v=P3['knot.right'], col='gray', lty=3)
-text(7, alpha, sprintf('a=%g', alpha), pos=3)
+text(7.5, alpha, sprintf('a=%g', alpha), pos=3)
 @
 
 \begin{center}
 <<PLFNEx2b,dependson='PLFNEx2a',echo=FALSE>>=
-plot(P3, type='b', xlab='$x$', ylab='$\\alpha$')
+plot(P3, type='b', xlab='$x$', ylab='$\\alpha$', from=-1, to=9, xlim=c(0,8))
 abline(h=alpha, col='gray', lty=2)
 abline(v=P3['knot.left'], col='gray', lty=3)
 abline(v=P3['knot.right'], col='gray', lty=3)
-text(7, alpha, sprintf('$\\alpha=%g$', alpha), pos=3)
+text(7.5, alpha, sprintf('$\\alpha=%g$', alpha), pos=3)
 @
 \end{center}
 
@@ -1817,9 +1827,9 @@ cat(readLines('../../NEWS'), sep='\n')
 This document has been generated with \LaTeX, \package{knitr} and
 the \package{tikzDevice} package for \R.
 Their authors' wonderful work is fully appreciated.
-Many thanks also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu,
-Jan Caha, and Pablo Villacorta Iglesias
-for stimulating discussion.
+Many thanks to Jan Caha for contributions to the package's source code,
+and also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
+and Pablo Villacorta Iglesias for stimulating discussion.
 
 
 
