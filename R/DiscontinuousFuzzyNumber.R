@@ -1,6 +1,6 @@
 ## This file is part of the FuzzyNumbers library.
 ##
-## Copyright 2012 Marek Gagolewski
+## Copyright 2012-2013 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify
@@ -17,20 +17,30 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' S4 class representing a fuzzy number with discontinuous side functions or alpha-cut bounds
+#' @title
+#' S4 Class Representing a Fuzzy Number with Discontinuous Side Functions or Alpha-Cut Bounds
 #'
-#'
+#' @description
+#' Discontinuity information increase the precision of some numerical
+#' integration-based algorithms, e.g. \code{\link{piecewiseLinearApproximation}}.
+#' It also allows for making more valid fuzzy number plots.
+#' 
 #' @section Slots:
 #'  \describe{
-#'    \item{\code{discontinuities.left}:}{Object of class \code{"numeric"} ~~ }
-#'    \item{\code{discontinuities.right}:}{Object of class \code{"numeric"} ~~ }
-#'    \item{\code{discontinuities.lower}:}{Object of class \code{"numeric"} ~~ }
-#'    \item{\code{discontinuities.upper}:}{Object of class \code{"numeric"} ~~ }
+#'    \item{\code{discontinuities.left}:}{nondecreasingly sorted  numeric vector
+#'     with elements in (0,1); discontinuity points for the left side generating function}
+#'    \item{\code{discontinuities.right}:}{nondecreasingly sorted numeric vector
+#'     with elements in (0,1); discontinuity points for the right side generating function}
+#'    \item{\code{discontinuities.lower}:}{nondecreasingly sorted numeric vector
+#'     with elements in (0,1); discontinuity points for the lower alpha-cut bound generator}
+#'    \item{\code{discontinuities.upper}:}{nondecreasingly sorted numeric vector
+#'     with elements in (0,1); discontinuity points for the upper alpha-cut bound generator}
 #'  }
 #'
 #' @section Extends:
 #' Class \code{\linkS4class{FuzzyNumber}}, directly. 
 #'
+#' @family DiscontinuousFuzzyNumber-method
 #' @exportClass DiscontinuousFuzzyNumber
 #' @name DiscontinuousFuzzyNumber-class
 #' @seealso \code{\link{DiscontinuousFuzzyNumber}} for a convenient constructor
@@ -99,6 +109,7 @@ setClass(
 #' @param discontinuities.upper nondecreasingly sorted numeric vector with elements in (0,1), possibly of length 0
 #' @return Object of class \code{\linkS4class{DiscontinuousFuzzyNumber}}
 #' @export
+#' @family DiscontinuousFuzzyNumber-method
 DiscontinuousFuzzyNumber <- function(a1, a2, a3, a4,
    lower=function(a) rep(NA_real_, length(a)),
    upper=function(a) rep(NA_real_, length(a)),

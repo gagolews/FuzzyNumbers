@@ -1,6 +1,6 @@
 ## This file is part of the FuzzyNumbers library.
 ##
-## Copyright 2012 Marek Gagolewski
+## Copyright 2012-2013 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify
@@ -17,7 +17,9 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' S4 class representing a fuzzy number
+#' @title
+#' S4 class Representing a Fuzzy Number
+#'
 #'
 #' Formally, a fuzzy number \eqn{A} (Dubois, Prade, 1978) is a fuzzy subset of the
 #' real line \eqn{R}  with membership function \eqn{\mu} given by:
@@ -64,6 +66,12 @@
 #'    \item{\code{left}:}{A nondecreasing function [0,1]->[0,1] that gives the left side function.}
 #'    \item{\code{right}:}{A nonincreasing function [0,1]->[1,0] that gives the right side function.}
 #'  }
+#'  
+#' @section Child classes:
+#' \code{\linkS4class{TrapezoidalFuzzyNumber}},
+#' \code{\linkS4class{PiecewiseLinearFuzzyNumber}},
+#' \code{\linkS4class{PowerFuzzyNumber}},
+#' \code{\linkS4class{DiscontinuousFuzzyNumber}}
 #' 
 #' @exportClass FuzzyNumber
 #' @name FuzzyNumber-class
@@ -150,9 +158,11 @@ setClass(
 )
 
 
+#' @title
 #' Creates a Fuzzy Number
 #'
-#' For convenience, objects of class \code{FuzzyNumber} (see \code{\link{FuzzyNumber-class}})
+#' @description
+#' For convenience, objects of class \code{\linkS4class{FuzzyNumber}}
 #' may be created with this function.
 #'
 #' @param a1 a number specyfing left bound of the support
@@ -163,7 +173,9 @@ setClass(
 #' @param upper upper alpha-cut bound generator; a nonincreasing function [0,1]->[1,0] or returning NA_real_
 #' @param left lower side function generator; a nondecreasing function [0,1]->[0,1] or returning NA_real_
 #' @param right upper side function generator; a nonincreasing function [0,1]->[1,0] or returning NA_real_
-#' @return Object of class \code{FuzzyNumber}
+#' @return Object of class \code{\linkS4class{FuzzyNumber}}
+#' 
+#' @family FuzzyNumber-method
 #' @export
 FuzzyNumber <- function(a1, a2, a3, a4,
    lower=function(a) rep(NA_real_, length(a)),
@@ -176,20 +188,28 @@ FuzzyNumber <- function(a1, a2, a3, a4,
    .Object
 }
 
+
+
+
+
+
+#' @title
 #' Coverts a special-type  fuzzy number object to a (general) FuzzyNumber
 #'
-#' FuzzyNumber is the base class for all FNs.
-#' Note that some functions for TFNs or PLFNs (more specific FNs)
+#' @description
+#' Drops all additional slots defined by \code{\linkS4class{FuzzyNumber}}
+#' child classes.
+#' 
+#' @details
+#' \code{\linkS4class{FuzzyNumber}} is the base class for all FNs.
+#' Note that some functions for TFNs or PLFNs 
 #' work much faster and are more precise. This function shouldn't be
 #' used in normal computations.
 #' 
-#' @param object a trapezoidal or piecewiselinear fuzzy number
-#' @return Object of class \code{FuzzyNumber}
+#' @param object an object inheriting from the \code{\linkS4class{FuzzyNumber}} class
+#' @return Object of class \code{\linkS4class{FuzzyNumber}}
 #' @export
-#' @seealso \code{\link{FuzzyNumber-class}},
-#' \code{\link{TrapezoidalFuzzyNumber-class}},
-#' \code{\link{PiecewiseLinearFuzzyNumber-class}},
-#' \code{\link{PowerFuzzyNumber-class}}
+#' @family FuzzyNumber-method
 as.FuzzyNumber <- function(object)
 {
    if (!inherits(object, "FuzzyNumber"))
