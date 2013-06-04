@@ -225,9 +225,9 @@ setMethod(
    {
       stopifnot(length(knot.n) == 1, knot.n >= 0)
       stopifnot(knot.n == length(knot.alpha)) 
-      
+
       a <- alphacut(object, c(0, knot.alpha, 1))
-      PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]))
+      PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]), knot.alpha=knot.alpha)
    })
 
 
