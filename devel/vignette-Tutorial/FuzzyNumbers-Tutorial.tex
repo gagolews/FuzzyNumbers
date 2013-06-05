@@ -807,50 +807,37 @@ x <- \hlfunctioncall{seq}(0,1,length.out=1e5)
 \end{knitrout}
 
 
-\subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
-
-We may also consider fuzzy numbers with discontinuous side
-functions or $\alpha$-cut generators.
-To avoid extensive numerical integration inaccuracies 
-(i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
-or plotting problems....
-
-TODO add plot for \texttt{DiscontinuousFuzzyNumber}
-
-\begin{knitrout}\small
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-A1 <- \hlfunctioncall{FuzzyNumber}(0,1,1,1,
-         lower=\hlfunctioncall{function}(a) \hlfunctioncall{floor}(3*a)/3,
-         upper=\hlfunctioncall{function}(a) 1-a
-) \hlcomment{# no info on discontinuities}
-
-A2 <- \hlfunctioncall{DiscontinuousFuzzyNumber}(2,3,3,3,
-         lower=\hlfunctioncall{function}(a) \hlfunctioncall{floor}(3*a)/3,
-         upper=\hlfunctioncall{function}(a) 1-a,
-         discontinuities.lower=\hlfunctioncall{c}(0, 1/3, 2/3, 1),
-         discontinuities.upper=\hlfunctioncall{numeric}(0)
-) \hlcomment{# discontinuities info included}
-
-\hlfunctioncall{plot}(A1, xlim=\hlfunctioncall{c}(0,4), xlab=\hlstring{'$x$'}, ylab=\hlstring{'$\textbackslash{}\textbackslash{}alpha$'})
-\hlfunctioncall{plot}(A2, add=TRUE, col=\hlstring{'red'})
-\end{alltt}
-\end{kframe}
-
-{\centering \includegraphics[width=4.5in]{figures-knitr/ExDiscontinuous} 
-
-}
-
-
-
-\end{knitrout}
-
-
-% plots.....
-
-% integration errors without this info.... (!)
-
-... TO BE DONE ....
+% \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
+% 
+% We may also consider fuzzy numbers with discontinuous side
+% functions or $\alpha$-cut generators.
+% To avoid extensive numerical integration inaccuracies 
+% (i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation}).
+% % or plotting problems....
+% 
+% % TODO add plot for \texttt{DiscontinuousFuzzyNumber}
+% % A1 <- FuzzyNumber(0,1,1,1,
+% %          lower=function(a) floor(3*a)/3,
+% %          upper=function(a) 1-a
+% % ) # no info on discontinuities
+% 
+% <<ExDiscontinuous>>=
+% A2 <- DiscontinuousFuzzyNumber(2,3,3,3,
+%          lower=function(a) floor(3*a)/3,
+%          upper=function(a) 1-a,
+%          discontinuities.lower=c(0, 1/3, 2/3, 1),
+%          discontinuities.upper=numeric(0)
+% ) # discontinuities info included
+% 
+% integrateAlpha(A2, "lower", 0, 1)
+% integrateAlpha(as.FuzzyNumber(A2), "lower", 0, 1)
+% @
+% 
+% % plots.....
+% 
+% % integration errors without this info.... (!)
+% 
+% ... TO BE DONE ....
 
 
 \subsection{Trapezoidal Fuzzy Numbers}\label{Sec:TFNdef}

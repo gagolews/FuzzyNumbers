@@ -20,7 +20,7 @@
 #' @title
 #' S4 class Representing a Fuzzy Number
 #'
-#'
+#' @description
 #' Formally, a fuzzy number \eqn{A} (Dubois, Prade, 1978) is a fuzzy subset of the
 #' real line \eqn{R}  with membership function \eqn{\mu} given by:
 #' \tabular{lll}{
@@ -35,7 +35,7 @@
 #' called the \emph{left side generator of \eqn{A}},
 #' and \eqn{right: [0,1]\to[0,1]}{right: [0,1]->[1,0]} is a nonincreasing function
 #' called the \emph{right side generator of \eqn{A}}.
-#' \cr
+#' 
 #' Alternatively, it may be shown that each fuzzy number \eqn{A} may be uniquely determined
 #' by specifying its \eqn{\alpha}-cuts, \eqn{A(\alpha)}. We have \eqn{A(0)=[a1,a4]} and
 #' \deqn{A(\alpha)=[a1+(a2-a1)*lower(\alpha), a3+(a4-a3)*upper(\alpha)]}
@@ -44,10 +44,11 @@
 #' are, respectively, strictly increasing and decreasing functions
 #' satisfying \eqn{lower(\alpha)=\inf\{x: \mu(x)\ge\alpha\}}{lower(\alpha)=inf(x: \mu(x)\ge\alpha)}
 #' and  \eqn{upper(\alpha)=\sup\{x: \mu(x)\ge\alpha\}}{upper(\alpha)=sup(x: \mu(x)\ge\alpha)}.
-#' \cr
+#' 
 #' Please note that many algorithms that deal with fuzzy numbers often use
 #' \eqn{\alpha}-cuts rather than side functions.
 #' 
+#' @details
 #' Note that the \pkg{FuzzyNumbers} package also deals with particular types
 #' of fuzzy numbers like trapezoidal, piecewise linear, or ``parametric'' FNs
 #' (see \code{\link{TrapezoidalFuzzyNumber-class}}

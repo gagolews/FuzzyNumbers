@@ -59,7 +59,7 @@
 #' @family FuzzyNumber-method
 #' @family PiecewiseLinearFuzzyNumber-method
 #' @family TrapezoidalFuzzyNumber-method
-#' @family DiscontinuousFuzzyNumber-method
+#' #@family DiscontinuousFuzzyNumber-method
 #' 
 #' @rdname plot-methods
 #' 
@@ -85,6 +85,11 @@
 #' xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
 #' type="l", col=1, lty=1, pch=1, lwd=1, add=FALSE, ...)
 #' 
+#' \S4method{plot}{DiscontinuousFuzzyNumber,missing}(x, y, from=NULL, to=NULL,
+#' n=101, draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,
+#' xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+#' type="l", col=1, lty=1, pch=1, lwd=1,
+#' add=FALSE, ...) # currently bases on alpha-cut bounds only
 #' 
 #' @examples
 #' plot(FuzzyNumber(0,1,2,3), col="gray")
@@ -365,6 +370,28 @@ setMethod(
 )
 
 
+
+setMethod(
+   f="plot",
+   signature(x="DiscontinuousFuzzyNumber", y="missing"),
+   definition=function(x, y, from=NULL, to=NULL, n=101,
+                       draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,
+                       xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
+                       type="l", col=1, lty=1, pch=1, lwd=1,
+                       add=FALSE, ...)
+   {
+      at.alpha <- unique(sort(pmax(0,pmin(1,c(x@discontinuities.lower-1e-16,
+                             x@discontinuities.lower+1e-16,
+                             x@discontinuities.upper-1e-16,
+                             x@discontinuities.upper+1e-16,
+                             seq(0, 1, length.out=n))))))
+      callNextMethod(x, at.alpha=at.alpha,
+                     from=from, to=to, type=type, xlab=xlab, ylab=ylab,
+                     xlim=xlim, ylim=ylim, col=col, lty=lty, pch=pch, lwd=lwd,
+                     draw.membership.function=draw.membership.function,
+                     draw.alphacuts=draw.alphacuts, add=add, ...)
+   }
+)
 
 
 
