@@ -613,12 +613,18 @@ max(abs(qbeta(x, 1, 2) - A4['lower'](x)))     # sup-error
 max(abs(qbeta(1-x, 1, 0.1) - A4['upper'](x))) # sup-error
 @
 
-% \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
-% 
-% We may also consider fuzzy numbers with discontinuous side
-% functions or $\alpha$-cut generators.
-% To avoid extensive numerical integration inaccuracies 
-% (i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation}).
+
+
+\subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
+
+We may also consider fuzzy numbers with discontinuous side
+functions or $\alpha$-cut generators.
+To avoid extensive numerical integration inaccuracies 
+(i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
+we use objects from the \texttt{DiscontinuousFuzzyNumber} class.
+Further on we will present some examples.
+
+
 % % or plotting problems....
 % 
 % % TODO add plot for \texttt{DiscontinuousFuzzyNumber}

@@ -731,7 +731,7 @@ A2[\hlstring{'left'}]
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x39bcc80>
+## <environment: 0x4ef7fe8>
 \end{verbatim}
 \begin{alltt}
 A2[\hlstring{'right'}]
@@ -739,7 +739,7 @@ A2[\hlstring{'right'}]
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x39bcc80>
+## <environment: 0x4ef7fe8>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -807,12 +807,18 @@ x <- \hlfunctioncall{seq}(0,1,length.out=1e5)
 \end{knitrout}
 
 
-% \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
-% 
-% We may also consider fuzzy numbers with discontinuous side
-% functions or $\alpha$-cut generators.
-% To avoid extensive numerical integration inaccuracies 
-% (i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation}).
+
+
+\subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
+
+We may also consider fuzzy numbers with discontinuous side
+functions or $\alpha$-cut generators.
+To avoid extensive numerical integration inaccuracies 
+(i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
+we use objects from the \texttt{DiscontinuousFuzzyNumber} class.
+Further on we will present some examples.
+
+
 % % or plotting problems....
 % 
 % % TODO add plot for \texttt{DiscontinuousFuzzyNumber}
@@ -923,7 +929,7 @@ T1[\hlstring{'lower'}]
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x31a88d8>
+## <bytecode: 0x3f4cd40>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -932,7 +938,7 @@ T1[\hlstring{'upper'}]
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x31a87f8>
+## <bytecode: 0x3f4cc60>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -941,7 +947,7 @@ T1[\hlstring{'left'}]
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x31a8b40>
+## <bytecode: 0x3f4cfa8>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -950,7 +956,7 @@ T1[\hlstring{'right'}]
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x31a8a60>
+## <bytecode: 0x3f4cec8>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -2498,7 +2504,7 @@ is used.
 \end{alltt}
 \begin{verbatim}
 ##    user  system elapsed 
-##   0.013   0.001   0.114
+##   0.012   0.000   0.090
 \end{verbatim}
 \begin{alltt}
 \hlfunctioncall{print}(P2[\hlstring{'allknots'}], 6)
@@ -2680,11 +2686,11 @@ We only know that the distance function is continuous.
 \}
 \end{alltt}
 \begin{verbatim}
-## 0.819360481     60 0.545856269 0.022293594
-## 0.326543073     17 0.546145664 0.022294007
-## 0.102972513     35 0.545856297 0.022293594
-## 0.129096587      8 0.546262450 0.022294032
-## 0.877980422     14 0.546147795 0.022294007
+## 0.083435631     33 0.545856237 0.022293594
+## 0.899270690      8 0.546166579 0.022294008
+## 0.525304287     62 0.545856216 0.022293594
+## 0.465534228     76 0.545856366 0.022293594
+## 0.903839787     51 0.545856369 0.022293594
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2714,7 +2720,7 @@ TO BE DONE... WORK  ON AN EXACT ALGORITHM IS IN PROGRESS.....
 \end{alltt}
 \begin{verbatim}
 ##    user  system elapsed 
-##   1.355   0.001   1.385
+##   1.299   0.003   1.330
 \end{verbatim}
 \begin{alltt}
 \hlfunctioncall{print}(P3[\hlstring{'allknots'}], 6)
@@ -2750,7 +2756,7 @@ Another example:
 \begin{verbatim}
 ## Pass 1a,1b,DONE.
 ##    user  system elapsed 
-##  36.487   0.064  37.362
+##  35.655   0.017  36.370
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
