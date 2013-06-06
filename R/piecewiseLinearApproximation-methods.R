@@ -95,6 +95,9 @@ setMethod(
       stopifnot(is.numeric(knot.n), length(knot.n) == 1, knot.n >= 0)
       stopifnot(is.numeric(knot.alpha), length(knot.alpha) == knot.n)
       stopifnot(is.finite(knot.alpha),  knot.alpha >= 0, knot.alpha <= 1)
+      
+      if (knot.n == 0)
+         stop('please use the trapezoidalApproximation() function')
 
       if (is.na(object@lower(0)) || is.na(object@upper(0)))
          stop("cannot approximate fuzzy numbers with no alpha bound generators")
@@ -106,7 +109,10 @@ setMethod(
       else if (method == "NearestEuclidean")
       {
          # TO DO: general method
-         return(piecewiseLinearApproximation_ApproximateNearestEuclidean1(object, knot.n, knot.alpha, verbose, ...))
+#          if (knot.n == 1) # original method from (Coroianu, Gagolewski, Grzegorzewski, 2013)
+#             return(piecewiseLinearApproximation_ApproximateNearestEuclidean1(object, knot.n, knot.alpha, verbose, ...))
+#          else # general case from (Coroianu, Gagolewski, Grzegorzewski, in-preparation)
+            return(piecewiseLinearApproximation_ApproximateNearestEuclideanN(object, knot.n, knot.alpha, verbose, ...))
       }
    }
 )
@@ -528,4 +534,134 @@ piecewiseLinearApproximation_ApproximateNearestEuclidean1 <- function(object, kn
    
    ## --------------------------------------------- /NearestEuclidean ---------
    ## ----------------------------------------------------------------------  
+}
+
+
+
+# internal function
+piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, knot.n, knot.alpha, verbose, ...)
+{
+   # This exact (up to numeric integration error, of course) method for any n
+   # was proposed by Coroianu, Gagolewski, Grzegorzewski (in-preparation)
+   
+   alpha <- c(0, knot.alpha, 1) # length: knot.n+2
+   stopifnot(!anyDuplicated(alpha), !is.unsorted(alpha))
+   
+   Phi <- matrix(NA_real_, nrow=2*knot.n+4, ncol=2*knot.n+4)
+   Phi[1,1] <- 2
+   for (j in 2:(knot.n+2)) {
+      Phi[j,1] <- Phi[1,j] <- 2-(alpha[j]+alpha[j-1])/2
+      for (i in 2:j) {
+         if (i == j) {
+            Phi[i,j] <- 2-(2*alpha[j]+alpha[j-1])/3
+         } else {
+            Phi[i,j] <- Phi[j,i] <- Phi[i-1,j]  
+         }
+      }
+   }
+   Phi[1:(knot.n+3),knot.n+3] <- Phi[knot.n+3,1:(knot.n+3)] <- 1
+   for (j in (knot.n+4):(2*knot.n+4)) {
+      Phi[j,1] <- Phi[1,j] <- (alpha[2*knot.n+5-j]+alpha[2*knot.n+6-j])/2
+      for (i in 2:j) {
+         if (i == j) {
+            Phi[i,j] <- (2*alpha[2*knot.n+5-j]+alpha[2*knot.n+6-j])/3
+         } else {
+            Phi[i,j] <- Phi[j,i] <- Phi[j,i-1]  
+         }
+      }
+   }
+   
+   
+   w <- numeric(2*knot.n+3)
+   for (i in 1:(2*knot.n+3)) {
+      if (i < knot.n+2) {
+         w[i] <- integrateAlpha(object, "lower", alpha[i], alpha[i+1], ...)
+      }
+      else if (i == knot.n+2)
+         w[i] = 0
+      else {
+         w[i] <- integrateAlpha(object, "upper", alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], ...)
+      }
+   }
+   
+
+   
+   wp <- numeric(2*knot.n+4)
+   wp[1] <- 0
+   for (i in 1:(2*knot.n+3)) {
+      if (i < knot.n+2) {
+         wp[i+1] <- integrateAlpha(object, "lower", alpha[i], alpha[i+1], weight=identity, ...)
+         wp[i+1] <- (wp[i+1]-alpha[i]*w[i])/(alpha[i+1]-alpha[i])
+      }
+      else if (i == knot.n+2)
+         wp[i+1] = 0
+      else {
+         wp[i+1] <- integrateAlpha(object, "upper", alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], weight=identity, ...)
+         wp[i+1] <- (alpha[2*knot.n-i+5]*w[i]-wp[i+1])/(alpha[2*knot.n-i+5]-alpha[2*knot.n-i+4])
+      }
+   }
+   
+   b <- numeric(2*knot.n+4)
+   b[1] <- sum(w)
+   for (i in 2:(2*knot.n+4))
+      b[i] <- b[i-1] - wp[i-1] - w[i-1] + wp[i]
+
+   
+   EPS <- 1e-9;
+   PhiInv <- solve(Phi)
+#    PhiInv[abs(PhiInv)<EPS] <- 0
+   
+   iter <- 1
+   z <- rep(0, 2*knot.n+4)
+   K <- rep(FALSE, 2*knot.n+4)
+   d <- as.numeric(PhiInv %*% b)
+   m <- which.min(d[-1])+1
+
+   
+   if (verbose)
+   {
+      cat(sprintf("Pass  %g: K={%5s}, d=(%s)\n                    z=(%s)\n",
+                  iter,  paste(as.numeric(which(K)),collapse=""),
+                  paste(sprintf("%8.2g", d), collapse=", "),
+                  paste(sprintf("%8.2g", z), collapse=", ")))
+   }
+   
+   while(d[m] < -EPS)
+   {
+      K[m] <- TRUE
+      
+      deltaz <- rep(0.0, 2*knot.n+4)
+      deltaz[K] <- as.numeric(solve(PhiInv[K,K], -d[K], tol=.Machine$double.eps))
+      if (min(deltaz[K]) < -EPS)
+         warning(sprintf("min(deltaz[K])==%g", min(deltaz[K])))
+      
+      z <- z+deltaz
+      
+      d <- as.numeric(PhiInv%*%(b+z))
+      #             for (k in which(K)) d <- d+PhiInv[k,]*deltaz[k] # ALTERNATIVE, BUT MORE INACCURATE
+      
+      m <- which.min(d[-1])+1
+      iter <- iter+1
+      
+      if (iter > 2*knot.n+4)
+         error("NOT CONVERGED??? THIS IS A BUG! -> CONTACT THE PACKAGE'S AUTHOR, PLEASE")
+      
+      stopifnot(all(z>=0))
+      if (max(abs(d[K])) > EPS) warning(sprintf("max(abs(d[K]))==%g", max(abs(d[K]))))
+      d[K] <- 0.0 # for better accuracy
+      
+      if (verbose)
+      {
+         cat(sprintf("Pass  %g: K={%5s}, d=(%s)\n                    z=(%s)\n",
+                     iter,  paste(as.numeric(which(K)),collapse=""),
+                     paste(sprintf("%8.2g", d), collapse=", "),
+                     paste(sprintf("%8.2g", z), collapse=", ")))
+      }
+   }
+   
+   d[c(F,rep(T, 2*knot.n+3)) & (d < 0)] <- 0.0; # kill EPS-error
+   res <- cumsum(d)
+   return(PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
+                                     knot.n=knot.n, knot.alpha=knot.alpha, knot.left=res[2:(knot.n+1)], knot.right=res[(knot.n+4):(2*knot.n+3)]))
+   
 }
