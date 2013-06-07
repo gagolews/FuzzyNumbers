@@ -242,7 +242,12 @@ It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
 \package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
 conveniently and effectively.
 To install latest ``official'' release of the 
-package available on \textit{CRAN} we type:
+package available on \textit{CRAN} we type\footnote{If the
+title of this vignette is ``Guide to the FuzzyNumbers X.X-\textbf{devel} package'',
+then some of the features presented here may be missing in the CRAN
+release. Please, upgrade to the latest development version from
+\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}
+if you need the new functionality.}
 
 <<eval=FALSE>>=
 install.packages('FuzzyNumbers')
@@ -250,7 +255,13 @@ install.packages('FuzzyNumbers')
 
 \noindent
 Alternatively, we may fetch its current development snapshot
-from \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.
+from \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}:
+
+<<eval=FALSE>>=
+install.packages('devtools')
+library('devtools')
+install_github('FuzzyNumbers', 'Rexamine')
+@
 
 
 \bigskip

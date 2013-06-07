@@ -606,15 +606,19 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
    for (i in 2:(2*knot.n+4))
       b[i] <- b[i-1] - wp[i-1] - w[i-1] + wp[i]
 
+   if (verbose) {
+      cat(sprintf("b=(%s)\n",
+               paste(sprintf("%8g", b), collapse=", ")))
+   }
    
-   EPS <- 1e-9;
-   PhiInv <- solve(Phi)
-#    PhiInv[abs(PhiInv)<EPS] <- 0
+   EPS <- .Machine$double.eps^0.5;
+   EPS_RELATIVE <- EPS*(object@a4-object@a1)
+   d <- solve(Phi, b)
    
+   PhiInv <- solve(Phi) # matrix invert - TO DO: try to get rid of this
    iter <- 1
    z <- rep(0, 2*knot.n+4)
    K <- rep(FALSE, 2*knot.n+4)
-   d <- as.numeric(PhiInv %*% b)
    m <- which.min(d[-1])+1
 
    
@@ -622,11 +626,11 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
    {
       cat(sprintf("Pass  %g: K={%5s}, d=(%s)\n                    z=(%s)\n",
                   iter,  paste(as.numeric(which(K)),collapse=""),
-                  paste(sprintf("%8.2g", d), collapse=", "),
-                  paste(sprintf("%8.2g", z), collapse=", ")))
+                  paste(sprintf("%8g", d), collapse=", "),
+                  paste(sprintf("%8g", z), collapse=", ")))
    }
    
-   while(d[m] < -EPS)
+   while(d[m] < -EPS_RELATIVE)  # relative error
    {
       K[m] <- TRUE
       
@@ -636,8 +640,7 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
          warning(sprintf("min(deltaz[K])==%g", min(deltaz[K])))
       
       z <- z+deltaz
-      
-      d <- as.numeric(PhiInv%*%(b+z))
+      d <- solve(Phi, b+z)
       #             for (k in which(K)) d <- d+PhiInv[k,]*deltaz[k] # ALTERNATIVE, BUT MORE INACCURATE
       
       m <- which.min(d[-1])+1
@@ -647,7 +650,7 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
          error("NOT CONVERGED??? THIS IS A BUG! -> CONTACT THE PACKAGE'S AUTHOR, PLEASE")
       
       stopifnot(all(z>=0))
-      if (max(abs(d[K])) > EPS) warning(sprintf("max(abs(d[K]))==%g", max(abs(d[K]))))
+      if (max(abs(d[K])) > EPS_RELATIVE) warning(sprintf("max(abs(d[K]))==%g", max(abs(d[K]))))
       d[K] <- 0.0 # for better accuracy
       
       if (verbose)
@@ -661,7 +664,11 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
    
    d[c(F,rep(T, 2*knot.n+3)) & (d < 0)] <- 0.0; # kill EPS-error
    res <- cumsum(d)
-   return(PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
-                                     knot.n=knot.n, knot.alpha=knot.alpha, knot.left=res[2:(knot.n+1)], knot.right=res[(knot.n+4):(2*knot.n+3)]))
+   
+   PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
+                              knot.n=knot.n, 
+                              knot.alpha=knot.alpha, 
+                              knot.left=res[2:(knot.n+1)],
+                              knot.right=res[(knot.n+4):(2*knot.n+3)])
    
 }
