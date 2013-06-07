@@ -1,18 +1,27 @@
-FuzzyNumbers Package NEWS
+                   ** FuzzyNumbers Package NEWS **
 
 ***************************************************************************
 
-0.3 /under development/
+0.3-0 /under development/
 
-* Added a call to  setGeneric("plot", function(x, y, ...) ...
-  to avoid a warning on install
+* piecewiseLinearApproximation() - general case (any knot.n)
+  for method="NearestEuclidean" now available.
+
+* New binary arithmetic operators, especially
+   for PiecewiseLinearFuzzyNumbers: +, -, *, /
+
+* New function: fapply() - applies a function on a PLFN
+  using the extension principle
 
 * New methods: as.character(); also used by show().
   This function also allows to generate LaTeX code defining the FN
   (toLaTeX arg thanks to Jan Caha).
 
-* New binary arithmetic operators, especially
-   for PiecewiseLinearFuzzyNumbers: +, -, *, /
+* as.PiecewiseLinearFuzzyNumber() is now an S4 method,
+  and can be called on objects of type numeric, as well as on
+  various FNs
+
+* ...
 
 * piecewiseLinearApproximation() and as.PiecewiseLinearFuzzyNumber()
   argument `knot.alpha` now defaults to equally distributed knots
@@ -24,14 +33,8 @@ FuzzyNumbers Package NEWS
   If `knot.alpha` is missing, then the knots will be equally distributed
   on the interval [0,1].
 
-* New function: fapply() - applies a function on a PLFN
-  using the extension principle
-
-* as.PiecewiseLinearFuzzyNumber() is now an S4 method,
-  and can be called on objects of type numeric, as well as on
-  various FNs
-
-* ...
+* Added a call to  setGeneric("plot", function(x, y, ...) ...
+  to avoid a warning on install
 
 * The FuzzyNumbers Tutorial has been properly included
   as the package's vignette
@@ -40,7 +43,7 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.2 /2012-12-27/
+0.2-1 /2012-12-27/
 
 * approx.invert(): a new function to find the numerical
   inverse of a given side/alpha-cut generating function
@@ -64,6 +67,6 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.1 /2012-07-01/
+0.1-1 /2012-07-01/
 
 * initial release

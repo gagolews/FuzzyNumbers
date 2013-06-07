@@ -127,20 +127,36 @@
 \widowpenalty=1000
 
 
+\newif\ifDevelopmentVersion
+
+\DevelopmentVersiontrue
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\ifDevelopmentVersion
+\pagestyle{fancy}
+\fancyhead[L]{}
+\fancyhead[R]{}
+\fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most 
+recent development version
+of \package{FuzzyNumbers} available on 
+\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.\newline
+If you use the ``official'' CRAN release, some of the features may be unavailable.}
+\fi
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-
-
 
 \begin{document}
 
 
 
 \begin{center}
-{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.3-devel} Package for \R}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.3-0} Package for \R}
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -227,7 +243,7 @@ or ``The rocket was launched between 2 and 3 p.m.''.
 
 \bigskip
 \package{FuzzyNumbers} is an Open Source (licensed under GNU LGPL 3)
-package for \R -- a free, open sourced software environment
+package for \R{} -- a free, open sourced software environment
 for statistical computing and graphics, which
 includes an implementation
 of a very powerful and quite popular high-level language called \lang{S}.
@@ -243,12 +259,15 @@ It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
 \package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
 conveniently and effectively.
 To install latest ``official'' release of the 
-package available on \textit{CRAN} we type\footnote{If the
-title of this vignette is ``Guide to the FuzzyNumbers X.X-\textbf{devel} package'',
-then some of the features presented here may be missing in the CRAN
-release. Please, upgrade to the latest development version from
+package available on \textit{CRAN} we type%
+\ifDevelopmentVersion%
+\footnote{You are viewing the \textbf{development} version of the tutorial.
+Some of the features presented in this document may be missing
+in the CRAN release. Please, upgrade to the \textbf{latest} development version from
 \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}
-if you need the new functionality.}
+if you need the new functionality.}\ignorespaces
+\fi%
+:
 
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -2812,21 +2831,30 @@ to allow for greater number of iterations.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-FuzzyNumbers Package NEWS
+                   ** FuzzyNumbers Package NEWS **
 
 ***************************************************************************
 
-0.3 /under development/
+0.3-0 /under development/
 
-* Added a call to  setGeneric("plot", function(x, y, ...) ...
-  to avoid a warning on install
+* piecewiseLinearApproximation() - general case (any knot.n)
+  for method="NearestEuclidean" now available.
+
+* New binary arithmetic operators, especially
+   for PiecewiseLinearFuzzyNumbers: +, -, *, /
+
+* New function: fapply() - applies a function on a PLFN
+  using the extension principle
 
 * New methods: as.character(); also used by show().
   This function also allows to generate LaTeX code defining the FN
   (toLaTeX arg thanks to Jan Caha).
 
-* New binary arithmetic operators, especially
-   for PiecewiseLinearFuzzyNumbers: +, -, *, /
+* as.PiecewiseLinearFuzzyNumber() is now an S4 method,
+  and can be called on objects of type numeric, as well as on
+  various FNs
+
+* ...
 
 * piecewiseLinearApproximation() and as.PiecewiseLinearFuzzyNumber()
   argument `knot.alpha` now defaults to equally distributed knots
@@ -2838,14 +2866,8 @@ FuzzyNumbers Package NEWS
   If `knot.alpha` is missing, then the knots will be equally distributed
   on the interval [0,1].
 
-* New function: fapply() - applies a function on a PLFN
-  using the extension principle
-
-* as.PiecewiseLinearFuzzyNumber() is now an S4 method,
-  and can be called on objects of type numeric, as well as on
-  various FNs
-
-* ...
+* Added a call to  setGeneric("plot", function(x, y, ...) ...
+  to avoid a warning on install
 
 * The FuzzyNumbers Tutorial has been properly included
   as the package's vignette
@@ -2854,7 +2876,7 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.2 /2012-12-27/
+0.2-1 /2012-12-27/
 
 * approx.invert(): a new function to find the numerical
   inverse of a given side/alpha-cut generating function
@@ -2878,7 +2900,7 @@ FuzzyNumbers Package NEWS
 
 ***************************************************************************
 
-0.1 /2012-07-01/
+0.1-1 /2012-07-01/
 
 * initial release
 \end{verbatim}

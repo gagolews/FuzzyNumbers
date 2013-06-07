@@ -73,19 +73,40 @@
 \widowpenalty=1000
 
 
+\newif\ifDevelopmentVersion
+
+<<FNver,echo=FALSE,results='asis',cache=FALSE>>=
+FNver <- packageDescription("FuzzyNumbers")$Version
+if (substring(FNver, nchar(FNver)) == "0") {
+   cat("\\DevelopmentVersiontrue\n")
+} else {
+   cat("\\DevelopmentVersionfalse\n")
+}
+@
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\ifDevelopmentVersion
+\pagestyle{fancy}
+\fancyhead[L]{}
+\fancyhead[R]{}
+\fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most 
+recent development version
+of \package{FuzzyNumbers} available on 
+\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.\newline
+If you use the ``official'' CRAN release, some of the features may be unavailable.}
+\fi
 
 \begin{document}
 
 
 
 \begin{center}
-{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.3-devel} Package for \R}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} {\Sexpr{FNver}} Package for \R}
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -226,7 +247,7 @@ or ``The rocket was launched between 2 and 3 p.m.''.
 
 \bigskip
 \package{FuzzyNumbers} is an Open Source (licensed under GNU LGPL 3)
-package for \R -- a free, open sourced software environment
+package for \R{} -- a free, open sourced software environment
 for statistical computing and graphics, which
 includes an implementation
 of a very powerful and quite popular high-level language called \lang{S}.
@@ -242,12 +263,15 @@ It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
 \package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
 conveniently and effectively.
 To install latest ``official'' release of the 
-package available on \textit{CRAN} we type\footnote{If the
-title of this vignette is ``Guide to the FuzzyNumbers X.X-\textbf{devel} package'',
-then some of the features presented here may be missing in the CRAN
-release. Please, upgrade to the latest development version from
+package available on \textit{CRAN} we type%
+\ifDevelopmentVersion%
+\footnote{You are viewing the \textbf{development} version of the tutorial.
+Some of the features presented in this document may be missing
+in the CRAN release. Please, upgrade to the \textbf{latest} development version from
 \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}
-if you need the new functionality.}
+if you need the new functionality.}\ignorespaces
+\fi%
+:
 
 <<eval=FALSE>>=
 install.packages('FuzzyNumbers')
