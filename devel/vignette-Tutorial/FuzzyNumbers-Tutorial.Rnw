@@ -157,7 +157,7 @@ options(tikzLatexPackages = c( # dolaczanie uzywanych pakietow TeX-a
    '\\usepackage{standalone}'
 ))
 
-options(tikzMetricsDictionary='/home/gagolews/R/tikzMetrics')
+options(tikzMetricsDictionary='~/R/tikzMetrics')
 
 options(tikzDocumentDeclaration = '\\documentclass[11pt]{standalone}\n')
 

@@ -1,6 +1,6 @@
 ## This file is part of the FuzzyNumbers library.
 ##
-## Copyright 2012 Marek Gagolewski
+## Copyright 2012-2013 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify
@@ -10,7 +10,7 @@
 ##
 ## FuzzyNumbers is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 ## GNU Lesser General Public License for more details.
 ##
 ## You should have received a copy of the GNU Lesser General Public License
@@ -108,11 +108,10 @@ setMethod(
          return(piecewiseLinearApproximation_ApproximateNearestEuclidean(object, knot.n, knot.alpha, optim.control, verbose, ...))
       else if (method == "NearestEuclidean")
       {
-         # TO DO: general method
 #          if (knot.n == 1) # original method from (Coroianu, Gagolewski, Grzegorzewski, 2013)
 #             return(piecewiseLinearApproximation_ApproximateNearestEuclidean1(object, knot.n, knot.alpha, verbose, ...))
 #          else # general case from (Coroianu, Gagolewski, Grzegorzewski, in-preparation)
-            return(piecewiseLinearApproximation_ApproximateNearestEuclideanN(object, knot.n, knot.alpha, verbose, ...))
+         return(piecewiseLinearApproximation_ApproximateNearestEuclideanN(object, knot.n, knot.alpha, verbose, ...))
       }
    }
 )
@@ -337,7 +336,7 @@ piecewiseLinearApproximation_ApproximateNearestEuclidean1 <- function(object, kn
    # This exact (up to numeric integration error, of course) method for n == 1
    # was proposed by Coroianu, Gagolewski, Grzegorzewski (FSS 2013)
    
-   if (knot.n != 1) stop("this method currently may only be used only for knot.n == 1")
+   if (knot.n != 1) stop("this version  may only be used only for knot.n == 1")
    
    
    w1   <- integrateAlpha(object, "lower", 0, knot.alpha, ...)
@@ -605,6 +604,8 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
    b[1] <- sum(w)
    for (i in 2:(2*knot.n+4))
       b[i] <- b[i-1] - wp[i-1] - w[i-1] + wp[i]
+   
+#    return(list(b=b, Phi=Phi, knot.alpha=knot.alpha, knot.n=knot.n)) # test only
 
    if (verbose) {
       cat(sprintf("b=(%s)\n",
@@ -657,8 +658,8 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
       {
          cat(sprintf("Pass  %g: K={%5s}, d=(%s)\n                    z=(%s)\n",
                      iter,  paste(as.numeric(which(K)),collapse=""),
-                     paste(sprintf("%8.2g", d), collapse=", "),
-                     paste(sprintf("%8.2g", z), collapse=", ")))
+                     paste(sprintf("%8g", d), collapse=", "),
+                     paste(sprintf("%8g", z), collapse=", ")))
       }
    }
    
