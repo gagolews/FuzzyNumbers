@@ -17,34 +17,36 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-setGeneric("core",
-           function(object) standardGeneric("core"))
 
-
-
-
-#' Calculate the core of a fuzzy number
+#' @title
+#' Calculate the Support of a Fuzzy Number
 #'
-#' We have \eqn{supp(A) := [a2,a3]}.
+#' @description
+#' We have\eqn{supp(A) := [a1,a4]}.
+#' This gives the values a fuzzy number possibly takes.
 #' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{
-#'      
-#'   }
-#' }
-#' @exportMethod core
-#' @name core
-#' @aliases core,FuzzyNumber-method
-#' @rdname core-methods
-#' @family FuzzyNumber-method
+#' @param object a fuzzy number
+#' @return numeric vector of length 2
+#' 
+#' @exportMethod supp
 #' @docType methods
+#' @name supp
+#' @family FuzzyNumber-method
+#' @family characteristics
+#' @rdname supp-methods
+#' @aliases supp,FuzzyNumber-method
+#' @usage
+#' \S4method{supp}{FuzzyNumber}(object)
+setGeneric("supp",
+           function(object) standardGeneric("supp"))
+
+
+
 setMethod(
-   f="core",
+   f="supp",
    signature(object="FuzzyNumber"),
    definition=function(object)
    {
-      c(object@a2, object@a3)
+      c(object@a1, object@a4)
    }
 )
-

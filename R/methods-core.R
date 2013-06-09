@@ -17,34 +17,37 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-setGeneric("expectedValue",
-           function(object, ...) standardGeneric("expectedValue"))
 
-
-
-#' Calculate the expected value of a fuzzy number (defuzzify)
+#' @title
+#' Calculate the Core of a Fuzzy Number
 #'
-#' The expected value of \eqn{A} is defined as
-#' \eqn{EV_w(A) := EI_U(A) - EI_L(A)},
-#' where \eqn{EI} is the \code{expectedInterval}.
+#' @description
+#' We have\eqn{core(A) := [a2,a3]}.
+#' This gives the values a fuzzy number necessarily takes.
 #' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{ }
-#' }
-#' @exportMethod expectedValue
-#' @name expectedValue
-#' @aliases expectedValue,FuzzyNumber-method
-#' @rdname expectedValue-methods
+#' @param object a fuzzy number
+#' @return numeric vector of length 2
+#' 
+#' @exportMethod core
 #' @docType methods
+#' @name core
 #' @family FuzzyNumber-method
-#' @seealso \code{\link{expectedInterval}} on which this function is based,
-#' and also \code{\link{weightedExpectedValue}}
+#' @family characteristics
+#' @rdname core-methods
+#' @aliases core,FuzzyNumber-method
+#' @usage
+#' \S4method{core}{FuzzyNumber}(object)
+setGeneric("core",
+           function(object) standardGeneric("core"))
+
+
+
 setMethod(
-   f="expectedValue",
+   f="core",
    signature(object="FuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
-      return(mean(expectedInterval(object, ...)))
+      c(object@a2, object@a3)
    }
 )
+

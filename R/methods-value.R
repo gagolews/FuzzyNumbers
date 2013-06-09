@@ -18,30 +18,39 @@
 
 
 
-
+#' @title
+#' Calculate the Value of a Fuzzy Number
+#'
+#' @description
+#' The calculation of the so-called value is one of possible methods to
+#' deffuzify a fuzzy number.
+#' 
+#' @details
+#' The value of \eqn{A} (Delgrado et al, 1998) is defined as
+#' \eqn{val(A) := \int_0^1 \alpha\left(A_L(\alpha)+A_U(\alpha)\right)\,d\alpha}{val(A) := int_0^1 \alpha(A_L(\alpha) + A_U(\alpha))d\alpha}.
+#' 
+#' @param object a fuzzy number
+#' @param ... additional arguments passed to \code{\link{alphaInterval}}
+#' @return a single numeric value
+#' 
+#' @exportMethod value
+#' @docType methods
+#' @name value
+#' @family FuzzyNumber-method
+#' @family deffuzification
+#' @family characteristics
+#' @rdname value-methods
+#' @aliases value,FuzzyNumber-method
+#' @usage
+#' \S4method{value}{FuzzyNumber}(object, ...)
+#' @references
+#' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
+#' Fuzzy Sets and Systems 93, pp. 125-135.\cr
 setGeneric("value",
            function(object, ...) standardGeneric("value"))
 
 
-#' Calculate the value of a fuzzy number (defuzzify)
-#'
-#' The value of \eqn{A} (Delgrado et al, 1998) is defined as
-#' \eqn{val(A) := \int_0^1 \alpha\left(A_L(\alpha)+A_U(\alpha)\right)\,d\alpha}{val(A) := int_0^1 \alpha(A_L(\alpha) + A_U(\alpha))d\alpha}.
-#' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{ }
-#' }
-#' @exportMethod value
-#' @name value
-#' @aliases value,FuzzyNumber-method
-#' @rdname value-methods
-#' @docType methods
-#' @seealso \code{\link{alphaInterval}} on which this function is based
-#' @family FuzzyNumber-method
-#' @references
-#' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
-#' Fuzzy Sets and Systems 93, pp. 125-135.\cr
+
 setMethod(
    f="value",
    signature(object="FuzzyNumber"),
