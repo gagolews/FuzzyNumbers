@@ -26,9 +26,10 @@
 #' built-in \code{\link{plot.default}} and \code{\link{curve}} function.
 #' 
 #' @details
-#' Note that if \code{from} > \code{a1} then it is set to \code{a1}.
+#' Note that if \code{from > a1} then it is set to \code{a1}.
 #'
-#' 
+#' @param x a fuzzy number
+#' @param y not used
 #' @param from numeric;
 #' @param to numeric;
 #' @param n numeric; number of points to probe
@@ -59,7 +60,7 @@
 #' @family FuzzyNumber-method
 #' @family PiecewiseLinearFuzzyNumber-method
 #' @family TrapezoidalFuzzyNumber-method
-#' #@family DiscontinuousFuzzyNumber-method
+#' @family DiscontinuousFuzzyNumber-method
 #' 
 #' @rdname plot-methods
 #' 
@@ -67,6 +68,7 @@
 #' @aliases plot,FuzzyNumber,missing-method
 #'          plot,TrapezoidalFuzzyNumber,missing-method
 #'          plot,PiecewiseLinearFuzzyNumber,missing-method
+#'          plot,DiscontinuousFuzzyNumber,missing-method
 #' @usage
 #' \S4method{plot}{FuzzyNumber,missing}(x, y, from=NULL, to=NULL, n=101, at.alpha=NULL,
 #' draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,

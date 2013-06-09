@@ -19,10 +19,6 @@
 
 
 
-
-
-
-
 #' Integrate a function with at most finite number of discontinuities
 #'
 #' The function uses multiple calls to \code{\link{integrate}}.

@@ -17,32 +17,40 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-
+#' @title
+#' Calculate the Ambiguity of a Fuzzy Number
+#' 
+#' @description
+#' The ambiguity (Delgado et al, 1998)
+#' is a measure of nonspecificity of a fuzzy number.
+#' 
+#' @details
+#' The ambiguity is defined as
+#' \eqn{amb(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha}{val(A) := int_0^1 \alpha(A_U(\alpha) - A_L(\alpha))d\alpha}.
+#'
+#' @param object a fuzzy number
+#' @param ... additional arguments passed to \code{\link{alphaInterval}}
+#' @return a single numeric value
+#' 
+#' 
+#' @exportMethod ambiguity
+#' @docType methods
+#' @name ambiguity
+#' @family FuzzyNumber-method
+#' @family characteristics
+#' @rdname ambiguity-methods
+#' @aliases ambiguity,FuzzyNumber-method
+#' @usage
+#' \S4method{ambiguity}{FuzzyNumber}(object, ...)
+#' @references
+#' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
+#' Fuzzy Sets and Systems 93, pp. 125-135.\cr
 setGeneric("ambiguity",
            function(object, ...) standardGeneric("ambiguity"))
 
 
 
-#' Calculate the ambiguity of a fuzzy number
-#' 
-#' The ambiguity is a measure of nonspecificity of a fuzzy number.
-#' It is defined as
-#' \eqn{amb(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha}{val(A) := int_0^1 \alpha(A_U(\alpha) - A_L(\alpha))d\alpha}.
-#'
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{}
-#' }
-#' @exportMethod ambiguity
-#' @name ambiguity
-#' @aliases ambiguity,FuzzyNumber-method
-#' @rdname ambiguity-methods
-#' @docType methods
-#' @seealso \code{\link{alphaInterval}} on which the method is based
-#' @family FuzzyNumber-method
-#' @references
-#' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
-#' Fuzzy Sets and Systems 93, pp. 125-135.\cr
+
 setMethod(
    f="ambiguity",
    signature(object="FuzzyNumber"),

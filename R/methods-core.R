@@ -32,7 +32,7 @@
 #' @docType methods
 #' @name core
 #' @family FuzzyNumber-method
-#' @family characteristics
+#' @family alpha_cuts
 #' @rdname core-methods
 #' @aliases core,FuzzyNumber-method
 #' @usage

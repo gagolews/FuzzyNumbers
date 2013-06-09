@@ -32,7 +32,7 @@
 #' @docType methods
 #' @name supp
 #' @family FuzzyNumber-method
-#' @family characteristics
+#' @family alpha_cuts
 #' @rdname supp-methods
 #' @aliases supp,FuzzyNumber-method
 #' @usage

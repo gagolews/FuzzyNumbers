@@ -1,6 +1,6 @@
 ## This file is part of the FuzzyNumbers library.
 ##
-## Copyright 2012 Marek Gagolewski
+## Copyright 2012-2013 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify
@@ -10,7 +10,7 @@
 ##
 ## FuzzyNumbers is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 ## GNU Lesser General Public License for more details.
 ##
 ## You should have received a copy of the GNU Lesser General Public License
@@ -18,36 +18,40 @@
 
 
 
-
+#' @title
+#' Calculate the Width of a Fuzzy Number
+#'
+#' @description
+#' The width (Chanas, 2001) is a measure of nonspecificity of a fuzzy number.
+#' 
+#' @details
+#' The width of \eqn{A} is defined as
+#' \eqn{width(A) := EI_U(A) - EI_L(A)},
+#' where \eqn{EI} is the \code{\link{expectedInterval}}.
+#' 
+#' @param object a fuzzy number
+#' @param ... additional arguments passed to \code{\link{expectedInterval}}
+#' @return a single numeric value
+#' 
+#' 
+#' @exportMethod width
+#' @docType methods
+#' @name width
+#' @family FuzzyNumber-method
+#' @family characteristics
+#' @rdname width-methods
+#' @aliases width,FuzzyNumber-method
+#' @usage
+#' \S4method{width}{FuzzyNumber}(object, ...)
+#' @references
+#' Chanas S. (2001), On the interval approximation of a fuzzy number,
+#' Fuzzy Sets and Systems 122, pp. 353-356.\cr
 setGeneric("width",
            function(object, ...) standardGeneric("width"))
 
 
 
-#' Calculate the width of a fuzzy number
-#'
-#' The width is a measure of nonspecificity of a fuzzy number.
-#' 
-#' The width of \eqn{A} is defined as
-#' \eqn{width(A) := EI_U(A) - EI_L(A)},
-#' where \eqn{EI} is the \code{expectedInterval}.
-#' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{
-#'      
-#'   }
-#' }
-#' @exportMethod width
-#' @name width
-#' @aliases width,FuzzyNumber-method
-#' @rdname width-methods
-#' @seealso \code{\link{expectedInterval}} on which this function is based
-#' @docType methods
-#' @family FuzzyNumber-method
-#' @references
-#' Chanas S. (2001), On the interval approximation of a fuzzy number,
-#' Fuzzy Sets and Systems 122, pp. 353-356.\cr
+
 setMethod(
    f="width",
    signature(object="FuzzyNumber"),

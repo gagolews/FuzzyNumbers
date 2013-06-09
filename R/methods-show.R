@@ -18,12 +18,22 @@
 
 
 
+#' @title
 #' Print Basic Information on a Fuzzy Number
 #'
-#' Calls \code{\link{as.character}} (with default arguments)
-#' and displays the result on the screen.
+#' @description
+#' See \code{\link{as.character.FuzzyNumber}} for more details.
 #' 
-#' @param object FuzzyNumber to be printed out
+#' @details
+#' The generic method \code{as.character} is called on given fuzzy number
+#' object with default arguments.
+#' The results are printed on \code{stdout}.
+#' 
+#' @param object a fuzzy number
+#' @return nothing interesting
+#' 
+#' @usage
+#' \S4method{show}{FuzzyNumber}(object)
 #' 
 #' @exportMethod show
 #' @name show
@@ -31,6 +41,11 @@
 #' @rdname show-methods
 #' @family FuzzyNumber-method
 #' @docType methods
+if (!isGeneric("show"))
+   setGeneric("show", function(object) standardGeneric("object"))
+
+
+
 setMethod(
    f="show",
    signature(object="FuzzyNumber"),

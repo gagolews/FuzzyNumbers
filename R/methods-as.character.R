@@ -19,21 +19,32 @@
 
 
 
+#' @title
 #' Get Basic Information on a Fuzzy Number in a String
 #'
-#'
-#' @param x FuzzyNumber to be described
-#' @param toLaTeX logical; should LaTeX code be output?
-#' @param varnameLaTeX character; variable name to be included in equations
-#' 
-#' @return character vector
+#' @description
+#' This method is especially useful if you would like to
+#' generate LaTeX equations defining a fuzzy numbers.
 #' 
 #' @details
+#' Consider calling the \code{\link{cat}} function on the resulting
+#' string.
+#' 
 #' Thanks to Jan Caha for suggesting the \code{toLaTeX} arg.
+#'
+#' @param x a fuzzy number
+#' @param toLaTeX logical; should LaTeX code be output?
+#' @param varnameLaTeX character; variable name to be included in equations
+#' @param ... not used
+#' @return character vector
+#' 
 #' 
 #' @aliases as.character,FuzzyNumber-method
 #' @rdname as.character-methods
 #' @family FuzzyNumber-method
+#' @family PiecewiseLinearFuzzyNumber-method
+#' @family TriangularFuzzyNumber-method
+#' @family PowerFuzzyNumber-method
 #' @export
 as.character.FuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    if (identical(toLaTeX, FALSE)) {

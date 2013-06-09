@@ -47,6 +47,7 @@
 #' @family FuzzyNumber-method
 #' @family PiecewiseLinearFuzzyNumber-method
 #' @family TrapezoidalFuzzyNumber-method
+#' @family extension_principle
 invisible(NULL)
 
 

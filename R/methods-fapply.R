@@ -18,30 +18,36 @@
 
 
 
-
-
-
-
+#' @title
 #' Apply a Function on a Fuzzy Number
 #' 
+#' @description
 #' Applies a given monotonic function
 #' using the extension principle (i.e. the function is applied on alpha-cuts).
 #' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "PiecewiseLinearFuzzyNumber", fun = "function")}}{return a PiecewiseLinearFuzzyNumber with the same knot settings}
-#' }
+#' @details
+#' Currently only a method for the \linkS4class{PiecewiseLinearFuzzyNumber}
+#' class has been defined. The computations are exact (up to a numeric error)
+#' at knots. So, make sure you have a sufficient number of knots if you
+#' want good approximation.
+#' 
+#' For other types of fuzzy numbers, consider using
+#' \code{\link{piecewiseLinearApproximation}}.
 #' 
 #' 
 #' @param object a fuzzy number
 #' @param fun a monotonic, vectorized R function
 #' @param ... additional arguments passed to \code{fun}
-#' @return a fuzzy number
+#' @return a \linkS4class{PiecewiseLinearFuzzyNumber}
+#' 
+#' @usage
+#' \S4method{fapply}{FuzzyNumber,function}(object, fun, ...)
 #' 
 #' @docType methods
 #' @name fapply
 #' @rdname fapply-methods
 #' @family PiecewiseLinearFuzzyNumber-method
+#' @family extension_principle
 #' @exportMethod fapply
 #' @aliases fapply,PiecewiseLinearFuzzyNumber,function-method
 setGeneric("fapply",
