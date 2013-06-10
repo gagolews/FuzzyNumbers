@@ -33,7 +33,10 @@
   If `knot.alpha` is missing, then the knots will be equally distributed
   on the interval [0,1].
 
-* Added a call to  setGeneric("plot", function(x, y, ...) ...
+* alphacut() now always returns a named two-column matrix.
+  evaluate() returns a named vector.
+
+* Added a call to setGeneric("plot", function(x, y, ...) ...
   to avoid a warning on install
 
 * The FuzzyNumbers Tutorial has been properly included

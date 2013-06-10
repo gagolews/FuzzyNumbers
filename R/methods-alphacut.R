@@ -17,29 +17,45 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-
+#' @title
+#' Calculate Alpha-Cuts
+#'
+#' @description
+#' If \eqn{A} is a fuzzy numbers, then its \eqn{\alpha}-cuts are
+#' always in form of intervals.
+#' Moreover, the \eqn{\alpha}-cuts form a nonincreasing
+#' chain w.r.t. \eqn{alpha}.
+#' 
+#' @param object a fuzzy numbers
+#' @param alpha numeric vector with elements in [0,1]
+#' 
+#' @return a matrix with two columns (left and right alha cut bounds).
+#' if some elements in \code{alpha} are not in [0,1], then \code{NA}
+#' is set.
+#' 
+#' @exportMethod alphacut
+#' @docType methods
+#' @name alphacut
+#' @family FuzzyNumber-method
+#' @family alpha_cuts
+#' @rdname alphacut-methods
+#' @aliases alphacut,FuzzyNumber,numeric-method
+#' @usage
+#' \S4method{alphacut}{FuzzyNumber,numeric}(object, alpha)
+#' @examples
+#' A <- TrapezoidalFuzzyNumber(1, 2, 3, 4)
+#' alphacut(A, c(-1, 0.4, 0.2))
 setGeneric("alphacut",
            function(object, alpha) standardGeneric("alphacut"))
 
-#' Calculate given alpha-cuts
-#'
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber", alpha = "numeric")}}{}
-#' }
-#' @return a matrix with two columns or a vector of length two
-#' @exportMethod alphacut
-#' @name alphacut
-#' @aliases alphacut,FuzzyNumber,numeric-method
-#' @rdname alphacut-methods
-#' @family FuzzyNumber-method
-#' @docType methods
+
 setMethod(
    f="alphacut",
    signature(object="FuzzyNumber", alpha="numeric"),
    definition=function(object, alpha)
    {
-      x <- matrix(NA_real_, nrow=length(alpha), ncol=2)
+      x <- matrix(NA_real_, nrow=length(alpha), ncol=2,
+                  dimnames=list(format(alpha), c("L", "U")))
       
       wh <- which(alpha >= 0 & alpha <= 1)
       x[wh, ] <-
@@ -48,9 +64,6 @@ setMethod(
             object@a3+(object@a4-object@a3)*object@upper(alpha[wh])
          )
 
-      if (length(alpha) <= 1)
-         return(as.numeric(x))
-      else
-         return(x)
+      x
    }
 )

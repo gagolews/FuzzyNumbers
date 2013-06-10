@@ -588,7 +588,7 @@ requires lengthy computations and is always done locally
 (for a given point, not for ``whole'' the function at once).
 \R is not a symbolic mathematical solver.
 If we had defined such procedures (it is really easy to do
-by using the \texttt{uniroot()} function), then an inexperienced user
+by using the \func{uniroot()} function), then an inexperienced user
 would have used it in his/her algorithms and wondered why everything
 runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 
@@ -607,7 +607,7 @@ Thus, general rules are as follows.
 If you want $\alpha$-cuts (e.g.~for finding
 trapezoidal approximations of FNs), specify them.
 If you would like to access side functions (by the way,
-the \texttt{plot()} function
+the \func{plot()} function
 automatically detects what kind of knowledge we have),
 assure they are provided.
 
@@ -780,15 +780,15 @@ Each PLFN is given by:
 \begin{itemize*}
 \item four coefficients $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$
 defining its support and core,
-\item the number of ``knots'', \texttt{knot.n}$\ge 0$,
-\item a vector of $\alpha$-cut coordinates, \texttt{knot.alpha}, consisting of \texttt{knot.n} elements $\in[0,1]$,
-\item a nondecreasingly sorted vector \texttt{knot.left} consisting of \texttt{knot.n} elements $\in[\mathtt{a1},\mathtt{a2}]$,
+\item the number of ``knots'', \argument{knot.n}$\ge 0$,
+\item a vector of $\alpha$-cut coordinates, \argument{knot.alpha}, consisting of \argument{knot.n} elements $\in[0,1]$,
+\item a nondecreasingly sorted vector \argument{knot.left} consisting of \argument{knot.n} elements $\in[\mathtt{a1},\mathtt{a2}]$,
 defining interpolation points for the left side function, and
-\item a nondecreasingly sorted vector \texttt{knot.right} consisting of \texttt{knot.n} elements $\in[\mathtt{a2},\mathtt{a3}]$,
+\item a nondecreasingly sorted vector \argument{knot.right} consisting of \argument{knot.n} elements $\in[\mathtt{a2},\mathtt{a3}]$,
 defining interpolation points for the right side function.
 \end{itemize*}
 
-If \texttt{knot.n}$\ge 1$, then the membership function of
+If \argument{knot.n}$\ge 1$, then the membership function of
 a piecewise linear fuzzy number $P$ is defined as:
 \begin{equation}
 \mu_P(x) = \left\{\begin{array}{ll}
@@ -866,7 +866,7 @@ from \argument{knot.left} and \argument{knot.right}
 (their lengths should then be equal to \argument{knot.n}+2).
 
 \bigskip
-If \texttt{knot.n} is equal to 0 or all left and right knots lie on common lines,
+If \argument{knot.n} is equal to 0 or all left and right knots lie on common lines,
 then a PLFN reduces to a TFN.
 Please note that, however, the \texttt{TrapezoidalFuzzyNumber} class
 does not inherit from \texttt{PiecewiseLinearFuzzyNumber}
@@ -961,9 +961,9 @@ cat(as.character(X, toLaTeX=TRUE, varnameLaTeX='X'))
 \section{Depicting Fuzzy Numbers}\label{Sec:Depicting}
 
 
-To depict FNs we use the \texttt{plot()} method,
+To depict FNs we use the \func{plot()} method,
 which uses similar parameters as the \R-built-in
-\texttt{curve()} function. If you are new to \R, you may wish
+\func{curve()} function. If you are new to \R, you may wish
 to read the manual on the most popular graphical routines by
 calling \texttt{?plot}, \texttt{?plot.default}, \texttt{?curve},
 \texttt{?abline}, \texttt{?par}, \texttt{?lines}, \texttt{?points},
@@ -995,10 +995,10 @@ approximated by piecewise linear functions with equidistant knots
 at one of the axes. Therefore, if we probe them
 at too few points, we may obtain very rough graphical representations.
 To control the number of points at which the interpolation takes place,
-we use the \texttt{n} parameter (which defaults to \texttt{101} = quite
-accurate).
+we use the \argument{n} argument (which defaults to \texttt{101}, i.e.~``quite
+accurate'').
 
-All three calls to the \texttt{plot()} method below depict the membership
+All three calls to the \func{plot()} method below depict the membership
 function of the same fuzzy number, but with different accuracy.
 
 <<depicting1c,dependson='depicting1b',fig.keep='none'>>=
@@ -1124,7 +1124,7 @@ plot(X, add=TRUE, type='p', from=-1, to=6)
 
 \noindent
 Please note that we use \TeX{} commands in plot labels.
-They are interpreted by the \texttt{tikzDevice} package for \R
+They are interpreted by the \package{tikzDevice} package for \R
 to generate beautiful figures, but setting this all up requires
 higher level of skills\dots and patience.
 
@@ -1175,17 +1175,20 @@ To compute arbitrary $\alpha$-cuts we use:
 <<comput1d,dependson='comput1c'>>=
 alphacut(A, 0) # same as supp(A) (if alpha-cut generators are defined)
 alphacut(A, 1) # same as core(A)
-alphacut(A, c(0,0.5,1))
+(a <- alphacut(A, c(0, 0.5, 1)))
+a[1, ]
+a[2, 2]
+a[, "L"]
 @
 
 \noindent
-Note that if we request to compute more than one $\alpha$-cut at once, then
-a matrix with 2 columns (instead of a numeric vector of length 2) is returned.
-The \texttt{alphacut()} method may only be used when $\alpha$-cut generators are
+Note that in result we always get a matrix with two columns.
+The matrix has named dimensions (names stand for only auxiliary information).
+The \func{alphacut()} method may only be used when $\alpha$-cut generators are
 provided by the user during the declaration of $A$, even for $\alpha=0$
 or $\alpha=1$.
 
-\subsection{Evaluation of the Membership Function}
+\subsection{Membership Function Evaluation}
 
 If side generators are defined, we may calculate
 the values of the membership function at different points by calling:
@@ -1196,6 +1199,8 @@ evaluate(A, c(-3,0,3))
 evaluate(A, seq(-1, 2, by=0.5))
 @
 
+\noindent Note that the vector has named elements (these ``labels''
+provide only auxiliary information).
 % \noindent
 % As wee see, this method needs a numeric vector (possibly of length 1)
 % as its second parameter.
@@ -1221,10 +1226,10 @@ expectedInterval(A)
 \noindent
 Please note that in case of objects of
 the \texttt{FuzzyNumber} class the expected interval is approximated
-by numerical integration. This method calls the \texttt{integrate()} function
+by numerical integration. This method calls the \func{integrate()} function
 and its accuracy (quite fine by default)
-may be controlled by the \texttt{subdivisions},
-\texttt{rel.tol}, and \texttt{abs.tol} parameters
+may be controlled by the \argument{subdivisions},
+\argument{rel.tol}, and \argument{abs.tol} parameters
 (call \texttt{?integrate} for more details).
 On the other hand, for TFNs and PLFs this method returns exact results.
 
@@ -1243,7 +1248,7 @@ expectedValue(A)
 @
 
 \noindent
-Note that this method uses a call to \texttt{expectedInterval(A)},
+Note that this method uses a call to \texttt{\func{expectedInterval}(A)},
 thus in case of \texttt{FuzzyNumber} class instances it also uses
 numerical approximation.
 
@@ -1454,8 +1459,8 @@ distance(T1, T2, type='Euclidean') # L2 distance /default/
 distance(T1, T2, type='EuclideanSquared') # Squared L2 distance
 @
 
-Types available (argument \texttt{type}): \texttt{Euclidean} (default),
-\texttt{EuclideanSquared}...
+Types available (argument \argument{type}): \str{"{}Euclidean"{}} (default),
+\str{"{}EuclideanSquared"{}}...
 
 
 
@@ -1483,7 +1488,7 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 
 \subsubsection{Na\'{i}ve Approximation}
 
-The \texttt{'Naive'} method generates a trapezoidal FN with the same
+The \str{"{}Naive"{}} method generates a trapezoidal FN with the same
 core and support as $A$.
 
 <<ApproxExA_naive,dependson='ApproxExA',fig.keep='none'>>=
@@ -1506,7 +1511,7 @@ legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
 
 % $L_2$ distance....
 
-The \texttt{'NearestEuclidean'} method
+The \str{"{}NearestEuclidean"{}} method
 gives the nearest $L_2$-approximation of $A$
 \cite[Corollary 8]{Ban2009:nearestfnrev}.
 
@@ -1530,12 +1535,12 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 \subsubsection{Expected Interval Preserving Approximation}
 
 
-The \texttt{'ExpectedIntervalPreserving'} method
+The \str{"{}ExpectedIntervalPreserving"{}} method
 gives the nearest $L_2$-approximation of $A$
 preserving the expected interval \cite{Ban2008:approxpresexpint,Grzegorzewski2010:trapfnapproxexpint,Yeh2008:traptriapprox}.
 Note that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
 we get the same result as in
-the \texttt{'NearestEuclidean'} method.
+the \str{"{}NearestEuclidean"{}} method.
 
 % TO BE DONE...
 
@@ -1586,7 +1591,7 @@ legend('topright', c('$\\mu_{B}$', '$\\mu_{TB_1}$', '$\\mu_{TB_2}$'),
 \subsubsection{Approximation with Restrictions on Support and Core}
 
 
-The \texttt{'SupportCoreRestricted'} method was proposed in \cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
+The \str{"{}SupportCoreRestricted"{}} method was proposed in \cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 It gives the $L_2$-nearest trapezoidal approximation with constraints
 $\mathrm{core}(A) \subseteq \mathrm{core}(\mathcal{T}(A))$
 and $\mathrm{supp}(\mathcal{T}(A)) \subseteq \mathrm{supp}(A)$,
@@ -1615,7 +1620,7 @@ legend('topright', legend=c('$A$', 'Supp\\&core restr.\napproximation'),
 TO BE DONE... Problem statement... Given a fuzzy number $A$ we seek for a piecewise linear
 fuzzy number $\mathcal{P}(A)$....
 
-Currently only fixed \texttt{knot.alpha} allowed.... TO BE DONE....
+Currently only fixed \argument{knot.alpha} allowed.... TO BE DONE....
 
 In this subsection we will use the following fuzzy number $A$
 for the sake of illustration:
@@ -1632,7 +1637,7 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 
 \subsubsection{Na\'{i}ve Approximation}
 
-The \texttt{'Naive'} method generates a PLFN with the same
+The \str{"{}Naive"{}} method generates a PLFN with the same
 core and support as $A$ and with sides interpolating the membership function
 of $A$ at given $\alpha$-cuts.
 
@@ -1655,12 +1660,12 @@ legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
 
 \subsubsection{$L_2$-nearest Approximation}
 
-\paragraph{Exact algorithm for fixed \texttt{knot.alpha}.}
+\paragraph{Exact algorithm for fixed \argument{knot.alpha}.}
 
 TO BE DONE...
 
-For \texttt{knot.n==1} the method proposed in \cite{CoroianuETAL2012:plfnapprox}
-is used.
+For \texttt{\argument{knot.n}==1} the method proposed in \cite{CoroianuETAL2012:plfnapprox}
+is used. [WORK ON \texttt{\argument{knot.n}>1} ALMOST FINISHED]
 
 <<ApproxPLFNNearest,dependson='ApproxExAPLFN',fig.keep='none'>>=
 system.time(P2 <- piecewiseLinearApproximation(A,
@@ -1730,7 +1735,7 @@ legend('top', c('$d(A_1,P_1)$', '$d(A_2,P_2)$'), lty=c(1,2), col=c(1,2))
 
 
 
-\paragraph{Finding best \texttt{knot.alpha} numerically.}
+\paragraph{Finding best \argument{knot.alpha} numerically.}
 
 Consider the following fuzzy number $A_1$:
 
@@ -1760,7 +1765,7 @@ plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A_1}(\\alpha)$')
 @
 \end{center}
 
-We may find best \texttt{knot.alpha} using numerical optimization.
+We may find best \argument{knot.alpha} using numerical optimization.
 We only know that the distance function is continuous.
 % TO DO.....
 
@@ -1785,17 +1790,17 @@ for (i in 1:5) # 5 iterations
 
 
 
-\paragraph{Approximate algorithm for fixed \texttt{knot.alpha}.}
+\paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
 
 This method uses a constrained version of the Nelder-Mead algorithm.
 The procedure minimizes the target function numerically
-by calling the \texttt{optim()} function.
+by calling the \func{optim()} function.
 There is thus no guarantee that it will find to the global minimum
 (it may fall into a neighborhood of a local minimum
 or even fail to converge).
 However, this approach may be used for any number of knots.
 
-TO BE DONE... WORK  ON AN EXACT ALGORITHM IS IN PROGRESS.....
+TO BE DONE... WORK  ON AN EXACT ALGORITHM IS ALMOST FINISHED.....
 
 <<ApproxMethodPLFN1,dependson='ApproxExAPLFN',fig.keep='none'>>=
 system.time(P3 <- piecewiseLinearApproximation(A,
@@ -1824,7 +1829,7 @@ print(distance(A, P4), digits=12)
 \end{center}
 
 If the method fails to converge, you may try to call it
-e.g.~with the \texttt{optim.control=list(maxit=\allowbreak{}5000)} parameter
+e.g.~with the \texttt{\argument{optim.control}=\func{list}(\argument{maxit}=\allowbreak{}5000)} parameter
 to allow for greater number of iterations.
 
 
