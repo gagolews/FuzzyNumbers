@@ -77,9 +77,9 @@
 #' @exportClass FuzzyNumber
 #' @name FuzzyNumber-class
 #' @seealso \code{\link{FuzzyNumber}} for a convenient constructor,
-#' \code{\link{convert.side}} for creating side functions generators,
-#' \code{\link{convert.alpha}} for creating alpha-cut bounds generators,
-#' \code{\link{approx.invert}} for inverting side functions/alpha-cuts numerically
+#' \code{\link{convertSide}} for creating side functions generators,
+#' \code{\link{convertAlpha}} for creating alpha-cut bounds generators,
+#' \code{\link{approxInvert}} for inverting side functions/alpha-cuts numerically
 #' @docType class
 #' @family FuzzyNumber-method
 #' @examples

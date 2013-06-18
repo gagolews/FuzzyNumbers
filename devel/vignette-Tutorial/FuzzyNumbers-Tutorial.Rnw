@@ -433,14 +433,14 @@ g <- splinefun(c(-1,0,10), c(1,0.5,0), method='monoH.FC')
 
 Let us convert them to side \textit{generating} functions, which shall be
 defined on the interval $[0,1]$.
-This may easily be done with the \func{convert.side()}
+This may easily be done with the \func{convertSide()}
 function. It returns a new function that calls
 the original one with linearly transformed input.
 
 <<ExFconvert2,dependson='ExFconvert'>>=
-convert.side(f, -4, -2)(c(0,1))
-convert.side(g, -1, 10)(c(0,1))
-convert.side(g, 10, -1)(c(0,1)) # interesting!
+convertSide(f, -4, -2)(c(0,1))
+convertSide(g, -1, 10)(c(0,1))
+convertSide(g, 10, -1)(c(0,1)) # interesting!
 @
 
 \noindent
@@ -449,8 +449,8 @@ now with arbitrary support and core.
 
 <<ExFconvert3,dependson='ExFconvert2',fig.keep='none'>>=
 B <- FuzzyNumber(10,20,20,30,
-    left=convert.side(f, -4, -2),
-   right=convert.side(g, -1, 10)
+    left=convertSide(f, -4, -2),
+   right=convertSide(g, -1, 10)
 )
 plot(B, xlab='$x$', ylab='$\\alpha$')
 @
@@ -523,8 +523,8 @@ legend('topright', c('$\\mu_{A1}$', '$\\mu_{A2}$'),
 
 
 \paragraph{Remark.}
-The \func{convert.alpha()} function
-works similarly to \func{convert.side()}.
+The \func{convertAlpha()} function
+works similarly to \func{convertSide()}.
 This tool, however, scales the output values
 of a given function, thus it may be used to create
 an alpha-cut generator conveniently.
@@ -622,15 +622,15 @@ and \func{splinefun()} (monotonic
 splines: \argument{method}s \str{'{}hyman{}'}
 and \str{'{}monoH.FC'{}}; the latter is
 default and recommended).
-They are available as the \func{approx.invert()}
+They are available as the \func{approxInvert()}
 function\footnote{The
 \argument{n} argument, which sets the number of interpolation points,
 controls the trade-off between accuracy and computation speed.
 Well, world's not ideal, remember that ``any'' is better than ``nothing''
 sometimes.}, and may
 of course be used on results returned by
-\func{convert.alpha()}
-and \func{convert.side()}.
+\func{convertAlpha()}
+and \func{convertSide()}.
 
 
 <<approxfuns>>=
@@ -639,8 +639,8 @@ r <- function(x) 1-pbeta(x, 1, 0.1)
 A4 <- FuzzyNumber(-2, 0, 0, 2,
    left  = l,
    right = r,
-   lower = approx.invert(l),
-   upper = approx.invert(r)
+   lower = approxInvert(l),
+   upper = approxInvert(r)
 )
 
 x <- seq(0,1,length.out=1e5)

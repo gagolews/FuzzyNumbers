@@ -36,6 +36,9 @@
 * alphacut() now always returns a named two-column matrix.
   evaluate() returns a named vector.
 
+* Function renamed: convert.side to convertSide, convert.alpha
+  to convertAlpha, approx.invert to approxInvert
+
 * Added a call to setGeneric("plot", function(x, y, ...) ...
   to avoid a warning on install
 

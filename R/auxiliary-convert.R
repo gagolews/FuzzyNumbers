@@ -17,10 +17,14 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-#' Convert a given side function to side generating function
+#' @title
+#' Convert a Given Side Function to Side Generating Function
 #' 
+#' @description
 #' The resulting function linearly scales the input
 #' and passes it to the original function. 
+#' 
+#' @details
 #' The function works for x1<x2 and x1>x2.
 #' 
 #' 
@@ -28,10 +32,11 @@
 #' @param x1 numeric vector of length 1; if longer, only the first element is used
 #' @param x2 numeric vector of length 1; if longer, only the first element is used
 #' @return a new function defined on [0,1] (scaled input)
+#' 
 #' @seealso \code{\linkS4class{FuzzyNumber}}
-#' @family FuzzyNumber-method
+#' @family auxiliary
 #' @export
-convert.side <- function(f, x1, x2) 
+convertSide <- function(f, x1, x2) 
 {
    stopifnot(is.function(f) && is.numeric(x1) && is.numeric(x2))
    e <- new.env()
@@ -47,8 +52,10 @@ convert.side <- function(f, x1, x2)
 }
 
 
-#' Convert a given upper/lower alpha-cut function  to an alpha-cut generating function
+#' @title
+#' Convert a Given Upper/Lower Alpha-Cut Function to an Alpha-Cut Generating Function
 #' 
+#' @description
 #' The resulting function calls the original function and then
 #' linearly scales its output.
 #' 
@@ -56,9 +63,11 @@ convert.side <- function(f, x1, x2)
 #' @param y1 numeric vector of length 1
 #' @param y2 numeric vector of length 1
 #' @return a new function defined on [0,1] (scaled input)
+#' 
 #' @seealso \code{\linkS4class{FuzzyNumber}}
+#' @family auxiliary
 #' @export
-convert.alpha <- function(f, y1, y2) 
+convertAlpha <- function(f, y1, y2) 
 {
    stopifnot(is.function(f) && is.numeric(y1) && is.numeric(y2))
    e <- new.env()

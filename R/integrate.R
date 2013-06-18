@@ -18,6 +18,23 @@
 
 
 
+integrate_identity <- function(object, which=c("lower", "upper"), from, to, n=100L)
+{ 
+   which <- match.arg(which)
+   stopifnot(is.numeric(from), length(from) == 1, is.finite(from))
+   stopifnot(is.numeric(to), length(to) == 1, is.finite(to))
+   stopifnot(is.numeric(n), length(n) == 1, n > 1)
+   
+   # Boole's rule (Newton-Cotes of degree 4)
+   br <- seq(from, to, length.out=4*n-3) 
+   if (which == 'lower')
+      fval <- (object@a1+(object@a2-object@a1)*object@lower(br))*br
+   else
+      fval <- (object@a3+(object@a4-object@a3)*object@upper(br))*br
+   
+   sum(fval * c(7, rep(c(32, 12, 32, 14), times=n-2), 32, 12, 32, 7)/90)*(to-from)/(n-1)
+}
+
 
 #' Integrate a function with at most finite number of discontinuities
 #'

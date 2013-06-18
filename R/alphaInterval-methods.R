@@ -18,38 +18,52 @@
 
 
 
-setGeneric("alphaInterval",
-           function(object, ...) standardGeneric("alphaInterval"))
 
 
-#' Calculate the so-called alpha-interval of a fuzzy number
+
+#' @title
+#' Calculate the Alpha-Interval of a Fuzzy Number
 #'
+#' @description
 #' We have \eqn{\alpha-Int(A) := [\int_0^1 \alpha A_L(\alpha)\,d\alpha, \int_0^1 \alpha A_U(\alpha)\,d\alpha]
 #' }{\alpha-Int(A) := [int_0^1 \alpha A_L(\alpha) d\alpha, int_0^1 \alpha A_U(\alpha) d\alpha]}.
 #' 
-#' Note that this may be done with numeric integration
-#' (for instances of the \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} class)
+#' @details
+#' Note that if an instance of the \code{FuzzyNumber} or \code{DiscontinuousFuzzyNumber} class
+#' is given, the calculation is performed via numerical integration.
+#' Otherwise, the computation is exact.
 #' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{(numerical integration used)}
-#'      \item{\code{signature(object = "TrapezoidalFuzzyNumber")}}{(exact)}
-#'      \item{\code{signature(object = "PiecewiseLinearFuzzyNumber")}}{(exact)}
-#'      \item{\code{signature(object = "PowerFuzzyNumber")}}{(exact)}
-#' }
+#' @param object a fuzzy number
+#' @param for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to XXXXXXX
+#' @return numeric vector of length 2
+#' 
 #' @exportMethod alphaInterval
-#' @name alphaInterval
-#' @aliases alphaInterval,FuzzyNumber-method
-#' @rdname alphaInterval-methods
 #' @docType methods
-#' @seealso \code{\link{integrateAlpha}}
+#' @name alphaInterval
 #' @family FuzzyNumber-method
+#' @family TrapezoidalFuzzyNumber-method
+#' @family PiecewiseLinearFuzzyNumber-method
+#' @family PowerFuzzyNumber-method
+#' @rdname alphaInterval-methods
+#' @aliases alphaInterval,FuzzyNumber-method
+#' @aliases alphaInterval,TrapezoidalFuzzyNumber-method
+#' @aliases alphaInterval,PiecewiseLinearFuzzyNumber-method
+#' @aliases alphaInterval,PowerFuzzyNumber-method
+#' @usage
+#' \S4method{alphaInterval}{FuzzyNumber}(object, ...)
+#' \S4method{alphaInterval}{TrapezoidalFuzzyNumber}(object)
+#' \S4method{alphaInterval}{PiecewiseLinearFuzzyNumber}(object)
+#' \S4method{alphaInterval}{PowerFuzzyNumber}(object)
+setGeneric("alphaInterval",
+function(object, ...) standardGeneric("alphaInterval"))
+
+
 setMethod(
    f="alphaInterval",
    signature(object="FuzzyNumber"),
    definition=function(object, ...)
    {
-      if (is.na(object@lower(0))) return(c(NA, NA));
+      if (is.na(object@lower(0)) || is.na(object@upper(0))) return(c(NA, NA));
 
       return(c(
          integrateAlpha(object, "lower", 0, 1, weight=identity, ...),
@@ -61,15 +75,11 @@ setMethod(
 
 
 
-#' @exportMethod alphaInterval
-#' @name alphaInterval
-#' @aliases alphaInterval,TrapezoidalFuzzyNumber-method
-#' @rdname alphaInterval-methods
-#' @docType methods
+
 setMethod(
    f="alphaInterval",
    signature(object="TrapezoidalFuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
       return(c(
          object@a1*0.5+(object@a2-object@a1)/3,
@@ -82,15 +92,11 @@ setMethod(
 
 
 
-#' @exportMethod alphaInterval
-#' @name alphaInterval
-#' @aliases alphaInterval,PiecewiseLinearFuzzyNumber-method
-#' @rdname alphaInterval-methods
-#' @docType methods
+
 setMethod(
    f="alphaInterval",
    signature(object="PiecewiseLinearFuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
       xl <- c(object@a1, object@knot.left,  object@a2)
       xr <- c(object@a3, object@knot.right, object@a4)
@@ -102,22 +108,18 @@ setMethod(
       dar <- diff(ar)
       
       return(c(
-         sum( diff(al^2)*(xl[-object@knot.n-2]-al[-object@knot.n-2]*dxl/dal)/2+diff(al^3)*dxl/dal/3 ),
+          sum( diff(al^2)*(xl[-object@knot.n-2]-al[-object@knot.n-2]*dxl/dal)/2+diff(al^3)*dxl/dal/3 ),
          -sum( diff(ar^2)*(xr[-object@knot.n-2]-ar[-object@knot.n-2]*dxr/dar)/2+diff(ar^3)*dxr/dar/3 )
       ))
    }
 )
 
 
-#' @exportMethod alphaInterval
-#' @name alphaInterval
-#' @aliases alphaInterval,PowerFuzzyNumber-method
-#' @rdname alphaInterval-methods
-#' @docType methods
+
 setMethod(
    f="alphaInterval",
    signature(object="PowerFuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
       return(c(
          (2*object@a2*object@p.left+object@a1)/(4*object@p.left+2),
