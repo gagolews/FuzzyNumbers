@@ -9,9 +9,9 @@ Authors@R: c(
 Description: The FuzzyNumbers package provides S4 classes and methods
     to deal with Fuzzy Numbers: computations of arithmetic
     operations, approximation by trapezoidal and piecewise linear FNs,
-    random FN generation, etc.
+    visualization, etc.
 Version: 0.3-0
-Date: 2013-06-18
+Date: 2013-06-21
 URL: http://www.rexamine.com/resources/fuzzynumbers/
 BugReports: https://github.com/Rexamine/FuzzyNumbers/issues
 License: LGPL (>= 3)
@@ -33,11 +33,9 @@ Collate:
     'PowerFuzzyNumber.R'
     'DiscontinuousFuzzyNumber.R'
     'Extract-methods.R'
-    'invert-generators.R'
     'integrate.R'
     'distance-methods.R'
     'Arithmetic-methods.R'
-    'convert-generators.R'
     'alphaInterval-methods.R'
     'expectedInterval-methods.R'
     'piecewiseLinearApproximation-methods.R'
@@ -55,3 +53,5 @@ Collate:
     'methods-fapply.R'
     'methods-alphacut.R'
     'methods-evaluate.R'
+    'auxiliary-convert.R'
+    'auxiliary-invert.R'

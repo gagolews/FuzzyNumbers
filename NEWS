@@ -6,6 +6,7 @@
 
 * piecewiseLinearApproximation() - general case (any knot.n)
   for method="NearestEuclidean" now available.
+  Thus, method="ApproximateNearestEuclidean" is now deprecated.
 
 * New binary arithmetic operators, especially
    for PiecewiseLinearFuzzyNumbers: +, -, *, /
@@ -25,7 +26,8 @@
 
 * piecewiseLinearApproximation() and as.PiecewiseLinearFuzzyNumber()
   argument `knot.alpha` now defaults to equally distributed knots
-  (via given `knot.n`)
+  (via given `knot.n`). If `knot.n` is missing, then it is guessed
+  from `knot.alpha`. 
 
 * PiecewiseLinearFuzzyNumber() now accepts missing `a1`, `a2`, `a3`, `a4`,
   and `knot.left`, `knot.right` of length `knot.n`+2. Moreover, if `knot.n`

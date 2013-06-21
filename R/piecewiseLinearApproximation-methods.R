@@ -19,7 +19,7 @@
 
 
 #' @title
-#' Piecewise linear approximation of a fuzzy number
+#' Piecewise Linear Approximation of a Fuzzy Number
 #'
 #' @description
 #' This method finds a piecewise linear approximation \eqn{P(A)}
@@ -31,34 +31,28 @@
 #' \enumerate{
 #' \item \code{NearestEuclidean}: see (Coroianu, Gagolewski, Grzegorzewski, 2013)
 #' for the description of the \code{knot.n==1} case;
-#' \code{knot.n>1}::WORK IN PROGRESS;
 #' uses numerical integration, see \code{\link{integrateAlpha}}.
+#' Slow for large \code{knot.n}.
 #' 
 #' \item \code{Naive}:
 #' We have core(A)==core(T(A)) and supp(A)==supp(T(A)) and the knots are
 #' taken directly from the specified alpha cuts (linear interpolation).
-#' 
-#' \item \code{ApproximateNearestEuclidean}: this is done via numeric optimization ("Nelder-Mead" algorithm);
-#' uses numerical integration, see \code{\link{integrateAlpha}};
-#' slow, imprecise, and thus highly discouraged.
 #' }
 #' 
 #' @usage
 #' \S4method{piecewiseLinearApproximation}{FuzzyNumber}(object,
-#' method=c("NearestEuclidean", "Naive", "ApproximateNearestEuclidean"),
+#' method=c("NearestEuclidean", "Naive"),
 #' knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
 #' ..., verbose=FALSE, optim.control=list())
 #' 
-#' @param method character, one of: \code{"NearestEuclidean"}, \code{"ApproximateNearestEuclidean"}, \code{"Naive"}
+#' @param method character, one of: \code{"NearestEuclidean"}, or \code{"Naive"}
 #' @param knot.n desired number of knots
 #' @param knot.alpha alpha-cuts at which knots will be positioned 
 #' (defaults to equally distributed knots)
 #' @param verbose logical; print some technical details on the computations being performed?
 #' [only \code{"NearestEuclidean"}, \code{"ApproximateNearestEuclidean"}]
-#' @param optim.control a list of control params for \code{\link{optim}} 
-#' [only \code{"ApproximateNearestEuclidean"}]
 #' @param ... further arguments passed to \code{\link{integrateAlpha}} 
-#' [only \code{"NearestEuclidean"}, \code{"ApproximateNearestEuclidean"}]
+#' [only \code{"NearestEuclidean"}]
 #' 
 #' @exportMethod piecewiseLinearApproximation
 #' @name piecewiseLinearApproximation
@@ -84,14 +78,15 @@ setMethod(
    f="piecewiseLinearApproximation",
    signature(object="FuzzyNumber"),
    definition=function(
-      object, method=c("NearestEuclidean", "Naive", "ApproximateNearestEuclidean"),
+      object, method=c("NearestEuclidean", "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
       knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
       ...,
-      verbose=FALSE,
-      optim.control=list() # optim.method=c("Nelder-Mead"),
+      verbose=FALSE
       )
    {
-      method <- match.arg(method);
+      method <- match.arg(method)
+      if (missing(knot.n) && !missing(knot.alpha))
+         knot.n <- length(knot.alpha)
       stopifnot(is.numeric(knot.n), length(knot.n) == 1, knot.n >= 0)
       stopifnot(is.numeric(knot.alpha), length(knot.alpha) == knot.n)
       stopifnot(is.finite(knot.alpha),  knot.alpha >= 0, knot.alpha <= 1)
@@ -104,10 +99,13 @@ setMethod(
 
       if (method == "Naive")
          return(piecewiseLinearApproximation_Naive(object, knot.n, knot.alpha))
-      else if (method == "ApproximateNearestEuclidean")
-         return(piecewiseLinearApproximation_ApproximateNearestEuclidean(object, knot.n, knot.alpha, optim.control, verbose, ...))
+      else if (method == "ApproximateNearestEuclidean") {
+         stop('[DEPRECATED] Please, use method="NearestEuclidean". This will give you exact solution')
+      }
       else if (method == "NearestEuclidean")
       {
+         if (knot.n > 200)
+            warning('`knot.n` is large - consider using method="Naive".')
 #          if (knot.n == 1) # original method from (Coroianu, Gagolewski, Grzegorzewski, 2013)
 #             return(piecewiseLinearApproximation_ApproximateNearestEuclidean1(object, knot.n, knot.alpha, verbose, ...))
 #          else # general case from (Coroianu, Gagolewski, Grzegorzewski, in-preparation)
@@ -608,68 +606,42 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
 #    return(list(b=b, Phi=Phi, knot.alpha=knot.alpha, knot.n=knot.n)) # test only
 
    if (verbose) {
-      cat(sprintf("b=(%s)\n",
-               paste(sprintf("%8g", b), collapse=", ")))
+      cat(sprintf("b=(%s)\n", paste(sprintf("%8g", b), collapse=", ")))
    }
    
    EPS <- .Machine$double.eps^0.5;
    EPS_RELATIVE <- EPS*(object@a4-object@a1)
    d <- solve(Phi, b)
    
-   PhiInv <- solve(Phi) # matrix invert - TO DO: try to get rid of this
-   iter <- 1
-   z <- rep(0, 2*knot.n+4)
-   K <- rep(FALSE, 2*knot.n+4)
-   m <- which.min(d[-1])+1
-
    
-   if (verbose)
-   {
-      cat(sprintf("Pass  %g: K={%5s}, d=(%s)\n                    z=(%s)\n",
-                  iter,  paste(as.numeric(which(K)),collapse=""),
-                  paste(sprintf("%8g", d), collapse=", "),
-                  paste(sprintf("%8g", z), collapse=", ")))
-   }
-   
-   while(d[m] < -EPS_RELATIVE)  # relative error
-   {
-      K[m] <- TRUE
-      
-      deltaz <- rep(0.0, 2*knot.n+4)
-      deltaz[K] <- as.numeric(solve(PhiInv[K,K], -d[K], tol=.Machine$double.eps))
-      if (min(deltaz[K]) < -EPS)
-         warning(sprintf("min(deltaz[K])==%g", min(deltaz[K])))
-      
-      z <- z+deltaz
-      d <- solve(Phi, b+z)
-      #             for (k in which(K)) d <- d+PhiInv[k,]*deltaz[k] # ALTERNATIVE, BUT MORE INACCURATE
-      
-      m <- which.min(d[-1])+1
-      iter <- iter+1
-      
-      if (iter > 2*knot.n+4)
-         error("NOT CONVERGED??? THIS IS A BUG! -> CONTACT THE PACKAGE'S AUTHOR, PLEASE")
-      
-      stopifnot(all(z>=0))
-      if (max(abs(d[K])) > EPS_RELATIVE) warning(sprintf("max(abs(d[K]))==%g", max(abs(d[K]))))
-      d[K] <- 0.0 # for better accuracy
+   iter <- 1L
+   K <- rep(FALSE, length(b))
+   repeat {
+      d <- solve(Phi, b)
+      m <- which.min(d[-1])+1 # the first element may be < 0 and it's OK
       
       if (verbose)
       {
-         cat(sprintf("Pass  %g: K={%5s}, d=(%s)\n                    z=(%s)\n",
+         cat(sprintf("Pass  %g: K={%5s}, x=(%s)\n",
                      iter,  paste(as.numeric(which(K)),collapse=""),
-                     paste(sprintf("%8g", d), collapse=", "),
-                     paste(sprintf("%8g", z), collapse=", ")))
+                     paste(sprintf("%8g", d), collapse=", ")))
       }
+      
+      if (d[m] >= -EPS_RELATIVE) break
+      if (K[m]) stop("NOT CONVERGED??? THIS IS A BUG! -> CONTACT THE PACKAGE'S AUTHOR, PLEASE")
+      Phi[,m]  <- 0
+      Phi[m,m] <- -1
+      K[m] <- TRUE
+      iter <- iter+1L
    }
+   d[K] <- 0
+   d[d<0 & c(FALSE, rep(TRUE, length(d)-1))] <- 0 # kill EPS-error
    
-   d[c(F,rep(T, 2*knot.n+3)) & (d < 0)] <- 0.0; # kill EPS-error
    res <- cumsum(d)
    
-   PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
+   return(PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
                               knot.n=knot.n, 
                               knot.alpha=knot.alpha, 
                               knot.left=res[2:(knot.n+1)],
-                              knot.right=res[(knot.n+4):(2*knot.n+3)])
-   
+                              knot.right=res[(knot.n+4):(2*knot.n+3)]))   
 }
