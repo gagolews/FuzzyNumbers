@@ -29,7 +29,7 @@
 #' @details
 #' `\code{method}` may be one of:
 #' \enumerate{
-#' \item \code{NearestEuclidean}: see (Coroianu, Gagolewski, Grzegorzewski, 2013)
+#' \item \code{NearestEuclidean}: see (Coroianu, Gagolewski, Grzegorzewski, 2013a)
 #' for the description of the \code{knot.n==1} case;
 #' uses numerical integration, see \code{\link{integrateAlpha}}.
 #' Slow for large \code{knot.n}.
@@ -43,14 +43,16 @@
 #' \S4method{piecewiseLinearApproximation}{FuzzyNumber}(object,
 #' method=c("NearestEuclidean", "Naive"),
 #' knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
-#' ..., verbose=FALSE, optim.control=list())
+#' ..., verbose=FALSE)
 #' 
-#' @param method character, one of: \code{"NearestEuclidean"}, or \code{"Naive"}
-#' @param knot.n desired number of knots
+#' @object a fuzzy number
+#' @param method character; one of: \code{"NearestEuclidean"} (default), or \code{"Naive"}
+#' @param knot.n desired number of knots (if missing, then calculated from given
+#' \code{knot.alpha})
 #' @param knot.alpha alpha-cuts at which knots will be positioned 
 #' (defaults to equally distributed knots)
-#' @param verbose logical; print some technical details on the computations being performed?
-#' [only \code{"NearestEuclidean"}, \code{"ApproximateNearestEuclidean"}]
+#' @param verbose logical; should some technical details on the computations being performed be printed?
+#' [only \code{"NearestEuclidean"}]
 #' @param ... further arguments passed to \code{\link{integrateAlpha}} 
 #' [only \code{"NearestEuclidean"}]
 #' 
@@ -59,11 +61,13 @@
 #' @aliases piecewiseLinearApproximation,FuzzyNumber-method
 #' @rdname piecewiseLinearApproximation-methods
 #' @docType methods
-#' @seealso \code{\link{trapezoidalApproximation}} for trapezoidal approximation
+#' @family approximation
 #' @family FuzzyNumber-method
 #' @references
-#' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
+#' Coroianu L., Gagolewski M., Grzegorzewski P. (2013a),
 #' Nearest Piecewise Linear Approximation of Fuzzy Numbers, Fuzzy Sets and Systems, doi:10.1016/j.fss.2013.02.005.\cr
+#' Coroianu L., Gagolewski M., Grzegorzewski P. (2013b),
+#' Nearest Piecewise Linear Approximation of Fuzzy Numbers - general case, in preparation.\cr
 #' 
 #' @examples
 #' (A <- FuzzyNumber(-1,0,1,3,lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))
@@ -141,191 +145,191 @@ piecewiseLinearApproximation_Naive <- function(object, knot.n, knot.alpha)
 
 
 
-# internal function
-piecewiseLinearApproximation_ApproximateNearestEuclidean <- function(object, knot.n, knot.alpha, optim.control, verbose, ...)
-{
-   # Get the starting point ==> Naive approximator
-   a <- alphacut(object, knot.alpha);
-   
-   if (knot.n > 1)
-   {
-      start.left0  <- c(object@a1,     a[,1] , object@a2);
-      start.right0 <- c(object@a3, rev(a[,2]), object@a4);
-   } else
-   {
-      start.left0  <- c(object@a1, a[1], object@a2);
-      start.right0 <- c(object@a3, a[2], object@a4);
-   }
-   
-   alpha.lower  <- c(0,knot.alpha,1);
-   alpha.upper  <- c(1,rev(knot.alpha),0);
-   
-   # First we try the "disjoint sides" version
-   
-   # constraints
-   ui <- matrix(0, nrow=(knot.n+2)-1, ncol=(knot.n+2));
-   for (i in 1:((knot.n+2)-1))
-   {
-      ui[i,i]  <- -1;
-      ui[i,i+1] <- 1;
-   }
-   ci <- rep(0, (knot.n+2)-1);
-   
-   
-   ## ================== ApproximateNearestEuclidean: PASS 1a: "disjoint" lower optimizer
-   
-   if (verbose) cat(sprintf("Pass 1a,"));
-   
-   target.lower <- function(res, ...)
-   {
-      #                stopifnot(all(diff(res) >= 0)); # not needed, as we apply linear constraints below
-      
-      lower2 <- approxfun(alpha.lower, res, method="linear");  # no ties to specify - knot.alpha is unique
-      
-      integrateAlpha(object, "lower", 0, 1, # Squared L2 - lower
-                     transform=function(alpha, y) (y-lower2(alpha))^2, ...);
-   }
-   
-   # ensure that the starting point is not on the constraint region boundary
-   start <- start.right0;
-   diff_start <- diff(start)
-   diff_start[diff_start <= 0] <- start[length(start)]*1e-12;
-   start <- cumsum(c(start[1], diff_start));
-   
-   optres <- constrOptim(start, target.lower, ci=ci, ui=ui,
-                         method="Nelder-Mead", control=optim.control, ...);
-   if (optres$convergence == 1)
-      warning("Constrained Nelder-Mead algorithm have not converged [lower] (iteration limit reached)");
-   if (optres$convergence >  1)
-      warning(paste("Constrained Nelder-Mead algorithm have not converged [lower] (", optres$message, ")", sep=""));
-   res.left <- optres$par;
-   
-   
-   ## ================== ApproximateNearestEuclidean: PASS 1b: "disjoint" upper optimizer
-   
-   if (verbose) cat(sprintf("1b,"));
-   
-   target.upper <- function(res, ...)
-   {
-      #                stopifnot(all(diff(res) >= 0)); # not needed, as we apply linear constraints below
-      
-      upper2 <- approxfun(alpha.upper, res, method="linear");
-      
-      integrateAlpha(object, "upper", 0, 1, # Squared L2 - upper
-                     transform=function(alpha, y) (y-upper2(alpha))^2, ...);
-   }
-   
-   # ensure that the starting point is not on the constraint region boundary
-   start <- start.right0;
-   diff_start <- diff(start)
-   diff_start[diff_start <= 0] <- start[length(start)]*1e-12;
-   start <- cumsum(c(start[1], diff_start));
-   
-   optres <- constrOptim(start, target.upper, ci=ci, ui=ui,
-                         method="Nelder-Mead", control=optim.control, ...);
-   if (optres$convergence == 1)
-      warning("Constrained Nelder-Mead algorithm have not converged [upper] (iteration limit reached)");
-   if (optres$convergence >  1)
-      warning(paste("Constrained Nelder-Mead algorithm have not converged [upper] (", optres$message, ")", sep=""));
-   res.right <- optres$par;
-   
-   
-   ## ================== ApproximateNearestEuclidean: try lower+upper
-   
-   if (res.left[knot.n+2] <= res.right[1])
-   {
-      if (verbose) cat(sprintf("DONE.\n"));
-      
-      # the sides are disjoint => this is the "optimal" solution => FINISH
-      return(PiecewiseLinearFuzzyNumber(res.left[1], res.left[knot.n+2], res.right[1], res.right[knot.n+2],
-                                        knot.n=knot.n, knot.alpha=knot.alpha,
-                                        knot.left=res.left[-c(1,knot.n+2)], knot.right=res.right[-c(1,knot.n+2)]));
-   }
-   
-   
-   # All right, if we are here then we have to optimize on all knots altogether...
-   # print("DEBUG: not disjoint");
-   # Open quesion: can we assume that a2==a3 ??? (currently we do not)
-   
-   ## ================== ApproximateNearestEuclidean: PASS 2: use both sides together
-   
-   if (verbose) cat(sprintf("2,"));
-   
-   target <- function(res, ...)
-   {
-      #                stopifnot(all(diff(res) >= 0)); # not needed, as we apply linear constraints below
-      
-      lower2 <- approxfun(alpha.lower, res[1:(knot.n+2)], method="linear");  # no ties to specify - knot.alpha is unique
-      d2l <- integrateAlpha(object, "lower", 0, 1, # Squared L2 - lower
-                            transform=function(alpha, y) (y-lower2(alpha))^2, ...);
-      
-      upper2 <- approxfun(alpha.upper, res[-(1:(knot.n+2))], method="linear");  # no ties to specify - knot.alpha is unique
-      d2r <- integrateAlpha(object, "upper", 0, 1, # Squared L2 - upper
-                            transform=function(alpha, y) (y-upper2(alpha))^2, ...);
-      
-      return(d2l+d2r); # Squared L2
-   }
-   
-   # constraints
-   ui <- matrix(0, nrow=2*(knot.n+2)-1, ncol=2*(knot.n+2));
-   for (i in 1:(2*(knot.n+2)-1))
-   {
-      ui[i,i]  <- -1;
-      ui[i,i+1] <- 1;
-   }
-   ci <- rep(0, 2*(knot.n+2)-1);
-   
-   # ensure that the starting point is not on the constraint region boundary
-   start <- c(start.left0, start.right0);
-   diff_start <- diff(start)
-   diff_start[diff_start <= 0] <- start[length(start)]*1e-12;
-   start <- cumsum(c(start[1], diff_start));
-   
-   optres <- constrOptim(start, target, ci=ci, ui=ui,
-                         method="Nelder-Mead", control=optim.control, ...);
-   
-   if (optres$convergence == 1)
-      warning("Constrained Nelder-Mead algorithm have not converged (iteration limit reached)");
-   if (optres$convergence >  1)
-      warning(paste("Constrained Nelder-Mead algorithm have not converged (", optres$message, ")", sep=""));
-   res <- optres$par;
-   
-   
-   # All right, we're done!
-   if (verbose) cat(sprintf("DONE.\n"));
-   return(PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
-                                     knot.n=knot.n, knot.alpha=knot.alpha, knot.left=res[2:(knot.n+1)], knot.right=res[(knot.n+4):(2*knot.n+3)]));
-   
-   # ALTERNATIVE: The L-BFGS-B method (in reparametrized input space) - sometimes worse
-   #          # reparametrize: (a1, DELTA)
-   #          res <- c(res[1], diff(res));
-   #
-   #          target <- function(res, ...)
-   #             {
-   #                res <- cumsum(res);
-   #                distance(object,
-   #                   PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
-   #                      knot.n=knot.n, knot.alpha=knot.alpha,
-   #                      knot.left=res[2:(knot.n+1)], knot.right=res[(knot.n+4):(2*knot.n+3)]),
-   #                   type="EuclideanSquared", ...);
-   #             }
-   #
-   #          optres <- optim(res, target, ...,
-   #             method="L-BFGS-B", lower=c(2*object@a1, rep(0, 2*knot.n+3)), control=optim.control);
-   #
-   #          if (optres$convergence != 0)
-   #             warning(paste("L-BFGS-B algorithm have not converged (", optres$message, ")", sep=""));
-   #
-   #          optres <- cma_es(res, target, ...,               # another try: CMA-ES (global optimizer, slow as hell)
-   #             lower=c(2*object@a1, rep(0, 2*knot.n+3)));
-   #
-   # #          print(optres); # this may be printed out in verbose mode
-   #
-   #          res <- optres$par;
-   #
-   #          # undo reparametrization:
-   #          res <- cumsum(res);
-}
+# # internal function
+# piecewiseLinearApproximation_ApproximateNearestEuclidean <- function(object, knot.n, knot.alpha, optim.control, verbose, ...)
+# {
+#    # Get the starting point ==> Naive approximator
+#    a <- alphacut(object, knot.alpha);
+#    
+#    if (knot.n > 1)
+#    {
+#       start.left0  <- c(object@a1,     a[,1] , object@a2);
+#       start.right0 <- c(object@a3, rev(a[,2]), object@a4);
+#    } else
+#    {
+#       start.left0  <- c(object@a1, a[1], object@a2);
+#       start.right0 <- c(object@a3, a[2], object@a4);
+#    }
+#    
+#    alpha.lower  <- c(0,knot.alpha,1);
+#    alpha.upper  <- c(1,rev(knot.alpha),0);
+#    
+#    # First we try the "disjoint sides" version
+#    
+#    # constraints
+#    ui <- matrix(0, nrow=(knot.n+2)-1, ncol=(knot.n+2));
+#    for (i in 1:((knot.n+2)-1))
+#    {
+#       ui[i,i]  <- -1;
+#       ui[i,i+1] <- 1;
+#    }
+#    ci <- rep(0, (knot.n+2)-1);
+#    
+#    
+#    ## ================== ApproximateNearestEuclidean: PASS 1a: "disjoint" lower optimizer
+#    
+#    if (verbose) cat(sprintf("Pass 1a,"));
+#    
+#    target.lower <- function(res, ...)
+#    {
+#       #                stopifnot(all(diff(res) >= 0)); # not needed, as we apply linear constraints below
+#       
+#       lower2 <- approxfun(alpha.lower, res, method="linear");  # no ties to specify - knot.alpha is unique
+#       
+#       integrateAlpha(object, "lower", 0, 1, # Squared L2 - lower
+#                      transform=function(alpha, y) (y-lower2(alpha))^2, ...);
+#    }
+#    
+#    # ensure that the starting point is not on the constraint region boundary
+#    start <- start.right0;
+#    diff_start <- diff(start)
+#    diff_start[diff_start <= 0] <- start[length(start)]*1e-12;
+#    start <- cumsum(c(start[1], diff_start));
+#    
+#    optres <- constrOptim(start, target.lower, ci=ci, ui=ui,
+#                          method="Nelder-Mead", control=optim.control, ...);
+#    if (optres$convergence == 1)
+#       warning("Constrained Nelder-Mead algorithm have not converged [lower] (iteration limit reached)");
+#    if (optres$convergence >  1)
+#       warning(paste("Constrained Nelder-Mead algorithm have not converged [lower] (", optres$message, ")", sep=""));
+#    res.left <- optres$par;
+#    
+#    
+#    ## ================== ApproximateNearestEuclidean: PASS 1b: "disjoint" upper optimizer
+#    
+#    if (verbose) cat(sprintf("1b,"));
+#    
+#    target.upper <- function(res, ...)
+#    {
+#       #                stopifnot(all(diff(res) >= 0)); # not needed, as we apply linear constraints below
+#       
+#       upper2 <- approxfun(alpha.upper, res, method="linear");
+#       
+#       integrateAlpha(object, "upper", 0, 1, # Squared L2 - upper
+#                      transform=function(alpha, y) (y-upper2(alpha))^2, ...);
+#    }
+#    
+#    # ensure that the starting point is not on the constraint region boundary
+#    start <- start.right0;
+#    diff_start <- diff(start)
+#    diff_start[diff_start <= 0] <- start[length(start)]*1e-12;
+#    start <- cumsum(c(start[1], diff_start));
+#    
+#    optres <- constrOptim(start, target.upper, ci=ci, ui=ui,
+#                          method="Nelder-Mead", control=optim.control, ...);
+#    if (optres$convergence == 1)
+#       warning("Constrained Nelder-Mead algorithm have not converged [upper] (iteration limit reached)");
+#    if (optres$convergence >  1)
+#       warning(paste("Constrained Nelder-Mead algorithm have not converged [upper] (", optres$message, ")", sep=""));
+#    res.right <- optres$par;
+#    
+#    
+#    ## ================== ApproximateNearestEuclidean: try lower+upper
+#    
+#    if (res.left[knot.n+2] <= res.right[1])
+#    {
+#       if (verbose) cat(sprintf("DONE.\n"));
+#       
+#       # the sides are disjoint => this is the "optimal" solution => FINISH
+#       return(PiecewiseLinearFuzzyNumber(res.left[1], res.left[knot.n+2], res.right[1], res.right[knot.n+2],
+#                                         knot.n=knot.n, knot.alpha=knot.alpha,
+#                                         knot.left=res.left[-c(1,knot.n+2)], knot.right=res.right[-c(1,knot.n+2)]));
+#    }
+#    
+#    
+#    # All right, if we are here then we have to optimize on all knots altogether...
+#    # print("DEBUG: not disjoint");
+#    # Open quesion: can we assume that a2==a3 ??? (currently we do not)
+#    
+#    ## ================== ApproximateNearestEuclidean: PASS 2: use both sides together
+#    
+#    if (verbose) cat(sprintf("2,"));
+#    
+#    target <- function(res, ...)
+#    {
+#       #                stopifnot(all(diff(res) >= 0)); # not needed, as we apply linear constraints below
+#       
+#       lower2 <- approxfun(alpha.lower, res[1:(knot.n+2)], method="linear");  # no ties to specify - knot.alpha is unique
+#       d2l <- integrateAlpha(object, "lower", 0, 1, # Squared L2 - lower
+#                             transform=function(alpha, y) (y-lower2(alpha))^2, ...);
+#       
+#       upper2 <- approxfun(alpha.upper, res[-(1:(knot.n+2))], method="linear");  # no ties to specify - knot.alpha is unique
+#       d2r <- integrateAlpha(object, "upper", 0, 1, # Squared L2 - upper
+#                             transform=function(alpha, y) (y-upper2(alpha))^2, ...);
+#       
+#       return(d2l+d2r); # Squared L2
+#    }
+#    
+#    # constraints
+#    ui <- matrix(0, nrow=2*(knot.n+2)-1, ncol=2*(knot.n+2));
+#    for (i in 1:(2*(knot.n+2)-1))
+#    {
+#       ui[i,i]  <- -1;
+#       ui[i,i+1] <- 1;
+#    }
+#    ci <- rep(0, 2*(knot.n+2)-1);
+#    
+#    # ensure that the starting point is not on the constraint region boundary
+#    start <- c(start.left0, start.right0);
+#    diff_start <- diff(start)
+#    diff_start[diff_start <= 0] <- start[length(start)]*1e-12;
+#    start <- cumsum(c(start[1], diff_start));
+#    
+#    optres <- constrOptim(start, target, ci=ci, ui=ui,
+#                          method="Nelder-Mead", control=optim.control, ...);
+#    
+#    if (optres$convergence == 1)
+#       warning("Constrained Nelder-Mead algorithm have not converged (iteration limit reached)");
+#    if (optres$convergence >  1)
+#       warning(paste("Constrained Nelder-Mead algorithm have not converged (", optres$message, ")", sep=""));
+#    res <- optres$par;
+#    
+#    
+#    # All right, we're done!
+#    if (verbose) cat(sprintf("DONE.\n"));
+#    return(PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
+#                                      knot.n=knot.n, knot.alpha=knot.alpha, knot.left=res[2:(knot.n+1)], knot.right=res[(knot.n+4):(2*knot.n+3)]));
+#    
+#    # ALTERNATIVE: The L-BFGS-B method (in reparametrized input space) - sometimes worse
+#    #          # reparametrize: (a1, DELTA)
+#    #          res <- c(res[1], diff(res));
+#    #
+#    #          target <- function(res, ...)
+#    #             {
+#    #                res <- cumsum(res);
+#    #                distance(object,
+#    #                   PiecewiseLinearFuzzyNumber(res[1], res[knot.n+2], res[knot.n+3], res[2*knot.n+4],
+#    #                      knot.n=knot.n, knot.alpha=knot.alpha,
+#    #                      knot.left=res[2:(knot.n+1)], knot.right=res[(knot.n+4):(2*knot.n+3)]),
+#    #                   type="EuclideanSquared", ...);
+#    #             }
+#    #
+#    #          optres <- optim(res, target, ...,
+#    #             method="L-BFGS-B", lower=c(2*object@a1, rep(0, 2*knot.n+3)), control=optim.control);
+#    #
+#    #          if (optres$convergence != 0)
+#    #             warning(paste("L-BFGS-B algorithm have not converged (", optres$message, ")", sep=""));
+#    #
+#    #          optres <- cma_es(res, target, ...,               # another try: CMA-ES (global optimizer, slow as hell)
+#    #             lower=c(2*object@a1, rep(0, 2*knot.n+3)));
+#    #
+#    # #          print(optres); # this may be printed out in verbose mode
+#    #
+#    #          res <- optres$par;
+#    #
+#    #          # undo reparametrization:
+#    #          res <- cumsum(res);
+# }
 
 
 # internal function

@@ -22,8 +22,6 @@
   and can be called on objects of type numeric, as well as on
   various FNs
 
-* ...
-
 * piecewiseLinearApproximation() and as.PiecewiseLinearFuzzyNumber()
   argument `knot.alpha` now defaults to equally distributed knots
   (via given `knot.n`). If `knot.n` is missing, then it is guessed

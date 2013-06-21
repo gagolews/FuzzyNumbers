@@ -17,13 +17,17 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @title Tools to Deal with Fuzzy Numbers in R
+#' 
+#' @description
 #' \pkg{FuzzyNumbers} is an open source (LGPL 3) package for R.
-#' It provides S4 classes and methods to deal with Fuzzy Numbers
+#' It provides S4 classes and methods to deal with Fuzzy Numbers.
 #' The package may be used by the practitioners as well as by the researchers
 #' in fuzzy numbers theory (e.g. for testing new algorithms,
 #' generating numerical examples, preparing figures).
 #'
-#' Fuzzy set theory lets us effectively and quite intuitively represent
+#' @details
+#' Fuzzy set theory lets us quite intuitively represent
 #' imprecise or vague information. Fuzzy numbers, which form a particular
 #' subclass of fuzzy sets of the real line, play a significant role
 #' in many important theoretical and/or practical considerations.
@@ -49,8 +53,8 @@
 #'      and piecewise linear FNs (see e.g. \code{\link{expectedValue}},
 #'      \code{\link{value}}, \code{\link{trapezoidalApproximation}},
 #'      \code{\link{piecewiseLinearApproximation}}),
-#'    \item Visualization of FNs (see \code{\link{plot}}),
-#'    \item Basic operations on FNs,
+#'    \item Visualization of FNs (see \code{\link{plot}}, \code{\link{as.character.FuzzyNumber}}),
+#'    \item Basic operations on FNs (see e.g. \code{\link{fapply}}),
 #'    \item Aggregation of FNs [TO DO],
 #'    \item Ranking of FNs [TO DO],
 #'    \item Random FN generation [TO DO],
@@ -75,7 +79,6 @@
 #'
 #' @name FuzzyNumbers-package
 #' @docType package
-#' @title Tools to deal with fuzzy numbers in R
 #' @author Marek Gagolewski \email{gagolews@@rexamine.com}, with contributions from Jan Caha
 #' @references
 #' \pkg{FuzzyNumbers} Homepage, \url{http://www.rexamine.com/resources/fuzzynumbers/}.\cr
