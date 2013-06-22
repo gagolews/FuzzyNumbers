@@ -41,7 +41,7 @@
 #' of fuzzy numbers like trapezoidal, piecewise linear, or ``parametric'' FNs
 #' (see \code{\linkS4class{TrapezoidalFuzzyNumber}}
 #' \code{\linkS4class{PiecewiseLinearFuzzyNumber}},
-#' \code{\linkS4class{PowerFuzzyNumber}},
+#' \code{\linkS4class{PowerFuzzyNumber}}, and *EXPERIMENTAL*
 #' \code{\linkS4class{DiscontinuousFuzzyNumber}})
 #'
 #' The package aims to provide the following functionality:
@@ -55,9 +55,9 @@
 #'      \code{\link{piecewiseLinearApproximation}}),
 #'    \item Visualization of FNs (see \code{\link{plot}}, \code{\link{as.character.FuzzyNumber}}),
 #'    \item Basic operations on FNs (see e.g. \code{\link{fapply}}),
-#'    \item Aggregation of FNs [TO DO],
-#'    \item Ranking of FNs [TO DO],
-#'    \item Random FN generation [TO DO],
+#'    \item Aggregation of FNs **TO DO**,
+#'    \item Ranking of FNs **TO DO**,
+#'    \item Random FN generation **TO DO**,
 #'    \item \dots
 #' }
 #'
@@ -67,7 +67,9 @@
 #' For a complete list of classes and methods
 #' call \code{help(package="FuzzyNumbers")}.
 #' Moreover, you will surely be interested in a step-by-step guide to the
-#' package usage and features which is available at
+#' package usage and features which is available by calling
+#' \code{vignette('FuzzyNumbers-Tutorial', 'FuzzyNumbers')}
+#' or at
 #' \url{http://github.com/Rexamine/FuzzyNumbers/raw/master/inst/doc/FuzzyNumbers-Tutorial.pdf}.
 #' \cr\cr
 #'
@@ -79,7 +81,8 @@
 #'
 #' @name FuzzyNumbers-package
 #' @docType package
-#' @author Marek Gagolewski \email{gagolews@@rexamine.com}, with contributions from Jan Caha
+#' @author Marek Gagolewski \email{gagolews@@rexamine.com},\cr
+#'  with contributions from Jan Caha
 #' @references
 #' \pkg{FuzzyNumbers} Homepage, \url{http://www.rexamine.com/resources/fuzzynumbers/}.\cr
 #' Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
@@ -95,7 +98,7 @@
 #' Dubois D., Prade H. (1978), Operations on fuzzy numbers, Int. J. Syst. Sci. 9, pp. 613-626.\cr
 #' Dubois D., Prade H. (1987), The mean value of a fuzzy number, Fuzzy Sets and Systems 24, pp. 279-300.\cr
 #' Gagolewski M. (2013), A Guide to the \code{FuzzyNumbers} Package for R,
-#' \url{https://github.com/Rexamine/FuzzyNumbers/blob/master/inst/doc/FuzzyNumbers-Tutorial.pdf?raw=true}.\cr
+#' \url{http://github.com/Rexamine/FuzzyNumbers/raw/master/inst/doc/FuzzyNumbers-Tutorial.pdf}.\cr
 #' Grzegorzewski P. (2010), Algorithms for trapezoidal approximations of fuzzy numbers
 #' preserving the expected interval, In: Bouchon-Meunier B. et al (Eds.),
 #' Foundations of Reasoning Under Uncertainty, Springer, pp. 85-98.\cr

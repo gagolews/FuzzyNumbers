@@ -45,7 +45,12 @@
 * The FuzzyNumbers Tutorial has been properly included
   as the package's vignette
 
-* Man pages update & cleanup
+* DiscontinuousFuzzyNumber class has been marked as **EXPERIMENTAL** 
+  in the manual
+
+* Man pages extensively updated
+
+* FuzzyNumbers devel repo moved to GitHub
 
 ***************************************************************************
 
@@ -65,16 +70,16 @@
    * does not check for the number of formal arguments,
       but just uses the first from the list
 
-* suggests `testthat`
+* Suggests `testthat`
 
-* each object has been documented
+* Each object has been documented
 
-* first CRAN release
+* First CRAN release
 
 ***************************************************************************
 
 0.1-1 /2012-07-01/
 
-* initial release
+* Initial release
 
 ***************************************************************************

@@ -18,7 +18,7 @@
 
 
 #' @title
-#' S4 Class Representing a Fuzzy Number with Discontinuous Side Functions or Alpha-Cut Bounds
+#' **EXPERIMENTAL** S4 Class Representing a Fuzzy Number with Discontinuous Side Functions or Alpha-Cut Bounds
 #'
 #' @description
 #' Discontinuity information increase the precision of some numerical

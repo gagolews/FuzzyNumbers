@@ -7,9 +7,9 @@ test_that("FuzzyNumber A-side functions", {
    )
    
    expect_that(A, is_a("FuzzyNumber"))
-   expect_that(supp(A), equals(c(1,7)))
-   expect_that(core(A), equals(c(2,4)))
-   expect_that(evaluate(A, c(-1,1,2,3,4,7,10)), equals(c(0,0,1,1,1,0,0)))
+   expect_that(supp(A), is_equivalent_to(c(1,7)))
+   expect_that(core(A), is_equivalent_to(c(2,4)))
+   expect_that(evaluate(A, c(-1,1,2,3,4,7,10)), is_equivalent_to(c(0,0,1,1,1,0,0)))
 })
 
 test_that("FuzzyNumber B-alpha cuts", {
@@ -19,17 +19,17 @@ test_that("FuzzyNumber B-alpha cuts", {
    )
    
    expect_that(B, is_a("FuzzyNumber"))
-   expect_that(supp(B), equals(c(-1,9)))
-   expect_that(core(B), equals(c(3,3)))
-   expect_that(alphacut(B, c(0,1)), equals(matrix(c(-1,3,9,3), nrow=2)))
+   expect_that(supp(B), is_equivalent_to(c(-1,9)))
+   expect_that(core(B), is_equivalent_to(c(3,3)))
+   expect_that(alphacut(B, c(0,1)), is_equivalent_to(matrix(c(-1,3,9,3), nrow=2)))
 })
   
 test_that("FuzzyNumber C-shadowed set", {
    C <- FuzzyNumber(-5,-1,1,5) # shadowed set
    
    expect_that(C, is_a("FuzzyNumber"))
-   expect_that(supp(C), equals(c(-5,5)))
-   expect_that(core(C), equals(c(-1,1)))
+   expect_that(supp(C), is_equivalent_to(c(-5,5)))
+   expect_that(core(C), is_equivalent_to(c(-1,1)))
 })
 
 
