@@ -26,7 +26,7 @@
 #' The function may be used to create side generating functions from
 #' alpha-cut generators and inversely.
 #' 
-#' @details#' 
+#' @details
 #' The function is a wrapper to \link{splinefun} and \link{approxfun}.
 #' Thus, interpolation is used.
 #' 

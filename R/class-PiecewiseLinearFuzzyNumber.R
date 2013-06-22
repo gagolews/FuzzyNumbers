@@ -17,31 +17,52 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
+#' @title
 #' S4 Class Representing a Piecewise Linear Fuzzy Number
 #'
+#' @description
 #' A piecewise linear fuzzy number (PLFN) has side functions
 #' and alpha-cut bounds that linearly interpolate a given set of points
 #' (at fixed alpha-cuts).
+#' 
+#' @details
+#' If \code{knot.n} is equal to 0 or all left and right knots lie on common lines,
+#' then a Piecewise Linear Fuzzy Number reduces to a 
+#' \linkS4class{TrapezoidalFuzzyNumber}.
+#' Note that, however, the
+#' \code{\linkS4class{TrapezoidalFuzzyNumber}} does not inherit from
+#' \code{\linkS4class{PiecewiseLinearFuzzyNumber}} for efficiency reasons.
+#' To convert the former to the latter, call \code{\link{as.PiecewiseLinearFuzzyNumber}}.
 #'
 #' @section Slots:
 #'  \describe{
+#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4}, 
+#'    \code{lower}, \code{upper}, \code{left}, \code{right}:}{
+#'    Inherited from the \code{\linkS4class{FuzzyNumber}} class.}
 #'     \item{\code{knot.n}:}{number of knots, a single integer value,
 #'     0 for a trapezoidal fuzzy number}
 #'     \item{\code{knot.alpha}:}{alpha-cuts, increasingly sorted vector of length \code{knot.n} with elements in [0,1]}
-#'     \item{\code{knot.left}:}{nondecreasingly sorted vector of length \code{knot.n}; defines left alpha-cut bounds at knots}
-#'     \item{\code{knot.right}:}{nondecreasingly sorted vector of length \code{knot.n}; defines right alpha-cut bounds at knots}
+#'     \item{\code{knot.left}:}{nondecreasingly sorted vector of length \code{knot.n}; 
+#'     defines left alpha-cut bounds at knots}
+#'     \item{\code{knot.right}:}{nondecreasingly sorted vector of length \code{knot.n}; 
+#'     defines right alpha-cut bounds at knots}
 #'  }
 #'  
 #' @section Extends:
-#' Class \code{\linkS4class{FuzzyNumber}}, directly.
+#' Class \code{\linkS4class{FuzzyNumber}}, directly. 
+#'
+#' @seealso \code{\link{PiecewiseLinearFuzzyNumber}} for a convenient constructor,
+#' \code{\link{as.PiecewiseLinearFuzzyNumber}} for conversion of objects to this class,
+#' and \code{\link{piecewiseLinearApproximation}} for approximation routines.
 #' 
 #' @exportClass PiecewiseLinearFuzzyNumber
 #' @name PiecewiseLinearFuzzyNumber-class
-#' @seealso \code{\link{PiecewiseLinearFuzzyNumber}} for a convenient constructor
-#' @family PiecewiseLinearFuzzyNumber-method
+#' @rdname PiecewiseLinearFuzzyNumber-class
 #' @docType class
+#' @family PiecewiseLinearFuzzyNumber-method
 #' @examples
 #' showClass("PiecewiseLinearFuzzyNumber")
+#' showMethods(classes="PiecewiseLinearFuzzyNumber")
 setClass(
    Class="PiecewiseLinearFuzzyNumber",
    representation(
@@ -120,11 +141,14 @@ setMethod(
 )
 
 
+#' @title
 #' Creates a Piecewise Linear Fuzzy Number
 #'
+#' @description
 #' For convenience, objects of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
 #' may be created with this function.
 #' 
+#' @details
 #' If \code{a1}, \code{a2}, \code{a3}, and \code{a4} are missing,
 #' then \code{knot.left} and \code{knot.right} may be of length \code{knot.n+2}.
 #' 
@@ -176,100 +200,3 @@ PiecewiseLinearFuzzyNumber <- function(a1, a2, a3, a4,
 
 
 
-
-
-#' Coverts an Object to a Piecewise Linear Fuzzy Number
-#' 
-#' This method is only for exact conversion.
-#' For other cases (e.g. general FNs), use
-#' \code{\link{piecewiseLinearApproximation}}.
-#' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "TrapezoidalFuzzyNumber")}}{}
-#'      \item{\code{signature(object = "numeric")}}{}
-#'      \item{\code{signature(object = "PiecewiseLinearFuzzyNumber")}}{
-#'      in cases when conversion will not be exact,
-#'      gives error and suggests using \code{\link{piecewiseLinearApproximation}}}
-#'      \item{\code{signature(object = "FuzzyNumber")}}{gives error and suggests using \code{\link{piecewiseLinearApproximation}}}
-#' }
-#'
-#' @param object a trapezoidal fuzzy number
-#' @param knot.n the number of knots
-#' @param knot.alpha \code{knot.n} alpha-cut values at knots,
-#' defaults to uniformly distributed knots
-#' @return Object of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
-#' 
-#' 
-#' @name as.PiecewiseLinearFuzzyNumber
-#' @docType methods
-#' @rdname as.PiecewiseLinearFuzzyNumber
-#' @family TrapezoidalFuzzyNumber-method
-#' @family PiecewiseLinearFuzzyNumber-method
-#' @family FuzzyNumber-method
-#' @aliases as.PiecewiseLinearFuzzyNumber,TrapezoidalFuzzyNumber-method
-#'          as.PiecewiseLinearFuzzyNumber,numeric-method
-#'          as.PiecewiseLinearFuzzyNumber,FuzzyNumber-method
-#'          as.PiecewiseLinearFuzzyNumber,TrapezoidalFuzzyNumber-method
-#' @exportMethod as.PiecewiseLinearFuzzyNumber
-setGeneric("as.PiecewiseLinearFuzzyNumber",
-           function(object, ...) standardGeneric("as.PiecewiseLinearFuzzyNumber"))
-
-
-
-
-setMethod(
-   f="as.PiecewiseLinearFuzzyNumber",
-   signature(object="TrapezoidalFuzzyNumber"),
-   definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
-   {
-      stopifnot(length(knot.n) == 1, knot.n >= 0)
-      stopifnot(knot.n == length(knot.alpha)) 
-
-      a <- alphacut(object, c(0, knot.alpha, 1))
-      PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]), knot.alpha=knot.alpha)
-   })
-
-
-
-setMethod(
-   f="as.PiecewiseLinearFuzzyNumber",
-   signature(object="numeric"),
-   definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
-   {
-      stopifnot(length(object) == 1, is.finite(object))
-      stopifnot(length(knot.n) == 1, knot.n >= 0)
-      stopifnot(knot.n == length(knot.alpha)) 
-      
-      PiecewiseLinearFuzzyNumber(a1=object, a2=object, a3=object, a4=object,
-                                 knot.n=knot.n, knot.alpha=knot.alpha, 
-                                 knot.left=rep(object, knot.n), 
-                                 knot.right=rep(object, knot.n))
-   })
-
-
-
-setMethod(
-   f="as.PiecewiseLinearFuzzyNumber",
-   signature(object="FuzzyNumber"),
-   definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
-   {
-      stop("as.PiecewiseLinearFuzzyNumber() is only for exact conversion. Use piecewiseLinearApproximation() instead.")
-   })
-
-
-
-setMethod(
-   f="as.PiecewiseLinearFuzzyNumber",
-   signature(object="PiecewiseLinearFuzzyNumber"),
-   definition=function(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
-   {
-      stopifnot(length(knot.n) == 1, knot.n >= 0)
-      stopifnot(knot.n == length(knot.alpha))   
-      
-      if (length(setdiff(object@knot.alpha, knot.alpha)) != 0)
-         stop("as.PiecewiseLinearFuzzyNumber() is only for exact conversion. Use piecewiseLinearApproximation() instead.")
-      
-      a <- alphacut(object, c(0, knot.alpha, 1))
-      PiecewiseLinearFuzzyNumber(knot.left=a[,1], knot.right=rev(a[,2]))
-   })

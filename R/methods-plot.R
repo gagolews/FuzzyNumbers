@@ -45,7 +45,7 @@
 #' @param lty see \code{\link{plot.default}}
 #' @param pch see \code{\link{plot.default}}
 #' @param lwd see \code{\link{plot.default}}
-#' @param shadowintensity numeric; for shadowed sets;
+#' @param shadowdensity numeric; for shadowed sets;
 #' @param shadowangle numeric; for shadowed sets;
 #' @param shadowcol color specification, see \code{\link{plot.default}}; for shadowed sets;
 #' @param shadowborder numeric; for shadowed sets;
@@ -91,7 +91,7 @@
 #' n=101, draw.membership.function=TRUE, draw.alphacuts=!draw.membership.function,
 #' xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL,
 #' type="l", col=1, lty=1, pch=1, lwd=1,
-#' add=FALSE, ...) # currently bases on alpha-cut bounds only
+#' add=FALSE, ...)
 #' 
 #' @examples
 #' plot(FuzzyNumber(0,1,2,3), col="gray")

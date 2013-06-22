@@ -22,11 +22,14 @@
 #'
 #' @description
 #' Discontinuity information increase the precision of some numerical
-#' integration-based algorithms, e.g. \code{\link{piecewiseLinearApproximation}}.
+#' integration-based algorithms, e.g. of \code{\link{piecewiseLinearApproximation}}.
 #' It also allows for making more valid fuzzy number plots.
 #' 
 #' @section Slots:
 #'  \describe{
+#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4}, 
+#'    \code{lower}, \code{upper}, \code{left}, \code{right}:}{
+#'    Inherited from the \code{\linkS4class{FuzzyNumber}} class.}
 #'    \item{\code{discontinuities.left}:}{nondecreasingly sorted  numeric vector
 #'     with elements in (0,1); discontinuity points for the left side generating function}
 #'    \item{\code{discontinuities.right}:}{nondecreasingly sorted numeric vector
@@ -40,13 +43,15 @@
 #' @section Extends:
 #' Class \code{\linkS4class{FuzzyNumber}}, directly. 
 #'
-#' @family DiscontinuousFuzzyNumber-method
 #' @exportClass DiscontinuousFuzzyNumber
 #' @name DiscontinuousFuzzyNumber-class
+#' @rdname DiscontinuousFuzzyNumber-class
 #' @seealso \code{\link{DiscontinuousFuzzyNumber}} for a convenient constructor
 #' @docType class
+#' @family DiscontinuousFuzzyNumber-method
 #' @examples
 #' showClass("DiscontinuousFuzzyNumber")
+#' showMethods(classes="DiscontinuousFuzzyNumber")
 setClass(
    Class="DiscontinuousFuzzyNumber",
    representation(
@@ -90,8 +95,10 @@ setClass(
 )
 
 
-#' Creates a fuzzy number with possibly discontinuous side functions or alpha-cut bounds
+#' @title
+#' Creates a Fuzzy Number with Possibly Discontinuous Side Functions or Alpha-Cut Bounds
 #'
+#' @description
 #' For convenience, objects of class \code{\linkS4class{DiscontinuousFuzzyNumber}}
 #' may be created with this function.
 #'
@@ -120,12 +127,11 @@ DiscontinuousFuzzyNumber <- function(a1, a2, a3, a4,
    discontinuities.lower=numeric(0),
    discontinuities.upper=numeric(0))
 {
-   .Object <- new("DiscontinuousFuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
+   new("DiscontinuousFuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
        lower=lower, upper=upper, left=left, right=right,
        discontinuities.left =discontinuities.left,
        discontinuities.right=discontinuities.right,
        discontinuities.lower=discontinuities.lower,
        discontinuities.upper=discontinuities.upper)
-   .Object
 }
 

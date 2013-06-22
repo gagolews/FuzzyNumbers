@@ -22,8 +22,8 @@
 #' Calculate the Support of a Fuzzy Number
 #'
 #' @description
-#' We have\eqn{supp(A) := [a1,a4]}.
-#' This gives the values a fuzzy number possibly takes.
+#' We have \eqn{\mathrm{supp}(A) := [a1,a4]}{supp(A) := [a1,a4]}.
+#' This gives the values that a fuzzy number possibly may represent.
 #' 
 #' @param object a fuzzy number
 #' @return numeric vector of length 2

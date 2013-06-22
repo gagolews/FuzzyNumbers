@@ -35,6 +35,11 @@
 #' However, if you operate on a large number of knots,
 #' the results should be satisfactory.
 #' 
+#' @param e1 a fuzzy number or single numeric value
+#' @param e2 a fuzzy number or single numeric value
+#' @return a fuzzy number of the class \linkS4class{PiecewiseLinearFuzzyNumber}
+#' of a \linkS4class{TrapezoidalFuzzyNumber}
+#' 
 #' @details
 #' Thanks to Jan Caha for suggestions on PLFN operations.
 #'
@@ -60,6 +65,8 @@
 #' \S4method{-}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2) 
 #' 
 #' \S4method{-}{PiecewiseLinearFuzzyNumber,FuzzyNumber}(e1, e2) # calls as.PiecewiseLinearFuzzyNumber()
+#' 
+#' \S4method{-}{FuzzyNumber,ANY}(e1, e2) # -e1
 #' 
 #' \S4method{*}{numeric,FuzzyNumber}(e1, e2) # e2 * e1
 #' 
@@ -94,7 +101,7 @@
 #' @aliases *,TrapezoidalFuzzyNumber,numeric-method
 #' @aliases +,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
 #' @aliases -,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
-#' @aliases -,FuzzyNumber-method
+#' @aliases -,FuzzyNumber,ANY-method
 #' @aliases +,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
 #' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
 #' @aliases *,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method

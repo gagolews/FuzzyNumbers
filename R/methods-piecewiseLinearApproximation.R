@@ -41,11 +41,11 @@
 #' 
 #' @usage
 #' \S4method{piecewiseLinearApproximation}{FuzzyNumber}(object,
-#' method=c("NearestEuclidean", "Naive"),
+#' method=c("NearestEuclidean", "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
 #' knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
 #' ..., verbose=FALSE)
 #' 
-#' @object a fuzzy number
+#' @param object a fuzzy number
 #' @param method character; one of: \code{"NearestEuclidean"} (default), or \code{"Naive"}
 #' @param knot.n desired number of knots (if missing, then calculated from given
 #' \code{knot.alpha})

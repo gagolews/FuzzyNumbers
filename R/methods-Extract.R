@@ -64,7 +64,7 @@ invisible(NULL)
 setMethod(
    f="[",
    signature(x="FuzzyNumber", i="character"),
-   definition=function(x, i, j, drop)
+   definition=function(x, i)
    {
       switch(i, 
              "a1"    = x@a1,
@@ -84,7 +84,7 @@ setMethod(
 setMethod(
    f="[",
    signature(x="PiecewiseLinearFuzzyNumber", i="character"),
-   definition=function(x, i, j, drop)
+   definition=function(x, i)
    {
       switch(i, 
              "a1"    = x@a1,
@@ -123,7 +123,7 @@ setMethod(
 setMethod(
    f="[",
    signature(x="PowerFuzzyNumber", i="character"),
-   definition=function(x, i, j, drop)
+   definition=function(x, i)
    {
       switch(i, 
              "a1"    = x@a1,
@@ -147,7 +147,7 @@ setMethod(
 setMethod(
    f="[",
    signature(x="DiscontinuousFuzzyNumber", i="character"),
-   definition=function(x, i, j, drop)
+   definition=function(x, i)
    {
       switch(i, 
              "a1"    = x@a1,

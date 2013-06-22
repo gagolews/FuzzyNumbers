@@ -41,7 +41,7 @@
 #' @return a \linkS4class{PiecewiseLinearFuzzyNumber}
 #' 
 #' @usage
-#' \S4method{fapply}{FuzzyNumber,function}(object, fun, ...)
+#' \S4method{fapply}{PiecewiseLinearFuzzyNumber,function}(object, fun, ...)
 #' 
 #' @docType methods
 #' @name fapply

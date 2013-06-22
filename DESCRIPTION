@@ -1,5 +1,5 @@
 Package: FuzzyNumbers
-Title: Tools to deal with fuzzy numbers in R
+Title: Tools to deal with fuzzy numbers
 Type: Package
 Authors@R: c(
     person("Marek", "Gagolewski", role = c("aut", "cre"),
@@ -27,11 +27,11 @@ Suggests:
     testthat
 Collate:
     'FuzzyNumbers-package.R'
-    'FuzzyNumber.R'
-    'TrapezoidalFuzzyNumber.R'
-    'PiecewiseLinearFuzzyNumber.R'
-    'PowerFuzzyNumber.R'
-    'DiscontinuousFuzzyNumber.R'
+    'class-FuzzyNumber.R'
+    'class-DiscontinuousFuzzyNumber.R'
+    'class-TrapezoidalFuzzyNumber.R'
+    'class-PiecewiseLinearFuzzyNumber.R'
+    'class-PowerFuzzyNumber.R'
     'methods-core.R'
     'methods-supp.R'
     'methods-value.R'
@@ -55,3 +55,7 @@ Collate:
     'methods-distance.R'
     'methods-integrate.R'
     'methods-Extract.R'
+    'methods-as.PiecewiseLinearFuzzyNumber.R'
+    'methods-as.FuzzyNumber.R'
+    'methods-as.TrapezoidalFuzzyNumber.R'
+    'methods-as.PowerFuzzyNumber.R'

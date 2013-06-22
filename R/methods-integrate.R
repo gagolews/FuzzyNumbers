@@ -62,7 +62,7 @@ integrate_discont_val <- function(f, from, to, discontinuities=numeric(0), ...)
    m <- length(discontinuities)
 
    if (m == 0)
-      return(integrate(f=f, lower=from, upper=to, ..., rel.tol=rel.tol)$value)
+      return(integrate(f=f, lower=from, upper=to, ...)$value)
 
    if (is.unsorted(discontinuities))
       stop("`discontinuities' should be ordered nondecreasingly")
@@ -72,8 +72,7 @@ integrate_discont_val <- function(f, from, to, discontinuities=numeric(0), ...)
 
    for (i in 1:(m+1))
    {
-      v[i] <- integrate(f=f, lower=x[i]+rel.tol, upper=x[i+1]-rel.tol, ...,
-         rel.tol=rel.tol*(m+1))$value
+      v[i] <- integrate(f=f, lower=x[i]+.Machine$double.eps^0.5, upper=x[i+1]-.Machine$double.eps^0.5, ...)$value
    }
 
    return(sum(v))

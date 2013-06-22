@@ -45,16 +45,13 @@
 #' satisfying \eqn{lower(\alpha)=\inf\{x: \mu(x)\ge\alpha\}}{lower(\alpha)=inf(x: \mu(x)\ge\alpha)}
 #' and  \eqn{upper(\alpha)=\sup\{x: \mu(x)\ge\alpha\}}{upper(\alpha)=sup(x: \mu(x)\ge\alpha)}.
 #' 
+#' 
+#' @details
 #' Please note that many algorithms that deal with fuzzy numbers often use
 #' \eqn{\alpha}-cuts rather than side functions.
 #' 
-#' @details
 #' Note that the \pkg{FuzzyNumbers} package also deals with particular types
-#' of fuzzy numbers like trapezoidal, piecewise linear, or ``parametric'' FNs
-#' (see \code{\link{TrapezoidalFuzzyNumber-class}}
-#' \code{\link{PiecewiseLinearFuzzyNumber-class}},
-#' \code{\link{PowerFuzzyNumber-class}},
-#' \code{\link{DiscontinuousFuzzyNumber-class}})
+#' of fuzzy numbers like trapezoidal, piecewise linear, or ``parametric'' FNs.
 #' 
 #' @section Slots:
 #'  \describe{
@@ -68,18 +65,21 @@
 #'    \item{\code{right}:}{A nonincreasing function [0,1]->[1,0] that gives the right side function.}
 #'  }
 #'  
-#' @section Child classes:
+#' @section Child/sub classes:
 #' \code{\linkS4class{TrapezoidalFuzzyNumber}},
 #' \code{\linkS4class{PiecewiseLinearFuzzyNumber}},
-#' \code{\linkS4class{PowerFuzzyNumber}},
+#' \code{\linkS4class{PowerFuzzyNumber}}, and
 #' \code{\linkS4class{DiscontinuousFuzzyNumber}}
+#' 
+#' @seealso \code{\link{FuzzyNumber}} for a convenient constructor, and
+#' \code{\link{as.FuzzyNumber}} for conversion of objects to this class.
+#' Also, see \code{\link{convertSide}} for creating side functions generators,
+#' \code{\link{convertAlpha}} for creating alpha-cut bounds generators,
+#' \code{\link{approxInvert}} for inverting side functions/alpha-cuts numerically.
 #' 
 #' @exportClass FuzzyNumber
 #' @name FuzzyNumber-class
-#' @seealso \code{\link{FuzzyNumber}} for a convenient constructor,
-#' \code{\link{convertSide}} for creating side functions generators,
-#' \code{\link{convertAlpha}} for creating alpha-cut bounds generators,
-#' \code{\link{approxInvert}} for inverting side functions/alpha-cuts numerically
+#' @rdname FuzzyNumber-class
 #' @docType class
 #' @family FuzzyNumber-method
 #' @examples
@@ -184,41 +184,11 @@ FuzzyNumber <- function(a1, a2, a3, a4,
    left=function(x)  rep(NA_real_, length(x)),
    right=function(x) rep(NA_real_, length(x)))
 {
-   .Object <- new("FuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
+   new("FuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
        lower=lower, upper=upper, left=left, right=right)
-   .Object
 }
 
 
 
 
 
-
-#' @title
-#' Coverts a special-type  fuzzy number object to a (general) FuzzyNumber
-#'
-#' @description
-#' Drops all additional slots defined by \code{\linkS4class{FuzzyNumber}}
-#' child classes.
-#' 
-#' @details
-#' \code{\linkS4class{FuzzyNumber}} is the base class for all FNs.
-#' Note that some functions for TFNs or PLFNs 
-#' work much faster and are more precise. This function shouldn't be
-#' used in normal computations.
-#' 
-#' @param object an object inheriting from the \code{\linkS4class{FuzzyNumber}} class
-#' @return Object of class \code{\linkS4class{FuzzyNumber}}
-#' @export
-#' @family FuzzyNumber-method
-as.FuzzyNumber <- function(object)
-{
-   if (!inherits(object, "FuzzyNumber"))
-      stop("`object' does not inherit from the FuzzyNumber class")
-
-   .Object <- new("FuzzyNumber",
-         a1=object@a1, a2=object@a2, a3=object@a3, a4=object@a4,
-         left=object@left, right=object@right,
-         lower=object@lower, upper=object@upper)
-   .Object
-}

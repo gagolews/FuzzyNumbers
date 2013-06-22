@@ -22,10 +22,10 @@
 #' Print Basic Information on a Fuzzy Number
 #'
 #' @description
-#' See \code{\link{as.character.FuzzyNumber}} for more details.
+#' See \code{\link{as.character}} for more details.
 #' 
 #' @details
-#' The generic method \code{as.character} is called on given fuzzy number
+#' The method \code{\link{as.character}} is called on given fuzzy number
 #' object with default arguments.
 #' The results are printed on \code{stdout}.
 #' 

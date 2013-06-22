@@ -22,8 +22,8 @@
 #' Calculate the Core of a Fuzzy Number
 #'
 #' @description
-#' We have\eqn{core(A) := [a2,a3]}.
-#' This gives the values a fuzzy number necessarily takes.
+#' We have \eqn{\mathrm{core}(A) := [a2,a3]}{core(A) := [a2,a3]}.
+#' This gives the values that a fuzzy number necessarily represents.
 #' 
 #' @param object a fuzzy number
 #' @return numeric vector of length 2

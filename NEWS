@@ -11,14 +11,15 @@
 * New binary arithmetic operators, especially
    for PiecewiseLinearFuzzyNumbers: +, -, *, /
 
-* New function: fapply() - applies a function on a PLFN
+* New method: fapply() - applies a function on a PLFN
   using the extension principle
 
 * New methods: as.character(); also used by show().
   This function also allows to generate LaTeX code defining the FN
   (toLaTeX arg thanks to Jan Caha).
 
-* as.PiecewiseLinearFuzzyNumber() is now an S4 method,
+* as.FuzzyNumber(), as.TriangularFuzzyNumber(), as.PowerFuzzyNumber(), and
+  as.PiecewiseLinearFuzzyNumber() are now S4 methods,
   and can be called on objects of type numeric, as well as on
   various FNs
 
@@ -35,6 +36,8 @@
 
 * alphacut() now always returns a named two-column matrix.
   evaluate() returns a named vector.
+
+* New function: TriangularFuzzyNumber - returns a TrapezoidalFuzzyNumber.
 
 * Function renamed: convert.side to convertSide, convert.alpha
   to convertAlpha, approx.invert to approxInvert

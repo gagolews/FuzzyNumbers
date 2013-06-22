@@ -56,7 +56,7 @@
 #' method=c("NearestEuclidean", "ExpectedIntervalPreserving", "SupportCoreRestricted", "Naive"), 
 #' ..., verbose=FALSE)
 #' 
-#' @object a fuzzy number
+#' @param object a fuzzy number
 #' @param method character; one of: \code{"NearestEuclidean"} (default), 
 #' \code{"ExpectedIntervalPreserving"}, 
 #' \code{"SupportCoreRestricted"}, 
