@@ -34,7 +34,7 @@
 #' Otherwise, the computation is exact.
 #' 
 #' @param object a fuzzy number
-#' @param for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to XXXXXXX
+#' @param for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to \code{\link{integrateAlpha}}
 #' @return numeric vector of length 2
 #' 
 #' @exportMethod alphaInterval
@@ -51,11 +51,14 @@
 #' @aliases alphaInterval,PowerFuzzyNumber-method
 #' @usage
 #' \S4method{alphaInterval}{FuzzyNumber}(object, ...)
+#' 
 #' \S4method{alphaInterval}{TrapezoidalFuzzyNumber}(object)
+#' 
 #' \S4method{alphaInterval}{PiecewiseLinearFuzzyNumber}(object)
+#' 
 #' \S4method{alphaInterval}{PowerFuzzyNumber}(object)
 setGeneric("alphaInterval",
-function(object, ...) standardGeneric("alphaInterval"))
+   function(object, ...) standardGeneric("alphaInterval"))
 
 
 setMethod(
@@ -63,7 +66,7 @@ setMethod(
    signature(object="FuzzyNumber"),
    definition=function(object, ...)
    {
-      if (is.na(object@lower(0)) || is.na(object@upper(0))) return(c(NA, NA));
+      if (is.na(object@lower(0)) || is.na(object@upper(0))) return(c(NA_real_, NA_real_))
 
       return(c(
          integrateAlpha(object, "lower", 0, 1, weight=identity, ...),

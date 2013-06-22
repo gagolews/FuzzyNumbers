@@ -17,42 +17,59 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
+
+#' @title
+#' Calculate the Expected Interval of a Fuzzy Number
+#'
+#' @description
+#' We have \eqn{EI(A) := [\int_0^1  A_L(\alpha)\,d\alpha,\int_0^1  A_U(\alpha)\,d\alpha]
+#' }{EI(A) := [int_0^1  A_L(\alpha) d\alpha, int_0^1  A_U(\alpha) d\alpha]},
+#' see (Duboid, Prade, 1987).
+#' 
+#' @details
+#' Note that if an instance of the \code{FuzzyNumber} or \code{DiscontinuousFuzzyNumber} class
+#' is given, the calculation is performed via numerical integration.
+#' Otherwise, the computation is exact.
+#' 
+#' @param object a fuzzy number
+#' @param for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to \code{\link{integrateAlpha}}
+#' @return numeric vector of length 2
+#' 
+#' @references
+#' Dubois D., Prade H. (1987), The mean value of a fuzzy number, Fuzzy Sets and Systems 24, pp. 279-300.\cr
+#' 
+#' @exportMethod expectedInterval
+#' @docType methods
+#' @name expectedInterval
+#' @family FuzzyNumber-method
+#' @family TrapezoidalFuzzyNumber-method
+#' @family PiecewiseLinearFuzzyNumber-method
+#' @family PowerFuzzyNumber-method
+#' @rdname expectedInterval-methods
+#' @aliases expectedInterval,FuzzyNumber-method
+#' @aliases expectedInterval,TrapezoidalFuzzyNumber-method
+#' @aliases expectedInterval,PiecewiseLinearFuzzyNumber-method
+#' @aliases expectedInterval,PowerFuzzyNumber-method
+#' @usage
+#' \S4method{expectedInterval}{FuzzyNumber}(object, ...)
+#' 
+#' \S4method{expectedInterval}{TrapezoidalFuzzyNumber}(object)
+#' 
+#' \S4method{expectedInterval}{PiecewiseLinearFuzzyNumber}(object)
+#' 
+#' \S4method{expectedInterval}{PowerFuzzyNumber}(object)
 setGeneric("expectedInterval",
            function(object, ...) standardGeneric("expectedInterval"))
 
 
 
-#' Calculate the expected interval of a fuzzy number
-#'
-#' We have \eqn{EI(A) := [\int_0^1  A_L(\alpha)\,d\alpha,\int_0^1  A_U(\alpha)\,d\alpha]
-#' }{EI(A) := [int_0^1  A_L(\alpha) d\alpha, int_0^1  A_U(\alpha) d\alpha]},
-#' see (Duboid, Prade, 1987).
-#' 
-#' Note that this may be done with numeric integration
-#' (for instances of the \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} class)
-#' 
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber")}}{(numerical integration used)}
-#'      \item{\code{signature(object = "TrapezoidalFuzzyNumber")}}{(exact)}
-#'      \item{\code{signature(object = "PiecewiseLinearFuzzyNumber")}}{(exact)}
-#'      \item{\code{signature(object = "PowerFuzzyNumber")}}{(exact)}
-#' }
-#' @references
-#' Dubois D., Prade H. (1987), The mean value of a fuzzy number, Fuzzy Sets and Systems 24, pp. 279-300.\cr
-#' @exportMethod expectedInterval
-#' @name expectedInterval
-#' @aliases expectedInterval,FuzzyNumber-method
-#' @rdname expectedInterval-methods
-#' @docType methods
-#' @family FuzzyNumber-method
-#' @seealso \code{\link{integrateAlpha}}
+
 setMethod(
    f="expectedInterval",
    signature(object="FuzzyNumber"),
    definition=function(object, ...)
    {
-      if (is.na(object@lower(0))) return(c(NA, NA))
+      if (is.na(object@lower(0))) return(c(NA_real_, NA_real_))
 
       return(c(
          integrateAlpha(object, "lower", 0, 1, ...),
@@ -64,15 +81,11 @@ setMethod(
 
 
 
-#' @exportMethod expectedInterval
-#' @name expectedInterval
-#' @aliases expectedInterval,TrapezoidalFuzzyNumber-method
-#' @rdname expectedInterval-methods
-#' @docType methods
+
 setMethod(
    f="expectedInterval",
    signature(object="TrapezoidalFuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
       return(0.5*c((object@a2+object@a1), (object@a4+object@a3)))
    }
@@ -82,15 +95,11 @@ setMethod(
 
 
 
-#' @exportMethod expectedInterval
-#' @name expectedInterval
-#' @aliases expectedInterval,PiecewiseLinearFuzzyNumber-method
-#' @rdname expectedInterval-methods
-#' @docType methods
+
 setMethod(
    f="expectedInterval",
    signature(object="PiecewiseLinearFuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
       xl <- c(object@a1, object@knot.left,  object@a2)
       xr <- c(object@a3, object@knot.right, object@a4)
@@ -105,15 +114,11 @@ setMethod(
 )
 
 
-#' @exportMethod expectedInterval
-#' @name expectedInterval
-#' @aliases expectedInterval,PowerFuzzyNumber-method
-#' @rdname expectedInterval-methods
-#' @docType methods
+
 setMethod(
    f="expectedInterval",
    signature(object="PowerFuzzyNumber"),
-   definition=function(object, ...)
+   definition=function(object)
    {
       return(c(
          (object@a1+object@p.left*(object@a2-object@a1)/(object@p.left+1) ),

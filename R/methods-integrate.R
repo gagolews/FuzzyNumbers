@@ -17,7 +17,7 @@
 ## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
 
 
-
+# internal - test
 integrate_identity <- function(object, which=c("lower", "upper"), from, to, n=100L)
 { 
    which <- match.arg(which)
@@ -36,8 +36,10 @@ integrate_identity <- function(object, which=c("lower", "upper"), from, to, n=10
 }
 
 
-#' Integrate a function with at most finite number of discontinuities
+#' @title
+#' Integrate a Function with at Most Finite Number of Discontinuities *EXPERIMENTAL*
 #'
+#' @description
 #' The function uses multiple calls to \code{\link{integrate}}.
 #'
 #' @param f an R function taking a numeric vector of length 1 as its first
@@ -46,13 +48,10 @@ integrate_identity <- function(object, which=c("lower", "upper"), from, to, n=10
 #' @param to the upper limit of integration
 #' @param discontinuities nondecreasingly sorted numeric vector which indicates
 #'          the points at which \code{f} is discontinuous
-#' @param rel.tol relative accuracy requested
 #' @param ... further arguments to be passed to the \code{\link{integrate}} function.
 #' @return the estimate of the integral
 #' @export
-integrate_discont_val <- function(f, from, to, discontinuities=numeric(0),
-   rel.tol = .Machine$double.eps^0.35, ...)
-
+integrate_discont_val <- function(f, from, to, discontinuities=numeric(0), ...)
 {
    if (!is.numeric(discontinuities))
       stop("`discontinuities' should be numeric")
@@ -86,101 +85,103 @@ integrate_discont_val <- function(f, from, to, discontinuities=numeric(0),
 
 
 
-
+#' @title
+#' Numerically Integrate Alpha-Cut Bounds
+#' 
+#' @description
+#' Integrates numerically a transformed or weighted lower or upper alpha-cut bound of a fuzzy number.
+#'
+#' @param object a fuzzy number
+#' @param which one of \code{"lower"}, \code{"upper"}
+#' @param from numeric
+#' @param to numeric
+#' @param weight a function or NULL
+#' @param transform a function or NULL
+#' @param ... additional arguments passed to \code{\link{integrate}} or \code{\link{integrate_discont_val}}
+#' @return a single numeric value
+#' 
+#' @exportMethod integrateAlpha
+#' @docType methods
+#' @name integrateAlpha
+#' @family FuzzyNumber-method
+#' @family DiscontinuousFuzzyNumber-method
+#' @rdname integrateAlpha-methods
+#' @aliases integrateAlpha,FuzzyNumber,character,numeric,numeric-method
+#' @aliases integrateAlpha,DiscontinuousFuzzyNumber,character,numeric,numeric-method
+#' @usage
+#' \S4method{integrateAlpha}{FuzzyNumber,character,numeric,numeric}(object, which=c("lower", "upper"), from=0, to=1, weight=NULL, transform=NULL, ...)
+#' 
+#' \S4method{integrateAlpha}{DiscontinuousFuzzyNumber,character,numeric,numeric}(object, which=c("lower", "upper"), from=0, to=1, weight=NULL, transform=NULL, ...)
 setGeneric("integrateAlpha",
      function(object, which, from, to, ...) standardGeneric("integrateAlpha"))
 
 
 
-#' Numerically integrate a transformed or weighted lower or upper alpha-cut bound of a fuzzy number
-#'
-#' @param weight a function or NULL
-#' @param transform a function or NULL
-#' @param rel.tol numeric
-#' @section Methods:
-#' \describe{
-#'      \item{\code{signature(object = "FuzzyNumber", which="character", from="numeric", to="numeric")}}{   }
-#'      \item{\code{signature(object = "DiscontinuousFuzzyNumber", which="character", from="numeric", to="numeric")}}{   }
-#' }
-#' @exportMethod integrateAlpha
-#' @name integrateAlpha
-#' @aliases integrateAlpha,FuzzyNumber,character,numeric,numeric-method
-#' @rdname integrateAlpha-methods
-#' @docType methods
-#' @family FuzzyNumber-method
-#' @seealso \code{\link{integrate_discont_val}}
+
 setMethod(
    f="integrateAlpha",
    signature(object="FuzzyNumber", which="character",
              from="numeric",       to="numeric"),
    definition=function(object, which=c("lower","upper"),
-                       from=0, to=1, weight=NULL, transform=NULL,
-                       rel.tol = .Machine$double.eps^0.35, ...)
+                       from=0, to=1, weight=NULL, transform=NULL, ...)
    {
-      which <- match.arg(which);
+      which <- match.arg(which)
       
       if (length(from) != 1 || length(to) != 1 || from < 0 || to > 1)
-         stop("invalid `from' or `to'");
+         stop("invalid `from' or `to'")
       
       if (!is.null(weight) && (class(weight) != "function" || length(formals(weight)) != 1))
-         stop("`weight' should be a function with 1 parameter");
+         stop("`weight' should be a function with 1 parameter")
       
       if (!is.null(transform) && (class(transform) != "function" || length(formals(transform)) != 2))
-         stop("`transform' should be a function with 2 parameter");
+         stop("`transform' should be a function with 2 parameter")
       
       if (!is.null(weight) && !is.null(transform))
-         stop("specify either `weight', `transform' or none");
+         stop("specify either `weight', `transform' or none")
       
       if (which == "lower")
       {
          if (!is.null(weight))
          {
             fun <- function(alpha)
-               (object@a1+(object@a2-object@a1)*object@lower(alpha))*weight(alpha);
+               (object@a1+(object@a2-object@a1)*object@lower(alpha))*weight(alpha)
          } else if (!is.null(transform))
          {
             fun <- function(alpha)
-               transform(alpha, object@a1+(object@a2-object@a1)*object@lower(alpha));
+               transform(alpha, object@a1+(object@a2-object@a1)*object@lower(alpha))
          } else
          {
             fun <- function(alpha)
-               object@a1+(object@a2-object@a1)*object@lower(alpha);
+               object@a1+(object@a2-object@a1)*object@lower(alpha)
          }
       } else
       {
          if (!is.null(weight))
          {
             fun <- function(alpha)
-               (object@a3+(object@a4-object@a3)*object@upper(alpha))*weight(alpha);
+               (object@a3+(object@a4-object@a3)*object@upper(alpha))*weight(alpha)
          } else if (!is.null(transform))
          {
             fun <- function(alpha)
-               transform(alpha, object@a3+(object@a4-object@a3)*object@upper(alpha));
+               transform(alpha, object@a3+(object@a4-object@a3)*object@upper(alpha))
          } else
          {
             fun <- function(alpha)
-               object@a3+(object@a4-object@a3)*object@upper(alpha);
+               object@a3+(object@a4-object@a3)*object@upper(alpha)
          }
       }
       
-      return(integrate(f=fun, from, to, rel.tol=rel.tol, ...)$value);
+      return(integrate(f=fun, from, to, ...)$value)
    }
-);
+)
 
 
-
-#' @exportMethod integrateAlpha
-#' @name integrateAlpha
-#' @aliases integrateAlpha,DiscontinuousFuzzyNumber,character,numeric,numeric-method
-#' @rdname integrateAlpha-methods
-#' @docType methods
 setMethod(
    f="integrateAlpha",
    signature(object="DiscontinuousFuzzyNumber", which="character",
              from="numeric",       to="numeric"),
-   definition=function(object, which=c("lower","upper"),
-      from=0, to=1, weight=NULL, transform=NULL,
-      rel.tol = .Machine$double.eps^0.35, ...)
+   definition=function(object, which=c("lower", "upper"),
+      from=0, to=1, weight=NULL, transform=NULL, ...)
    {
       which <- match.arg(which)
 
@@ -234,7 +235,7 @@ setMethod(
       }
 
       return(integrate_discont_val(fun, from, to,
-         discontinuities=disconts, rel.tol=rel.tol, ...))
+         discontinuities=disconts, ...))
    }
 )
 
