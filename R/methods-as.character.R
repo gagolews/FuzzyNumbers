@@ -42,9 +42,6 @@
 #' @aliases as.character,FuzzyNumber-method
 #' @rdname as.character-methods
 #' @family FuzzyNumber-method
-#' @family PiecewiseLinearFuzzyNumber-method
-#' @family TriangularFuzzyNumber-method
-#' @family PowerFuzzyNumber-method
 #' @export
 as.character.FuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    if (identical(toLaTeX, FALSE)) {
@@ -106,6 +103,7 @@ as.character.FuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
 #' @aliases as.character,PiecewiseLinearFuzzyNumber-method
 #' @rdname as.character-methods
 #' @export
+#' @family PiecewiseLinearFuzzyNumber-method
 as.character.PiecewiseLinearFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    if (identical(toLaTeX, FALSE)) {
       sprintf("Piecewise linear fuzzy number with %g knot(s),\n   support=[%g,%g],\n      core=[%g,%g].\n",
@@ -210,6 +208,7 @@ as.character.PiecewiseLinearFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaT
 #' @aliases as.character,TrapezoidalFuzzyNumber-method
 #' @rdname as.character-methods
 #' @export
+#' @family TriangularFuzzyNumber-method
 as.character.TrapezoidalFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    if (identical(toLaTeX, FALSE)) {
       sprintf("Trapezoidal fuzzy number with:\n   support=[%g,%g],\n      core=[%g,%g].\n",
@@ -260,6 +259,7 @@ as.character.TrapezoidalFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="
 #' @aliases as.character,PowerFuzzyNumber-method
 #' @rdname as.character-methods
 #' @export
+#' @family PowerFuzzyNumber-method
 as.character.PowerFuzzyNumber <- function(x, toLaTeX=FALSE, varnameLaTeX="A", ...) {
    if (identical(toLaTeX, FALSE)) {
       sprintf("Fuzzy number given by power functions, and:\n   support=[%g,%g],\n      core=[%g,%g].\n",
