@@ -1999,7 +1999,7 @@ for (i in 1:5) # 5 iterations
 
 
 
-\clearpage
+% \clearpage
 \section{NEWS/CHANGELOG}
 
 <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
@@ -2025,7 +2025,7 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 
 
-\clearpage
+% \clearpage
 \bibliographystyle{acm}
 \bibliography{bibliography}
 
