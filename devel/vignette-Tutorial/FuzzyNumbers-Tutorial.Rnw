@@ -77,7 +77,7 @@
 
 <<FNver,echo=FALSE,results='asis',cache=FALSE>>=
 FNver <- packageDescription("FuzzyNumbers")$Version
-if (substring(FNver, nchar(FNver)) == "0") {
+if (as.integer(substring(FNver, nchar(FNver))) %% 2 == 0) {
    cat("\\DevelopmentVersiontrue\n")
 } else {
    cat("\\DevelopmentVersionfalse\n")
@@ -178,7 +178,7 @@ opts_chunk$set(
    keep.source=TRUE,
    out.width='4.5in',
    fig.width=6,
-   fig.height=6/sqrt(2),
+   fig.height=6/sqrt(3),
    fig.path='figures-knitr/',
    cache.path='cache-knitr/',
    cache=TRUE,
@@ -390,6 +390,7 @@ plot(A1)
 
 \begin{center}
 <<A1ex5,dependson='A1ex',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A1, xlab='$x$', ylab='$\\alpha$', main='')
 @
 \end{center}
@@ -446,6 +447,7 @@ plot(B, xlab='$x$', ylab='$\\alpha$')
 
 \begin{center}
 <<ExFconvert4,dependson='ExFconvert3',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 <<ExFconvert3>>
 @
 \end{center}
@@ -501,6 +503,7 @@ legend('topright', c(expression(mu[A1]), expression(mu[A2])),
 
 \begin{center}
 <<alphacutEx2,dependson='alphacutEx',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A1, col='blue', xlab='$x$', ylab='$\\alpha$')
 plot(A2, col='red', lty=2, add=TRUE)
 legend('topright', c('$\\mu_{A1}$', '$\\mu_{A2}$'),
@@ -540,6 +543,7 @@ plot(A3)
 
 \begin{center}
 <<A3deffig2,dependson='A3def',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A3, xlab='$x$', ylab='$\\alpha$', shadowcol='gray')
 @
 \end{center}
@@ -719,22 +723,12 @@ plot(T1)
 
 \begin{center}
 <<TrapEx1d,dependson='TrapEx1c',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(T1, xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
 
-\bigskip
-Trapezoidal fuzzy numbers are among the simplest FNs.
-Despite their simplicity, however, they include triangular FNs,
-``crisp'' real intervals, and ``crisp'' reals.
-Please note that currently no separate classes for these particular TFNs types
-are implemented in the package.
 
-<<TrapEx2>>=
-TrapezoidalFuzzyNumber(1,2,2,3)  # triangular FN
-TrapezoidalFuzzyNumber(2,2,3,3)  # `crisp' interval
-TrapezoidalFuzzyNumber(5,5,5,5)  # `crisp' real
-@
 
 
 
@@ -761,7 +755,21 @@ T1['right']
 
 
 
+\bigskip
+Trapezoidal fuzzy numbers are among the simplest FNs.
+Despite their simplicity, however, they include triangular FNs,
+``crisp'' real intervals, and ``crisp'' reals.
+Please note that currently no separate classes for these particular TFNs types
+are implemented in the package.
 
+<<TrapEx2>>=
+TrapezoidalFuzzyNumber(1,2,2,3)   # triangular FN
+TriangularFuzzyNumber(1,2,3)      # the same
+TrapezoidalFuzzyNumber(2,2,3,3)   # `crisp' interval
+as.TrapezoidalFuzzyNumber(c(2,3)) # the same
+TrapezoidalFuzzyNumber(5,5,5,5)   # `crisp' real
+as.TrapezoidalFuzzyNumber(5)      # the same
+@
 
 
 
@@ -825,6 +833,7 @@ plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 
 \begin{center}
 <<PLFNEx1b,dependson='PLFNEx1a',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(P1, type='b', xlab='$x$', ylab='$\\alpha$', from=0, to=5, xlim=c(0.5,4.5))
 plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 @
@@ -887,6 +896,7 @@ text(7.5, alpha, sprintf('a=%g', alpha), pos=3)
 
 \begin{center}
 <<PLFNEx2b,dependson='PLFNEx2a',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(P3, type='b', xlab='$x$', ylab='$\\alpha$', from=-1, to=9, xlim=c(0,8))
 abline(h=alpha, col='gray', lty=2)
 abline(v=P3['knot.left'], col='gray', lty=3)
@@ -938,6 +948,7 @@ plot(X)
 
 \begin{center}
 <<PowerEx1b,dependson='PowerEx1a',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(X, type='l', xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
@@ -983,6 +994,7 @@ plot(A)
 
 \begin{center}
 <<depicting1b,dependson='depicting1a',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 @
 \end{center}
@@ -1008,6 +1020,7 @@ plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 
 \begin{center}
 <<depicting1d,dependson='depicting1c',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, n=3, type='b', xlab='$x$', ylab='$\\alpha$')
 plot(A, n=6, add=TRUE, lty=2, col=2, type='b', pch=2)
 plot(A, n=101, add=TRUE, lty=4, col=4) # default n
@@ -1033,6 +1046,7 @@ plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use sides
 
 \begin{center}
 <<depicting1f,dependson='depicting1e',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, n=3, at.alpha=numeric(0), type='b', xlab='$x$', ylab='$\\alpha$') # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
 @
@@ -1047,6 +1061,7 @@ plot(A, draw.alphacuts=TRUE)
 
 \begin{center}
 <<depicting1h,dependson='depicting1g',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, draw.alphacuts=TRUE, ylab='$x$', xlab='$\\alpha$')
 @
 \end{center}
@@ -1079,11 +1094,15 @@ cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 
 \noindent This gives the following \LaTeX{} code\dots
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 <<depicting1i2,dependson='depicting1i',results='asis',echo=FALSE>>=
 cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 \end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 \noindent \dots and, after compiling:
 
@@ -1097,7 +1116,8 @@ cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 The code may of course be modified manually to suit your needs.
 
 \paragraph{Tuning your figures.}
-Finally, we leave you with a quite complex example from one of our papers:
+Finally, we leave you with a quite more complex graphical 
+example from one of our papers:
 
 <<depicting2a,fig.keep='none'>>=
 X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1,
@@ -1122,20 +1142,8 @@ plot(X, add=TRUE, type='p', from=-1, to=6)
 
 \begin{center}
 <<depicting2b,dependson='depicting2a',echo=FALSE>>=
-X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1, knot.alpha=0.6, knot.left=0.3, knot.right=4)
-
-plot.default(NA, xlab='$x$', ylab='$\\mu_S(x)$', xlim=c(-0.3,5.3), ylim=c(0,1))
-
-xpos <- c(X['a1'], X['knot.left'], X['a2'], X['a3'], X['knot.right'], X['a4'])
-xlab <- c('$s_1$', '$s_2$', '$s_3$', '$s_4$', '$s_5$', '$s_6$')
-abline(v=xpos, col='gray', lty=3)
-text(xpos, 1.05, xlab, pos=3, xpd=TRUE)
-
-abline(h=c(0, X['knot.alpha'], 1), col='gray', lty=2)
-text(5.55, X['knot.alpha'], sprintf('$\\alpha_0$'), pos=4, xpd=TRUE)
-
-plot(X, add=TRUE, type='l', from=-1, to=6)
-plot(X, add=TRUE, type='p', from=-1, to=6)
+par(mar=c(4,4,2,1))
+<<depicting2a>>
 @
 \end{center}
 
@@ -1388,14 +1396,24 @@ which implements the basic arithmetic operations
 as defined in \cite{KlirYuan1995:fuzzybook}.
 
 
-<<addition>>=
+<<addition,fig.keep='none'>>=
 A <- TrapezoidalFuzzyNumber(0, 1, 1, 2)
 B <- TrapezoidalFuzzyNumber(1, 2, 2, 3)
+plot(A, xlim=c(0,6))
+plot(B, add=TRUE, col=2, lty=2)
+plot(A+B, add=TRUE, col=4, lty=4)
+@
+
+
+\begin{center}
+<<additionFig,dependson='addition',echo=FALSE,results='hide'>>=
+par(mar=c(4,4,2,1))
 plot(A, xlim=c(0,6), xlab='$x$', ylab='$\\alpha$')
 plot(B, add=TRUE, col=2, lty=2)
 plot(A+B, add=TRUE, col=4, lty=4)
 legend('topright', c('$A$', '$B$', '$A+B$'), lty=c(1,2,4), col=c(1,2,4))
 @
+\end{center}
 
 
 Currently all the operations are available
@@ -1427,17 +1445,26 @@ A+B # note the number of knots has increased
 
 
 
+
+
 \subsection{Applying Functions}
 
 
 To apply a monotonic transformation on a piecewise linear fuzzy number
 (using the extension principle) we call \func{fapply()}.
 
-<<fapply>>=
+<<fapply,fig.keep='none'>>=
 A <- as.PiecewiseLinearFuzzyNumber(TrapezoidalFuzzyNumber(0,1,2,3), knot.n=100)
+plot(fapply(A, function(x) log(x+1)^0.5))
+@
+
+\begin{center}
+<<fapplyFig,dependson='fapply',echo=FALSE,results='hide'>>=
+par(mar=c(4,4,2,1))
 plot(fapply(A, function(x) log(x+1)^0.5), xlab='$x$', ylab='$\\alpha$')
 legend('topleft', '$\\sqrt{\\log(A+1)}$', lty=1)
 @
+\end{center}
 
 \noindent
 The operation being applied should be a properly
@@ -1457,13 +1484,23 @@ vectorized \R function object.
 \section{Approximation of Fuzzy Numbers}\label{Sec:Approximation}
 
 
+Complicated membership functions
+are often very inconvenient for processing imprecise information modeled by
+fuzzy numbers. Moreover, handling too complex membership
+functions entails difficulties in interpretation of the results
+too. This is the reason why a suitable approximation of fuzzy
+numbers is so important. We would like to deal
+with functions that are
+simpler or more regular and hence more convenient for 
+computing.
+
 \subsection{Metrics in the Space of Fuzzy Numbers}
 
 It seems that the most suitable metric for approximation problems
 is an extension of the Euclidean ($L_2$) distance
 (cf.~\cite{Grzegorzewski1998:metricsordersfn}), $d$, defined by the equation:
 \begin{equation}
-d^2(A,B) = \int_0^1 \left(A_L(\alpha)-B_L(\alpha)\right)^2\,d\alpha
+d_E^2(A,B) = \int_0^1 \left(A_L(\alpha)-B_L(\alpha)\right)^2\,d\alpha
          + \int_0^1 \left(A_U(\alpha)-B_U(\alpha)\right)^2\,d\alpha.
 \end{equation}
 
@@ -1488,12 +1525,10 @@ distance(T1, T2, type='EuclideanSquared') # Squared L2 distance
 
 \subsection{Approximation by Trapezoidal Fuzzy Numbers}
 
-TO BE DONE... Problem statement...
-%
-Given a fuzzy number $A$ we seek for a trapezoidal
-fuzzy number $\mathcal{T}(A)$....
-
-In this subsection we will use the following fuzzy number $A$
+Our main task in this section is to, given a fuzzy number $A$,
+seek for a trapezoidal fuzzy number $\mathcal{T}(A)$
+that fulfills some desired properties.
+We will use the following FN
 for the sake of illustration:
 
 <<ApproxExA>>=
@@ -1505,10 +1540,15 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 )
 @
 
+The approximation procedure has been implemented
+in \func{trapezoidalApproximation()}.
+The \argument{method} argument selects the algorithm used
+to project $A$ into the space of TFNs.
 
 \subsubsection{Na\"{i}ve Approximation}
 
-The \str{"{}Naive"{}} method generates a trapezoidal FN with the same
+The \str{"{}Naive"{}} \argument{method} just
+generates a trapezoidal FN with the same
 core and support as $A$.
 
 <<ApproxExA_naive,dependson='ApproxExA',fig.keep='none'>>=
@@ -1518,6 +1558,7 @@ distance(A, T1)
 
 \begin{center}
 <<ApproxExA_naive2,dependson='ApproxExA_naive',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 plot(T1, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
@@ -1525,17 +1566,28 @@ legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
 @
 \end{center}
 
+It is easily seen that the na\"{i}ve approximator
+may not represent $A$ well.
+Thus, we will often need some more reasonable
+approach.
 
 
 \subsubsection{$L_2$-nearest Approximation}
 
+
+
+
 % $L_2$ distance....
 
-The \str{"{}NearestEuclidean"{}} method
+The \str{"{}NearestEuclidean"{}} \argument{method}
 gives the nearest $L_2$-approximation of $A$
-\cite[Corollary 8]{Ban2009:nearestfnrev}.
-
-% TO BE DONE...
+\cite[Corollary 8]{Ban2009:nearestfnrev},
+i.e.~a trapezoidal fuzzy number $\mathcal{T}(A)$ such that
+\[
+\mathcal{T}(A)=\min\limits_{T\in \mathrm{TFN}}d_E(A,T).
+\]
+It may be shown that the solution to this problem
+always exists and is unique.
 
 <<ApproxExA_L2n,dependson='ApproxExA',fig.keep='none'>>=
 (T2 <- trapezoidalApproximation(A, method='NearestEuclidean'))
@@ -1544,6 +1596,7 @@ distance(A, T2)
 
 \begin{center}
 <<ApproxExA_naiveL2n2,dependson='ApproxExA_L2n',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 plot(T2, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
@@ -1551,20 +1604,25 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 @
 \end{center}
 
+Note that the implementation relies on numeric integration.
 
 \subsubsection{Expected Interval Preserving Approximation}
 
 
 The \str{"{}ExpectedIntervalPreserving"{}} method
 gives the nearest $L_2$-approximation of $A$
-preserving the expected interval \cite{Ban2008:approxpresexpint,Grzegorzewski2010:trapfnapproxexpint,Yeh2008:traptriapprox}.
-Note that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
-we get the same result as in
+preserving the expected interval \cite{Ban2008:approxpresexpint,Grzegorzewski2010:trapfnapproxexpint,Yeh2008:traptriapprox},
+i.e.~we get $\mathcal{T}(A)$ such that $\mathrm{EI}(A)=\mathrm{EI}(\mathcal{T}(A))$.
+
+First of all, it may be shown that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
+we obtain the same result as in
 the \str{"{}NearestEuclidean"{}} method.
 
 % TO BE DONE...
 
 <<ApproxExA_ExpInt,dependson='ApproxExA',fig.keep='none'>>=
+ambiguity(A)
+width(A)/3
 (T3 <- trapezoidalApproximation(A, method='ExpectedIntervalPreserving'))
 distance(A, T3)
 expectedInterval(A)
@@ -1573,18 +1631,19 @@ expectedInterval(T3)
 
 % \begin{center}
 <<ApproxExA_ExpInt2,dependson='ApproxExA_ExpInt',eval=FALSE,echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 plot(T3, col='red', lty=2, add=TRUE)
 @
 % \end{center}
 
-Unfortunately, for highly skewed membership functions this method
-(as well as the previous one) reveals sometimes quite unfavorable
+On the other hand, for highly skewed membership functions this method
+(as well as the previous one)  sometimes reveals quite unfavorable
 behavior. E.g.~if $B$ is a FN such that
-$\mathrm{Val}(B) < \mathrm{EV}_{1/3}(B)$
-or $\mathrm{Val}(B) > \mathrm{EV}_{2/3}(B)$,
-then it may happen that the core of the output
-and the core of the original fuzzy number $B$ are disjoint,
+$\mathrm{val}(B) < \mathrm{EV}_{1/3}(B)$
+or $\mathrm{val}(B) > \mathrm{EV}_{2/3}(B)$,
+then it may happen that the cores of the output
+and of the original fuzzy number $B$ are disjoint,
 cf.~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 
 <<ApproxExA_ExpInt3,fig.keep='none'>>=
@@ -1599,6 +1658,7 @@ distance(B, TB2)
 
 \begin{center}
 <<ApproxExA_ExpInt3Fig,dependson='ApproxExA_ExpInt3',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(B, xlab='$x$', ylab='$\\alpha$', log='x', xlim=c(0.9,46))
 plot(TB1, col='red',  lty=2, add=TRUE)
 plot(TB2, col='blue', lty=3, add=TRUE)
@@ -1611,8 +1671,10 @@ legend('topright', c('$\\mu_{B}$', '$\\mu_{TB_1}$', '$\\mu_{TB_2}$'),
 \subsubsection{Approximation with Restrictions on Support and Core}
 
 
-The \str{"{}SupportCoreRestricted"{}} method was proposed in \cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
-It gives the $L_2$-nearest trapezoidal approximation with constraints
+The \str{"{}SupportCoreRestricted"{}} \argument{method}
+was proposed in \cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
+It gives the $L_2$-nearest trapezoidal approximation $\mathcal{T}(A)$
+with constraints:
 $\mathrm{core}(A) \subseteq \mathrm{core}(\mathcal{T}(A))$
 and $\mathrm{supp}(\mathcal{T}(A)) \subseteq \mathrm{supp}(A)$,
 i.e.~for which each point that surely belongs to $A$ also belongs to $\mathcal{T}(A)$,
@@ -1625,6 +1687,7 @@ distance(A, T4)
 
 \begin{center}
 <<ApproxExA_RestrSuppCore2,dependson='ApproxExA_RestrSuppCore',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 plot(T4, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', 'Supp\\&core restr.\napproximation'),
@@ -1637,9 +1700,18 @@ legend('topright', legend=c('$A$', 'Supp\\&core restr.\napproximation'),
 
 \subsection{Approximation by Piecewise Linear Fuzzy Numbers}
 
-TO BE DONE... Problem statement... Given a fuzzy number $A$ 
-and fixed \argument{knot.alpha} we seek for a piecewise linear
-fuzzy number $\mathcal{P}(A)$....
+When approximating arbitrary fuzzy numbers by trapezoidal ones we
+generally take care for the core and support of a fuzzy number
+(i.e.~for values that surely belong or do not belong at all to the
+set under study), while the sides of a fuzzy number corresponding
+to all intermediate degrees of membership are linearized. This
+approach may not be suitable if we are also interested in focusing
+on some other degrees of uncertainty except for 0 or 1.
+
+Thus, given a fuzzy number $A$ and a fixed
+\argument{knot.alpha}=$\boldsymbol\alpha$ vector, we are interested in
+finding a piecewise linear fuzzy number $\mathcal{P}(A)$
+that has some desirable properties.
 
 In this subsection we will use the following fuzzy number $A$
 for the sake of illustration:
@@ -1654,11 +1726,14 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 @
 
 
-
+The approximation procedure has been implemented
+in \func{piecewiseLinearApproximation()}.
+The \argument{method} argument selects the algorithm used
+to project $A$ into the space of PLFNs (for given \argument{knot.alpha}).
 
 \subsubsection{Na\"{i}ve Approximation}
 
-The \str{"{}Naive"{}} method generates a PLFN with the same
+The \str{"{}Naive"{}} \argument{method} generates a PLFN with the same
 core and support as $A$ and with sides interpolating the membership function
 of $A$ at given $\alpha$-cuts.
 
@@ -1671,6 +1746,7 @@ print(distance(A, P1), 8)
 
 \begin{center}
 <<ApproxPLFNNaive2,dependson='ApproxPLFNNaive',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 plot(P1, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
@@ -1686,12 +1762,21 @@ then it approaches $0$.
 
 \subsubsection{$L_2$-nearest Approximation}
 
-\paragraph{Exact algorithm for fixed \argument{knot.alpha}.}
+% \paragraph{Exact algorithm for fixed \argument{knot.alpha}.}
 
-TO BE DONE...
+Similarly to the $L_2$-nearest TFN case, here we are looking for
+\[
+\mathcal{P}(A)=\min\limits_{T\in \mathrm{PLFN}(\boldsymbol\alpha)}d_E(A,T).
+\]
+It may be shown that the solution to this problem
+always exists and is unique, see \cite{CoroianuETAL2013:plfnapprox}
+and \cite{CoroianuETAL2013:plfnapprox2}.
 
-For \texttt{\argument{knot.n}==1} the method proposed in \cite{CoroianuETAL2012:plfnapprox}
-is used. [WORK ON \texttt{\argument{knot.n}>1} ALMOST FINISHED]
+The \str{"{}NearestEuclidean"{}} \argument{method}
+uses the algorithm described in \cite{CoroianuETAL2013:plfnapprox}
+and \cite{CoroianuETAL2013:plfnapprox2}.
+This implementation relies on numeric integration, so for large \argument{knot.n}
+may be slow.
 
 <<ApproxPLFNNearest,dependson='ApproxExAPLFN',fig.keep='none'>>=
 P2 <- piecewiseLinearApproximation(A,
@@ -1702,6 +1787,7 @@ print(distance(A, P2), 12)
 
 \begin{center}
 <<ApproxPLFNNearest2,dependson='ApproxPLFNNearest',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(A, xlab='$x$', ylab='$\\alpha$')
 plot(P2, col='red', lty=2, add=TRUE)
 legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
@@ -1759,16 +1845,48 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 % \end{center}
 
 
+\paragraph{Example: Convergence.}
+As the na\"{i}ve approximator's error approaches 0 as $\text{\argument{knot.n}}\to \infty$
+for equidistant knots, so does the error of the nearest $L_2$ approximator.
+Let us study the convergence behavior for our exemplary $A$.
 
+<<ApproxPLFNNearestConv1,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
+n <- 1:25
+d <- matrix(NA, ncol=2, nrow=length(n))
+# d[,1] - Naive approximator's error for given knot.n
+# d[,2] - Best L2 approximator's error
+for (i in seq_along(n))
+{
+   P1 <- piecewiseLinearApproximation(A, method='Naive',
+            knot.n=n[i]) # equidistant knots
+   P2 <- piecewiseLinearApproximation(A, method='NearestEuclidean',
+            knot.n=n[i]) # equidistant knots
+   d[i,1] <- distance(A, P1)
+   d[i,2] <- distance(A, P2)
+}
+matplot(n, d, type='l')
+@
 
-\paragraph{Finding best \argument{knot.alpha} for $\text{\argument{knot.n}}=1$ numerically.}
-Let us depict the ``best'' $L_2$ distance as a function of $\alpha$,
+\begin{center}
+<<ApproxPLFNNearestConv2,dependson='ApproxPLFNNearestConv1',echo=FALSE>>=
+par(mar=c(4,4,2,1))
+matplot(n, d, type='l', xlab='$n$', ylab='$d_E(A, \\cdot)$')
+legend('topright', c('$d_E(A, P_1)$', '$d_E(A, P_2)$'),
+   lty=1:2, col=1:2)
+@
+\end{center}
+
+\paragraph{Example: Finding best \argument{knot.alpha}
+for $\text{\argument{knot.n}}=1$ numerically.}
+The approximation problem is stated using a fixed
+\argument{knit.alpha}.
+However, we may e.g.~depict the ``best'' $L_2$ distance as a function of $\alpha$,
 i.e.~the $D_{A}(\alpha)$ function.
 
 <<ApproxPLFNNearest3,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
 a <- seq(1e-9, 1-1e-9, length.out=100) # many alphas from (0,1)
 d <- numeric(length(a)) # distances /to be calculated/
-for (i in 1:length(a))
+for (i in seq_along(a))
 {
    P1 <- piecewiseLinearApproximation(A, method='NearestEuclidean',
             knot.n=1, knot.alpha=a[i])
@@ -1779,12 +1897,13 @@ plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)))
 
 \begin{center}
 <<ApproxPLFNNearest4,dependson='ApproxPLFNNearest3',echo=FALSE>>=
+par(mar=c(4,4,2,1))
 plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A}(\\alpha)$')
 @
 \end{center}
 
 For $\text{\argument{knot.n}}=1$ we may find best \argument{knot.alpha} using numerical optimization.
-It may be shown, see \cite{CoroianuETAL2012:plfnapprox},
+It may be shown, see \cite{CoroianuETAL2013:plfnapprox},
 that the distance function $D_{A}(\alpha)$ is continuous,
 but in general the minimum is not necessarily unique.
 % TO DO.....
@@ -1800,7 +1919,7 @@ for (i in 1:5) # 5 iterations
          P1 <- piecewiseLinearApproximation(A, method='NearestEuclidean',
                                              knot.n=1, knot.alpha=a)
 
-         distance(A1, P1)
+         distance(A, P1)
       }, method='L-BFGS-B', lower=1e-9, upper=1-1e-9) -> res
    cat(sprintf('%.9f %6g *%.9f* %.9f\n', a0, res$counts[1], res$par, res$value))
 }
@@ -1880,7 +1999,7 @@ for (i in 1:5) # 5 iterations
 
 
 
-
+\clearpage
 \section{NEWS/CHANGELOG}
 
 <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
@@ -1906,7 +2025,7 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 
 
-
+\clearpage
 \bibliographystyle{acm}
 \bibliography{bibliography}
 
