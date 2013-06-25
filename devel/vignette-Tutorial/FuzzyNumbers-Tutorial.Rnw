@@ -1852,9 +1852,10 @@ Let us study the convergence behavior for our exemplary $A$.
 
 <<ApproxPLFNNearestConv1,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
 n <- 1:25
-d <- matrix(NA, ncol=2, nrow=length(n))
+d <- matrix(NA, ncol=3, nrow=length(n))
 # d[,1] - Naive approximator's error for given knot.n
 # d[,2] - Best L2 approximator's error
+# d[,3] - theoretical upper bound
 for (i in seq_along(n))
 {
    P1 <- piecewiseLinearApproximation(A, method='Naive',
@@ -1863,16 +1864,20 @@ for (i in seq_along(n))
             knot.n=n[i]) # equidistant knots
    d[i,1] <- distance(A, P1)
    d[i,2] <- distance(A, P2)
+   
+   upbound <- alphacut(A, c(0,P1@knot.alpha,1))
+   upbound <- abs(c(diff(upbound[,1]), diff(upbound[,2])))*sqrt(2)
+   d[i,3] <- sqrt(2)*max(upbound)
 }
-matplot(n, d, type='l')
+matplot(n, d, type='l', log="y", lty=c(1,2,4), col=c(1,2,4))
 @
 
 \begin{center}
 <<ApproxPLFNNearestConv2,dependson='ApproxPLFNNearestConv1',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-matplot(n, d, type='l', xlab='$n$', ylab='$d_E(A, \\cdot)$')
-legend('topright', c('$d_E(A, P_1)$', '$d_E(A, P_2)$'),
-   lty=1:2, col=1:2)
+matplot(n, d, type='l', xlab='$n$', ylab='$d(A, \\cdot)$', log="y", lty=c(1,2,4), col=c(1,2,4))
+legend(x=15, y=5, c('$d(A, N^n(A))$', '$d(A, \\Pi^n(A))$', 'upper bound'),
+   lty=c(1,2,4), col=c(1,2,4))
 @
 \end{center}
 

@@ -11,9 +11,9 @@ Description: The FuzzyNumbers package provides S4 classes and methods
     operations, approximation by trapezoidal and piecewise linear FNs,
     visualization, etc.
 Version: 0.3-2
-Date: 2013-06-23
+Date: 2013-06-25
 URL: http://www.rexamine.com/resources/fuzzynumbers/
-BugReports: https://github.com/Rexamine/FuzzyNumbers/issues
+BugReports: http://github.com/Rexamine/FuzzyNumbers/issues
 License: LGPL (>= 3)
 ByteCompile: TRUE
 Depends:
