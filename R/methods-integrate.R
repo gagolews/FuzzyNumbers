@@ -170,7 +170,7 @@ setMethod(
          }
       }
       
-      return(integrate(f=fun, from, to, ...)$value)
+      integrate(f=fun, from, to, ...)$value
    }
 )
 
@@ -233,8 +233,8 @@ setMethod(
          disconts <- object@discontinuities.upper
       }
 
-      return(integrate_discont_val(fun, from, to,
-         discontinuities=disconts, ...))
+      integrate_discont_val(fun, from, to,
+         discontinuities=disconts, ...)
    }
 )
 

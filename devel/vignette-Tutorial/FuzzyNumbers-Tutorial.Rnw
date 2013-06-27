@@ -1851,8 +1851,8 @@ for equidistant knots, so does the error of the nearest $L_2$ approximator.
 Let us study the convergence behavior for our exemplary $A$.
 
 <<ApproxPLFNNearestConv1,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
-n <- 1:25
-d <- matrix(NA, ncol=3, nrow=length(n))
+n <- 1:50
+d <- matrix(NA, ncol=4, nrow=length(n))
 # d[,1] - Naive approximator's error for given knot.n
 # d[,2] - Best L2 approximator's error
 # d[,3] - theoretical upper bound
@@ -1865,9 +1865,9 @@ for (i in seq_along(n))
    d[i,1] <- distance(A, P1)
    d[i,2] <- distance(A, P2)
    
-   upbound <- alphacut(A, c(0,P1@knot.alpha,1))
-   upbound <- abs(c(diff(upbound[,1]), diff(upbound[,2])))*sqrt(2)
-   d[i,3] <- sqrt(2)*max(upbound)
+   acut <- alphacut(A, seq(0, 1, length.out=n[i]+2))
+   # d[i,3] <- sqrt(sum((c(diff(acut[,1]), diff(acut[,2]))^2)/(n[i]+1))) # beter ubound
+   d[i,3] <- sqrt(2)*max(abs(c(diff(acut[,1]), diff(acut[,2]))))
 }
 matplot(n, d, type='l', log="y", lty=c(1,2,4), col=c(1,2,4))
 @
@@ -1876,7 +1876,7 @@ matplot(n, d, type='l', log="y", lty=c(1,2,4), col=c(1,2,4))
 <<ApproxPLFNNearestConv2,dependson='ApproxPLFNNearestConv1',echo=FALSE>>=
 par(mar=c(4,4,2,1))
 matplot(n, d, type='l', xlab='$n$', ylab='$d(A, \\cdot)$', log="y", lty=c(1,2,4), col=c(1,2,4))
-legend(x=15, y=5, c('$d(A, N^n(A))$', '$d(A, \\Pi^n(A))$', 'upper bound'),
+legend(x=35, y=3, c('$d(A, N^n(A))$', '$d(A, \\Pi^n(A))$', 'upper bound'),
    lty=c(1,2,4), col=c(1,2,4))
 @
 \end{center}

@@ -5,6 +5,11 @@
 
 0.3-2 /under development/
 
+* piecewiseLinearApproximation() how does not fail on exceptions thrown
+     by integrate(); fallback=Newton-Cotes formula (degree 4)
+
+* [STILL TO DO]: tryCatch in distance()...
+
 * ...
 
 ***************************************************************************

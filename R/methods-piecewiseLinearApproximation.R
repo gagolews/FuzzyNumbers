@@ -576,12 +576,24 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
    w <- numeric(2*knot.n+3)
    for (i in 1:(2*knot.n+3)) {
       if (i < knot.n+2) {
-         w[i] <- integrateAlpha(object, "lower", alpha[i], alpha[i+1], ...)
+         w[i] <- tryCatch(
+            integrateAlpha(object, "lower", alpha[i], alpha[i+1], ...),
+            error=function(e) {
+               aph <- seq(alpha[i], alpha[i+1], length.out=5)
+               (alpha[i+1]-alpha[i])*
+                  sum((object@a1+(object@a2-object@a1)*object@lower(aph))*c(7,32,12,32,7)/90) # Boole's rule
+         })
       }
       else if (i == knot.n+2)
-         w[i] = 0
+         w[i] <- 0
       else {
-         w[i] <- integrateAlpha(object, "upper", alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], ...)
+         w[i] <- tryCatch(
+            integrateAlpha(object, "upper", alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], ...),
+            error=function(e) {
+               aph <- seq(alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], length.out=5)
+               (alpha[2*knot.n-i+5]-alpha[2*knot.n-i+4])*
+                  sum((object@a3+(object@a4-object@a3)*object@upper(aph))*c(7,32,12,32,7)/90) # Boole's rule
+         })
       }
    }
    
@@ -591,13 +603,25 @@ piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, kn
    wp[1] <- 0
    for (i in 1:(2*knot.n+3)) {
       if (i < knot.n+2) {
-         wp[i+1] <- integrateAlpha(object, "lower", alpha[i], alpha[i+1], weight=identity, ...)
+         wp[i+1] <- tryCatch(
+            integrateAlpha(object, "lower", alpha[i], alpha[i+1], weight=identity, ...),
+            error=function(e) {
+               aph <- seq(alpha[i], alpha[i+1], length.out=5)
+               (alpha[i+1]-alpha[i])*
+                  sum((object@a1+(object@a2-object@a1)*object@lower(aph))*aph*c(7,32,12,32,7)/90) # Boole's rule
+         })
          wp[i+1] <- (wp[i+1]-alpha[i]*w[i])/(alpha[i+1]-alpha[i])
       }
       else if (i == knot.n+2)
-         wp[i+1] = 0
+         wp[i+1] <- 0
       else {
-         wp[i+1] <- integrateAlpha(object, "upper", alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], weight=identity, ...)
+         wp[i+1] <- tryCatch(
+            integrateAlpha(object, "upper", alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], weight=identity, ...),
+            error=function(e) {
+               aph <- seq(alpha[2*knot.n-i+4], alpha[2*knot.n-i+5], length.out=5)
+               (alpha[2*knot.n-i+5]-alpha[2*knot.n-i+4])*
+                  sum((object@a3+(object@a4-object@a3)*object@upper(aph))*aph*c(7,32,12,32,7)/90) # Boole's rule
+         })
          wp[i+1] <- (alpha[2*knot.n-i+5]*w[i]-wp[i+1])/(alpha[2*knot.n-i+5]-alpha[2*knot.n-i+4])
       }
    }
