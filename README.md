@@ -19,7 +19,7 @@ The package aims to provide the following functionality:
 
 * * *
 
-**Homepage**: http://www.rexamine.com/resources/fuzzynumbers/
+**Homepage**: http://FuzzyNumbers.rexamine.com/
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
@@ -35,7 +35,7 @@ with contributions from Jan Caha
 To **cite** package **FuzzyNumbers** in publications please use:
 
 > "Gagolewski M. (2013). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
-http://www.rexamine.com/resources/fuzzynumbers/."
+http://FuzzyNumbers.rexamine.com//."
 
 A BibTeX entry for LaTeX users is:
 
