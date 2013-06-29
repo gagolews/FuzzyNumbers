@@ -4,9 +4,9 @@ citEntry(entry = "Manual",
   title        = "FuzzyNumbers Package: Tools to Deal with Fuzzy Numbers in R",
   author       = personList(as.person("Marek Gagolewski")),
   year         = "2013",
-  url          = "http://www.rexamine.com/resources/fuzzynumbers/",
+  url          = "http://FuzzyNumbers.rexamine.com/",
   textVersion  =
   paste("Gagolewski M. (2013).",
         "FuzzyNumbers Package: Tools to Deal with Fuzzy Numbers in R.",
-        "http://www.rexamine.com/resources/fuzzynumbers/.")
+        "http://FuzzyNumbers.rexamine.com/.")
 )
