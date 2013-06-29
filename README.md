@@ -35,7 +35,7 @@ with contributions from Jan Caha
 To **cite** package **FuzzyNumbers** in publications please use:
 
 > "Gagolewski M. (2013). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
-http://FuzzyNumbers.rexamine.com//."
+http://FuzzyNumbers.rexamine.com/."
 
 A BibTeX entry for LaTeX users is:
 
