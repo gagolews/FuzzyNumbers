@@ -29,8 +29,7 @@ Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 * * *
 
-**Author**: Marek Gągolewski [gagolews at rexamine dot com],
-with contributions from Jan Caha
+**Author**: Marek Gagolewski](http://staff.rexamine.com/gagolews), with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
@@ -44,7 +43,7 @@ A BibTeX entry for LaTeX users is:
    title = {**FuzzyNumbers** Package: Tools to deal with fuzzy numbers in R},
    author = {Marek Gagolewski},
    year = {2013},
-   url = {http://www.rexamine.com/resources/fuzzynumbers/}
+   url = {http://FuzzyNumbers.rexamine.com/}
 }
 ```
 
