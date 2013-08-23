@@ -40,9 +40,9 @@
 \newcommand{\Cpp}{\lang{C++}}
 \newcommand{\R}{\lang{R}}
 
-\newcommand{\func}[1]{\texttt{\hlfunctioncall{#1}}}
-\newcommand{\argument}[1]{\texttt{\hlargument{#1}}}
-\newcommand{\str}[1]{\texttt{\hlstring{#1}}}
+\newcommand{\func}[1]{\texttt{\hlkwd{#1}}}
+\newcommand{\argument}[1]{\texttt{\hlkwc{#1}}}
+\newcommand{\str}[1]{\texttt{\hlstr{#1}}}
 \newcommand{\key}[1]{{$\langle$\texttt{#1}$\rangle$}\xspace} % skrot klawiszowy
 
 \setlength{\pdfpagewidth}{\paperwidth}
@@ -77,7 +77,7 @@
 
 <<FNver,echo=FALSE,results='asis',cache=FALSE>>=
 FNver <- packageDescription("FuzzyNumbers")$Version
-if (as.integer(substring(FNver, nchar(FNver))) %% 2 == 0) {
+if (as.integer(substring(FNver, nchar(FNver))) == "0") {
    cat("\\DevelopmentVersiontrue\n")
 } else {
    cat("\\DevelopmentVersionfalse\n")
@@ -94,9 +94,9 @@ if (as.integer(substring(FNver, nchar(FNver))) %% 2 == 0) {
 \pagestyle{fancy}
 \fancyhead[L]{}
 \fancyhead[R]{}
-\fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most 
+\fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most
 recent development version
-of \package{FuzzyNumbers} available on 
+of \package{FuzzyNumbers} available on
 \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.\newline
 If you use the ``official'' CRAN release, some of the features may be unavailable.}
 \fi
@@ -117,8 +117,8 @@ ul. Newelska 6, 01-447 Warsaw, Poland
 
 ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
-\href{http://www.rexamine.com/resources/fuzzynumbers/}%
-{www.rexamine.com/resources/fuzzynumbers/}
+\href{http://FuzzyNumbers.rexamine.com/}%
+{http://FuzzyNumbers.rexamine.com}
 
 \bigskip
 \today
@@ -262,7 +262,7 @@ It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
 
 \package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
 conveniently and effectively.
-To install latest ``official'' release of the 
+To install latest ``official'' release of the
 package available on \textit{CRAN} we type%
 \ifDevelopmentVersion%
 \footnote{You are viewing the \textbf{development} version of the tutorial.
@@ -411,7 +411,7 @@ examples for our publications much easier.
 A similar concept was used e.g.~in \cite{StefaniniSorini2009:eusflat}
 (LR-fuzzy numbers).
 
-Assume, however, that we are given two fancy side 
+Assume, however, that we are given two fancy side
 functions $f: [a_1,a_2]=[-4,-2]\to[0,1]$,
 and $g: [a_3,a_4]=[-1,10]\to[1,0]$,
 for example:
@@ -456,8 +456,8 @@ par(mar=c(4,4,2,1))
 
 \subsubsection{Definition by $\alpha$-cut Bounds}
 
-Alternatively, a fuzzy number $A$ may be defined by specifying 
-its $\alpha$-cuts. We have (for $\alpha\in(0,1)$ and 
+Alternatively, a fuzzy number $A$ may be defined by specifying
+its $\alpha$-cuts. We have (for $\alpha\in(0,1)$ and
 $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$):
 \begin{eqnarray}
 A_\alpha & := & [A_L(\alpha), A_U(\alpha)]\\
@@ -523,7 +523,7 @@ an $\alpha$-cut generator conveniently.
 
 \subsubsection{Definition with Generating Functions Omitted: Shadowed Sets}
 
-In the above examples 
+In the above examples
 either side generating functions or $\alpha$-cut generators
 were passed to the \func{FuzzyNumber()} function.
 Let us note what will happen if we omit both of them.
@@ -573,7 +573,7 @@ evaluate(A2, 6.5) # A2 hasn't got them
 
 \subsection{Using Numeric Approximations of $\alpha$-cut or Side Generators}
 
-The reason for setting  
+The reason for setting
 \texttt{NA}s\footnote{To be precise, it's \texttt{NA\_real\_}.}
 as return values of omitted generators
 is simple. Finding a function inverse numerically
@@ -645,23 +645,23 @@ max(abs(qbeta(1-x, 1, 0.1) - A4['upper'](x))) # sup-error estimator
 
 
 % \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
-% 
+%
 % We may also consider fuzzy numbers with discontinuous side
 % functions or $\alpha$-cut generators.
-% To avoid extensive numerical integration inaccuracies 
+% To avoid extensive numerical integration inaccuracies
 % (i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
 % we use objects from the \texttt{DiscontinuousFuzzyNumber} class.
 % Further on we will present some examples.
 
 
 % % or plotting problems....
-% 
+%
 % % TODO add plot for \texttt{DiscontinuousFuzzyNumber}
 % % A1 <- FuzzyNumber(0,1,1,1,
 % %          lower=function(a) floor(3*a)/3,
 % %          upper=function(a) 1-a
 % % ) # no info on discontinuities
-% 
+%
 % <<ExDiscontinuous>>=
 % A2 <- DiscontinuousFuzzyNumber(2,3,3,3,
 %          lower=function(a) floor(3*a)/3,
@@ -669,15 +669,15 @@ max(abs(qbeta(1-x, 1, 0.1) - A4['upper'](x))) # sup-error estimator
 %          discontinuities.lower=c(0, 1/3, 2/3, 1),
 %          discontinuities.upper=numeric(0)
 % ) # discontinuities info included
-% 
+%
 % integrateAlpha(A2, "lower", 0, 1)
 % integrateAlpha(as.FuzzyNumber(A2), "lower", 0, 1)
 % @
-% 
+%
 % % plots.....
-% 
+%
 % % integration errors without this info.... (!)
-% 
+%
 % ... TO BE DONE ....
 
 
@@ -743,7 +743,7 @@ Of course, in this case the generating functions are known \textit{a priori}
 ($A_1$ had no $\alpha$-cut generators)
 so there is no need to provide them manually
 (what is more, this has been disallowed for safety reasons).
-Thus, is we wanted to define a trapezoidal FN next time, we would 
+Thus, is we wanted to define a trapezoidal FN next time, we would
 do it not like with $A_1$ but rather as with $T_1$.
 
 <<TrapEx1e,dependson='TrapEx1d'>>=
@@ -923,7 +923,7 @@ procedures described in Sec.~\ref{Sec:Approximation}.
 \subsection{Fuzzy Numbers with Sides Given by Power Functions}\label{Sec:powerdef}
 
 Fuzzy numbers which sides are given by power functions
-are defined using four coefficients 
+are defined using four coefficients
 $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$,
 and parameters $\mathtt{p.left}, \mathtt{p.right}>0$ which determine
 exponents for the side functions:
@@ -1116,7 +1116,7 @@ cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 The code may of course be modified manually to suit your needs.
 
 \paragraph{Tuning your figures.}
-Finally, we leave you with a quite more complex graphical 
+Finally, we leave you with a quite more complex graphical
 example from one of our papers:
 
 <<depicting2a,fig.keep='none'>>=
@@ -1355,7 +1355,7 @@ diff(supp(A))
 \subsection{Arithmetic Operations}
 
 The basic binary arithmetic operations for FNs are often defined
-by means of the so-called extension principle 
+by means of the so-called extension principle
 (see \cite{KlirYuan1995:fuzzybook})
 and interval arithmetic.
 For each $\alpha\in[0,1]$:
@@ -1377,14 +1377,14 @@ see \cite{DuboisPrade1978:opfn,DiamondKloeden1994:metricspacesfs}.
 Moreover, for $\lambda \in \mathbb{R}$,
 the scalar multiplication is given by:
 \[
-\left( \lambda \cdot A\right) _{\alpha }=\lambda A_{\alpha }=\left\{ 
+\left( \lambda \cdot A\right) _{\alpha }=\lambda A_{\alpha }=\left\{
 \begin{array}{ll}
 \left[ \lambda A_{L}\left( \alpha \right) ,\lambda A_{U}\left( \alpha
-\right) \right] , & \text{if }\lambda \geq 0, \\ 
+\right) \right] , & \text{if }\lambda \geq 0, \\
 \left[ \lambda A_{U}\left( \alpha \right) ,\lambda A_{L}\left( \alpha
 \right) \right] , & \text{if }\lambda <0,%
 \end{array}%
-\right. 
+\right.
 \]%
 for each $\alpha \in \lbrack 0,1]$.
 
@@ -1491,7 +1491,7 @@ functions entails difficulties in interpretation of the results
 too. This is the reason why a suitable approximation of fuzzy
 numbers is so important. We would like to deal
 with functions that are
-simpler or more regular and hence more convenient for 
+simpler or more regular and hence more convenient for
 computing.
 
 \subsection{Metrics in the Space of Fuzzy Numbers}
@@ -1801,20 +1801,20 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 % Beware of numerical error in integration e.g.~due to discontinuity
 % in $\alpha$-cuts........
 % ..... TO BE DONE....
-% 
+%
 % <<PLFNApproxNeares_error,fig.keep='none',warning=FALSE>>=
 % A1 <- FuzzyNumber(0,1,1,1,
 %          lower=function(a) floor(3*a)/3,
 %          upper=function(a) 1-a
 % ) # no info on discontinuities
-% 
+%
 % A2 <- DiscontinuousFuzzyNumber(0,1,1,1,
 %          lower=function(a) floor(3*a)/3,
 %          upper=function(a) 1-a,
 %          discontinuities.lower=c(0, 1/3, 2/3, 1),
 %          discontinuities.upper=numeric(0)
 % ) # discontinuities info included
-% 
+%
 % a <- seq(1e-9, 1-1e-9, length.out=100) # many alphas from (0,1)
 % d1 <- numeric(length(a)) # distances #1 (to be calculated)
 % d2 <- numeric(length(a)) # distances #2 (to be calculated)
@@ -1824,19 +1824,19 @@ legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
 %             knot.n=1, knot.alpha=a[i])
 %    P2 <- piecewiseLinearApproximation(A2, method='NearestEuclidean',
 %             knot.n=1, knot.alpha=a[i])
-% 
+%
 %    d1[i] <- distance(A1, P1)
 %    d2[i] <- distance(A2, P2)
 % }
 % @
-% 
+%
 % We note that in the first case the distance for $\alpha=0$ (trapezoidal
 % approximation) is
 % smaller than e.g.~for $\alpha\simeq 0.05$, which, theoretically,
 % is not possible. Moreover, the distance is not continuous
 % at some $\alpha$ (but it is in theory).
 % % .. TO DO.....
-% 
+%
 % \begin{center}
 % <<PLFNApproxNeares_error2,dependson='PLFNApproxNeares_error',echo=FALSE>>=
 % matplot(a, cbind(d1, d2), type='l', xlab='$\\alpha$', ylab='')
@@ -1851,7 +1851,7 @@ for equidistant knots, so does the error of the nearest $L_2$ approximator.
 Let us study the convergence behavior for our exemplary $A$.
 
 <<ApproxPLFNNearestConv1,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
-n <- 1:50
+n <- 1:27
 d <- matrix(NA, ncol=4, nrow=length(n))
 # d[,1] - Naive approximator's error for given knot.n
 # d[,2] - Best L2 approximator's error
@@ -1864,7 +1864,7 @@ for (i in seq_along(n))
             knot.n=n[i]) # equidistant knots
    d[i,1] <- distance(A, P1)
    d[i,2] <- distance(A, P2)
-   
+
    acut <- alphacut(A, seq(0, 1, length.out=n[i]+2))
    # d[i,3] <- sqrt(sum((c(diff(acut[,1]), diff(acut[,2]))^2)/(n[i]+1))) # beter ubound
    d[i,3] <- sqrt(2)*max(abs(c(diff(acut[,1]), diff(acut[,2]))))
@@ -1876,7 +1876,7 @@ matplot(n, d, type='l', log="y", lty=c(1,2,4), col=c(1,2,4))
 <<ApproxPLFNNearestConv2,dependson='ApproxPLFNNearestConv1',echo=FALSE>>=
 par(mar=c(4,4,2,1))
 matplot(n, d, type='l', xlab='$n$', ylab='$d(A, \\cdot)$', log="y", lty=c(1,2,4), col=c(1,2,4))
-legend(x=35, y=3, c('$d(A, N^n(A))$', '$d(A, \\Pi^n(A))$', 'upper bound'),
+legend(x=20, y=3.2, c('$d(A, N^n(A))$', '$d(A, \\Pi^n(A))$', 'upper bound'),
    lty=c(1,2,4), col=c(1,2,4))
 @
 \end{center}
@@ -1935,7 +1935,7 @@ for (i in 1:5) # 5 iterations
 
 
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
-% 
+%
 % This method uses a constrained version of the Nelder-Mead algorithm.
 % The procedure minimizes the target function numerically
 % by calling the \func{optim()} function.
@@ -1943,9 +1943,9 @@ for (i in 1:5) # 5 iterations
 % (it may fall into a neighborhood of a local minimum
 % or even fail to converge).
 % However, this approach may be used for any number of knots.
-% 
+%
 % TO BE DONE... WORK  ON AN EXACT ALGORITHM IS ALMOST FINISHED.....
-% 
+%
 % <<ApproxMethodPLFN1,dependson='ApproxExAPLFN',fig.keep='none'>>=
 % system.time(P3 <- piecewiseLinearApproximation(A,
 %    method='ApproximateNearestEuclidean', knot.n=1, knot.alpha=0.5))
@@ -1955,15 +1955,15 @@ for (i in 1:5) # 5 iterations
 % \noindent
 % Compare with exact solution......
 % Please note that a call to this method may be time-consuming.
-% 
+%
 % Another example:
-% 
+%
 % <<ApproxMethodPLFN2,dependson='ApproxExAPLFN',fig.keep='none'>>=
 % system.time(P4 <- piecewiseLinearApproximation(A,
 %    method='ApproximateNearestEuclidean', knot.n=4,
 %    knot.alpha=c(0.2, 0.3, 0.7, 0.9), verbose=TRUE))
 % @
-% 
+%
 % \begin{center}
 % <<ApproxMethodPLFN3,dependson='ApproxMethodPLFN2',echo=FALSE>>=
 % plot(A, xlab='$x$', ylab='$\\alpha$')
@@ -1971,13 +1971,13 @@ for (i in 1:5) # 5 iterations
 % print(distance(A, P4), digits=12)
 % @
 % \end{center}
-% 
+%
 % If the method fails to converge, you may try to call it
 % e.g.~with the \texttt{\argument{optim.control}=\func{list}(\argument{maxit}=\allowbreak{}5000)} parameter
 % to allow for greater number of iterations.
-% 
-% 
-% 
+%
+%
+%
 % <<fig.keep='none',echo=FALSE,exec=FALSE>>=
 % # B <- FuzzyNumber(0, 1, 1, 3,
 % #    lower=function(x) sqrt(x), upper=function(x) (1-x)^10)
@@ -2023,7 +2023,7 @@ and Pablo Villacorta Iglesias for stimulating discussion.
 
 
 The contribution of Marek Gagolewski was partially supported
-by the European Union from resources of the European Social Fund, Project PO KL 
+by the European Union from resources of the European Social Fund, Project PO KL
 ``Information technologies: Research and their interdisciplinary
 applications'', agreement UDA-POKL.04.01.01-00-051/10-00 (March-June 2013),
 and by FNP START Scholarship from the Foundation for Polish Science (2013).
