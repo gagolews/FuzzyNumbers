@@ -304,9 +304,9 @@ library(help='FuzzyNumbers')
 @
 
 \noindent
-For more information please visit the package's homepage \cite{Gagolewski:FuzzyNumbersHome}.
-In case of any problems, comments, or suggestions feel free to contact the author.
-Good luck!
+For more information please visit the package's homepage
+\cite{Gagolewski:fuzzynumberspackage}. In case of any problems, comments,
+or suggestions feel free to contact the author. Good luck!
 
 
 
@@ -1769,12 +1769,12 @@ Similarly to the $L_2$-nearest TFN case, here we are looking for
 \mathcal{P}(A)=\min\limits_{T\in \mathrm{PLFN}(\boldsymbol\alpha)}d_E(A,T).
 \]
 It may be shown that the solution to this problem
-always exists and is unique, see \cite{CoroianuETAL2013:plfnapprox}
-and \cite{CoroianuETAL2013:plfnapprox2}.
+always exists and is unique, see \cite{CoroianuETALXXXX:piecewise1}
+and \cite{CoroianuETALXXXX:piecewise2}.
 
 The \str{"{}NearestEuclidean"{}} \argument{method}
-uses the algorithm described in \cite{CoroianuETAL2013:plfnapprox}
-and \cite{CoroianuETAL2013:plfnapprox2}.
+uses the algorithm described in \cite{CoroianuETALXXXX:piecewise1}
+and \cite{CoroianuETALXXXX:piecewise2}.
 This implementation relies on numeric integration, so for large \argument{knot.n}
 may be slow.
 
@@ -1908,7 +1908,7 @@ plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A}(\\alpha)$')
 \end{center}
 
 For $\text{\argument{knot.n}}=1$ we may find best \argument{knot.alpha} using numerical optimization.
-It may be shown, see \cite{CoroianuETAL2013:plfnapprox},
+It may be shown, see \cite{CoroianuETALXXXX:piecewise1},
 that the distance function $D_{A}(\alpha)$ is continuous,
 but in general the minimum is not necessarily unique.
 % TO DO.....
@@ -2032,6 +2032,9 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 % \clearpage
 \bibliographystyle{acm}
-\bibliography{bibliography}
+% see https://github.com/gagolews/bibliography
+% add 'export BIBINPUTS="/home/gagolews/Publikacje/bibliography"'
+%     to .bashrc
+\bibliography{gagolewski,gagolewski_temp,aggregation,probstat,r,unsorted,fuzzynumbers}
 
 \end{document}
