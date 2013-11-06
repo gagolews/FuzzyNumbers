@@ -29,7 +29,7 @@ Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 * * *
 
-**Author**: Marek Gagolewski](http://staff.rexamine.com/gagolews), with contributions from Jan Caha
+**Author**: Marek Gagolewski](http://gagolewski.rexamine.com/), with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
