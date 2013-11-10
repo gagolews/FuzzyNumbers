@@ -62,7 +62,7 @@
 #' }
 #'
 #' Please feel free to send any comments and feature requests to the author
-#' (see his homepage at \url{http://staff.rexamine.com/gagolews/}).
+#' (see his homepage at \url{http://gagolewski.rexamine.com/}).
 #'
 #' For a complete list of classes and methods
 #' call \code{help(package="FuzzyNumbers")}.
@@ -93,15 +93,16 @@
 #' @author Marek Gagolewski \email{gagolews@@rexamine.com},\cr
 #'  with contributions from Jan Caha
 #' @references
-#' \pkg{FuzzyNumbers} Homepage, \url{http://www.rexamine.com/resources/fuzzynumbers/}.\cr
+#' \pkg{FuzzyNumbers} Homepage, \url{http://FuzzyNumbers.rexamine.com/}.\cr
 #' Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
 #' preserving the expected interval, Fuzzy Sets and Systems 159, pp. 1327-1344.\cr
 #' Ban A.I. (2009), On the nearest parametric approximation of a fuzzy number - Revisited,
-#' Fuzzy Sets and Systems 160, pp. 3027--3047.\cr
+#' Fuzzy Sets and Systems 160, pp. 3027-3047.\cr
 #' Chanas S. (2001), On the interval approximation of a fuzzy number,
 #' Fuzzy Sets and Systems 122, pp. 353-356.\cr
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
-#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, Fuzzy Sets and Systems, 2013, doi:10.1016/j.fss.2013.02.005.\cr
+#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, 
+#' Fuzzy Sets and Systems 233, pp. 26-51.\cr
 #' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
 #' Fuzzy Sets and Systems 93, pp. 125-135.\cr
 #' Dubois D., Prade H. (1978), Operations on fuzzy numbers, Int. J. Syst. Sci. 9, pp. 613-626.\cr

@@ -65,7 +65,8 @@
 #' @family FuzzyNumber-method
 #' @references
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013a),
-#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, Fuzzy Sets and Systems, doi:10.1016/j.fss.2013.02.005.\cr
+#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, 
+#' Fuzzy Sets and Systems 233, pp. 26-51.\cr
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013b),
 #' Nearest Piecewise Linear Approximation of Fuzzy Numbers - general case, in preparation.\cr
 #' 
