@@ -18,7 +18,7 @@
 
 
 #' @title Tools to Deal with Fuzzy Numbers
-#' 
+#'
 #' @description
 #' \pkg{FuzzyNumbers} is an open source (LGPL 3) package for R.
 #' It provides S4 classes and methods to deal with Fuzzy Numbers.
@@ -82,12 +82,12 @@
 #' \bold{Acknowledgments}: Many thanks to Jan Caha,
 #' Przemyslaw Grzegorzewski, Lucian Coroianu, and Pablo Villacorta Iglesias
 #'  for stimulating discussion.
-#'  
+#'
 #'  The development of the package in March-June 2013 was partially supported
-#'  by the European Union from resources of the European Social Fund, Project PO KL 
+#'  by the European Union from resources of the European Social Fund, Project PO KL
 #'  ``Information technologies: Research and their interdisciplinary
 #'  applications'', agreement UDA-POKL.04.01.01-00-051/10-00.
-#' 
+#'
 #' @name FuzzyNumbers-package
 #' @docType package
 #' @author Marek Gagolewski \email{gagolews@@rexamine.com},\cr
@@ -101,7 +101,7 @@
 #' Chanas S. (2001), On the interval approximation of a fuzzy number,
 #' Fuzzy Sets and Systems 122, pp. 353-356.\cr
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
-#' Nearest Piecewise Linear Approximation of Fuzzy Numbers, 
+#' Nearest Piecewise Linear Approximation of Fuzzy Numbers,
 #' Fuzzy Sets and Systems 233, pp. 26-51.\cr
 #' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
 #' Fuzzy Sets and Systems 93, pp. 125-135.\cr

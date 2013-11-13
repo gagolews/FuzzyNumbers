@@ -24,15 +24,15 @@
 #' @description
 #' The calculation of the so-called value is one of possible methods to
 #' deffuzify a fuzzy number.
-#' 
+#'
 #' @details
 #' The value of \eqn{A} (Delgrado et al, 1998) is defined as
 #' \eqn{val(A) := \int_0^1 \alpha\left(A_L(\alpha)+A_U(\alpha)\right)\,d\alpha}{val(A) := int_0^1 \alpha(A_L(\alpha) + A_U(\alpha))d\alpha}.
-#' 
+#'
 #' @param object a fuzzy number
 #' @param ... additional arguments passed to \code{\link{alphaInterval}}
 #' @return a single numeric value
-#' 
+#'
 #' @exportMethod value
 #' @docType methods
 #' @name value
@@ -59,5 +59,3 @@ setMethod(
       return(sum(alphaInterval(object, ...)))
    }
 )
-
-

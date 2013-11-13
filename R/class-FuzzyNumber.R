@@ -35,7 +35,7 @@
 #' called the \emph{left side generator of \eqn{A}},
 #' and \eqn{right: [0,1]\to[0,1]}{right: [0,1]->[1,0]} is a nonincreasing function
 #' called the \emph{right side generator of \eqn{A}}.
-#' 
+#'
 #' Alternatively, it may be shown that each fuzzy number \eqn{A} may be uniquely determined
 #' by specifying its \eqn{\alpha}-cuts, \eqn{A(\alpha)}. We have \eqn{A(0)=[a1,a4]} and
 #' \deqn{A(\alpha)=[a1+(a2-a1)*lower(\alpha), a3+(a4-a3)*upper(\alpha)]}
@@ -44,15 +44,15 @@
 #' are, respectively, strictly increasing and decreasing functions
 #' satisfying \eqn{lower(\alpha)=\inf\{x: \mu(x)\ge\alpha\}}{lower(\alpha)=inf(x: \mu(x)\ge\alpha)}
 #' and  \eqn{upper(\alpha)=\sup\{x: \mu(x)\ge\alpha\}}{upper(\alpha)=sup(x: \mu(x)\ge\alpha)}.
-#' 
-#' 
+#'
+#'
 #' @details
 #' Please note that many algorithms that deal with fuzzy numbers often use
 #' \eqn{\alpha}-cuts rather than side functions.
-#' 
+#'
 #' Note that the \pkg{FuzzyNumbers} package also deals with particular types
 #' of fuzzy numbers like trapezoidal, piecewise linear, or ``parametric'' FNs.
-#' 
+#'
 #' @section Slots:
 #'  \describe{
 #'    \item{\code{a1}:}{Single numeric value specifying the left bound for the support.}
@@ -64,19 +64,19 @@
 #'    \item{\code{left}:}{A nondecreasing function [0,1]->[0,1] that gives the left side function.}
 #'    \item{\code{right}:}{A nonincreasing function [0,1]->[1,0] that gives the right side function.}
 #'  }
-#'  
+#'
 #' @section Child/sub classes:
 #' \code{\linkS4class{TrapezoidalFuzzyNumber}},
 #' \code{\linkS4class{PiecewiseLinearFuzzyNumber}},
 #' \code{\linkS4class{PowerFuzzyNumber}}, and
 #' \code{\linkS4class{DiscontinuousFuzzyNumber}}
-#' 
+#'
 #' @seealso \code{\link{FuzzyNumber}} for a convenient constructor, and
 #' \code{\link{as.FuzzyNumber}} for conversion of objects to this class.
 #' Also, see \code{\link{convertSide}} for creating side functions generators,
 #' \code{\link{convertAlpha}} for creating alpha-cut bounds generators,
 #' \code{\link{approxInvert}} for inverting side functions/alpha-cuts numerically.
-#' 
+#'
 #' @exportClass FuzzyNumber
 #' @name FuzzyNumber-class
 #' @rdname FuzzyNumber-class
@@ -117,35 +117,35 @@ setClass(
       upper01 <- object@upper(c(0,1))
       left01  <- object@left(c(0,1))
       right01 <- object@right(c(0,1))
-      
+
       if (length(lower01) != 2 || !is.numeric(lower01))
          return("`lower' is not properly vectorized or doesn't give numeric results")
       else if (!is.na(lower01[1])) {
          if (lower01[1] < 0 || lower01[2] > 1 || lower01[1] > lower01[2])
             return("`lower' should be an increasing function [0,1]->[0,1]")
       }
-      
+
       if (length(upper01) != 2 || !is.numeric(upper01))
          return("`upper' is not properly vectorized or doesn't give numeric results")
       else if (!is.na(upper01[1])) {
          if (upper01[2] < 0 || upper01[1] > 1 || upper01[2] > upper01[1])
             return("`upper' should be a decreasing function [0,1]->[1,0]")
       }
-      
+
       if (length(left01) != 2 || !is.numeric(left01))
          return("`left' is not properly vectorized or doesn't give numeric results")
       else if (!is.na(left01[1])) {
          if (left01[1] < 0 || left01[2] > 1 || left01[1] > left01[2])
             return("`left' should be an increasing function [0,1]->[0,1]")
       }
-      
+
       if (length(right01) != 2 || !is.numeric(right01))
          return("`right' is not properly vectorized or doesn't give numeric results")
       else if (!is.na(right01[1])) {
          if (right01[2] < 0 || right01[1] > 1 || right01[2] > right01[1])
             return("`right' should be a decreasing function [0,1]->[1,0]")
       }
-      
+
 
       if (is.na(right01[1]) != is.na(left01[1]))
          return("Either all or none of `left' and `right' should return NA")
@@ -175,7 +175,7 @@ setClass(
 #' @param left lower side function generator; a nondecreasing function [0,1]->[0,1] or returning NA_real_
 #' @param right upper side function generator; a nonincreasing function [0,1]->[1,0] or returning NA_real_
 #' @return Object of class \code{\linkS4class{FuzzyNumber}}
-#' 
+#'
 #' @family FuzzyNumber-method
 #' @export
 FuzzyNumber <- function(a1, a2, a3, a4,
@@ -187,8 +187,3 @@ FuzzyNumber <- function(a1, a2, a3, a4,
    new("FuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
        lower=lower, upper=upper, left=left, right=right)
 }
-
-
-
-
-

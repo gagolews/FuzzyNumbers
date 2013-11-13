@@ -25,14 +25,14 @@
 #' always in form of intervals.
 #' Moreover, the \eqn{\alpha}-cuts form a nonincreasing
 #' chain w.r.t. \eqn{alpha}.
-#' 
+#'
 #' @param object a fuzzy numbers
 #' @param alpha numeric vector with elements in [0,1]
-#' 
+#'
 #' @return a matrix with two columns (left and right alha cut bounds).
 #' if some elements in \code{alpha} are not in [0,1], then \code{NA}
 #' is set.
-#' 
+#'
 #' @exportMethod alphacut
 #' @docType methods
 #' @name alphacut
@@ -56,7 +56,7 @@ setMethod(
    {
       x <- matrix(NA_real_, nrow=length(alpha), ncol=2,
                   dimnames=list(format(alpha), c("L", "U")))
-      
+
       wh <- which(alpha >= 0 & alpha <= 1)
       x[wh, ] <-
         c(

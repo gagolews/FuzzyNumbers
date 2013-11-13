@@ -24,10 +24,10 @@
 #' Discontinuity information increase the precision of some numerical
 #' integration-based algorithms, e.g. of \code{\link{piecewiseLinearApproximation}}.
 #' It also allows for making more valid fuzzy number plots.
-#' 
+#'
 #' @section Slots:
 #'  \describe{
-#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4}, 
+#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4},
 #'    \code{lower}, \code{upper}, \code{left}, \code{right}:}{
 #'    Inherited from the \code{\linkS4class{FuzzyNumber}} class.}
 #'    \item{\code{discontinuities.left}:}{nondecreasingly sorted  numeric vector
@@ -41,7 +41,7 @@
 #'  }
 #'
 #' @section Extends:
-#' Class \code{\linkS4class{FuzzyNumber}}, directly. 
+#' Class \code{\linkS4class{FuzzyNumber}}, directly.
 #'
 #' @exportClass DiscontinuousFuzzyNumber
 #' @name DiscontinuousFuzzyNumber-class
@@ -134,4 +134,3 @@ DiscontinuousFuzzyNumber <- function(a1, a2, a3, a4,
        discontinuities.lower=discontinuities.lower,
        discontinuities.upper=discontinuities.upper)
 }
-

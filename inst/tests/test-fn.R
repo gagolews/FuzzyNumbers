@@ -5,7 +5,7 @@ test_that("FuzzyNumber A-side functions", {
      left  = function(x) x,
      right = function(x) 1-x
    )
-   
+
    expect_that(A, is_a("FuzzyNumber"))
    expect_that(supp(A), is_equivalent_to(c(1,7)))
    expect_that(core(A), is_equivalent_to(c(2,4)))
@@ -17,16 +17,16 @@ test_that("FuzzyNumber B-alpha cuts", {
      lower = function(alpha) pbeta(alpha, 5, 9),
      upper = function(alpha) pexp(1/alpha-1)
    )
-   
+
    expect_that(B, is_a("FuzzyNumber"))
    expect_that(supp(B), is_equivalent_to(c(-1,9)))
    expect_that(core(B), is_equivalent_to(c(3,3)))
    expect_that(alphacut(B, c(0,1)), is_equivalent_to(matrix(c(-1,3,9,3), nrow=2)))
 })
-  
+
 test_that("FuzzyNumber C-shadowed set", {
    C <- FuzzyNumber(-5,-1,1,5) # shadowed set
-   
+
    expect_that(C, is_a("FuzzyNumber"))
    expect_that(supp(C), is_equivalent_to(c(-5,5)))
    expect_that(core(C), is_equivalent_to(c(-1,1)))
@@ -34,7 +34,7 @@ test_that("FuzzyNumber C-shadowed set", {
 
 
 test_that("FuzzyNumber wrong ones", {
-   
+
    expect_that(try(FuzzyNumber(0,1,2,Inf), TRUE), is_a("try-error"))
    expect_that(try(FuzzyNumber(0,1,0,3), TRUE), is_a("try-error"))
    expect_that(try(FuzzyNumber(0,1,2,3,

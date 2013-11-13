@@ -23,24 +23,24 @@
 #'
 #' @description
 #' For possible slot names see man pages for the \linkS4class{FuzzyNumber} class and its derivatives
-#' 
+#'
 #' @details
 #' All slot accessors are read-only.
-#' 
+#'
 #' @param x a fuzzy number
 #' @param i character; slot name
-#' 
+#'
 #' @return slot value
-#' 
+#'
 #' @usage
 #' \S4method{[}{FuzzyNumber,character}(x, i)
-#' 
+#'
 #' \S4method{[}{PiecewiseLinearFuzzyNumber,character}(x, i)
-#' 
+#'
 #' \S4method{[}{PowerFuzzyNumber,character}(x, i)
-#' 
+#'
 #' \S4method{[}{DiscontinuousFuzzyNumber,character}(x, i)
-#' 
+#'
 #' @name Extract
 #' @rdname Extract-methods
 #' @docType methods
@@ -66,7 +66,7 @@ setMethod(
    signature(x="FuzzyNumber", i="character"),
    definition=function(x, i)
    {
-      switch(i, 
+      switch(i,
              "a1"    = x@a1,
              "a2"    = x@a2,
              "a3"    = x@a3,
@@ -86,7 +86,7 @@ setMethod(
    signature(x="PiecewiseLinearFuzzyNumber", i="character"),
    definition=function(x, i)
    {
-      switch(i, 
+      switch(i,
              "a1"    = x@a1,
              "a2"    = x@a2,
              "a3"    = x@a3,
@@ -125,7 +125,7 @@ setMethod(
    signature(x="PowerFuzzyNumber", i="character"),
    definition=function(x, i)
    {
-      switch(i, 
+      switch(i,
              "a1"    = x@a1,
              "a2"    = x@a2,
              "a3"    = x@a3,
@@ -149,7 +149,7 @@ setMethod(
    signature(x="DiscontinuousFuzzyNumber", i="character"),
    definition=function(x, i)
    {
-      switch(i, 
+      switch(i,
              "a1"    = x@a1,
              "a2"    = x@a2,
              "a3"    = x@a3,

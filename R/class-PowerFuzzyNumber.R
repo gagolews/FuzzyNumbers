@@ -23,21 +23,21 @@
 #'
 #' @description
 #' Fuzzy numbers which sides are given by power functions
-#' are defined using four coefficients 
+#' are defined using four coefficients
 #' \code{a1} <= \code{a2} <= \code{a3} <= \code{a4},
 #' and parameters \code{p.left}, \code{p.right}>0, which determine
 #' exponents for the side functions.
-#' 
+#'
 #' @details
 #' We have \eqn{\mathtt{left}(x)=x^{\mathtt{p.left}}}{left(x)=x^p.left},
 #' and \eqn{\mathtt{right}(x)=(1-x)^{\mathtt{p.right}}}{right(x)=(1-x)^p.right}.
-#' 
+#'
 #' This class is a natural generalization of trapezoidal FNs.
 #' For other see \linkS4class{PiecewiseLinearFuzzyNumber}.
 #'
 #' @section Slots:
 #'  \describe{
-#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4}, 
+#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4},
 #'    \code{lower}, \code{upper}, \code{left}, \code{right}:}{
 #'    Inherited from the \code{\linkS4class{FuzzyNumber}} class.}
 #'    \item{\code{p.left}:}{single numeric value; 1.0 for a trapezoidal FN.}
@@ -45,8 +45,8 @@
 #'  }
 #'
 #' @section Extends:
-#' Class \code{\linkS4class{FuzzyNumber}}, directly. 
-#' 
+#' Class \code{\linkS4class{FuzzyNumber}}, directly.
+#'
 #' @seealso \code{\link{PowerFuzzyNumber}} for a convenient constructor,
 #' \code{\link{as.PowerFuzzyNumber}} for conversion of objects to this class.
 #'
@@ -87,9 +87,9 @@ setMethod(
    definition=function(.Object, ...)
    {
       .Object <- callNextMethod()
-      
+
       e <- new.env();
-      
+
       e$p.left  <- p.left  <- .Object@p.left    # p.left <- ... to avoid
       e$p.right <- p.right <- .Object@p.right   # PKG CHECK problems
 
@@ -123,12 +123,10 @@ setMethod(
 #' @param p.right a positive number specyfing the exponent for the right side
 #' @return Object of class \code{\linkS4class{PowerFuzzyNumber}}
 #' @export
-#' 
+#'
 #' @family PowerFuzzyNumber-method
 PowerFuzzyNumber <- function(a1, a2, a3, a4, p.left=1.0, p.right=1.0)
 {
    new("PowerFuzzyNumber", a1=a1, a2=a2, a3=a3, a4=a4,
                                       p.left=p.left, p.right=p.right)
 }
-
-

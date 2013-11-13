@@ -19,11 +19,11 @@
 
 #' @title
 #' Calculate the Ambiguity of a Fuzzy Number
-#' 
+#'
 #' @description
 #' The ambiguity (Delgado et al, 1998)
 #' is a measure of nonspecificity of a fuzzy number.
-#' 
+#'
 #' @details
 #' The ambiguity is defined as
 #' \eqn{amb(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha}{val(A) := int_0^1 \alpha(A_U(\alpha) - A_L(\alpha))d\alpha}.
@@ -31,8 +31,8 @@
 #' @param object a fuzzy number
 #' @param ... additional arguments passed to \code{\link{alphaInterval}}
 #' @return a single numeric value
-#' 
-#' 
+#'
+#'
 #' @exportMethod ambiguity
 #' @docType methods
 #' @name ambiguity

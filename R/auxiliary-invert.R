@@ -21,25 +21,25 @@
 
 #' @title
 #' Approximate the Inverse of a Given Function
-#' 
+#'
 #' @description
 #' The function may be used to create side generating functions from
 #' alpha-cut generators and inversely.
-#' 
+#'
 #' @details
 #' The function is a wrapper to \link{splinefun} and \link{approxfun}.
 #' Thus, interpolation is used.
-#' 
+#'
 #' @param f a monotonic, continuous function f: [0,1]->[0,1]
 #' @param method interpolation method: ``\code{monoH.FC}', ``\code{hyman}'' or ``\code{linear}''
 #' @param n number of interpolation points
-#' 
+#'
 #' @return a new function, the approximate inverse of the input
-#' 
+#'
 #' @family auxiliary
 #' @seealso \code{\linkS4class{FuzzyNumber}}
 #' @export
-approxInvert <- function(f, method=c("monoH.FC", "linear", "hyman"), n=500) 
+approxInvert <- function(f, method=c("monoH.FC", "linear", "hyman"), n=500)
 {
    stopifnot(is.function(f))
    method <- match.arg(method)
@@ -52,4 +52,3 @@ approxInvert <- function(f, method=c("monoH.FC", "linear", "hyman"), n=500)
    else
       splinefun(y, x, method=method)
 }
-

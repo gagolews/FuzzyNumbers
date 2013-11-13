@@ -20,17 +20,17 @@
 
 #' @title
 #' Evaluate the Membership Function
-#' 
+#'
 #' @description
 #' This function returns the value(s) of the membership function
 #' of a fuzzy number at given point(s).
 #'
-#' 
+#'
 #' @param object a fuzzy numbers
 #' @param x numeric vector
-#' 
+#'
 #' @return a numeric vector
-#' 
+#'
 #' @exportMethod evaluate
 #' @docType methods
 #' @name evaluate
@@ -63,4 +63,3 @@ setMethod(
       y
    }
 )
-

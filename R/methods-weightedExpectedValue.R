@@ -24,19 +24,19 @@
 #' @description
 #' The calculation of the so-called weighted expected value is one of possible methods to
 #' deffuzify a fuzzy number.
-#' 
+#'
 #' For \eqn{w=0.5} we get the ordinary \code{\link{expectedValue}}.
-#' 
+#'
 #' @details
 #' The weighted expected value of \eqn{A} is defined as
 #' \eqn{EV_w(A) := (1-w) EI_L(A) + w EI_U(A)}{EV_w(A) := (1-w) EI_L(A) + w EI_U(A)},
 #' where \eqn{EI} is the \code{\link{expectedInterval}.}
-#' 
+#'
 #' @param object a fuzzy number
 #' @param w a single numeric value in [0,1]
 #' @param ... additional arguments passed to \code{\link{expectedInterval}}
 #' @return a single numeric value
-#' 
+#'
 #' @exportMethod weightedExpectedValue
 #' @docType methods
 #' @name weightedExpectedValue
@@ -63,4 +63,3 @@ setMethod(
       return((1-w)*EI[1] + w*EI[2])
    }
 )
-

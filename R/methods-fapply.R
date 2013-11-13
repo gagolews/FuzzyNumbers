@@ -20,29 +20,29 @@
 
 #' @title
 #' Apply a Function on a Fuzzy Number
-#' 
+#'
 #' @description
 #' Applies a given monotonic function
 #' using the extension principle (i.e. the function is applied on alpha-cuts).
-#' 
+#'
 #' @details
 #' Currently only a method for the \linkS4class{PiecewiseLinearFuzzyNumber}
 #' class has been defined. The computations are exact (up to a numeric error)
 #' at knots. So, make sure you have a sufficient number of knots if you
 #' want good approximation.
-#' 
+#'
 #' For other types of fuzzy numbers, consider using
 #' \code{\link{piecewiseLinearApproximation}}.
-#' 
-#' 
+#'
+#'
 #' @param object a fuzzy number
 #' @param fun a monotonic, vectorized R function
 #' @param ... additional arguments passed to \code{fun}
 #' @return a \linkS4class{PiecewiseLinearFuzzyNumber}
-#' 
+#'
 #' @usage
 #' \S4method{fapply}{PiecewiseLinearFuzzyNumber,function}(object, fun, ...)
-#' 
+#'
 #' @docType methods
 #' @name fapply
 #' @rdname fapply-methods
@@ -62,10 +62,10 @@ setMethod(
    {
       ol <-     c(object@a1, object@knot.left,  object@a2)
       or <- rev(c(object@a3, object@knot.right, object@a4))
-      
+
       ol <- fun(ol, ...)
       or <- fun(or, ...)
-      
+
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(knot.alpha=object@knot.alpha,
                                  knot.left=pmin(ol, or),
@@ -73,4 +73,3 @@ setMethod(
       )
    }
 )
-

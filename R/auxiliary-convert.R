@@ -19,24 +19,24 @@
 
 #' @title
 #' Convert a Given Side Function to Side Generating Function
-#' 
+#'
 #' @description
 #' The resulting function linearly scales the input
-#' and passes it to the original function. 
-#' 
+#' and passes it to the original function.
+#'
 #' @details
 #' The function works for x1<x2 and x1>x2.
-#' 
-#' 
+#'
+#'
 #' @param f a function defined on [x1,x2]
 #' @param x1 numeric vector of length 1; if longer, only the first element is used
 #' @param x2 numeric vector of length 1; if longer, only the first element is used
 #' @return a new function defined on [0,1] (scaled input)
-#' 
+#'
 #' @seealso \code{\linkS4class{FuzzyNumber}}
 #' @family auxiliary
 #' @export
-convertSide <- function(f, x1, x2) 
+convertSide <- function(f, x1, x2)
 {
    stopifnot(is.function(f) && is.numeric(x1) && is.numeric(x2))
    e <- new.env()
@@ -54,20 +54,20 @@ convertSide <- function(f, x1, x2)
 
 #' @title
 #' Convert a Given Upper/Lower Alpha-Cut Function to an Alpha-Cut Generating Function
-#' 
+#'
 #' @description
 #' The resulting function calls the original function and then
 #' linearly scales its output.
-#' 
+#'
 #' @param f a function into [y1,y2]
 #' @param y1 numeric vector of length 1
 #' @param y2 numeric vector of length 1
 #' @return a new function defined on [0,1] (scaled input)
-#' 
+#'
 #' @seealso \code{\linkS4class{FuzzyNumber}}
 #' @family auxiliary
 #' @export
-convertAlpha <- function(f, y1, y2) 
+convertAlpha <- function(f, y1, y2)
 {
    stopifnot(is.function(f) && is.numeric(y1) && is.numeric(y2))
    e <- new.env()

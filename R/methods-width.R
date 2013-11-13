@@ -23,17 +23,17 @@
 #'
 #' @description
 #' The width (Chanas, 2001) is a measure of nonspecificity of a fuzzy number.
-#' 
+#'
 #' @details
 #' The width of \eqn{A} is defined as
 #' \eqn{width(A) := EI_U(A) - EI_L(A)},
 #' where \eqn{EI} is the \code{\link{expectedInterval}}.
-#' 
+#'
 #' @param object a fuzzy number
 #' @param ... additional arguments passed to \code{\link{expectedInterval}}
 #' @return a single numeric value
-#' 
-#' 
+#'
+#'
 #' @exportMethod width
 #' @docType methods
 #' @name width
@@ -60,4 +60,3 @@ setMethod(
       return(diff(expectedInterval(object, ...)))
    }
 )
-

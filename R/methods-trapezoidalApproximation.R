@@ -30,7 +30,7 @@
 #' \code{method} may be one of:
 #' \enumerate{
 #' \item \code{NearestEuclidean}: see (Ban, 2009); uses numerical integration, see \code{\link{integrateAlpha}}
-#' 
+#'
 #' \item \code{Naive}:
 #' We have core(A)==core(T(A)) and supp(A)==supp(T(A))
 #'
@@ -50,16 +50,16 @@
 #' for which each point that surely belongs to A also belongs to T(A),
 #' and each point that surely does not belong to A also does not belong to T(A).
 #' }
-#' 
+#'
 #' @usage
 #' \S4method{trapezoidalApproximation}{FuzzyNumber}(object,
-#' method=c("NearestEuclidean", "ExpectedIntervalPreserving", "SupportCoreRestricted", "Naive"), 
+#' method=c("NearestEuclidean", "ExpectedIntervalPreserving", "SupportCoreRestricted", "Naive"),
 #' ..., verbose=FALSE)
-#' 
+#'
 #' @param object a fuzzy number
-#' @param method character; one of: \code{"NearestEuclidean"} (default), 
-#' \code{"ExpectedIntervalPreserving"}, 
-#' \code{"SupportCoreRestricted"}, 
+#' @param method character; one of: \code{"NearestEuclidean"} (default),
+#' \code{"ExpectedIntervalPreserving"},
+#' \code{"SupportCoreRestricted"},
 #' \code{"Naive"}
 #' @param verbose logical; should some technical details on the computations being performed be printed?
 #' @param ... further arguments passed to \code{\link{integrateAlpha}}
@@ -83,14 +83,14 @@
 #' with restrictions on the support and core, Proc. EUSFLAT/LFA 2011, Atlantic Press, pp. 749-756.\cr
 #' Yeh C.-T. (2008), Trapezoidal and triangular approximations preserving the expected interval,
 #' Fuzzy Sets and Systems 159, pp. 1345-1353.\cr
-#' 
+#'
 #' @examples
 #' (A <- FuzzyNumber(-1,0,1,40,lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))
 #' (TA <- trapezoidalApproximation(A, "ExpectedIntervalPreserving")) # Note that cores are disjoint!
 #' expectedInterval(A)
 #' expectedInterval(TA)
-setGeneric("trapezoidalApproximation", 
-           function(object, ...) 
+setGeneric("trapezoidalApproximation",
+           function(object, ...)
               standardGeneric("trapezoidalApproximation"));
 
 
@@ -138,17 +138,17 @@ trapezoidalApproximation_NearestEuclidean <- function(object, ..., verbose)
    # calculate integrals:
    if (is.na(object@lower(0)) || is.na(object@upper(0)))
       stop("Integral of alphacut bounds cannot be computed")
-   
+
    expected.interval <- expectedInterval(object, ...)
    alpha.interval <- alphaInterval(object, ...)
-   
+
    intLower <- expected.interval[1]
    intUpper <- expected.interval[2]
    intAlphaTimesLower <- alpha.interval[1]
    intAlphaTimesUpper <- alpha.interval[2]
-   
+
    # Here we use the method given in (Ban, 2009)
-   
+
    if (intAlphaTimesUpper-intAlphaTimesLower >= (intUpper-intLower)/3 )
       # i.e. if ambiguity(A) >= width(A)/3
    { # (i)
@@ -161,7 +161,7 @@ trapezoidalApproximation_NearestEuclidean <- function(object, ..., verbose)
       if (-intLower+3*intAlphaTimesLower-3*intUpper+5*intAlphaTimesUpper > 0)
       { # (iii)
          if (verbose) cat("Using Case (iii) of (Corollary 8; Ban, 2009)\n")
-         
+
          a1 <-             (16*intLower-18*intAlphaTimesLower-2*intUpper)/5
          a2 <- a3 <- a4 <- (-2*intLower+ 6*intAlphaTimesLower+4*intUpper)/5
       } else
@@ -173,12 +173,12 @@ trapezoidalApproximation_NearestEuclidean <- function(object, ..., verbose)
          } else
          { # (ii)
             if (verbose) cat("Using Case (ii) of (Corollary 8; Ban, 2009)\n")
-            
+
             a1       <- ( 7*intLower-9*intAlphaTimesLower+1*intUpper-3*intAlphaTimesUpper)/2
             a2 <- a3 <- (-2*intLower+6*intAlphaTimesLower-2*intUpper+6*intAlphaTimesUpper)/2
             a4       <- ( 1*intLower-3*intAlphaTimesLower+7*intUpper-9*intAlphaTimesUpper)/2
          }
-   
+
    return(TrapezoidalFuzzyNumber(a1,a2,a3,a4))
 }
 
@@ -189,17 +189,17 @@ trapezoidalApproximation_ExpectedIntervalPreserving <- function(object, ..., ver
    # calculate integrals:
    if (is.na(object@lower(0)) || is.na(object@upper(0)))
       stop("Integral of alphacut bounds cannot be computed")
-   
+
    expected.interval <- expectedInterval(object, ...)
    alpha.interval <- alphaInterval(object, ...)
-   
+
    intLower <- expected.interval[1]
    intUpper <- expected.interval[2]
    intAlphaTimesLower <- alpha.interval[1]
    intAlphaTimesUpper <- alpha.interval[2]
-   
+
    # Here we use the method given in (Grzegorzewski, 2010)
-   
+
    if (intAlphaTimesUpper-intAlphaTimesLower >= (intUpper-intLower)/3 )
       # i.e. if ambiguity(A) >= width(A)/3
    {
@@ -212,7 +212,7 @@ trapezoidalApproximation_ExpectedIntervalPreserving <- function(object, ..., ver
       Eval13 <- 2*intLower/3 +   intUpper/3 # Weighted Expected Value w=1/3
       Eval23 <-   intLower/3 + 2*intUpper/3 # Weighted Expected Value w=2/3
       Val <- intAlphaTimesLower + intAlphaTimesUpper # Value
-      
+
       if (Eval13 <= Val && Val <= Eval23)
       {
          a1 <-       3*intLower +   intUpper - 3*intAlphaTimesLower - 3*intAlphaTimesUpper
@@ -228,9 +228,9 @@ trapezoidalApproximation_ExpectedIntervalPreserving <- function(object, ..., ver
          a2 <- a3 <- a4 <- intUpper
       }
    }
-   
+
    return(TrapezoidalFuzzyNumber(a1, a2, a3, a4))
-   
+
 }
 
 
@@ -241,17 +241,17 @@ trapezoidalApproximation_SupportCoreRestricted <- function(object, ..., verbose)
    # calculate integrals:
    if (is.na(object@lower(0)) || is.na(object@upper(0)))
       stop("Integral of alphacut bounds cannot be computed")
-   
+
    expected.interval <- expectedInterval(object, ...)
    alpha.interval <- alphaInterval(object, ...)
-   
+
    intLower <- expected.interval[1]
    intUpper <- expected.interval[2]
    intAlphaTimesLower <- alpha.interval[1]
    intAlphaTimesUpper <- alpha.interval[2]
-   
+
    # Here we use the method given in (Grzegorzewski, Pasternak-Winiarska, 2011)
-   
+
    u1 <- 4*intLower - 6*intAlphaTimesLower
    u2 <- 6*intAlphaTimesLower - 2*intLower
    if (object@a2 > u2)
@@ -277,8 +277,8 @@ trapezoidalApproximation_SupportCoreRestricted <- function(object, ..., verbose)
          a2 <- object@a2
       }
    }
-   
-   
+
+
    u3 <- 6*intAlphaTimesUpper - 2*intUpper
    u4 <- 4*intUpper - 6*intAlphaTimesUpper
    if (object@a4 > u4)
@@ -304,8 +304,6 @@ trapezoidalApproximation_SupportCoreRestricted <- function(object, ..., verbose)
          a4 <- object@a4
       }
    }
-   
+
    return(TrapezoidalFuzzyNumber(a1, a2, a3, a4))
 }
-
-

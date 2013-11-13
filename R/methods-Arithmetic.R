@@ -19,69 +19,69 @@
 
 #' @title
 #' Arithmetic Operations on Fuzzy Numbers
-#' 
+#'
 #' @description
-#' Applies arithmetic operations using the extension principle 
+#' Applies arithmetic operations using the extension principle
 #' and interval-based calculations.
-#' 
+#'
 #' @details
 #' Implemented operators: \code{+}, \code{-}, \code{*}, \code{/}
 #' for piecewise linear fuzzy numbers.
 #' Also some versions may be applied on numeric values and
 #' trapezoidal fuzzy numbers.
-#' 
+#'
 #' Note that according to the theory the class of PLFNs is not closed
 #' under the operations * and /.
 #' However, if you operate on a large number of knots,
 #' the results should be satisfactory.
-#' 
+#'
 #' @param e1 a fuzzy number or single numeric value
 #' @param e2 a fuzzy number or single numeric value
 #' @return a fuzzy number of the class \linkS4class{PiecewiseLinearFuzzyNumber}
 #' of a \linkS4class{TrapezoidalFuzzyNumber}
-#' 
+#'
 #' @details
 #' Thanks to Jan Caha for suggestions on PLFN operations.
 #'
 #' @return a fuzzy number
-#' 
+#'
 #' @usage
 #' \S4method{+}{numeric,FuzzyNumber}(e1, e2) # e2 + e1
-#' 
+#'
 #' \S4method{+}{TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber}(e1, e2)
-#' 
+#'
 #' \S4method{+}{PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber}(e1, e2)
-#' 
+#'
 #' \S4method{+}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2)
-#' 
+#'
 #' \S4method{+}{PiecewiseLinearFuzzyNumber,FuzzyNumber}(e1, e2) # calls as.PiecewiseLinearFuzzyNumber()
-#' 
+#'
 #' \S4method{-}{numeric,FuzzyNumber}(e1, e2) # e2*(-1) + e1
-#' 
+#'
 #' \S4method{-}{TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber}(e1, e2)
-#' 
+#'
 #' \S4method{-}{PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber}(e1, e2)
-#' 
-#' \S4method{-}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2) 
-#' 
+#'
+#' \S4method{-}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2)
+#'
 #' \S4method{-}{PiecewiseLinearFuzzyNumber,FuzzyNumber}(e1, e2) # calls as.PiecewiseLinearFuzzyNumber()
-#' 
+#'
 #' \S4method{-}{FuzzyNumber,ANY}(e1, e2) # -e1
-#' 
+#'
 #' \S4method{*}{numeric,FuzzyNumber}(e1, e2) # e2 * e1
-#' 
+#'
 #' \S4method{*}{TrapezoidalFuzzyNumber,numeric}(e1, e2)
-#' 
+#'
 #' \S4method{*}{PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber}(e1, e2)
-#' 
+#'
 #' \S4method{*}{PiecewiseLinearFuzzyNumber,FuzzyNumber}(e1, e2) # calls as.PiecewiseLinearFuzzyNumber()
-#' 
-#' \S4method{*}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2) 
-#' 
-#' \S4method{/}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2) 
-#' 
+#'
+#' \S4method{*}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2)
+#'
+#' \S4method{/}{PiecewiseLinearFuzzyNumber,numeric}(e1, e2)
+#'
 #' \S4method{/}{PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber}(e1, e2)
-#' 
+#'
 #' \S4method{/}{PiecewiseLinearFuzzyNumber,FuzzyNumber}(e1, e2) # calls as.PiecewiseLinearFuzzyNumber()
 #'
 #' @name Arithmetic
@@ -220,13 +220,13 @@ setMethod(
    {
       knot.alpha <- unique(sort(c(e1@knot.alpha, e2@knot.alpha)))
       knot.n <- length(knot.alpha)
-      
+
       if (!isTRUE(all.equal(e1@knot.alpha, knot.alpha)))
          e1 <- as.PiecewiseLinearFuzzyNumber(e1, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       if (!isTRUE(all.equal(e2@knot.alpha, knot.alpha)))
          e2 <- as.PiecewiseLinearFuzzyNumber(e2, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(e1@a1+e2@a1, e1@a2+e2@a2, e1@a3+e2@a3, e1@a4+e2@a4,
                                  knot.n=knot.n, knot.alpha=knot.alpha,
@@ -240,18 +240,18 @@ setMethod(
 
 setMethod(
    "-",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"),
    function (e1, e2)
    {
       knot.alpha <- unique(sort(c(e1@knot.alpha, e2@knot.alpha)))
       knot.n <- length(knot.alpha)
-      
+
       if (!isTRUE(all.equal(e1@knot.alpha, knot.alpha)))
          e1 <- as.PiecewiseLinearFuzzyNumber(e1, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       if (!isTRUE(all.equal(e2@knot.alpha, knot.alpha)))
          e2 <- as.PiecewiseLinearFuzzyNumber(e2, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,
                                  knot.left=c(e1@a1,e1@knot.left,e1@a2)-rev(c(e2@a3,e2@knot.right,e2@a4)),
@@ -267,30 +267,30 @@ setMethod(
 
 setMethod(
    "*",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"),
    function (e1, e2)
    {
       knot.alpha <- unique(sort(c(e1@knot.alpha, e2@knot.alpha)))
       knot.n <- length(knot.alpha)
-      
+
       if (!isTRUE(all.equal(e1@knot.alpha, knot.alpha)))
          e1 <- as.PiecewiseLinearFuzzyNumber(e1, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       if (!isTRUE(all.equal(e2@knot.alpha, knot.alpha)))
          e2 <- as.PiecewiseLinearFuzzyNumber(e2, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       e1l <- c(e1@a1,e1@knot.left,e1@a2)
       e2l <- c(e2@a1,e2@knot.left,e2@a2)
       e1r <- rev(c(e1@a3,e1@knot.right,e1@a4))
       e2r <- rev(c(e2@a3,e2@knot.right,e2@a4))
-      
+
       p1 <- e1l*e2l
       p2 <- e1l*e2r
       p3 <- e1r*e2l
       p4 <- e1r*e2r
-      
+
       warning("Piecewise linear fuzzy numbers are not closed under the `*' operation.")
-      
+
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,
                                  knot.left=pmin(p1, p2, p3, p4),
@@ -304,33 +304,33 @@ setMethod(
 
 setMethod(
    "/",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "PiecewiseLinearFuzzyNumber"),
    function (e1, e2)
    {
       if (e2@a1 <= 0 && e2@a4 >= 0)
          stop("division by zero")
-      
+
       knot.alpha <- unique(sort(c(e1@knot.alpha, e2@knot.alpha)))
       knot.n <- length(knot.alpha)
-      
+
       if (!isTRUE(all.equal(e1@knot.alpha, knot.alpha)))
          e1 <- as.PiecewiseLinearFuzzyNumber(e1, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       if (!isTRUE(all.equal(e2@knot.alpha, knot.alpha)))
          e2 <- as.PiecewiseLinearFuzzyNumber(e2, knot.n=knot.n, knot.alpha=knot.alpha)
-      
+
       e1l <- c(e1@a1,e1@knot.left,e1@a2)
       e2r <- 1.0/c(e2@a1,e2@knot.left,e2@a2)
       e1r <- rev(c(e1@a3,e1@knot.right,e1@a4))
       e2l <- 1.0/rev(c(e2@a3,e2@knot.right,e2@a4))
-      
+
       p1 <- e1l*e2l
       p2 <- e1l*e2r
       p3 <- e1r*e2l
       p4 <- e1r*e2r
-      
+
       warning("Piecewise linear fuzzy numbers are not closed under the `/' operation.")
-      
+
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,
                                  knot.left=pmin(p1, p2, p3, p4),
@@ -346,7 +346,7 @@ setMethod(
 
 setMethod(
    "+",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"),
    function (e1, e2)
    {
       e1 + as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)
@@ -356,7 +356,7 @@ setMethod(
 
 setMethod(
    "-",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"),
    function (e1, e2)
    {
       e1 - as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)
@@ -366,7 +366,7 @@ setMethod(
 
 setMethod(
    "*",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"),
    function (e1, e2)
    {
       e1 * as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)
@@ -376,7 +376,7 @@ setMethod(
 
 setMethod(
    "/",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "FuzzyNumber"),
    function (e1, e2)
    {
       e1 / as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)
@@ -387,7 +387,7 @@ setMethod(
 
 setMethod(
    "+",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"),
    function (e1, e2)
    {
       e1 + as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)
@@ -397,7 +397,7 @@ setMethod(
 
 setMethod(
    "-",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"),
    function (e1, e2)
    {
       e1 - as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)
@@ -415,7 +415,7 @@ setMethod(
       kr <- rev(c(e1@a3, e1@knot.right, e1@a4))
       kmin <- pmin(e2*kl, e2*kr)
       kmax <- pmax(e2*kl, e2*kr)
-      
+
       PiecewiseLinearFuzzyNumber(
          kmin[1],
          kmin[length(kmin)],
@@ -433,7 +433,7 @@ setMethod(
 
 setMethod(
    "/",
-   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"), 
+   signature(e1 = "PiecewiseLinearFuzzyNumber", e2 = "numeric"),
    function (e1, e2)
    {
       e1 / as.PiecewiseLinearFuzzyNumber(e2, knot.n=e1@knot.n, knot.alpha=e1@knot.alpha)

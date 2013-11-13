@@ -23,18 +23,18 @@
 #'
 #' @description
 #' See \code{\link{as.character}} for more details.
-#' 
+#'
 #' @details
 #' The method \code{\link{as.character}} is called on given fuzzy number
 #' object with default arguments.
 #' The results are printed on \code{stdout}.
-#' 
+#'
 #' @param object a fuzzy number
 #' @return nothing interesting
-#' 
+#'
 #' @usage
 #' \S4method{show}{FuzzyNumber}(object)
-#' 
+#'
 #' @exportMethod show
 #' @name show
 #' @aliases show,FuzzyNumber-method

@@ -24,10 +24,10 @@
 #' @description
 #' We have \eqn{\mathrm{supp}(A) := [a1,a4]}{supp(A) := [a1,a4]}.
 #' This gives the values that a fuzzy number possibly may represent.
-#' 
+#'
 #' @param object a fuzzy number
 #' @return numeric vector of length 2
-#' 
+#'
 #' @exportMethod supp
 #' @docType methods
 #' @name supp

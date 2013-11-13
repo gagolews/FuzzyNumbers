@@ -22,7 +22,7 @@
 #'
 #' @description
 #' Trapezoidal Fuzzy Numbers have linear side functions and alpha-cut bounds.
-#' 
+#'
 #' @details
 #' Trapezoidal fuzzy numbers are among the simplest FNs.
 #' Despite their simplicity, however, they include triangular FNs,
@@ -32,13 +32,13 @@
 #'
 #' @section Slots:
 #'  \describe{
-#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4}, 
+#'    \item{\code{a1}, \code{a2}, \code{a3}, \code{a4},
 #'    \code{lower}, \code{upper}, \code{left}, \code{right}:}{
 #'    Inherited from the \code{\linkS4class{FuzzyNumber}} class.}
 #'  }
 #'
 #' @section Extends:
-#' Class \code{\linkS4class{FuzzyNumber}}, directly. 
+#' Class \code{\linkS4class{FuzzyNumber}}, directly.
 #'
 #' @seealso \code{\link{TrapezoidalFuzzyNumber}} for a convenient constructor,
 #' \code{\link{as.TrapezoidalFuzzyNumber}} for conversion of objects to this class,
@@ -77,7 +77,7 @@ setClass(
 #' @param a4 a number specyfing right bound of the support
 #' @return Object of class \code{\linkS4class{TrapezoidalFuzzyNumber}}
 #' @export
-#' 
+#'
 #' @family TrapezoidalFuzzyNumber-method
 TrapezoidalFuzzyNumber <- function(a1, a2, a3, a4)
 {
@@ -91,7 +91,7 @@ TrapezoidalFuzzyNumber <- function(a1, a2, a3, a4)
 #' @description
 #' For convenience, objects of class \code{\linkS4class{TrapezoidalFuzzyNumber}}
 #' may be created with this function.
-#' 
+#'
 #' @details
 #' Currently there is no separate class of a Triangular Fuzzy Number.
 #'
@@ -100,7 +100,7 @@ TrapezoidalFuzzyNumber <- function(a1, a2, a3, a4)
 #' @param a4 a number specyfing right bound of the support
 #' @return Object of class \code{\linkS4class{TrapezoidalFuzzyNumber}}
 #' @export
-#' 
+#'
 #' @family TrapezoidalFuzzyNumber-method
 TriangularFuzzyNumber <- function(a1, amid, a4)
 {
