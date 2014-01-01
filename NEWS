@@ -6,13 +6,12 @@
 0.3-3 /under development/
 
 * piecewiseLinearApproximation() how does not fail on exceptions thrown
-      by integrate(); fallback=Newton-Cotes formula
+      by integrate(); fallback=Newton-Cotes formula.
 
 * Removed `Suggests` dependency: testthat tests now available for developers
-      via the FuzzyNumbers github repository
+      via the FuzzyNumbers github repository.
 
-* Package vignette is now available online at 
-      http://FuzzyNumbers.rexamine.com
+* Package vignette is now available online at http://FuzzyNumbers.rexamine.com.
 
 * ...
 
@@ -42,7 +41,7 @@
 * piecewiseLinearApproximation() and as.PiecewiseLinearFuzzyNumber()
   argument `knot.alpha` now defaults to equally distributed knots
   (via given `knot.n`). If `knot.n` is missing, then it is guessed
-  from `knot.alpha`. 
+  from `knot.alpha`.
 
 * PiecewiseLinearFuzzyNumber() now accepts missing `a1`, `a2`, `a3`, `a4`,
   and `knot.left`, `knot.right` of length `knot.n`+2. Moreover, if `knot.n`
@@ -64,7 +63,7 @@
 * The FuzzyNumbers Tutorial has been properly included
   as the package's vignette
 
-* DiscontinuousFuzzyNumber class has been marked as **EXPERIMENTAL** 
+* DiscontinuousFuzzyNumber class has been marked as **EXPERIMENTAL**
   in the manual
 
 * Man pages extensively updated

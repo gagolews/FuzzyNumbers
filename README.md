@@ -23,7 +23,7 @@ The package aims to provide the following functionality:
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
-**Tutorial**: http://github.com/Rexamine/FuzzyNumbers/raw/master/inst/doc/FuzzyNumbers-Tutorial.pdf
+**Tutorial**: https://github.com/Rexamine/FuzzyNumbers/raw/master/devel/tutorial/FuzzyNumbers-Tutorial_current.pdf
 
 **On-line manual**: http://docs.rexamine.com/R-man/FuzzyNumbers/FuzzyNumbers-package.html
 
@@ -33,16 +33,16 @@ Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
-> "Gagolewski M. (2013). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
+> "Gagolewski M. (2014). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
 http://FuzzyNumbers.rexamine.com/."
 
 A BibTeX entry for LaTeX users is:
 
 ```
 @Manual{FuzzyNumbersPkgR,
-   title = {**FuzzyNumbers** Package: Tools to deal with fuzzy numbers in R},
+   title = {FuzzyNumbers Package: Tools to deal with fuzzy numbers in R},
    author = {Marek Gagolewski},
-   year = {2013},
+   year = {2014},
    url = {http://FuzzyNumbers.rexamine.com/}
 }
 ```
