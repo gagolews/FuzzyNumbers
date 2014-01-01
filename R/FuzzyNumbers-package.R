@@ -67,10 +67,7 @@
 #' For a complete list of classes and methods
 #' call \code{help(package="FuzzyNumbers")}.
 #' Moreover, you will surely be interested in a step-by-step guide to the
-#' package usage and features which is available by calling
-#' \code{vignette('FuzzyNumbers-Tutorial', 'FuzzyNumbers')}
-#' or at
-#' \url{http://github.com/Rexamine/FuzzyNumbers/raw/master/inst/doc/FuzzyNumbers-Tutorial.pdf}.
+#' package usage and features which is available at the project's webpage.
 #' \cr\cr
 #'
 #'
@@ -107,8 +104,6 @@
 #' Fuzzy Sets and Systems 93, pp. 125-135.\cr
 #' Dubois D., Prade H. (1978), Operations on fuzzy numbers, Int. J. Syst. Sci. 9, pp. 613-626.\cr
 #' Dubois D., Prade H. (1987), The mean value of a fuzzy number, Fuzzy Sets and Systems 24, pp. 279-300.\cr
-#' Gagolewski M. (2013), A Guide to the \pkg{FuzzyNumbers} Package for R,
-#' \url{http://github.com/Rexamine/FuzzyNumbers/raw/master/inst/doc/FuzzyNumbers-Tutorial.pdf}.\cr
 #' Grzegorzewski P. (2010), Algorithms for trapezoidal approximations of fuzzy numbers
 #' preserving the expected interval, In: Bouchon-Meunier B. et al (Eds.),
 #' Foundations of Reasoning Under Uncertainty, Springer, pp. 85-98.\cr
