@@ -3,3 +3,4 @@
 ^devel
 ^src/.*\.o$
 ^README.md$
+^\.gitignore$

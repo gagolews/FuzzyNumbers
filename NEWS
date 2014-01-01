@@ -3,12 +3,16 @@
 
 ***************************************************************************
 
-0.4-0 /under development/
+0.3-3 /under development/
 
 * piecewiseLinearApproximation() how does not fail on exceptions thrown
-     by integrate(); fallback=Newton-Cotes formula (degree 4)
+      by integrate(); fallback=Newton-Cotes formula
 
-* [STILL TO DO]: tryCatch in distance()...
+* Removed `Suggests` dependency: testthat tests now available for developers
+      via the FuzzyNumbers github repository
+
+* Package vignette is now available online at 
+      http://FuzzyNumbers.rexamine.com
 
 * ...
 

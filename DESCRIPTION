@@ -7,55 +7,18 @@ Authors@R: c(
     person("Jan", "Caha", role = "ctb",
     email = "jan.caha@upol.cz"))
 Description: The FuzzyNumbers package provides S4 classes and methods
-    to deal with Fuzzy Numbers: computations of arithmetic
+    to deal with Fuzzy Numbers that allow for computations of arithmetic
     operations, approximation by trapezoidal and piecewise linear FNs,
     visualization, etc.
-Version: 0.4-0
-Date: 2013-11-13
+Version: 0.3-3
+Date: 2014-01-01
 URL: http://FuzzyNumbers.rexamine.com
 BugReports: http://github.com/Rexamine/FuzzyNumbers/issues
 License: LGPL (>= 3)
 ByteCompile: TRUE
 Depends:
     R (>= 2.12.0),
-    base,
     methods,
     grDevices,
     graphics,
     stats
-Suggests:
-    testthat
-Collate:
-    'FuzzyNumbers-package.R'
-    'class-FuzzyNumber.R'
-    'class-DiscontinuousFuzzyNumber.R'
-    'class-TrapezoidalFuzzyNumber.R'
-    'class-PiecewiseLinearFuzzyNumber.R'
-    'class-PowerFuzzyNumber.R'
-    'methods-core.R'
-    'methods-supp.R'
-    'methods-value.R'
-    'methods-expectedValue.R'
-    'methods-weightedExpectedValue.R'
-    'methods-width.R'
-    'methods-ambiguity.R'
-    'methods-plot.R'
-    'methods-as.character.R'
-    'methods-show.R'
-    'methods-fapply.R'
-    'methods-alphacut.R'
-    'methods-evaluate.R'
-    'auxiliary-convert.R'
-    'auxiliary-invert.R'
-    'methods-piecewiseLinearApproximation.R'
-    'methods-trapezoidalApproximation.R'
-    'methods-Arithmetic.R'
-    'methods-alphaInterval.R'
-    'methods-expectedInterval.R'
-    'methods-distance.R'
-    'methods-integrate.R'
-    'methods-Extract.R'
-    'methods-as.PiecewiseLinearFuzzyNumber.R'
-    'methods-as.FuzzyNumber.R'
-    'methods-as.TrapezoidalFuzzyNumber.R'
-    'methods-as.PowerFuzzyNumber.R'

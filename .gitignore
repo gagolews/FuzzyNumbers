@@ -29,5 +29,5 @@ figures-knitr
 *.out
 *.bbl
 *.blg
-devel/vignette-Tutorial/FuzzyNumbers-Tutorial.tex
-devel/vignette-Tutorial/FuzzyNumbers-Tutorial.pdf
+devel/tutorial/src/*.tex
+devel/tutorial/src/*.pdf
