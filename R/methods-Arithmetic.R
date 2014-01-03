@@ -94,24 +94,24 @@
 #' @exportMethod *
 #' @exportMethod +
 #' @aliases *,numeric,FuzzyNumber-method
-#' @aliases +,numeric,FuzzyNumber-method
-#' @aliases -,numeric,FuzzyNumber-method
-#' @aliases *,TrapezoidalFuzzyNumber,numeric-method
-#' @aliases +,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
-#' @aliases -,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
-#' @aliases -,FuzzyNumber,ANY-method
-#' @aliases +,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
-#' @aliases -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
-#' @aliases *,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
-#' @aliases /,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
-#' @aliases +,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
-#' @aliases -,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
-#' @aliases /,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
-#' @aliases *,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
-#' @aliases +,PiecewiseLinearFuzzyNumber,numeric-method
-#' @aliases -,PiecewiseLinearFuzzyNumber,numeric-method
-#' @aliases *,PiecewiseLinearFuzzyNumber,numeric-method
-#' @aliases /,PiecewiseLinearFuzzyNumber,numeric-method
+#'          +,numeric,FuzzyNumber-method
+#'          -,numeric,FuzzyNumber-method
+#'          *,TrapezoidalFuzzyNumber,numeric-method
+#'          +,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
+#'          -,TrapezoidalFuzzyNumber,TrapezoidalFuzzyNumber-method
+#'          -,FuzzyNumber,ANY-method
+#'          +,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
+#'          -,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
+#'          *,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
+#'          /,PiecewiseLinearFuzzyNumber,PiecewiseLinearFuzzyNumber-method
+#'          +,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
+#'          -,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
+#'          /,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
+#'          *,PiecewiseLinearFuzzyNumber,FuzzyNumber-method
+#'          +,PiecewiseLinearFuzzyNumber,numeric-method
+#'          -,PiecewiseLinearFuzzyNumber,numeric-method
+#'          *,PiecewiseLinearFuzzyNumber,numeric-method
+#'          /,PiecewiseLinearFuzzyNumber,numeric-method
 invisible(NULL)
 
 

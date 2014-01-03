@@ -44,9 +44,9 @@
 #' @family DiscontinuousFuzzyNumber-method
 #' @rdname distance-methods
 #' @aliases distance,FuzzyNumber,FuzzyNumber-method
-#' @aliases distance,DiscontinuousFuzzyNumber,FuzzyNumber-method
-#' @aliases distance,FuzzyNumber,DiscontinuousFuzzyNumber-method
-#' @aliases distance,DiscontinuousFuzzyNumber,DiscontinuousFuzzyNumber-method
+#'          distance,DiscontinuousFuzzyNumber,FuzzyNumber-method
+#'          distance,FuzzyNumber,DiscontinuousFuzzyNumber-method
+#'          distance,DiscontinuousFuzzyNumber,DiscontinuousFuzzyNumber-method
 #'
 #' @usage
 #' \S4method{distance}{FuzzyNumber,FuzzyNumber}(e1, e2, type=c("Euclidean", "EuclideanSquared"), ...)

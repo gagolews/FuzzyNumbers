@@ -3,7 +3,7 @@
 
 ***************************************************************************
 
-0.3-3 /under development/
+0.3-3 /2014-01-03/
 
 * piecewiseLinearApproximation() now supports new method="SupportCorePreserving",
       see  Coroianu L., Gagolewski M., Grzegorzewski P., Adabitabar Firozja M.,

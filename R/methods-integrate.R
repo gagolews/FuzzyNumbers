@@ -108,7 +108,7 @@ integrate_discont_val <- function(f, from, to, discontinuities=numeric(0), ...)
 #' @family DiscontinuousFuzzyNumber-method
 #' @rdname integrateAlpha-methods
 #' @aliases integrateAlpha,FuzzyNumber,character,numeric,numeric-method
-#' @aliases integrateAlpha,DiscontinuousFuzzyNumber,character,numeric,numeric-method
+#'          integrateAlpha,DiscontinuousFuzzyNumber,character,numeric,numeric-method
 #' @usage
 #' \S4method{integrateAlpha}{FuzzyNumber,character,numeric,numeric}(object, which=c("lower", "upper"), from=0, to=1, weight=NULL, transform=NULL, ...)
 #'

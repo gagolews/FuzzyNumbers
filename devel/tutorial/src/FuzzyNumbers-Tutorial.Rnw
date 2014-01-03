@@ -1932,7 +1932,82 @@ for (i in 1:5) # 5 iterations
 
 
 
+\subsubsection{$L_2$-nearest Approximation Preserving Support and Core}
 
+Fix $\boldsymbol\alpha$. The next method searches for:
+\[
+\mathcal{P}(A)=\min\limits_{T\in \mathrm{PLFN}(\boldsymbol\alpha)}d_E(A,T).
+\]
+such that $\mathrm{supp}(A)=\mathrm{supp}(\mathcal{P}(A))$
+and $\mathrm{core}(A)=\mathrm{core}(\mathcal{P}(A))$, see
+\cite{CoroianuETALXXXX:piecewise1suppcore}.
+
+The \str{"{}SupportCorePreserving"{}} \argument{method}
+of the \func{piecewiseLinearApproximation()} function
+currently implements only the \texttt{\argument{knot.n}==1} case.
+
+
+\paragraph{Example 1.}
+Let us consider the following FN.
+
+<<suppcoreplfn1a>>=
+A <- FuzzyNumber(0, 3, 4, 5,
+   lower=function(x) qbeta(x, 2, 1),
+   upper=function(x) 1-x^3
+)
+@
+
+Here are its unrestricted ($P_1$) and supp-core-restricted ($P_2$)
+PLFN approximations for $\boldsymbol\alpha=(0.2)$.
+
+<<suppcoreplfn1a2,dependson='suppcoreplfn1a'>>=
+knot.alpha <- 0.2
+P1 <- piecewiseLinearApproximation(A, knot.alpha=knot.alpha)
+P2 <- piecewiseLinearApproximation(A, method="SupportCorePreserving",
+   knot.alpha=knot.alpha)
+distance(A, P1)
+print(alphacut(P1, c(0, knot.alpha, 1)))
+distance(A, P2)
+print(alphacut(P2, c(0, knot.alpha, 1)))
+@
+
+\begin{center}
+<<suppcoreplfn1a3,dependson='suppcoreplfn1a2',echo=FALSE>>=
+par(mar=c(4,4,2,1))
+plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(P1, col=2, add=TRUE, lty=2)
+plot(P2, col=4, add=TRUE, lty=4, lwd=2)
+abline(h=knot.alpha, col="grey", lty=3)
+legend("topleft", legend=c("$A$", "$P_1$", "$P_2$"), lty=c(1,2,4), col=c(1,2,4), lwd=c(1,1,2))
+@
+\end{center}
+
+Let us find $\alpha_0$ for which we get the minimal approximation
+distance (error).
+
+<<suppcoreplfn1a4,dependson='suppcoreplfn1a'>>=
+D <- function(a) distance(A,
+   piecewiseLinearApproximation(A, method="SupportCorePreserving", knot.alpha=a))
+optimize(D, lower=0, upper=1)
+@
+
+Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving function, see
+\cite{CoroianuETALXXXX:piecewise1suppcore} for discussion.
+
+\begin{center}
+<<suppcoreplfn1a5,dependson='suppcoreplfn1a4',echo=FALSE>>=
+par(mar=c(4,4,2,1))
+a <- seq(0, 1, length.out=1001)
+Da <- sapply(a, D)
+plot(a[-c(1,length(a))], Da[-c(1,length(a))], xlab="$\\alpha$", ylab="$D(\\alpha)$",
+   type='l', xlim=c(0,1), ylim=range(Da))
+points(c(0, 1), Da[c(2, length(a)-1)])
+points(c(0, 1), Da[c(1,length(a))], pch=16)
+opt <- optimize(D, interval=c(0,1))
+abline(v=opt$minimum, col="grey", lty=3)
+abline(h=opt$objective, col="grey", lty=3)
+@
+\end{center}
 
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
 %
@@ -2007,10 +2082,11 @@ for (i in 1:5) # 5 iterations
 % \clearpage
 \section{NEWS/CHANGELOG}
 
+% \begin{verbatim}
 <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
-cat(readLines('../../NEWS'), sep='\n')
+cat(readLines('../../../NEWS'), sep='\n')
 @
-
+% \end{verbatim}
 
 \paragraph{Acknowledgments.}
 This document has been generated with \LaTeX, \package{knitr} and

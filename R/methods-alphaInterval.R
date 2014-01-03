@@ -29,12 +29,14 @@
 #' }{\alpha-Int(A) := [int_0^1 \alpha A_L(\alpha) d\alpha, int_0^1 \alpha A_U(\alpha) d\alpha]}.
 #'
 #' @details
-#' Note that if an instance of the \code{FuzzyNumber} or \code{DiscontinuousFuzzyNumber} class
+#' Note that if an instance of the \code{FuzzyNumber} or 
+#' \code{DiscontinuousFuzzyNumber} class
 #' is given, the calculation is performed via numerical integration.
 #' Otherwise, the computation is exact.
 #'
 #' @param object a fuzzy number
-#' @param ... for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to \code{\link{integrateAlpha}}
+#' @param ... for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber}
+#'  - additional arguments passed to \code{\link{integrateAlpha}}
 #' 
 #' @return Returns numeric vector of length 2.
 #'
@@ -47,9 +49,9 @@
 #' @family PowerFuzzyNumber-method
 #' @rdname alphaInterval-methods
 #' @aliases alphaInterval,FuzzyNumber-method
-#' @aliases alphaInterval,TrapezoidalFuzzyNumber-method
-#' @aliases alphaInterval,PiecewiseLinearFuzzyNumber-method
-#' @aliases alphaInterval,PowerFuzzyNumber-method
+#'          alphaInterval,TrapezoidalFuzzyNumber-method
+#'          alphaInterval,PiecewiseLinearFuzzyNumber-method
+#'          alphaInterval,PowerFuzzyNumber-method
 #' @usage
 #' \S4method{alphaInterval}{FuzzyNumber}(object, ...)
 #'

@@ -58,9 +58,9 @@
 #' @family PowerFuzzyNumber-method
 #' @family conversion
 #' @aliases as.character,FuzzyNumber-method
-#' @aliases as.character,PiecewiseLinearFuzzyNumber-method
-#' @aliases as.character,TrapezoidalFuzzyNumber-method
-#' @aliases as.character,PowerFuzzyNumber-method
+#'          as.character,PiecewiseLinearFuzzyNumber-method
+#'          as.character,TrapezoidalFuzzyNumber-method
+#'          as.character,PowerFuzzyNumber-method
 invisible(NULL)
 
 

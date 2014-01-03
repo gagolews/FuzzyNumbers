@@ -49,9 +49,9 @@
 #' @family PowerFuzzyNumber-method
 #' @rdname expectedInterval-methods
 #' @aliases expectedInterval,FuzzyNumber-method
-#' @aliases expectedInterval,TrapezoidalFuzzyNumber-method
-#' @aliases expectedInterval,PiecewiseLinearFuzzyNumber-method
-#' @aliases expectedInterval,PowerFuzzyNumber-method
+#'          expectedInterval,TrapezoidalFuzzyNumber-method
+#'          expectedInterval,PiecewiseLinearFuzzyNumber-method
+#'          expectedInterval,PowerFuzzyNumber-method
 #' @usage
 #' \S4method{expectedInterval}{FuzzyNumber}(object, ...)
 #'

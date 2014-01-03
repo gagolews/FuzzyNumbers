@@ -50,9 +50,9 @@
 #' @family DiscontinuousFuzzyNumber,character-method
 #' @exportMethod [
 #' @aliases [,FuzzyNumber,character-method
-#' @aliases [,PiecewiseLinearFuzzyNumber,character-method
-#' @aliases [,PowerFuzzyNumber,character-method
-#' @aliases [,DiscontinuousFuzzyNumber,character-method
+#'          [,PiecewiseLinearFuzzyNumber,character-method
+#'          [,PowerFuzzyNumber,character-method
+#'          [,DiscontinuousFuzzyNumber,character-method
 #' @examples
 #' A <- FuzzyNumber(1,2,3,4)
 #' A["a1"]
