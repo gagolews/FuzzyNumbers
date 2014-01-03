@@ -29,13 +29,17 @@
 #' \code{\link{piecewiseLinearApproximation}}.
 #'
 #' @usage
-#' \S4method{as.PiecewiseLinearFuzzyNumber}{TrapezoidalFuzzyNumber}(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
+#' \S4method{as.PiecewiseLinearFuzzyNumber}{TrapezoidalFuzzyNumber}(object, knot.n=0,
+#'    knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
 #'
-#' \S4method{as.PiecewiseLinearFuzzyNumber}{numeric}(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
+#' \S4method{as.PiecewiseLinearFuzzyNumber}{numeric}(object, knot.n=0,
+#'    knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
 #'
-#' \S4method{as.PiecewiseLinearFuzzyNumber}{FuzzyNumber}(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
+#' \S4method{as.PiecewiseLinearFuzzyNumber}{FuzzyNumber}(object, knot.n=0,
+#'    knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
 #'
-#' \S4method{as.PiecewiseLinearFuzzyNumber}{PiecewiseLinearFuzzyNumber}(object, knot.n=0, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
+#' \S4method{as.PiecewiseLinearFuzzyNumber}{PiecewiseLinearFuzzyNumber}(object, knot.n=0,
+#'    knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)])
 #'
 #' @param object a fuzzy number or a single numeric value (crisp number)
 #' or vector of length two (interval)

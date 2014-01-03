@@ -29,7 +29,8 @@
 #' @details
 #' \code{method} may be one of:
 #' \enumerate{
-#' \item \code{NearestEuclidean}: see (Ban, 2009); uses numerical integration, see \code{\link{integrateAlpha}}
+#' \item \code{NearestEuclidean}: see (Ban, 2009); 
+#' uses numerical integration, see \code{\link{integrateAlpha}}
 #'
 #' \item \code{Naive}:
 #' We have core(A)==core(T(A)) and supp(A)==supp(T(A))
@@ -37,8 +38,10 @@
 #' \item \code{ExpectedIntervalPreserving}:
 #' L2-nearest trapezoidal approximation preserving the expected interval given in
 #' (Grzegorzewski, 2010; Ban, 2008; Yeh, 2008)
-#' Unfortunately, for highly skewed membership functions this approximation operator may have
-#' quite unfavourable behavior. E.g. if Val(A) < EV_{1/3}(A) or Val(A) > EV_{2/3}(A),
+#' Unfortunately, for highly skewed membership functions 
+#' this approximation operator may have
+#' quite unfavourable behavior.
+#' For example, if Val(A) < EV_{1/3}(A) or Val(A) > EV_{2/3}(A),
 #' then it may happen that the core of the output
 #' and the core of the original fuzzy number A are disjoint
 #' (cf. Grzegorzewski, Pasternak-Winiarska, 2011)
@@ -46,15 +49,17 @@
 #' \item \code{SupportCoreRestricted}:
 #' This method was proposed in (Grzegorzewski, Pasternak-Winiarska, 2011).
 #' L2-nearest trapezoidal approximation with constraints
-#' core(A) \eqn{\subseteq}{SUBSETS} core(T(A)) and supp(T(A)) \eqn{\subseteq}{SUBSETS} supp(A), i.e.
+#' core(A) \eqn{\subseteq}{SUBSETS} core(T(A)) 
+#' and supp(T(A)) \eqn{\subseteq}{SUBSETS} supp(A), i.e.
 #' for which each point that surely belongs to A also belongs to T(A),
 #' and each point that surely does not belong to A also does not belong to T(A).
 #' }
 #'
 #' @usage
 #' \S4method{trapezoidalApproximation}{FuzzyNumber}(object,
-#' method=c("NearestEuclidean", "ExpectedIntervalPreserving", "SupportCoreRestricted", "Naive"),
-#' ..., verbose=FALSE)
+#'    method=c("NearestEuclidean", "ExpectedIntervalPreserving",
+#'             "SupportCoreRestricted", "Naive"),
+#'    ..., verbose=FALSE)
 #'
 #' @param object a fuzzy number
 #' @param method character; one of: \code{"NearestEuclidean"} (default),
@@ -95,8 +100,10 @@
 #' Fuzzy Sets and Systems 159, pp. 1345-1353.
 #'
 #' @examples
-#' (A <- FuzzyNumber(-1,0,1,40,lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))
-#' (TA <- trapezoidalApproximation(A, "ExpectedIntervalPreserving")) # Note that cores are disjoint!
+#' (A <- FuzzyNumber(-1, 0, 1, 40,
+#'    lower=function(x) sqrt(x), upper=function(x) 1-sqrt(x)))
+#' (TA <- trapezoidalApproximation(A,
+#'    "ExpectedIntervalPreserving")) # Note that the cores are disjoint!
 #' expectedInterval(A)
 #' expectedInterval(TA)
 setGeneric("trapezoidalApproximation",

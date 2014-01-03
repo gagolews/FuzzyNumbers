@@ -47,10 +47,10 @@
 #'
 #' @usage
 #' \S4method{piecewiseLinearApproximation}{FuzzyNumber}(object,
-#' method=c("NearestEuclidean", "SupportCorePreserving", 
-#' "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
-#' knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
-#' ..., verbose=FALSE)
+#'    method=c("NearestEuclidean", "SupportCorePreserving", 
+#'    "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
+#'    knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
+#'    ..., verbose=FALSE)
 #'
 #' @param object a fuzzy number
 #' @param method character; one of: \code{"NearestEuclidean"} (default), 
@@ -87,8 +87,10 @@
 #'  submitted for publication.
 #'
 #' @examples
-#' (A <- FuzzyNumber(-1,0,1,3,lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))
-#' (PA <- piecewiseLinearApproximation(A, "NearestEuclidean", knot.n=1, knot.alpha=0.2))
+#' (A <- FuzzyNumber(-1, 0, 1, 3,
+#'    lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))
+#' (PA <- piecewiseLinearApproximation(A, "NearestEuclidean",
+#'    knot.n=1, knot.alpha=0.2))
 setGeneric("piecewiseLinearApproximation",
   function(object, ...) standardGeneric("piecewiseLinearApproximation"));
 
