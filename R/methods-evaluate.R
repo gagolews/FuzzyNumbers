@@ -29,7 +29,7 @@
 #' @param object a fuzzy numbers
 #' @param x numeric vector
 #'
-#' @return a numeric vector
+#' @return Returns a numeric vector.
 #'
 #' @exportMethod evaluate
 #' @docType methods

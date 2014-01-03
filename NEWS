@@ -5,15 +5,21 @@
 
 0.3-3 /under development/
 
-* piecewiseLinearApproximation() how does not fail on exceptions thrown
+* piecewiseLinearApproximation() now supports new method="SupportCorePreserving",
+      see  Coroianu L., Gagolewski M., Grzegorzewski P., Adabitabar Firozja M.,
+      Houlari T., Piecewise Linear Approximation of Fuzzy Numbers Preserving
+      the Support and Core, 2014 (submitted for publication).
+
+* piecewiseLinearApproximation() now does not fail on exceptions thrown
       by integrate(); fallback=Newton-Cotes formula.
 
 * Removed `Suggests` dependency: testthat tests now available for developers
       via the FuzzyNumbers github repository.
 
-* Package vignette is now available online at http://FuzzyNumbers.rexamine.com.
+* Package manual has been corrected and extended.
 
-* ...
+* Package vignette is now only available
+      online at http://FuzzyNumbers.rexamine.com.
 
 ***************************************************************************
 

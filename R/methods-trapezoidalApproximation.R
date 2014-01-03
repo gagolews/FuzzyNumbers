@@ -63,6 +63,8 @@
 #' \code{"Naive"}
 #' @param verbose logical; should some technical details on the computations being performed be printed?
 #' @param ... further arguments passed to \code{\link{integrateAlpha}}
+#' 
+#' @return Returns a \code{\link{TrapezoidalFuzzyNumber}} object.
 #'
 #' @exportMethod trapezoidalApproximation
 #' @name trapezoidalApproximation
@@ -73,16 +75,24 @@
 #' @family FuzzyNumber-method
 #' @references
 #' Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
-#' preserving the expected interval, Fuzzy Sets and Systems 159, pp. 1327-1344.\cr
-#' Ban A.I. (2009), On the nearest parametric approximation of a fuzzy number - Revisited,
-#' Fuzzy Sets and Systems 160, pp. 3027--3047.\cr
-#' Grzegorzewski P. (2010), Algorithms for trapezoidal approximations of fuzzy numbers
+#' preserving the expected interval, Fuzzy Sets and Systems 159, pp. 1327-1344.
+#' 
+#' Ban A.I. (2009), On the nearest parametric approximation of a fuzzy number 
+#' - Revisited, Fuzzy Sets and Systems 160, pp. 3027-3047.
+#' 
+#' Grzegorzewski P. (2010), Algorithms for trapezoidal 
+#' approximations of fuzzy numbers
 #' preserving the expected interval, In: Bouchon-Meunier B. et al (Eds.),
-#' Foundations of Reasoning Under Uncertainty, Springer, pp. 85-98.\cr
-#' Grzegorzewski P, Pasternak-Winiarska K. (2011), Trapezoidal approximations of fuzzy numbers
-#' with restrictions on the support and core, Proc. EUSFLAT/LFA 2011, Atlantic Press, pp. 749-756.\cr
-#' Yeh C.-T. (2008), Trapezoidal and triangular approximations preserving the expected interval,
-#' Fuzzy Sets and Systems 159, pp. 1345-1353.\cr
+#' Foundations of Reasoning Under Uncertainty, Springer, pp. 85-98.
+#' 
+#' Grzegorzewski P, Pasternak-Winiarska K. (2011), Trapezoidal
+#'  approximations of fuzzy numbers
+#' with restrictions on the support and core, Proc. EUSFLAT/LFA 2011,
+#'  Atlantic Press, pp. 749-756.
+#' 
+#' Yeh C.-T. (2008), Trapezoidal and triangular approximations 
+#' preserving the expected interval,
+#' Fuzzy Sets and Systems 159, pp. 1345-1353.
 #'
 #' @examples
 #' (A <- FuzzyNumber(-1,0,1,40,lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))

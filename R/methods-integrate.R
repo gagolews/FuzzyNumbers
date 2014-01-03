@@ -49,7 +49,8 @@ integrate_identity <- function(object, which=c("lower", "upper"), from, to, n=10
 #' @param discontinuities nondecreasingly sorted numeric vector which indicates
 #'          the points at which \code{f} is discontinuous
 #' @param ... further arguments to be passed to the \code{\link{integrate}} function.
-#' @return the estimate of the integral
+#' 
+#' @return Returns the estimate of the integral.
 #' @export
 integrate_discont_val <- function(f, from, to, discontinuities=numeric(0), ...)
 {
@@ -97,7 +98,8 @@ integrate_discont_val <- function(f, from, to, discontinuities=numeric(0), ...)
 #' @param weight a function or NULL
 #' @param transform a function or NULL
 #' @param ... additional arguments passed to \code{\link{integrate}} or \code{\link{integrate_discont_val}}
-#' @return a single numeric value
+#' 
+#' @return Returns a single numeric value.
 #'
 #' @exportMethod integrateAlpha
 #' @docType methods

@@ -34,7 +34,7 @@
 #' @param method interpolation method: ``\code{monoH.FC}', ``\code{hyman}'' or ``\code{linear}''
 #' @param n number of interpolation points
 #'
-#' @return a new function, the approximate inverse of the input
+#' @return Returns a new function, the approximate inverse of the input.
 #'
 #' @family auxiliary
 #' @seealso \code{\linkS4class{FuzzyNumber}}

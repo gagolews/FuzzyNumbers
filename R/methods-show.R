@@ -30,7 +30,8 @@
 #' The results are printed on \code{stdout}.
 #'
 #' @param object a fuzzy number
-#' @return nothing interesting
+#' 
+#' @return Does not return anything interesting.
 #'
 #' @usage
 #' \S4method{show}{FuzzyNumber}(object)

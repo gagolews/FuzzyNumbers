@@ -31,7 +31,8 @@
 #'
 #' @param object a fuzzy number
 #' @param ... additional arguments passed to \code{\link{expectedInterval}}
-#' @return a single numeric value
+#' 
+#' @return Returns a single numeric value.
 #'
 #'
 #' @exportMethod width
@@ -45,7 +46,7 @@
 #' \S4method{width}{FuzzyNumber}(object, ...)
 #' @references
 #' Chanas S. (2001), On the interval approximation of a fuzzy number,
-#' Fuzzy Sets and Systems 122, pp. 353-356.\cr
+#' Fuzzy Sets and Systems 122, pp. 353-356.
 setGeneric("width",
            function(object, ...) standardGeneric("width"))
 

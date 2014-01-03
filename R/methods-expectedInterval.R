@@ -33,10 +33,12 @@
 #'
 #' @param object a fuzzy number
 #' @param ... for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to \code{\link{integrateAlpha}}
-#' @return numeric vector of length 2
+#' 
+#' @return Returns a numeric vector of length 2.
 #'
 #' @references
-#' Dubois D., Prade H. (1987), The mean value of a fuzzy number, Fuzzy Sets and Systems 24, pp. 279-300.\cr
+#' Dubois D., Prade H. (1987), The mean value of a fuzzy number,
+#'  Fuzzy Sets and Systems 24, pp. 279-300.
 #'
 #' @exportMethod expectedInterval
 #' @docType methods

@@ -35,7 +35,8 @@
 #'
 #' @param object a fuzzy number
 #' @param ... for \code{FuzzyNumber} and \code{DiscontinuousFuzzyNumber} - additional arguments passed to \code{\link{integrateAlpha}}
-#' @return numeric vector of length 2
+#' 
+#' @return Returns numeric vector of length 2.
 #'
 #' @exportMethod alphaInterval
 #' @docType methods

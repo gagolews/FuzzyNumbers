@@ -42,7 +42,8 @@
 #' @param knot.n the number of knots
 #' @param knot.alpha \code{knot.n} alpha-cut values at knots,
 #' defaults to uniformly distributed knots
-#' @return Object of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}
+#' 
+#' @return Returns an bject of class \code{\linkS4class{PiecewiseLinearFuzzyNumber}}.
 #'
 #'
 #' @name as.PiecewiseLinearFuzzyNumber

@@ -29,7 +29,7 @@
 #' @param object a fuzzy numbers
 #' @param alpha numeric vector with elements in [0,1]
 #'
-#' @return a matrix with two columns (left and right alha cut bounds).
+#' @return Returns a matrix with two columns (left and right alha cut bounds).
 #' if some elements in \code{alpha} are not in [0,1], then \code{NA}
 #' is set.
 #'

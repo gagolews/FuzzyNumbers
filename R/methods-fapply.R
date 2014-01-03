@@ -38,7 +38,8 @@
 #' @param object a fuzzy number
 #' @param fun a monotonic, vectorized R function
 #' @param ... additional arguments passed to \code{fun}
-#' @return a \linkS4class{PiecewiseLinearFuzzyNumber}
+#' 
+#' @return Returns a \linkS4class{PiecewiseLinearFuzzyNumber}.
 #'
 #' @usage
 #' \S4method{fapply}{PiecewiseLinearFuzzyNumber,function}(object, fun, ...)

@@ -31,7 +31,8 @@
 #'
 #' @param object a fuzzy number
 #' @param ... additional arguments passed to \code{\link{alphaInterval}}
-#' @return a single numeric value
+#' 
+#' @return Returns a single numeric value.
 #'
 #' @exportMethod value
 #' @docType methods
@@ -45,7 +46,7 @@
 #' \S4method{value}{FuzzyNumber}(object, ...)
 #' @references
 #' Delgado M., Vila M.A., Voxman W. (1998), On a canonical representation of a fuzzy number,
-#' Fuzzy Sets and Systems 93, pp. 125-135.\cr
+#' Fuzzy Sets and Systems 93, pp. 125-135.
 setGeneric("value",
            function(object, ...) standardGeneric("value"))
 

@@ -29,24 +29,32 @@
 #' @details
 #' `\code{method}` may be one of:
 #' \enumerate{
-#' \item \code{NearestEuclidean}: see (Coroianu, Gagolewski, Grzegorzewski, 2013a)
-#' for the description of the \code{knot.n==1} case;
+#' \item \code{NearestEuclidean}: see (Coroianu, Gagolewski, Grzegorzewski, 2013 and 2014a);
 #' uses numerical integration, see \code{\link{integrateAlpha}}.
 #' Slow for large \code{knot.n}.
+#' 
+#' \item \code{SupportCorePreserving}:
+#' This method was proposed in (Coroianu et al., 2014b)
+#' and is currently only available for \code{knot.n==1}.
+#' It is the L2-nearest piecewise linear approximation with constraints
+#' core(A)==core(P(A)) and supp(A)==supp(P(A));
+#' uses numerical integration.
 #'
 #' \item \code{Naive}:
-#' We have core(A)==core(T(A)) and supp(A)==supp(T(A)) and the knots are
+#' We have core(A)==core(P(A)) and supp(A)==supp(P(A)) and the knots are
 #' taken directly from the specified alpha cuts (linear interpolation).
 #' }
 #'
 #' @usage
 #' \S4method{piecewiseLinearApproximation}{FuzzyNumber}(object,
-#' method=c("NearestEuclidean", "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
+#' method=c("NearestEuclidean", "SupportCorePreserving", 
+#' "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
 #' knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
 #' ..., verbose=FALSE)
 #'
 #' @param object a fuzzy number
-#' @param method character; one of: \code{"NearestEuclidean"} (default), or \code{"Naive"}
+#' @param method character; one of: \code{"NearestEuclidean"} (default), 
+#' \code{"SupportCorePreserving"}, or \code{"Naive"}
 #' @param knot.n desired number of knots (if missing, then calculated from given
 #' \code{knot.alpha})
 #' @param knot.alpha alpha-cuts at which knots will be positioned
@@ -54,7 +62,9 @@
 #' @param verbose logical; should some technical details on the computations being performed be printed?
 #' [only \code{"NearestEuclidean"}]
 #' @param ... further arguments passed to \code{\link{integrateAlpha}}
-#' [only \code{"NearestEuclidean"}]
+#' [only \code{"NearestEuclidean"} and \code{"SupportCorePreserving"}]
+#' 
+#' @return Returns a \code{\link{PiecewiseLinearFuzzyNumber}} object.
 #'
 #' @exportMethod piecewiseLinearApproximation
 #' @name piecewiseLinearApproximation
@@ -64,11 +74,17 @@
 #' @family approximation
 #' @family FuzzyNumber-method
 #' @references
-#' Coroianu L., Gagolewski M., Grzegorzewski P. (2013a),
+#' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
 #' Nearest Piecewise Linear Approximation of Fuzzy Numbers,
-#' Fuzzy Sets and Systems 233, pp. 26-51.\cr
-#' Coroianu L., Gagolewski M., Grzegorzewski P. (2013b),
-#' Nearest Piecewise Linear Approximation of Fuzzy Numbers - general case, in preparation.\cr
+#' Fuzzy Sets and Systems 233, pp. 26-51.
+#' 
+#' Coroianu L., Gagolewski M., Grzegorzewski P. (2014a),
+#' Nearest Piecewise Linear Approximation of Fuzzy Numbers - General Case,
+#'  submitted for publication.
+#' 
+#' Coroianu L., Gagolewski M., Grzegorzewski P., Adabitabar Firozja M., Houlari T. (2014b),
+#' Piecewise Linear Approximation of Fuzzy Numbers Preserving the Support and Core,
+#'  submitted for publication.
 #'
 #' @examples
 #' (A <- FuzzyNumber(-1,0,1,3,lower=function(x) sqrt(x),upper=function(x) 1-sqrt(x)))
@@ -83,7 +99,8 @@ setMethod(
    f="piecewiseLinearApproximation",
    signature(object="FuzzyNumber"),
    definition=function(
-      object, method=c("NearestEuclidean", "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
+      object, method=c("NearestEuclidean", "SupportCorePreserving", 
+         "Naive", "ApproximateNearestEuclidean [DEPRECATED]"),
       knot.n=1, knot.alpha=seq(0, 1, length.out=knot.n+2)[-c(1,knot.n+2)],
       ...,
       verbose=FALSE
@@ -105,7 +122,11 @@ setMethod(
       if (method == "Naive")
          return(piecewiseLinearApproximation_Naive(object, knot.n, knot.alpha))
       else if (method == "ApproximateNearestEuclidean") {
-         stop('[DEPRECATED] Please, use method="NearestEuclidean". This will give you exact solution')
+         stop('[DEPRECATED] Please use method="NearestEuclidean". This will give you exact solution')
+      }
+      else if (method == "SupportCorePreserving")
+      {
+         return(piecewiseLinearApproximation_ApproximateSupportCorePreserving(object, knot.n, knot.alpha, ...))
       }
       else if (method == "NearestEuclidean")
       {
@@ -113,12 +134,53 @@ setMethod(
             warning('`knot.n` is large - consider using method="Naive".')
 #          if (knot.n == 1) # original method from (Coroianu, Gagolewski, Grzegorzewski, 2013)
 #             return(piecewiseLinearApproximation_ApproximateNearestEuclidean1(object, knot.n, knot.alpha, verbose, ...))
-#          else # general case from (Coroianu, Gagolewski, Grzegorzewski, in-preparation)
+#          else # general case from (Coroianu, Gagolewski, Grzegorzewski, submitted)
          return(piecewiseLinearApproximation_ApproximateNearestEuclideanN(object, knot.n, knot.alpha, verbose, ...))
       }
    }
 )
 
+
+
+# internal function
+piecewiseLinearApproximation_ApproximateSupportCorePreserving <- function(A, knot.n, knot.alpha, ...)
+{
+#    Coroianu L., Gagolewski M., Grzegorzewski P., Adabitabar Firozja M., Houlari T., Piecewise Linear Approximation of Fuzzy Numbers Preserving the Support and Core, 2013, SRI PAS Research Report RB/51/2013
+   if (knot.n != 1) stop("this approximation method currently may only be used only for knot.n == 1")
+   
+   xsol <- function(A, alpha, ...) {
+      
+      f1 <- function(beta) 3*beta*(A@a1+(A@a2-A@a1)*A@lower(beta)-A@a1*(alpha-beta)/alpha)/alpha
+      f2 <- function(beta) 3*(1-beta)*(A@a1+(A@a2-A@a1)*A@lower(beta)-A@a2*(beta-alpha)/(1-alpha))/(1-alpha)
+      
+      if (alpha <= 0) xm <- A@a1 else if (alpha >= 1) xm <- A@a2 else
+         xm <- integrate(f1, 0, alpha, ...)$val + 
+            integrate(f2, alpha, 1, ...)$val
+      
+      if (xm < A@a1) A@a1
+      else if (xm > A@a2) A@a2
+      else xm
+      
+   }
+   
+   ysol <- function(A, alpha, ...) {
+      
+      f1 <- function(b) 3*b*(A@a3+(A@a4-A@a3)*A@upper(b)-A@a4*(alpha-b)/alpha)/alpha
+      f2 <- function(b) 3*(1-b)*(A@a3+(A@a4-A@a3)*A@upper(b)-A@a3*(b-alpha)/(1-alpha))/(1-alpha)
+      
+      if (alpha <= 0) ym <- A@a4 else if (alpha >= 1) ym <- A@a3 else
+         ym <- integrate(f1, 0, alpha, ...)$val + 
+            integrate(f2, alpha, 1, ...)$val
+      
+      if (ym < A@a3) A@a3
+      else if (ym > A@a4) A@a4
+      else ym
+      
+   }
+   
+   PiecewiseLinearFuzzyNumber(A@a1, A@a2, A@a3, A@a4, knot.alpha=knot.alpha,
+      knot.left=xsol(A, knot.alpha, ...), knot.right=ysol(A, knot.alpha, ...))
+}
 
 
 
@@ -339,7 +401,7 @@ piecewiseLinearApproximation_ApproximateNearestEuclidean1 <- function(object, kn
    # This exact (up to numeric integration error, of course) method for n == 1
    # was proposed by Coroianu, Gagolewski, Grzegorzewski (FSS 2013)
 
-   if (knot.n != 1) stop("this version  may only be used only for knot.n == 1")
+   if (knot.n != 1) stop("this approximation method may only be used only for knot.n == 1")
 
 
    w1   <- integrateAlpha(object, "lower", 0, knot.alpha, ...)
@@ -544,7 +606,7 @@ piecewiseLinearApproximation_ApproximateNearestEuclidean1 <- function(object, kn
 piecewiseLinearApproximation_ApproximateNearestEuclideanN <- function(object, knot.n, knot.alpha, verbose, ...)
 {
    # This exact (up to numeric integration error, of course) method for any n
-   # was proposed by Coroianu, Gagolewski, Grzegorzewski (in-preparation)
+   # was proposed by Coroianu, Gagolewski, Grzegorzewski (submitted paper)
 
    alpha <- c(0, knot.alpha, 1) # length: knot.n+2
    stopifnot(!anyDuplicated(alpha), !is.unsorted(alpha))

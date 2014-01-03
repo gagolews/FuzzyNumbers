@@ -31,7 +31,7 @@
 #' @param f a function defined on [x1,x2]
 #' @param x1 numeric vector of length 1; if longer, only the first element is used
 #' @param x2 numeric vector of length 1; if longer, only the first element is used
-#' @return a new function defined on [0,1] (scaled input)
+#' @return Returns a new function defined on [0,1] (scaled input).
 #'
 #' @seealso \code{\linkS4class{FuzzyNumber}}
 #' @family auxiliary
@@ -62,7 +62,7 @@ convertSide <- function(f, x1, x2)
 #' @param f a function into [y1,y2]
 #' @param y1 numeric vector of length 1
 #' @param y2 numeric vector of length 1
-#' @return a new function defined on [0,1] (scaled input)
+#' @return Returns a new function defined on [0,1] (scaled input).
 #'
 #' @seealso \code{\linkS4class{FuzzyNumber}}
 #' @family auxiliary

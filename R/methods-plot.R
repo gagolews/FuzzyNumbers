@@ -52,7 +52,7 @@
 #' @param add logical; add another FuzzyNumber to existing plot?
 #' @param ... further arguments passed to \code{\link{plot.default}}
 #'
-#' @return nothing really interesting
+#' @return Returns nothing really interesting.
 #'
 #' @exportMethod plot
 #' @docType methods

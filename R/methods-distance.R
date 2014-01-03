@@ -34,7 +34,7 @@
 #' @param type one of \code{"Euclidean"}, \code{"EuclideanSquared"}
 #' @param ... additional arguments passed to \code{\link{integrate}}
 #'
-#' @return the calculated distance, single numeric value
+#' @return Returns the calculated distance, i.e. a single numeric value.
 #'
 #'
 #' @exportMethod distance
@@ -59,7 +59,7 @@
 #'
 #' @references
 #' Grzegorzewski P., Metrics and orders in space of fuzzy numbers,
-#' Fuzzy Sets and Systems 97, 1998, pp. 83-94.\cr
+#' Fuzzy Sets and Systems 97, 1998, pp. 83-94.
 setGeneric("distance",
            function(e1, e2, ...) standardGeneric("distance"))
 

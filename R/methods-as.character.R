@@ -35,7 +35,8 @@
 #' @param x a fuzzy number
 #' @param toLaTeX logical; should LaTeX code be output?
 #' @param varnameLaTeX character; variable name to be included in equations
-#' @return character vector
+#' 
+#' @return Returns a character vector.
 #'
 #' @usage
 #' \S4method{as.character}{FuzzyNumber}(x, toLaTeX=FALSE, varnameLaTeX="A")

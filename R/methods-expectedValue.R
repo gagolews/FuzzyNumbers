@@ -32,7 +32,8 @@
 #'
 #' @param object a fuzzy number
 #' @param ... additional arguments passed to \code{\link{expectedInterval}}
-#' @return a single numeric value
+#' 
+#' @return Returns a single numeric value.
 #'
 #' @exportMethod expectedValue
 #' @docType methods

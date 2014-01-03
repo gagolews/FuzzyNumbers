@@ -30,7 +30,7 @@
 #' @param x a fuzzy number
 #' @param i character; slot name
 #'
-#' @return slot value
+#' @return Returns the slot value.
 #'
 #' @usage
 #' \S4method{[}{FuzzyNumber,character}(x, i)

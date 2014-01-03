@@ -39,7 +39,8 @@
 #'
 #' @param object a fuzzy number or a single numeric value (crisp number)
 #' or vector of length two (interval)
-#' @return Object of class \code{\linkS4class{PowerFuzzyNumber}}
+#' 
+#' @return Returns an object of class \code{\linkS4class{PowerFuzzyNumber}}.
 #'
 #'
 #' @name as.PowerFuzzyNumber

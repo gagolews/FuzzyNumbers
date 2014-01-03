@@ -26,7 +26,8 @@
 #' This gives the values that a fuzzy number necessarily represents.
 #'
 #' @param object a fuzzy number
-#' @return numeric vector of length 2
+#' 
+#' @return Returns a numeric vector of length 2.
 #'
 #' @exportMethod core
 #' @docType methods

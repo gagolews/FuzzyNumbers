@@ -37,13 +37,11 @@
 #'
 #' @param e1 a fuzzy number or single numeric value
 #' @param e2 a fuzzy number or single numeric value
-#' @return a fuzzy number of the class \linkS4class{PiecewiseLinearFuzzyNumber}
-#' of a \linkS4class{TrapezoidalFuzzyNumber}
+#' @return Returns a fuzzy number of the class \linkS4class{PiecewiseLinearFuzzyNumber}
+#' or \linkS4class{TrapezoidalFuzzyNumber}.
 #'
 #' @details
 #' Thanks to Jan Caha for suggestions on PLFN operations.
-#'
-#' @return a fuzzy number
 #'
 #' @usage
 #' \S4method{+}{numeric,FuzzyNumber}(e1, e2) # e2 + e1
