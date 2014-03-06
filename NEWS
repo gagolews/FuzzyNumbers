@@ -3,6 +3,14 @@
 
 ***************************************************************************
 
+0.3-4 /under development/
+
+* added propert import directives in NAMESPACE
+
+* ...
+
+***************************************************************************
+
 0.3-3 /2014-01-03/
 
 * piecewiseLinearApproximation() now supports new method="SupportCorePreserving",

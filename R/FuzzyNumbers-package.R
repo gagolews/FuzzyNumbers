@@ -137,4 +137,9 @@
 #' Yeh C.-T. (2008), Trapezoidal and triangular approximations 
 #' preserving the expected interval,
 #' Fuzzy Sets and Systems 159, pp. 1345-1353.
+#' 
+#' @import methods
+#' @import grDevices
+#' @import graphics
+#' @import stats
 invisible(NULL)
