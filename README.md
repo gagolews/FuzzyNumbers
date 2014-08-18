@@ -2,6 +2,7 @@
 
 ### Tools to Deal with Fuzzy Numbers in R
 
+[![Build Status](https://travis-ci.org/Rexamine/FuzzyNumbers.svg?branch=master)](https://travis-ci.org/Rexamine/FuzzyNumbers)
 
 **FuzzyNumbers** is an open source (LGPL 3) package for R. It provides S4 classes and methods to deal with fuzzy numbers. The package may be used by the practitioners as well as by the researchers in fuzzy numbers theory (e.g. for preparing figures, generating numerical examples, or testing new algorithms).
 
