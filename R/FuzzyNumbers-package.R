@@ -87,6 +87,10 @@
 #'
 #' @name FuzzyNumbers-package
 #' @docType package
+#' @import methods
+#' @import grDevices
+#' @import graphics
+#' @import stats
 #' @author Marek Gagolewski \email{gagolews@@rexamine.com},\cr
 #'  with contributions from Jan Caha
 #' @references
@@ -98,12 +102,22 @@
 #' Ban A.I. (2009), On the nearest parametric approximation of a fuzzy number - Revisited,
 #' Fuzzy Sets and Systems 160, pp. 3027-3047.
 #' 
+#' Bodjanova S. (2005), Median value and median interval of a fuzzy number,
+#' Information Sciences 172, pp. 73-89.
+#' 
 #' Chanas S. (2001), On the interval approximation of a fuzzy number,
 #' Fuzzy Sets and Systems 122, pp. 353-356.
 #' 
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
 #' Nearest Piecewise Linear Approximation of Fuzzy Numbers,
 #' Fuzzy Sets and Systems 233, pp. 26-51.
+#' 
+#' Coroianu L., Gagolewski M., Grzegorzewski P.,
+#' Adabitabar Firozja M., Houlari T. (2014),
+#' Piecewise linear approximation of fuzzy numbers preserving 
+#' the support and core, In: Laurent A. et al. (Eds.), 
+#' Information Processing and Management of Uncertainty in 
+#' Knowledge-Based Systems, Part II (CCIS 443), Springer, pp. 244-254.
 #' 
 #' Delgado M., Vila M.A., Voxman W. (1998), 
 #' On a canonical representation of a fuzzy number,
@@ -112,8 +126,11 @@
 #' Dubois D., Prade H. (1978), Operations on fuzzy numbers, 
 #' Int. J. Syst. Sci. 9, pp. 613-626.
 #' 
-#' Dubois D., Prade H. (1987), The mean value of a fuzzy number, 
+#' Dubois D., Prade H. (1987a), The mean value of a fuzzy number, 
 #' Fuzzy Sets and Systems 24, pp. 279-300.
+#' 
+#' Dubois D., Prade H. (1987b), Fuzzy numbers: An overview, In: Analysis of Fuzzy
+#' Information. Mathematical Logic, vol. I, CRC Press, pp. 3-39.
 #' 
 #' Grzegorzewski P. (2010), Algorithms for trapezoidal approximations of fuzzy numbers
 #' preserving the expected interval, In: Bouchon-Meunier B. et al (Eds.),

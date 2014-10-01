@@ -3,11 +3,14 @@
 
 ***************************************************************************
 
-0.3-4 /under development/
+0.3-5 /2014-10-01/
 
-* added propert import directives in NAMESPACE
+* added proper import directives in NAMESPACE
 
-* ...
+* piecewiseLinearApproximation: method="ApproximateNearestEuclidean"
+  no longer accepted; use "NearestEuclidean" instead.
+
+* package vignette now in the vignettes/ directory.
 
 ***************************************************************************
 

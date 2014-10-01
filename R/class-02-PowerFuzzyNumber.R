@@ -22,7 +22,7 @@
 #' S4 class Representing a Fuzzy Number with Sides Given by Power Functions
 #'
 #' @description
-#' Fuzzy numbers which sides are given by power functions
+#' Bodjanova-type fuzzy numbers which sides are given by power functions
 #' are defined using four coefficients
 #' \code{a1} <= \code{a2} <= \code{a3} <= \code{a4},
 #' and parameters \code{p.left}, \code{p.right}>0, which determine
@@ -49,6 +49,11 @@
 #'
 #' @seealso \code{\link{PowerFuzzyNumber}} for a convenient constructor,
 #' \code{\link{as.PowerFuzzyNumber}} for conversion of objects to this class.
+#' 
+#' @references
+#' Bodjanova S. (2005), Median value and median interval of a fuzzy number,
+#' Information Sciences 172, pp. 73-89.
+#'
 #'
 #' @exportClass PowerFuzzyNumber
 #' @name PowerFuzzyNumber-class

@@ -1,6 +1,7 @@
-\documentclass[11pt]{article}
 %\VignetteIndexEntry{A Guide to the FuzzyNumbers Package}
-%\VignetteEngine{knitr}
+%\VignetteEngine{knitr::knitr}
+%\VignetteKeyword{Fuzzy Numbers, extension principle, S4, R}
+\documentclass[11pt]{article}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,8 +127,7 @@ ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
 
 \medskip
-\textit{The package, as well as this tutorial, is still in its early
-days -- any suggestions and contributions are welcome!}
+\textit{Any suggestions and contributions are welcome!}
 \end{center}
 
 
@@ -351,7 +351,8 @@ and $\mathtt{right}: [0,1]\to[0,1]$ is a nonincreasing function
 In our package, it is assumed that these functions fulfill the conditions
 $\mathtt{left}(0)\ge 0$, $\mathtt{left}(1)\le 1$,
 $\mathtt{right}(0)\le 1$, and $\mathtt{right}(1)\ge 0$.
-
+Note that this is a so-called L-R representation of FNs,
+see \cite{DuboisPrade1987:fnoverview}.
 
 
 
@@ -922,7 +923,8 @@ procedures described in Sec.~\ref{Sec:Approximation}.
 
 \subsection{Fuzzy Numbers with Sides Given by Power Functions}\label{Sec:powerdef}
 
-Fuzzy numbers which sides are given by power functions
+Bodjanova-type \cite{Bodjanova2005:medianfn}
+fuzzy numbers which sides are given by power functions
 are defined using four coefficients
 $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$,
 and parameters $\mathtt{p.left}, \mathtt{p.right}>0$ which determine
@@ -1940,7 +1942,7 @@ Fix $\boldsymbol\alpha$. The next method searches for:
 \]
 such that $\mathrm{supp}(A)=\mathrm{supp}(\mathcal{P}(A))$
 and $\mathrm{core}(A)=\mathrm{core}(\mathcal{P}(A))$, see
-\cite{CoroianuETALXXXX:piecewise1suppcore}.
+\cite{CoroianuETAL2014:piecewise1suppcore}.
 
 The \str{"{}SupportCorePreserving"{}} \argument{method}
 of the \func{piecewiseLinearApproximation()} function
@@ -1992,7 +1994,7 @@ optimize(D, lower=0, upper=1)
 @
 
 Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving function, see
-\cite{CoroianuETALXXXX:piecewise1suppcore} for discussion.
+\cite{CoroianuETAL2014:piecewise1suppcore} for discussion.
 
 \begin{center}
 <<suppcoreplfn1a5,dependson='suppcoreplfn1a4',echo=FALSE>>=
@@ -2079,14 +2081,14 @@ abline(h=opt$objective, col="grey", lty=3)
 
 
 
-% \clearpage
-\section{NEWS/CHANGELOG}
-
-% \begin{verbatim}
-<<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
-cat(readLines('../../../NEWS'), sep='\n')
-@
-% \end{verbatim}
+% % \clearpage
+% \section{NEWS/CHANGELOG}
+%
+% % \begin{verbatim}
+% <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
+% cat(readLines('../../../NEWS'), sep='\n')
+% @
+% % \end{verbatim}
 
 \paragraph{Acknowledgments.}
 This document has been generated with \LaTeX, \package{knitr} and
@@ -2106,11 +2108,125 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 
 
-% \clearpage
-\bibliographystyle{acm}
-% see https://github.com/gagolews/bibliography
-% add 'export BIBINPUTS="/home/gagolews/Publikacje/bibliography"'
-%     to .bashrc
-\bibliography{gagolewski,gagolewski_temp,aggregation,probstat,r,unsorted,fuzzynumbers}
+% % \clearpage
+% \bibliographystyle{acm}
+% % see https://github.com/gagolews/bibliography
+% % add 'export BIBINPUTS="/home/gagolews/Publikacje/bibliography"'
+% %     to .bashrc
+% \bibliography{gagolewski,gagolewski_temp,aggregation,probstat,r,unsorted,fuzzynumbers}
+
+\begin{thebibliography}{10}
+
+\bibitem{Ban2008:approxpresexpint}
+{\sc Ban, A.}
+\newblock Approximation of fuzzy numbers by trapezoidal fuzzy numbers
+  preserving the expected interval.
+\newblock {\em Fuzzy Sets and Systems 159\/} (2008), 1327--1344.
+
+\bibitem{Ban2009:nearestfnrev}
+{\sc Ban, A.}
+\newblock On the nearest parametric approximation of a fuzzy number --
+  revisited.
+\newblock {\em Fuzzy Sets and Systems 160\/} (2009), 3027--3047.
+
+\bibitem{Bodjanova2005:medianfn}
+{\sc Bodjanova, S.}
+\newblock Median value and median interval of a fuzzy number.
+\newblock {\em Information Sciences 172\/} (2005), 73--89.
+
+\bibitem{Chanas2001:intervapproxfn}
+{\sc Chanas, S.}
+\newblock On the interval approximation of a fuzzy number.
+\newblock {\em Fuzzy Sets and Systems 122\/} (2001), 353--356.
+
+\bibitem{CoroianuETAL2013:piecewise1}
+{\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
+\newblock Nearest piecewise linear approximation of fuzzy numbers.
+\newblock {\em Fuzzy Sets and Systems 233\/} (2013), 26--51.
+
+\bibitem{CoroianuETALXXXX:piecewise2}
+{\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
+\newblock Nearest piecewise linear approximation of fuzzy numbers -- {G}eneral
+  case, 2014.
+\newblock Submitted paper.
+
+\bibitem{CoroianuETAL2014:piecewise1suppcore}
+{\sc Coroianu, L., Gagolewski, M., Grzegorzewski, P., {Adabitabar Firozja}, M.,
+  and Houlari, T.}
+\newblock Piecewise linear approximation of fuzzy numbers preserving the
+  support and core.
+\newblock In {\em Information Processing and Management of Uncertainty in
+  Knowledge-Based Systems, Part II\/} (2014), A.~Laurent et~al., Eds.,
+  vol.~443, Springer, pp.~244--254.
+
+\bibitem{DelgadoETAL1998:canonicalfn}
+{\sc Delgado, M., Vila, M., and Voxman, W.}
+\newblock On a canonical representation of a fuzzy number.
+\newblock {\em Fuzzy Sets and Systems 93\/} (1998), 125--135.
+
+\bibitem{DiamondKloeden1994:metricspacesfs}
+{\sc Diamond, P., and Kloeden, P.}
+\newblock {\em Metric spaces of fuzzy sets. {T}heory and applications}.
+\newblock World Scientific, Singapore, 1994.
+
+\bibitem{DuboisPrade1978:opfn}
+{\sc Dubois, D., and Prade, H.}
+\newblock Operations on fuzzy numbers.
+\newblock {\em Int. J. Syst. Sci. 9\/} (1978), 613--626.
+
+\bibitem{DuboisPrade1987:fnoverview}
+{\sc Dubois, D., and Prade, H.}
+\newblock Fuzzy numbers: An overview.
+\newblock In {\em In: Analysis of Fuzzy Information. Mathematical Logic, vol.
+  I}. CRC Press, 1987, pp.~3--39.
+
+\bibitem{DuboisPrade1987:meanfn}
+{\sc Dubois, D., and Prade, H.}
+\newblock The mean value of a fuzzy number.
+\newblock {\em Fuzzy Sets and Systems 24\/} (1987), 279--300.
+
+\bibitem{Gagolewski:fuzzynumberspackage}
+{\sc Gagolewski, M.}
+\newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
+  \textsf{R}}, 2014.
+\newblock {h}ttp://FuzzyNumbers.rexamine.com.
+
+\bibitem{Grzegorzewski1998:metricsordersfn}
+{\sc Grzegorzewski, P.}
+\newblock Metrics and orders in space of fuzzy numbers.
+\newblock {\em Fuzzy Sets and Systems 97\/} (1998), 83--94.
+
+\bibitem{Grzegorzewski2010:trapfnapproxexpint}
+{\sc Grzegorzewski, P.}
+\newblock Algorithms for trapezoidal approximations of fuzzy numbers preserving
+  the expected interval.
+\newblock In {\em Foundations of Reasoning Under Uncertainty\/} (2010),
+  B.-M.~B. et~al, Ed., Springer, pp.~85--98.
+
+\bibitem{GrzegorzewskiPasternak2011:trapapproxsupcore}
+{\sc Grzegorzewski, P., and Pasternak-Winiarska, K.}
+\newblock Trapezoidal approximations of fuzzy numbers with restrictions on the
+  support and core.
+\newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantic Press,
+  pp.~749--756.
+
+\bibitem{KlirYuan1995:fuzzybook}
+{\sc Klir, G.~J., and Yuan, B.}
+\newblock {\em Fuzzy sets and fuzzy logic. {T}heory and applications}.
+\newblock Prentice Hall PTR, New Jersey, 1995.
+
+\bibitem{StefaniniSorini2009:eusflat}
+{\sc Stefanini, L., and Sorini, L.}
+\newblock Fuzzy arithmetic with parametric {LR} fuzzy numbers.
+\newblock In {\em Proc. IFSA/EUSFLAT 2009\/} (2009), pp.~600--605.
+
+\bibitem{Yeh2008:traptriapprox}
+{\sc Yeh, C.-T.}
+\newblock Trapezoidal and triangular approximations preserving the expected
+  interval.
+\newblock {\em Fuzzy Sets and Systems 159\/} (2008), 1345--1353.
+
+\end{thebibliography}
+
 
 \end{document}

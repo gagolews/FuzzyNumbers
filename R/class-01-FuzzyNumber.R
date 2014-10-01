@@ -21,7 +21,7 @@
 #' S4 class Representing a Fuzzy Number
 #'
 #' @description
-#' Formally, a fuzzy number \eqn{A} (Dubois, Prade, 1978) is a fuzzy subset of the
+#' Formally, a fuzzy number \eqn{A} (Dubois, Prade, 1987) is a fuzzy subset of the
 #' real line \eqn{R}  with membership function \eqn{\mu} given by:
 #' \tabular{lll}{
 #'                    \tab | \eqn{0}                      \tab if \eqn{x    < a1}, \cr
@@ -35,6 +35,7 @@
 #' called the \emph{left side generator of \eqn{A}},
 #' and \eqn{right: [0,1]\to[0,1]}{right: [0,1]->[1,0]} is a nonincreasing function
 #' called the \emph{right side generator of \eqn{A}}.
+#' Note that this is a so-called L-R representation of a fuzzy number.
 #'
 #' Alternatively, it may be shown that each fuzzy number \eqn{A} may be uniquely determined
 #' by specifying its \eqn{\alpha}-cuts, \eqn{A(\alpha)}. We have \eqn{A(0)=[a1,a4]} and
@@ -76,6 +77,11 @@
 #' Also, see \code{\link{convertSide}} for creating side functions generators,
 #' \code{\link{convertAlpha}} for creating alpha-cut bounds generators,
 #' \code{\link{approxInvert}} for inverting side functions/alpha-cuts numerically.
+#' 
+#' @references
+#' Dubois D., Prade H. (1987), Fuzzy numbers: An overview, In: Analysis of Fuzzy
+#' Information. Mathematical Logic, vol. I, CRC Press, pp. 3-39.
+
 #'
 #' @exportClass FuzzyNumber
 #' @name FuzzyNumber-class
