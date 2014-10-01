@@ -17,8 +17,11 @@ URL: http://FuzzyNumbers.rexamine.com
 BugReports: http://github.com/Rexamine/FuzzyNumbers/issues
 License: LGPL (>= 3)
 ByteCompile: TRUE
+VignetteBuilder: knitr
+Suggests:
+    knitr
 Depends:
-    R (>= 2.15.0),
+    R (>= 3.0.0),
     methods,
     grDevices,
     graphics,

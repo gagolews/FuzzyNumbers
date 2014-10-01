@@ -23,6 +23,8 @@ FuzzyNumbers.Rproj
 # LaTeX/knitr aux stuff
 cache-knitr
 figures-knitr
+vignette/cache
+vignette/figures
 *.aux
 *.log
 *.toc

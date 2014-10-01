@@ -423,7 +423,7 @@ To depict $A_1$ we call:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/A1ex5} 
+{\centering \includegraphics[width=4.5in]{figure/A1ex5} 
 
 }
 
@@ -502,7 +502,7 @@ now with arbitrary support and core.
     \hlkwc{left}\hlstd{=}\hlkwd{convertSide}\hlstd{(f,} \hlopt{-}\hlnum{4}\hlstd{,} \hlopt{-}\hlnum{2}\hlstd{),}
    \hlkwc{right}\hlstd{=}\hlkwd{convertSide}\hlstd{(g,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)}
 \hlstd{)}
-\hlkwd{plot}\hlstd{(B,} \hlkwc{xlab}\hlstd{=}\hlstr{'$x$'}\hlstd{,} \hlkwc{ylab}\hlstd{=}\hlstr{'$\textbackslash{}\textbackslash{}alpha$'}\hlstd{)}
+\hlkwd{plot}\hlstd{(B,} \hlkwc{xlab}\hlstd{=}\hlkwd{expression}\hlstd{(x),} \hlkwc{ylab}\hlstd{=}\hlkwd{expression}\hlstd{(alpha))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -511,7 +511,7 @@ now with arbitrary support and core.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ExFconvert4} 
+{\centering \includegraphics[width=4.5in]{figure/ExFconvert4} 
 
 }
 
@@ -577,7 +577,7 @@ An example:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/alphacutEx2} 
+{\centering \includegraphics[width=4.5in]{figure/alphacutEx2} 
 
 }
 
@@ -633,7 +633,7 @@ complaints. However\dots
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/A3deffig2} 
+{\centering \includegraphics[width=4.5in]{figure/A3deffig2} 
 
 }
 
@@ -727,7 +727,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x2803000>
+## <environment: 0x2e4dd28>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
@@ -735,7 +735,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x2803000>
+## <environment: 0x2e4dd28>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -914,7 +914,7 @@ To depict $T_1$ we call:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/TrapEx1d} 
+{\centering \includegraphics[width=4.5in]{figure/TrapEx1d} 
 
 }
 
@@ -949,7 +949,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x261c3c0>
+## <bytecode: 0x2cbbe70>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -958,7 +958,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x261c4a0>
+## <bytecode: 0x2cbb058>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -967,7 +967,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x261d088>
+## <bytecode: 0x2cbbbd0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -976,7 +976,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x261d168>
+## <bytecode: 0x2cbbcb0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -1133,7 +1133,7 @@ PLFNs in our package are represented by the \texttt{PiecewiseLinearFuzzyNumber} 
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/PLFNEx1b} 
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx1b} 
 
 }
 
@@ -1270,7 +1270,7 @@ we would do that by calling:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/PLFNEx2b} 
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx2b} 
 
 }
 
@@ -1352,7 +1352,7 @@ An example:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/PowerEx1b} 
+{\centering \includegraphics[width=4.5in]{figure/PowerEx1b} 
 
 }
 
@@ -1420,7 +1420,7 @@ Let us consider the following FN:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/depicting1b} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1b} 
 
 }
 
@@ -1456,7 +1456,7 @@ function of the same fuzzy number, but with different accuracy.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/depicting1d} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1d} 
 
 }
 
@@ -1490,7 +1490,7 @@ If we want, for some reasons, to use $\alpha$-cuts, then we may do as follows:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/depicting1f} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1f} 
 
 }
 
@@ -1514,7 +1514,7 @@ We may also illustrate an $\alpha$-cut representation of a fuzzy number:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/depicting1h} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1h} 
 
 }
 
@@ -1622,18 +1622,17 @@ example from one of our papers:
 \hlstd{X} \hlkwb{<-} \hlkwd{PiecewiseLinearFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{5}\hlstd{,} \hlkwc{knot.n}\hlstd{=}\hlnum{1}\hlstd{,}
    \hlkwc{knot.alpha}\hlstd{=}\hlnum{0.6}\hlstd{,} \hlkwc{knot.left}\hlstd{=}\hlnum{0.3}\hlstd{,} \hlkwc{knot.right}\hlstd{=}\hlnum{4}\hlstd{)}
 
-\hlkwd{plot.default}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{xlab}\hlstd{=}\hlstr{'$x$'}\hlstd{,} \hlkwc{ylab}\hlstd{=}\hlstr{'$\textbackslash{}\textbackslash{}mu_S(x)$'}\hlstd{,}
+\hlkwd{plot.default}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{xlab}\hlstd{=}\hlkwd{expression}\hlstd{(x),} \hlkwc{ylab}\hlstd{=}\hlkwd{expression}\hlstd{(mu[S](x)),}
    \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{0.3}\hlstd{,}\hlnum{5.3}\hlstd{),} \hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))} \hlcom{# empty window}
 
 \hlstd{xpos} \hlkwb{<-} \hlkwd{c}\hlstd{(X[}\hlstr{'a1'}\hlstd{], X[}\hlstr{'knot.left'}\hlstd{],  X[}\hlstr{'a2'}\hlstd{],}
           \hlstd{X[}\hlstr{'a3'}\hlstd{], X[}\hlstr{'knot.right'}\hlstd{], X[}\hlstr{'a4'}\hlstd{])}
-\hlstd{xlab} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'$s_1$'}\hlstd{,} \hlstr{'$s_2$'}\hlstd{,} \hlstr{'$s_3$'}\hlstd{,}
-          \hlstr{'$s_4$'}\hlstd{,} \hlstr{'$s_5$'}\hlstd{,} \hlstr{'$s_6$'}\hlstd{)}
+\hlstd{xlab} \hlkwb{<-} \hlkwd{expression}\hlstd{(s[}\hlnum{1}\hlstd{], s[}\hlnum{2}\hlstd{], s[}\hlnum{3}\hlstd{], s[}\hlnum{4}\hlstd{], s[}\hlnum{5}\hlstd{], s[}\hlnum{6}\hlstd{])}
 \hlkwd{abline}\hlstd{(}\hlkwc{v}\hlstd{=xpos,} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{3}\hlstd{)}
 \hlkwd{text}\hlstd{(xpos,} \hlnum{1.05}\hlstd{, xlab,} \hlkwc{pos}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{xpd}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 
 \hlkwd{abline}\hlstd{(}\hlkwc{h}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{, X[}\hlstr{'knot.alpha'}\hlstd{],} \hlnum{1}\hlstd{),} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{)}
-\hlkwd{text}\hlstd{(}\hlnum{5.55}\hlstd{, X[}\hlstr{'knot.alpha'}\hlstd{],} \hlkwd{sprintf}\hlstd{(}\hlstr{'$\textbackslash{}\textbackslash{}alpha_0$'}\hlstd{),} \hlkwc{pos}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{xpd}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlkwd{text}\hlstd{(}\hlnum{5.1}\hlstd{, X[}\hlstr{'knot.alpha'}\hlstd{],} \hlkwd{expression}\hlstd{(alpha[}\hlnum{0}\hlstd{]),} \hlkwc{pos}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{xpd}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 
 \hlkwd{plot}\hlstd{(X,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'l'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{6}\hlstd{)}
 \hlkwd{plot}\hlstd{(X,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'p'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{6}\hlstd{)}
@@ -1645,7 +1644,7 @@ example from one of our papers:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/depicting2b} 
+{\centering \includegraphics[width=4.5in]{figure/depicting2b} 
 
 }
 
@@ -1654,11 +1653,11 @@ example from one of our papers:
 \end{knitrout}
 \end{center}
 
-\noindent
-Please note that we use \TeX{} commands in plot labels.
-They are interpreted by the \package{tikzDevice} package for \R
-to generate beautiful figures, but setting this all up requires
-higher level of skills\dots and patience.
+%\noindent
+%Please note that we use \TeX{} commands in plot labels.
+%They are interpreted by the \package{tikzDevice} package for \R
+%to generate beautiful figures, but setting this all up requires
+%higher level of skills\dots and patience.
 
 
 
@@ -2051,7 +2050,7 @@ as defined in \cite{KlirYuan1995:fuzzybook}.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/additionFig} 
+{\centering \includegraphics[width=4.5in]{figure/additionFig} 
 
 }
 
@@ -2118,7 +2117,7 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{A} \hlkwb{<-} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{),} \hlkwc{knot.n}\hlstd{=}\hlnum{100}\hlstd{)}
-\hlkwd{plot}\hlstd{(}\hlkwd{fapply}\hlstd{(A,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{log}\hlstd{(x}\hlopt{+}\hlnum{1}\hlstd{)}\hlopt{^}\hlnum{0.5}\hlstd{))}
+\hlkwd{plot}\hlstd{(}\hlkwd{fapply}\hlstd{(A,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{sqrt}\hlstd{(}\hlkwd{log}\hlstd{(x}\hlopt{+}\hlnum{1}\hlstd{))))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -2127,7 +2126,7 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/fapplyFig} 
+{\centering \includegraphics[width=4.5in]{figure/fapplyFig} 
 
 }
 
@@ -2260,7 +2259,7 @@ core and support as $A$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxExA_naive2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naive2} 
 
 }
 
@@ -2315,7 +2314,7 @@ always exists and is unique.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxExA_naiveL2n2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2} 
 
 }
 
@@ -2443,7 +2442,7 @@ cf.~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxExA_ExpInt3Fig} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_ExpInt3Fig} 
 
 }
 
@@ -2488,7 +2487,7 @@ and each point that surely does not belong to $A$ also does not belong to $\math
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxExA_RestrSuppCore2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2} 
 
 }
 
@@ -2569,7 +2568,7 @@ of $A$ at given $\alpha$-cuts.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxPLFNNaive2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNaive2} 
 
 }
 
@@ -2630,7 +2629,7 @@ may be slow.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxPLFNNearest2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2} 
 
 }
 
@@ -2724,7 +2723,7 @@ Let us study the convergence behavior for our exemplary $A$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxPLFNNearestConv2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearestConv2} 
 
 }
 
@@ -2760,7 +2759,7 @@ i.e.~the $D_{A}(\alpha)$ function.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/ApproxPLFNNearest4} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest4} 
 
 }
 
@@ -2794,11 +2793,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.416650999     21 *0.363075991* 0.650344602
-## 0.969824721     23 *0.363016625* 0.650345262
-## 0.619480287     34 *0.362899271* 0.650336546
-## 0.167719480     43 *0.363064000* 0.650343721
-## 0.736245882     23 *0.363006878* 0.650345243
+## 0.829271731     24 *0.363089048* 0.650345156
+## 0.233834688     25 *0.362897858* 0.650336546
+## 0.483240701     48 *0.363092840* 0.650345282
+## 0.773500850     52 *0.363092232* 0.650345263
+## 0.720699773     19 *0.363070826* 0.650344291
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2880,7 +2879,7 @@ PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/suppcoreplfn1a3} 
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a3} 
 
 }
 
@@ -2916,7 +2915,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figures-knitr/suppcoreplfn1a5} 
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5} 
 
 }
 
@@ -2957,7 +2956,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 %
 % \begin{center}
 % <<ApproxMethodPLFN3,dependson='ApproxMethodPLFN2',echo=FALSE>>=
-% plot(A, xlab='$x$', ylab='$\\alpha$')
+% plot(A, xlab=expression(x), ylab=expression(alpha))
 % plot(P4, col='red', lty=2, add=TRUE)
 % print(distance(A, P4), digits=12)
 % @
@@ -3005,8 +3004,8 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 % % \end{verbatim}
 
 \paragraph{Acknowledgments.}
-This document has been generated with \LaTeX, \package{knitr} and
-the \package{tikzDevice} package for \R.
+This document has been generated with \LaTeX and the \package{knitr}
+package for \R.
 Their authors' wonderful work is fully appreciated.
 Many thanks to Jan Caha for contributions to the package's source code,
 and also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu

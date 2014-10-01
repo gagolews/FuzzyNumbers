@@ -141,52 +141,52 @@ ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 options(digits=7)
 options(width=73)
 require('knitr')
-require('tikzDevice')
+# require('tikzDevice')
+#
+# options(tikzDefaultEngine = 'pdftex')
+#
+# options(tikzLatexPackages = c( # dolaczanie uzywanych pakietow TeX-a
+#    '\\usepackage{amsmath,amssymb,amsfonts}', # pakiety AMS
+#    '\\usepackage{tikz}',
+# #   '\\usepackage[MeX,T1,plmath]{polski}', # obsluga m.in. polskich ogonkow
+#    '\\usepackage[utf8]{inputenc}',
+#    '\\usepackage[T1]{fontenc}',
+#    '\\usetikzlibrary{calc}',
+#    '\\usepackage[english]{babel}',
+#    '\\selectlanguage{english}',
+#    '\\usepackage{standalone}'
+# ))
+#
+# options(tikzMetricsDictionary='~/R/tikzMetrics')
+#
+# options(tikzDocumentDeclaration = '\\documentclass[11pt]{standalone}\n')
+#
+# options(tikzMetricPackages = c(
+#    '\\usepackage[utf8]{inputenc}',
+#    '\\usepackage[T1]{fontenc}',
+#    '\\usepackage{amsmath,amssymb,amsfonts}',
+#    '\\usetikzlibrary{calc}',
+#    '\\usepackage[english]{babel}',
+#    '\\selectlanguage{english}'
+# ))
 
-options(tikzDefaultEngine = 'pdftex')
-
-options(tikzLatexPackages = c( # dolaczanie uzywanych pakietow TeX-a
-   '\\usepackage{amsmath,amssymb,amsfonts}', # pakiety AMS
-   '\\usepackage{tikz}',
-#   '\\usepackage[MeX,T1,plmath]{polski}', # obsluga m.in. polskich ogonkow
-   '\\usepackage[utf8]{inputenc}',
-   '\\usepackage[T1]{fontenc}',
-   '\\usetikzlibrary{calc}',
-   '\\usepackage[english]{babel}',
-   '\\selectlanguage{english}',
-   '\\usepackage{standalone}'
-))
-
-options(tikzMetricsDictionary='~/R/tikzMetrics')
-
-options(tikzDocumentDeclaration = '\\documentclass[11pt]{standalone}\n')
-
-options(tikzMetricPackages = c(
-   '\\usepackage[utf8]{inputenc}',
-   '\\usepackage[T1]{fontenc}',
-   '\\usepackage{amsmath,amssymb,amsfonts}',
-   '\\usetikzlibrary{calc}',
-   '\\usepackage[english]{babel}',
-   '\\selectlanguage{english}'
-))
 
 
-
-opts_knit$set(progress = TRUE, verbose = TRUE)
+# opts_knit$set(progress = TRUE, verbose = TRUE)
 
 opts_chunk$set(
    keep.source=TRUE,
    out.width='4.5in',
    fig.width=6,
    fig.height=6/sqrt(3),
-   fig.path='figures-knitr/',
-   cache.path='cache-knitr/',
+#    fig.path='figures-knitr/',
+#    cache.path='cache-knitr/',
    cache=TRUE,
    tidy=FALSE,
 #    dev='cairo_pdf',
 #    dev.args=list(pointsize=11),
-   dev='tikz',
-   external=TRUE,
+#    dev='tikz',
+#    external=TRUE,
    fig.align='center',
    size='small'
 )
@@ -392,7 +392,7 @@ plot(A1)
 \begin{center}
 <<A1ex5,dependson='A1ex',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A1, xlab='$x$', ylab='$\\alpha$', main='')
+plot(A1, xlab=expression(x), ylab=expression(alpha), main='')
 @
 \end{center}
 
@@ -443,7 +443,7 @@ B <- FuzzyNumber(10,20,20,30,
     left=convertSide(f, -4, -2),
    right=convertSide(g, -1, 10)
 )
-plot(B, xlab='$x$', ylab='$\\alpha$')
+plot(B, xlab=expression(x), ylab=expression(alpha))
 @
 
 \begin{center}
@@ -505,9 +505,9 @@ legend('topright', c(expression(mu[A1]), expression(mu[A2])),
 \begin{center}
 <<alphacutEx2,dependson='alphacutEx',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A1, col='blue', xlab='$x$', ylab='$\\alpha$')
+plot(A1, col='blue', xlab=expression(x), ylab=expression(alpha))
 plot(A2, col='red', lty=2, add=TRUE)
-legend('topright', c('$\\mu_{A1}$', '$\\mu_{A2}$'),
+legend('topright', expression(mu[A[1]], mu[A[2]]),
    col=c('blue', 'red'), lty=c(1,2))
 @
 \end{center}
@@ -545,7 +545,7 @@ plot(A3)
 \begin{center}
 <<A3deffig2,dependson='A3def',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A3, xlab='$x$', ylab='$\\alpha$', shadowcol='gray')
+plot(A3, xlab=expression(x), ylab=expression(alpha), shadowcol='gray')
 @
 \end{center}
 
@@ -725,7 +725,7 @@ plot(T1)
 \begin{center}
 <<TrapEx1d,dependson='TrapEx1c',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(T1, xlab='$x$', ylab='$\\alpha$')
+plot(T1, xlab=expression(x), ylab=expression(alpha))
 @
 \end{center}
 
@@ -835,7 +835,7 @@ plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 \begin{center}
 <<PLFNEx1b,dependson='PLFNEx1a',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(P1, type='b', xlab='$x$', ylab='$\\alpha$', from=0, to=5, xlim=c(0.5,4.5))
+plot(P1, type='b', xlab=expression(x), ylab=expression(alpha), from=0, to=5, xlim=c(0.5,4.5))
 plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 @
 \end{center}
@@ -898,11 +898,11 @@ text(7.5, alpha, sprintf('a=%g', alpha), pos=3)
 \begin{center}
 <<PLFNEx2b,dependson='PLFNEx2a',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(P3, type='b', xlab='$x$', ylab='$\\alpha$', from=-1, to=9, xlim=c(0,8))
+plot(P3, type='b', xlab=expression(x), ylab=expression(alpha), from=-1, to=9, xlim=c(0,8))
 abline(h=alpha, col='gray', lty=2)
 abline(v=P3['knot.left'], col='gray', lty=3)
 abline(v=P3['knot.right'], col='gray', lty=3)
-text(7.5, alpha, sprintf('$\\alpha=%g$', alpha), pos=3)
+text(7.5, alpha, parse(text=sprintf('alpha*"="*%g', alpha)), pos=3)
 @
 \end{center}
 
@@ -951,7 +951,7 @@ plot(X)
 \begin{center}
 <<PowerEx1b,dependson='PowerEx1a',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(X, type='l', xlab='$x$', ylab='$\\alpha$')
+plot(X, type='l', xlab=expression(x), ylab=expression(alpha))
 @
 \end{center}
 
@@ -997,7 +997,7 @@ plot(A)
 \begin{center}
 <<depicting1b,dependson='depicting1a',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 @
 \end{center}
 
@@ -1023,7 +1023,7 @@ plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 \begin{center}
 <<depicting1d,dependson='depicting1c',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, n=3, type='b', xlab='$x$', ylab='$\\alpha$')
+plot(A, n=3, type='b', xlab=expression(x), ylab=expression(alpha))
 plot(A, n=6, add=TRUE, lty=2, col=2, type='b', pch=2)
 plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 @
@@ -1049,7 +1049,7 @@ plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use sides
 \begin{center}
 <<depicting1f,dependson='depicting1e',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, n=3, at.alpha=numeric(0), type='b', xlab='$x$', ylab='$\\alpha$') # use alpha-cuts
+plot(A, n=3, at.alpha=numeric(0), type='b', xlab=expression(x), ylab=expression(alpha)) # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
 @
 \end{center}
@@ -1064,7 +1064,7 @@ plot(A, draw.alphacuts=TRUE)
 \begin{center}
 <<depicting1h,dependson='depicting1g',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, draw.alphacuts=TRUE, ylab='$x$', xlab='$\\alpha$')
+plot(A, draw.alphacuts=TRUE, ylab=expression(x), xlab=expression(alpha))
 @
 \end{center}
 
@@ -1125,18 +1125,17 @@ example from one of our papers:
 X <- PiecewiseLinearFuzzyNumber(0, 1, 2, 5, knot.n=1,
    knot.alpha=0.6, knot.left=0.3, knot.right=4)
 
-plot.default(NA, xlab='$x$', ylab='$\\mu_S(x)$',
+plot.default(NA, xlab=expression(x), ylab=expression(mu[S](x)),
    xlim=c(-0.3,5.3), ylim=c(0,1)) # empty window
 
 xpos <- c(X['a1'], X['knot.left'],  X['a2'],
           X['a3'], X['knot.right'], X['a4'])
-xlab <- c('$s_1$', '$s_2$', '$s_3$',
-          '$s_4$', '$s_5$', '$s_6$')
+xlab <- expression(s[1], s[2], s[3], s[4], s[5], s[6])
 abline(v=xpos, col='gray', lty=3)
 text(xpos, 1.05, xlab, pos=3, xpd=TRUE)
 
 abline(h=c(0, X['knot.alpha'], 1), col='gray', lty=2)
-text(5.55, X['knot.alpha'], sprintf('$\\alpha_0$'), pos=4, xpd=TRUE)
+text(5.1, X['knot.alpha'], expression(alpha[0]), pos=4, xpd=TRUE)
 
 plot(X, add=TRUE, type='l', from=-1, to=6)
 plot(X, add=TRUE, type='p', from=-1, to=6)
@@ -1149,11 +1148,11 @@ par(mar=c(4,4,2,1))
 @
 \end{center}
 
-\noindent
-Please note that we use \TeX{} commands in plot labels.
-They are interpreted by the \package{tikzDevice} package for \R
-to generate beautiful figures, but setting this all up requires
-higher level of skills\dots and patience.
+%\noindent
+%Please note that we use \TeX{} commands in plot labels.
+%They are interpreted by the \package{tikzDevice} package for \R
+%to generate beautiful figures, but setting this all up requires
+%higher level of skills\dots and patience.
 
 
 
@@ -1410,10 +1409,10 @@ plot(A+B, add=TRUE, col=4, lty=4)
 \begin{center}
 <<additionFig,dependson='addition',echo=FALSE,results='hide'>>=
 par(mar=c(4,4,2,1))
-plot(A, xlim=c(0,6), xlab='$x$', ylab='$\\alpha$')
+plot(A, xlim=c(0,6), xlab=expression(x), ylab=expression(alpha))
 plot(B, add=TRUE, col=2, lty=2)
 plot(A+B, add=TRUE, col=4, lty=4)
-legend('topright', c('$A$', '$B$', '$A+B$'), lty=c(1,2,4), col=c(1,2,4))
+legend('topright', expression(A, B, A+B), lty=c(1,2,4), col=c(1,2,4))
 @
 \end{center}
 
@@ -1457,14 +1456,14 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 
 <<fapply,fig.keep='none'>>=
 A <- as.PiecewiseLinearFuzzyNumber(TrapezoidalFuzzyNumber(0,1,2,3), knot.n=100)
-plot(fapply(A, function(x) log(x+1)^0.5))
+plot(fapply(A, function(x) sqrt(log(x+1))))
 @
 
 \begin{center}
 <<fapplyFig,dependson='fapply',echo=FALSE,results='hide'>>=
 par(mar=c(4,4,2,1))
-plot(fapply(A, function(x) log(x+1)^0.5), xlab='$x$', ylab='$\\alpha$')
-legend('topleft', '$\\sqrt{\\log(A+1)}$', lty=1)
+plot(fapply(A, function(x) log(x+1)^0.5), xlab=expression(x), ylab=expression(alpha))
+legend('topleft', expression(sqrt(log(A+1))), lty=1)
 @
 \end{center}
 
@@ -1561,9 +1560,9 @@ distance(A, T1)
 \begin{center}
 <<ApproxExA_naive2,dependson='ApproxExA_naive',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T1, col='red', lty=2, add=TRUE)
-legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
+legend('topright', legend=expression(A, 'Naive approx.'),
    col=c('black', 'red'), lty=c(1,2))
 @
 \end{center}
@@ -1599,9 +1598,9 @@ distance(A, T2)
 \begin{center}
 <<ApproxExA_naiveL2n2,dependson='ApproxExA_L2n',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T2, col='red', lty=2, add=TRUE)
-legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
+legend('topright', legend=expression(A, L[2]-"nearest approx."),
    col=c('black', 'red'), lty=c(1,2))
 @
 \end{center}
@@ -1634,7 +1633,7 @@ expectedInterval(T3)
 % \begin{center}
 <<ApproxExA_ExpInt2,dependson='ApproxExA_ExpInt',eval=FALSE,echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T3, col='red', lty=2, add=TRUE)
 @
 % \end{center}
@@ -1661,10 +1660,10 @@ distance(B, TB2)
 \begin{center}
 <<ApproxExA_ExpInt3Fig,dependson='ApproxExA_ExpInt3',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(B, xlab='$x$', ylab='$\\alpha$', log='x', xlim=c(0.9,46))
+plot(B, xlab=expression(x), ylab=expression(alpha), log='x', xlim=c(0.9,46))
 plot(TB1, col='red',  lty=2, add=TRUE)
 plot(TB2, col='blue', lty=3, add=TRUE)
-legend('topright', c('$\\mu_{B}$', '$\\mu_{TB_1}$', '$\\mu_{TB_2}$'),
+legend('topright', expression(mu[B], mu[TB[1]], mu[TB[2]]),
    col=c('black', 'red', 'blue'), lty=c(1,2,3))
 @
 \end{center}
@@ -1690,9 +1689,9 @@ distance(A, T4)
 \begin{center}
 <<ApproxExA_RestrSuppCore2,dependson='ApproxExA_RestrSuppCore',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T4, col='red', lty=2, add=TRUE)
-legend('topright', legend=c('$A$', 'Supp\\&core restr.\napproximation'),
+legend('topright', legend=expression(A, 'Supp&core restr.'),
    col=c('black', 'red'), lty=c(1,2))
 @
 \end{center}
@@ -1749,9 +1748,9 @@ print(distance(A, P1), 8)
 \begin{center}
 <<ApproxPLFNNaive2,dependson='ApproxPLFNNaive',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(P1, col='red', lty=2, add=TRUE)
-legend('topright', legend=c('$A$', 'Na\\"{i}ve approx.'),
+legend('topright', legend=expression(A, 'Naive approx.'),
    col=c('black', 'red'), lty=c(1,2))
 @
 \end{center}
@@ -1790,9 +1789,9 @@ print(distance(A, P2), 12)
 \begin{center}
 <<ApproxPLFNNearest2,dependson='ApproxPLFNNearest',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(P2, col='red', lty=2, add=TRUE)
-legend('topright', legend=c('$A$', '$L_2$-nearest approx.'),
+legend('topright', legend=expression(A, L[2]-"nearest approx."),
    col=c('black', 'red'), lty=c(1,2))
 @
 \end{center}
@@ -1877,8 +1876,8 @@ matplot(n, d, type='l', log="y", lty=c(1,2,4), col=c(1,2,4))
 \begin{center}
 <<ApproxPLFNNearestConv2,dependson='ApproxPLFNNearestConv1',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-matplot(n, d, type='l', xlab='$n$', ylab='$d(A, \\cdot)$', log="y", lty=c(1,2,4), col=c(1,2,4))
-legend(x=20, y=3.2, c('$d(A, N^n(A))$', '$d(A, \\Pi^n(A))$', 'upper bound'),
+matplot(n, d, type='l', xlab=expression(n), ylab=expression(d(A, '*')), log="y", lty=c(1,2,4), col=c(1,2,4))
+legend(x=19, y=3.2, expression(d(A, {N^n}(A)), d(A, {Pi^n}(A)), 'upper bound'),
    lty=c(1,2,4), col=c(1,2,4))
 @
 \end{center}
@@ -1905,7 +1904,7 @@ plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)))
 \begin{center}
 <<ApproxPLFNNearest4,dependson='ApproxPLFNNearest3',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(a, d, type='l', xlab='$\\alpha$', ylab='$D_{A}(\\alpha)$')
+plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)))
 @
 \end{center}
 
@@ -1976,11 +1975,11 @@ print(alphacut(P2, c(0, knot.alpha, 1)))
 \begin{center}
 <<suppcoreplfn1a3,dependson='suppcoreplfn1a2',echo=FALSE>>=
 par(mar=c(4,4,2,1))
-plot(A, xlab='$x$', ylab='$\\alpha$')
+plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(P1, col=2, add=TRUE, lty=2)
 plot(P2, col=4, add=TRUE, lty=4, lwd=2)
 abline(h=knot.alpha, col="grey", lty=3)
-legend("topleft", legend=c("$A$", "$P_1$", "$P_2$"), lty=c(1,2,4), col=c(1,2,4), lwd=c(1,1,2))
+legend("topleft", legend=expression(A, P[1], P[2]), lty=c(1,2,4), col=c(1,2,4), lwd=c(1,1,2))
 @
 \end{center}
 
@@ -2001,7 +2000,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 par(mar=c(4,4,2,1))
 a <- seq(0, 1, length.out=1001)
 Da <- sapply(a, D)
-plot(a[-c(1,length(a))], Da[-c(1,length(a))], xlab="$\\alpha$", ylab="$D(\\alpha)$",
+plot(a[-c(1,length(a))], Da[-c(1,length(a))], xlab=expression(alpha), ylab=expression(D(alpha)),
    type='l', xlim=c(0,1), ylim=range(Da))
 points(c(0, 1), Da[c(2, length(a)-1)])
 points(c(0, 1), Da[c(1,length(a))], pch=16)
@@ -2043,7 +2042,7 @@ abline(h=opt$objective, col="grey", lty=3)
 %
 % \begin{center}
 % <<ApproxMethodPLFN3,dependson='ApproxMethodPLFN2',echo=FALSE>>=
-% plot(A, xlab='$x$', ylab='$\\alpha$')
+% plot(A, xlab=expression(x), ylab=expression(alpha))
 % plot(P4, col='red', lty=2, add=TRUE)
 % print(distance(A, P4), digits=12)
 % @
@@ -2091,8 +2090,8 @@ abline(h=opt$objective, col="grey", lty=3)
 % % \end{verbatim}
 
 \paragraph{Acknowledgments.}
-This document has been generated with \LaTeX, \package{knitr} and
-the \package{tikzDevice} package for \R.
+This document has been generated with \LaTeX and the \package{knitr}
+package for \R.
 Their authors' wonderful work is fully appreciated.
 Many thanks to Jan Caha for contributions to the package's source code,
 and also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
