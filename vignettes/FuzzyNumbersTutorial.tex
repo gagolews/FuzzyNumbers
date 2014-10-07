@@ -73,7 +73,6 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \RequirePackage{graphicx,verbatim,longtable}
 \usepackage{mdwlist}
-\usepackage{multirow,multicol}
 \usepackage[nottoc]{tocbibind}
 \usepackage{rotating}
 
@@ -116,7 +115,7 @@
 \addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
 
 
-\setlength{\topsep}{1pt} % wpływa m.in. na odstęp dla verbatim
+\setlength{\topsep}{1pt} % wplywa m.in. na odstep dla verbatim
 \tolerance=500
 \predisplaypenalty=0
 \clubpenalty=1000
@@ -150,7 +149,7 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 
 
 \begin{center}
-{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.3-5} Package for \R}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.3-6} Package for \R}
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -727,7 +726,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x2e4dd28>
+## <environment: 0x2c32e38>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
@@ -735,7 +734,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x2e4dd28>
+## <environment: 0x2c32e38>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -949,7 +948,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x2cbbe70>
+## <bytecode: 0x2116bf0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -958,7 +957,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x2cbb058>
+## <bytecode: 0x2116cd0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -967,7 +966,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x2cbbbd0>
+## <bytecode: 0x2116988>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -976,7 +975,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x2cbbcb0>
+## <bytecode: 0x2116a68>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -2793,11 +2792,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.829271731     24 *0.363089048* 0.650345156
-## 0.233834688     25 *0.362897858* 0.650336546
-## 0.483240701     48 *0.363092840* 0.650345282
-## 0.773500850     52 *0.363092232* 0.650345263
-## 0.720699773     19 *0.363070826* 0.650344291
+## 0.398644546     21 *0.363080778* 0.650344834
+## 0.117179028     18 *0.362897469* 0.650336546
+## 0.694235381     25 *0.363079985* 0.650344798
+## 0.042517054     22 *0.363041758* 0.650345342
+## 0.323939143     75 *0.363338970* 0.650322688
 \end{verbatim}
 \end{kframe}
 \end{knitrout}

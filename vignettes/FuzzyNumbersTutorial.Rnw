@@ -24,7 +24,6 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \RequirePackage{graphicx,verbatim,longtable}
 \usepackage{mdwlist}
-\usepackage{multirow,multicol}
 \usepackage[nottoc]{tocbibind}
 \usepackage{rotating}
 
@@ -67,7 +66,7 @@
 \addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
 
 
-\setlength{\topsep}{1pt} % wpływa m.in. na odstęp dla verbatim
+\setlength{\topsep}{1pt} % wplywa m.in. na odstep dla verbatim
 \tolerance=500
 \predisplaypenalty=0
 \clubpenalty=1000
