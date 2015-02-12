@@ -1,6 +1,8 @@
 %\VignetteIndexEntry{A Guide to the FuzzyNumbers Package}
 %\VignetteEngine{knitr::knitr}
-%\VignetteKeyword{Fuzzy Numbers, extension principle, S4, R}
+%\VignetteKeyword{fuzzy number}
+%\VignetteKeyword{extension principle}
+%\VignetteKeyword{S4}
 \documentclass[11pt]{article}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
