@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^devel
+^man-roxygen
 ^src/.*\.o$
 ^README.md$
 ^\.gitignore$

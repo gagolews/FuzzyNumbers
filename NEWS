@@ -7,6 +7,9 @@
 
 * t.b.d........
 
+* added possibility and necessity functions that represent comparison 
+  operators <=,<,>,>= (with tests and description in vignette)
+
 ***************************************************************************
 
 0.3-5 /2014-10-01/

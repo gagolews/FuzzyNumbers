@@ -14,9 +14,10 @@ The package aims to provide the following functionality:
 *    Defuzzification and approximation of FNs by triangular and piecewise linear fuzzy numbers,
 *    Visualization,
 *    Basic arithmetic operations,
+*    Ranking of fuzzy numbers (implemented operators <=,<,>,>= in forms of possibility and necessity functions - works only for PiecewiseLinearFuzzyNumbers for now),
 *    Aggregation [TO DO],
-*    Random fuzzy numbers generation [TO DO],
-*    Ranking of fuzzy numbers [TO DO].
+*    Random fuzzy numbers generation [TO DO].
+
 
 * * *
 

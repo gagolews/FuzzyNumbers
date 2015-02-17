@@ -104,6 +104,7 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 \fi
 
 \begin{document}
+%\SweaveOpts{concordance=TRUE}
 
 
 
@@ -121,6 +122,12 @@ ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
 \href{http://FuzzyNumbers.rexamine.com/}%
 {http://FuzzyNumbers.rexamine.com}
+
+{\large Jan Caha${}^{3}$}
+
+${}^{3}$ Institute of Geoinformatics, VŠB - Technical University of Ostrava
+
+Email: \texttt{jan.caha@klikni.cz}
 
 \bigskip
 \today
@@ -2011,6 +2018,77 @@ abline(h=opt$objective, col="grey", lty=3)
 @
 \end{center}
 
+\section{Ranking Fuzzy Numbers in the Setting of Possibility Theory}
+
+There are several possible approaches towards ranking of fuzzy numbers. Dubois and Prade \cite{DuboisPrade1983:rankfn} point out that some are counterintuitive or consider only one point of view on comparing fuzzy numbers. To overcome this issue the set of ranking indices was proposed by Dubois and Prade \cite{DuboisPrade1983:rankfn}. The ranking is done within the framework of Possibility theory which means that for each comparison operator <=, >=, <,> there is a measure of possibility and necessity assessing the truthfulness of the statement (Possibility theory is in detail desribed in \cite{DuboisPrade1986:possbook}). Both measures takes values from the interval [0,1]. Value 1 means complete truthfulness of the statement, 0 means absolute untruthfulness and values in between describe partial truthfulness.
+
+If there are two fuzzy numbers $X$ and $Y$ then the possibility ($\Pi$) and necessity ($\mathcal{N}$) of $X>=Y$ (named exceedance in \package{FuzzyNumbers}) is given by these equations \cite{DuboisPrade1983:rankfn}: 
+\begin{equation}
+\Pi_{X}( [ Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ),
+\end{equation} 
+\begin{equation}
+\mathcal{N}_{X}( [ Y,\infty )) = \underset{x}{\inf} \max ( 1 - \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ).
+\end{equation} 
+
+The possiblity and necessity of $X>Y$ (named strict exceedance in \package{FuzzyNumbers}) are defined as\cite{DuboisPrade1983:rankfn}:
+\begin{equation}
+\Pi_{X}( ] Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ),
+\end{equation} 
+\begin{equation}
+\mathcal{N}_{X}( ] Y,\infty )) = \underset{x}{\inf} \max ( 1-\mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ).
+\end{equation} 
+
+Changing the $[ Y,\infty )$ to $( - \infty, Y ]$ etc. in these formulas will produce other four indices indicating $X<=Y$ and $X<Y$ \cite{DuboisPrade1983:rankfn,DuboisPrade1986:possbook}.
+
+Now lets create two \texttt{PiecewiseLinearFuzzyNumber}s that we will be comparing.
+<<compareXY1>>=
+x = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0.2, 1.0, 2.8))
+y = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0, 1.8, 2.2))
+@
+We can visualized them together.
+<<compareXY1plot,dependson='compareXY1'>>=
+plot(x, col="red")
+plot(y, col="green", add=TRUE)
+@
+The comparison if $X>=Y$ is done using functions \func{possibilityExceedance()} and \func{necessityExceedance()}.
+<<compareXY1c1,dependson='compareXY1'>>=
+possibilityExceedance(x,y)
+necessityExceedance(x,y)
+@
+In the same way we can determine the truthfulness of statement $X>Y$ with functions \func{possibilityStrictExceedance()} and \func{necessityStrictExceedance()}.
+<<compareXY1c2,dependson='compareXY1'>>=
+possibilityStrictExceedance(x,y)
+necessityStrictExceedance(x,y)
+@
+The image image above shows that there is no clear domination of one of the fuzzy numbers and so tell us the indices.
+
+To assess the inverse situations $X<=Y$ and $X<Y$ the following code can be used.
+<<compareXY1c3,dependson='compareXY1'>>=
+possibilityUndervaluation(x,y)
+necessityUndervaluation(x,y)  
+possibilityStrictUndervaluation(x,y)
+necessityStrictUndervaluation(x,y)  
+@
+The results show that again there is no strict domination of one fuzzy number by another (in such case all the indices would be either 1 or 0). But the values of all indices are higher for $X<=Y$,$X<Y$ than in cases $X>=Y$, $X>Y$. Such outcome can be interpred as $X$ being generally smaller then $Y$ but the result is not conclusive. The amount of uncertainty is desribed by these indices.
+
+A slightly more illustrative example is provided below. Note that third and fourth line provide limits for visualization of fuzzy numbers.
+<<compareXY2>>=
+x = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(1.7, 2.7, 2.8), knot.n = 9)
+y = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0, 1.8, 2.2), knot.n = 9)
+min = min(x@a1,y@a1)
+max = max(x@a4,y@a4)
+plot(x, col="red", xlim = c(min,max))
+plot(y, col="green", add=TRUE)
+possibilityExceedance(x,y)
+necessityExceedance(x,y)
+possibilityStrictExceedance(x,y)
+necessityStrictExceedance(x,y)
+possibilityUndervaluation(x,y)
+necessityUndervaluation(x,y)  
+possibilityStrictUndervaluation(x,y)
+necessityStrictUndervaluation(x,y)  
+@
+
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
 %
 % This method uses a constrained version of the Nelder-Mead algorithm.
@@ -2173,6 +2251,16 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 {\sc Dubois, D., and Prade, H.}
 \newblock Operations on fuzzy numbers.
 \newblock {\em Int. J. Syst. Sci. 9\/} (1978), 613--626.
+
+\bibitem{DuboisPrade1983:rankfn}
+{\sc Dubois, D., and Prade, H.}
+\newblock Ranking Fuzzy Numbers in the Setting of Possibility Theory.
+\newblock {\em Information Sciences. 30\/} (1983), 183--224.
+
+\bibitem{DuboisPrade1986:possbook}
+{\sc Dubois, D., and Prade, H.}
+\newblock {\em {P}ossibility {T}heory: {A}n approach to {C}omputerized {P}rocessing of {U}ncertainty.}.
+\newblock Plenum Press, New York, 1986.
 
 \bibitem{DuboisPrade1987:fnoverview}
 {\sc Dubois, D., and Prade, H.}

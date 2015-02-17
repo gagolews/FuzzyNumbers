@@ -5,12 +5,13 @@ Authors@R: c(
     person("Marek", "Gagolewski", role = c("aut", "cre"),
     email = "gagolews@rexamine.com"),
     person("Jan", "Caha", role = "ctb",
-    email = "jan.caha@upol.cz"))
+    email = "jan.caha@klikni.cz"))
 Description: S4 classes and methods
     to deal with fuzzy numbers. With them you can calculate any arithmetic
     operations (e.g. by using the Zadeh extension principle),
     perform approximation of arbitrary FNs by trapezoidal and piecewise
-    linear FNs, prepare plots of FNs for publications, etc.
+    linear FNs, prepare plots of FNs for publications, calculate 
+    possibility and necessity for comparisons, etc.
 Version: 0.3-6
 Date: 2014-12-06
 URL: http://FuzzyNumbers.rexamine.com
