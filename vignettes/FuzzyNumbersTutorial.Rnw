@@ -1479,9 +1479,31 @@ legend('topleft', expression(sqrt(log(A+1))), lty=1)
 The operation being applied should be a properly
 vectorized \R function object.
 
+\subsubsection{Special Functions}
 
+There are several functions that are not monotonic but useful for
+calculation. Amongst those integer powers of fuzzy numbers are 
+probably the best example. While the odd powers could be implemented
+as monotonic functions it can not be done for even powers if the 
+fuzzy number containts 0. Because of this issue the power is 
+implemented as special function.
 
+<<exponential,fig.keep='none'>>=
+A <- as.PiecewiseLinearFuzzyNumber(TrapezoidalFuzzyNumber(-2,-1,-1,2), knot.n=10)
+plot(A, xlim=c(-8,8))
+plot(A^2, add=TRUE, col=2, lty=2)
+plot(A^3, add=TRUE, col=4, lty=4)
+@
 
+\begin{center}
+<<exponentialFig,dependson='exponential',echo=FALSE,results='hide'>>=
+par(mar=c(4,4,2,1))
+plot(A, xlim=c(-8,8), xlab=expression(x), ylab=expression(alpha))
+plot(A^2, add=TRUE, col=2, lty=2)
+plot(A^3, add=TRUE, col=4, lty=4)
+legend('topright', expression(A, A^2, A^3), lty=c(1,2,4), col=c(1,2,4))
+@
+\end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2047,8 +2069,8 @@ y = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0, 1.8, 2.2))
 @
 We can visualized them together.
 <<compareXY1plot,dependson='compareXY1'>>=
-plot(x, col="red")
-plot(y, col="green", add=TRUE)
+plot(x, col=2)
+plot(y, col=4, add=TRUE)
 @
 The comparison if $X>=Y$ is done using functions \func{possibilityExceedance()} and \func{necessityExceedance()}.
 <<compareXY1c1,dependson='compareXY1'>>=
@@ -2077,8 +2099,8 @@ x = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(1.7, 2.7, 2.8), knot.n =
 y = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0, 1.8, 2.2), knot.n = 9)
 min = min(x@a1,y@a1)
 max = max(x@a4,y@a4)
-plot(x, col="red", xlim = c(min,max))
-plot(y, col="green", add=TRUE)
+plot(x, col=2, xlim = c(min,max))
+plot(y, col=4, add=TRUE)
 possibilityExceedance(x,y)
 necessityExceedance(x,y)
 possibilityStrictExceedance(x,y)
@@ -2089,6 +2111,46 @@ possibilityStrictUndervaluation(x,y)
 necessityStrictUndervaluation(x,y)  
 @
 
+\section{Minimum and Maximum of Fuzzy Numbers}
+
+In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number. 
+
+The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}: 
+\begin{equation}
+A_\alpha \wedge B_\alpha = [A_L(\alpha) \wedge B_L(\alpha), A_U(\alpha) \wedge B_U(\alpha)],
+\end{equation} 
+while the maximum is defined as:
+\begin{equation}
+A_\alpha \vee B_\alpha = [A_L(\alpha) \vee B_L(\alpha), A_U(\alpha) \vee B_U(\alpha)].
+\end{equation} 
+
+
+The definition allows determination of minimum and maximum only for Piecewise Linear Fuzzy Numbers. As such the result is only an approximation, which may cause problems with the result is the number of knots is too small (please see examples in the package help for the functions).
+
+<<minmaxXY,fig.keep='none'>>=
+x = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(-4.8, -3 , -1.5), knot.n = 9)
+y = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(-5.5, -2.5, -1.1), knot.n = 9)
+min = min(x@a1,y@a1)
+max = max(x@a4,y@a4)
+plot(x, col=1, xlim = c(min,max))
+plot(y, col=2, add=TRUE)
+maxFN = maximum(x,y)
+minFN = minimum(x,y)
+plot(minFN, col=4)
+plot(maxFN, col=6, add=TRUE)
+@
+
+\begin{center}
+<<minmaxXYFig,dependson='minmaxXY',echo=FALSE,results='hide'>>=
+par(mar=c(4,4,2,1))
+plot(x, col=1, xlim = c(min,max))
+plot(y, col=2, add=TRUE)
+legend('topright', expression(x, y), lty=c(1,1), col=c(1,2))
+plot(minFN, col=4)
+plot(maxFN, col=6, add=TRUE)
+legend('topright', expression(min, max), lty=c(1,1), col=c(4,6))
+@
+\end{center}
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
 %
 % This method uses a constrained version of the Nelder-Mead algorithm.
@@ -2297,6 +2359,11 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
   support and core.
 \newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantic Press,
   pp.~749--756.
+
+\bibitem{KaufmannGupta1985:fuzzybook}
+{\sc Kaufmann, A., and Gupta, M.~M.}
+\newblock {\em Introduction to {F}uzzy {A}rithmetic}.
+\newblock van Nostrand Reinhold Company, New York, 1985.
 
 \bibitem{KlirYuan1995:fuzzybook}
 {\sc Klir, G.~J., and Yuan, B.}

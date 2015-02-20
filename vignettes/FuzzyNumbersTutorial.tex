@@ -2141,9 +2141,38 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 The operation being applied should be a properly
 vectorized \R function object.
 
+\subsubsection{Special Functions}
+
+There are several functions that are not monotonic but useful for
+calculation. Amongst those integer powers of fuzzy numbers are 
+probably the best example. While the odd powers could be implemented
+as monotonic functions it can not be done for even powers if the 
+fuzzy number containts 0. Because of this issue the power is 
+implemented as special function.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{2}\hlstd{,}\hlopt{-}\hlnum{1}\hlstd{,}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{),} \hlkwc{knot.n}\hlstd{=}\hlnum{10}\hlstd{)}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{8}\hlstd{,}\hlnum{8}\hlstd{))}
+\hlkwd{plot}\hlstd{(A}\hlopt{^}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{plot}\hlstd{(A}\hlopt{^}\hlnum{3}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{4}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/exponentialFig-1} 
+
+}
 
 
 
+\end{knitrout}
+\end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2961,8 +2990,8 @@ We can visualized them together.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
-\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlstr{"green"}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
@@ -3048,8 +3077,8 @@ A slightly more illustrative example is provided below. Note that third and four
 \hlstd{y} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1.8}\hlstd{,} \hlnum{2.2}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
 \hlstd{min} \hlkwb{=} \hlkwd{min}\hlstd{(x}\hlopt{@}\hlkwc{a1}\hlstd{,y}\hlopt{@}\hlkwc{a1}\hlstd{)}
 \hlstd{max} \hlkwb{=} \hlkwd{max}\hlstd{(x}\hlopt{@}\hlkwc{a4}\hlstd{,y}\hlopt{@}\hlkwc{a4}\hlstd{)}
-\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(min,max))}
-\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlstr{"green"}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(min,max))}
+\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
 
@@ -3109,6 +3138,58 @@ A slightly more illustrative example is provided below. Note that third and four
 \end{kframe}
 \end{knitrout}
 
+\section{Minimum and Maximum of Fuzzy Numbers}
+
+In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number. 
+
+The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}: 
+\begin{equation}
+A_\alpha \wedge B_\alpha = [A_L(\alpha) \wedge B_L(\alpha), A_U(\alpha) \wedge B_U(\alpha)],
+\end{equation} 
+while the maximum is defined as:
+\begin{equation}
+A_\alpha \vee B_\alpha = [A_L(\alpha) \vee B_L(\alpha), A_U(\alpha) \vee B_U(\alpha)].
+\end{equation} 
+
+
+The definition allows determination of minimum and maximum only for Piecewise Linear Fuzzy Numbers. As such the result is only an approximation, which may cause problems with the result is the number of knots is too small (please see examples in the package help for the functions).
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{4.8}\hlstd{,} \hlopt{-}\hlnum{3} \hlstd{,} \hlopt{-}\hlnum{1.5}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlstd{y} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5.5}\hlstd{,} \hlopt{-}\hlnum{2.5}\hlstd{,} \hlopt{-}\hlnum{1.1}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlstd{min} \hlkwb{=} \hlkwd{min}\hlstd{(x}\hlopt{@}\hlkwc{a1}\hlstd{,y}\hlopt{@}\hlkwc{a1}\hlstd{)}
+\hlstd{max} \hlkwb{=} \hlkwd{max}\hlstd{(x}\hlopt{@}\hlkwc{a4}\hlstd{,y}\hlopt{@}\hlkwc{a4}\hlstd{)}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(min,max))}
+\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{maxFN} \hlkwb{=} \hlkwd{maximum}\hlstd{(x,y)}
+\hlstd{minFN} \hlkwb{=} \hlkwd{minimum}\hlstd{(x,y)}
+\hlkwd{plot}\hlstd{(minFN,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{)}
+\hlkwd{plot}\hlstd{(maxFN,} \hlkwc{col}\hlstd{=}\hlnum{6}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/minmaxXYFig-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=4.5in]{figure/minmaxXYFig-2} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
 %
 % This method uses a constrained version of the Nelder-Mead algorithm.
@@ -3317,6 +3398,11 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
   support and core.
 \newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantic Press,
   pp.~749--756.
+
+\bibitem{KaufmannGupta1985:fuzzybook}
+{\sc Kaufmann, A., and Gupta, M.~M.}
+\newblock {\em Introduction to {F}uzzy {A}rithmetic}.
+\newblock van Nostrand Reinhold Company, New York, 1985.
 
 \bibitem{KlirYuan1995:fuzzybook}
 {\sc Klir, G.~J., and Yuan, B.}
