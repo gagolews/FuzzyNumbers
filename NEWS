@@ -9,6 +9,12 @@
 
 * added possibility and necessity functions that represent comparison 
   operators <=,<,>,>= (with tests and description in vignette)
+  
+* added functions to determine minimum and maximum of two fuzzy numbers
+  (description in vignette)
+
+* added operator ^ for calculation of integer power of
+  PiecewiseLinearFuzzyNumber
 
 ***************************************************************************
 

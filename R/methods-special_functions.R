@@ -4,14 +4,17 @@
 #'
 #' @description
 #' The arc-tangent of two arguments arctan2(y, x) returns the angle between 
-#' the x-axis and the vector from the origin to (x, y) for PiecewiseLinearFuzzyNumbers
+#' the x-axis and the vector from the origin to (x, y) for PiecewiseLinearFuzzyNumbers.
+#' Resulting values are no longer from interval [-pi,pi] but [-1.5pi,pi], in order to
+#' provide valid fuzzy numbers as result.
 #' 
 #' 
 #' @param y a PiecewiseLinearFuzzyNumber
 #' @param x a PiecewiseLinearFuzzyNumber
 #'
 #' @return Returns a fuzzy number of the class \linkS4class{PiecewiseLinearFuzzyNumber}
-#' indicating the angle specified by the input fuzzy numbers. 
+#' indicating the angle specified by the input fuzzy numbers. The range of results is
+#' [-1.5pi,pi].  
 #'
 #' @exportMethod arctan2
 #' @docType methods
