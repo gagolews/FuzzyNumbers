@@ -43,10 +43,10 @@ setMethod(
     
     knot.alpha = (y@knot.alpha)
 
-    yl <- as.numeric(c(y@a1,y@knot.left,y@a2))
-    xl <- as.numeric(c(x@a1,x@knot.left,x@a2))
-    yr <- as.numeric(rev(c(y@a3,y@knot.right,y@a4)))
-    xr <- as.numeric(rev(c(x@a3,x@knot.right,x@a4)))
+    yl <- c(y@a1,y@knot.left,y@a2)
+    xl <- c(x@a1,x@knot.left,x@a2)
+    yr <- rev(c(y@a3,y@knot.right,y@a4))
+    xr <- rev(c(x@a3,x@knot.right,x@a4))
     
     modified = FALSE
     mod <- ((yl<=0 & 0<=yr) & (xr<=0))
@@ -123,8 +123,8 @@ setMethod(
     e2 = as.integer(e2)
     knot.alpha = (e1@knot.alpha)
     
-    xl <- as.numeric(c(e1@a1,e1@knot.left,e1@a2))
-    xr <- as.numeric(rev(c(e1@a3,e1@knot.right,e1@a4)))
+    xl <- (c(e1@a1,e1@knot.left,e1@a2))
+    xr <- (rev(c(e1@a3,e1@knot.right,e1@a4)))
     
     p1 <- xl^e2
     p2 <- xr^e2
