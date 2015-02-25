@@ -286,8 +286,8 @@ setMethod(
       p2 <- e1l*e2r
       p3 <- e1r*e2l
       p4 <- e1r*e2r
-
-      warning("Piecewise linear fuzzy numbers are not closed under the `*' operation.")
+      
+      # warning("Piecewise linear fuzzy numbers are not closed under the `*' operation.")
 
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,
@@ -327,7 +327,7 @@ setMethod(
       p3 <- e1r*e2l
       p4 <- e1r*e2r
 
-      warning("Piecewise linear fuzzy numbers are not closed under the `/' operation.")
+      # warning("Piecewise linear fuzzy numbers are not closed under the `/' operation.")
 
       # using the extension principle and interval-based arithmetic operations
       PiecewiseLinearFuzzyNumber(knot.alpha=knot.alpha,

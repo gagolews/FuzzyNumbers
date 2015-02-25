@@ -3,9 +3,7 @@
 
 ***************************************************************************
 
-0.3-6 /devel/
-
-* t.b.d........
+0.4-1
 
 * added possibility and necessity functions that represent comparison 
   operators <=,<,>,>= (with tests and description in vignette)
@@ -15,6 +13,9 @@
 
 * added operator ^ for calculation of integer power of
   PiecewiseLinearFuzzyNumber
+
+* added function arctan2 for calculation of atan2 with
+  PiecewiseLinearFuzzyNumber arguments
 
 ***************************************************************************
 

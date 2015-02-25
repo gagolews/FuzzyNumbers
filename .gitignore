@@ -31,5 +31,7 @@ vignettes/figure
 *.out
 *.bbl
 *.blg
+*.synctex.gz
+FuzzyNumbersTutorial-concordance.tex
 devel/tutorial/src/*.tex
 devel/tutorial/src/*.pdf
