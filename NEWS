@@ -3,7 +3,7 @@
 
 ***************************************************************************
 
-0.4-1 /2015-25-02/
+0.4-1 /2015-02-26/
 
 * added possibility and necessity functions that represent comparison 
   operators <=,<,>,>= (with tests and description in vignette)

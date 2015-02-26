@@ -31,7 +31,7 @@ Gagolewski M., Caha J., [A Guide to the FuzzyNumbers 0.4-1 Package for R](https:
 
 * * *
 
-**Author**: Marek Gagolewski](http://gagolewski.rexamine.com/), with contributions from Jan Caha
+**Author**: [Marek Gagolewski](http://gagolewski.rexamine.com/), with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
