@@ -1,13 +1,35 @@
-#' 
+## This file is part of the FuzzyNumbers library.
+##
+## Copyright 2012-2014 Marek Gagolewski
+##
+##
+## FuzzyNumbers is free software: you can redistribute it and/or modify
+## it under the terms of the GNU Lesser General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## FuzzyNumbers is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
+
+
 #' @title
 #' Maximum of fuzzy nubmers
 #'
 #' @description
-#' Determines maximum fuzzy number based on two inputs. The resulting 
+#' Determines maximum fuzzy number based on two inputs. 
+#' 
+#' @details
+#' The resulting 
 #' PiecewiseLinearFuzzyNumber is only an approximation of the result
 #' it might not be very precise for small number of knots (see examples).
 #' 
-#' @references KAUFMANN, A., GUPTA, M. M. (1985) Introduction to Fuzzy Arithmetic. New York : Van Nostrand Reinhold Company. ISBN 044230079. 
+#' @references KAUFMANN, A., GUPTA, M. M. (1985) Introduction to Fuzzy Arithmetic.
+#'  New York : Van Nostrand Reinhold Company. ISBN 044230079. 
 #' 
 #' @param e1 a PiecewiseLinearFuzzyNumber
 #' @param e2 a PiecewiseLinearFuzzyNumber
@@ -73,16 +95,20 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Minimum of fuzzy nubmers
 #'
 #' @description
-#' Determines minimum fuzzy number based on two inputs. The resulting 
+#' Determines minimum fuzzy number based on two inputs.
+#' 
+#' @details
+#' The resulting 
 #' PiecewiseLinearFuzzyNumber is only an approximation of the result
 #' it might not be very precise for small number of knots (see examples).
 #' 
-#' @references KAUFMANN, A., GUPTA, M. M. (1985) Introduction to Fuzzy Arithmetic. New York : Van Nostrand Reinhold Company. ISBN 044230079. 
+#' @references KAUFMANN, A., GUPTA, M. M. (1985) Introduction to Fuzzy Arithmetic.
+#' New York : Van Nostrand Reinhold Company. ISBN 044230079. 
 #' 
 #' @param e1 a PiecewiseLinearFuzzyNumber
 #' @param e2 a PiecewiseLinearFuzzyNumber

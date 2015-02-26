@@ -7,13 +7,13 @@ Authors@R: c(
     person("Jan", "Caha", role = "ctb",
     email = "jan.caha@klikni.cz"))
 Description: S4 classes and methods
-    to deal with fuzzy numbers. With them you can calculate any arithmetic
+    to deal with fuzzy numbers. With them you can compute any arithmetic
     operations (e.g. by using the Zadeh extension principle),
     perform approximation of arbitrary FNs by trapezoidal and piecewise
     linear FNs, prepare plots of FNs for publications, calculate 
-    possibility and necessity for comparisons, etc.
+    possibility and necessity values for comparisons, etc.
 Version: 0.4-1
-Date: 2015-25-02
+Date: 2015-02-26
 URL: http://FuzzyNumbers.rexamine.com
 BugReports: http://github.com/Rexamine/FuzzyNumbers/issues
 License: LGPL (>= 3)

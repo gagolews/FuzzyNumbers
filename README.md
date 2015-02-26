@@ -14,9 +14,8 @@ The package aims to provide the following functionality:
 *    Defuzzification and approximation of FNs by triangular and piecewise linear fuzzy numbers,
 *    Visualization,
 *    Basic arithmetic operations,
-*    Ranking of fuzzy numbers (implemented operators <=,<,>,>= in forms of possibility and necessity functions - works only for PiecewiseLinearFuzzyNumbers for now),
-*    Aggregation [TO DO],
-*    Random fuzzy numbers generation [TO DO].
+*    Ranking of fuzzy numbers (implemented operators <=,<,>,>= in forms of possibility and necessity functions - works only for PiecewiseLinearFuzzyNumbers for now)
+*    and many more.
 
 
 * * *
@@ -25,7 +24,8 @@ The package aims to provide the following functionality:
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
-**Tutorial**: https://github.com/Rexamine/FuzzyNumbers/raw/master/devel/tutorial/FuzzyNumbers-Tutorial_current.pdf
+**Tutorial**: 
+Gagolewski M., Caha J., [A Guide to the FuzzyNumbers 0.4-1 Package for R](https://github.com/Rexamine/FuzzyNumbers/raw/master/devel/tutorial/FuzzyNumbers-Tutorial_current.pdf), 2015
 
 **On-line manual**: http://docs.rexamine.com/R-man/FuzzyNumbers/FuzzyNumbers-package.html
 
@@ -35,7 +35,7 @@ Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
-> "Gagolewski M. (2014). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
+> "Gagolewski M., Caha J. (2015). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.  
 http://FuzzyNumbers.rexamine.com/."
 
 A BibTeX entry for LaTeX users is:
@@ -44,7 +44,7 @@ A BibTeX entry for LaTeX users is:
 @Manual{FuzzyNumbersPkgR,
    title = {FuzzyNumbers Package: Tools to deal with fuzzy numbers in R},
    author = {Marek Gagolewski},
-   year = {2014},
+   year = {2015},
    url = {http://FuzzyNumbers.rexamine.com/}
 }
 ```

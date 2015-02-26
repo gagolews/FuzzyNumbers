@@ -109,7 +109,9 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 
 
 \begin{center}
-{\LARGE\sf A Guide to the \package{FuzzyNumbers} {\Sexpr{FNver}} Package for \R}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
+
+{\Large\sf (FuzzyNumbers version {\Sexpr{FNver}}) }
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -120,14 +122,16 @@ ul. Newelska 6, 01-447 Warsaw, Poland
 
 ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
-\href{http://FuzzyNumbers.rexamine.com/}%
-{http://FuzzyNumbers.rexamine.com}
-
 {\large Jan Caha${}^{3}$}
 
 ${}^{3}$ Institute of Geoinformatics, VŠB - Technical University of Ostrava
 
 Email: \texttt{jan.caha@klikni.cz}
+
+\bigskip
+
+\href{http://FuzzyNumbers.rexamine.com/}%
+{http://FuzzyNumbers.rexamine.com}
 
 \bigskip
 \today
@@ -1482,10 +1486,10 @@ vectorized \R function object.
 \subsubsection{Special Functions}
 
 There are several functions that are not monotonic but useful for
-calculation. Amongst those integer powers of fuzzy numbers are 
+calculation. Amongst those integer powers of fuzzy numbers are
 probably the best example. While the odd powers could be implemented
-as monotonic functions it can not be done for even powers if the 
-fuzzy number containts 0. Because of this issue the power is 
+as monotonic functions it can not be done for even powers if the
+fuzzy number containts 0. Because of this issue the power is
 implemented as special function.
 
 <<exponential,fig.keep='none'>>=
@@ -2044,21 +2048,21 @@ abline(h=opt$objective, col="grey", lty=3)
 
 There are several possible approaches towards ranking of fuzzy numbers. Dubois and Prade \cite{DuboisPrade1983:rankfn} point out that some are counterintuitive or consider only one point of view on comparing fuzzy numbers. To overcome this issue the set of ranking indices was proposed by Dubois and Prade \cite{DuboisPrade1983:rankfn}. The ranking is done within the framework of Possibility theory which means that for each comparison operator <=, >=, <,> there is a measure of possibility and necessity assessing the truthfulness of the statement (Possibility theory is in detail desribed in \cite{DuboisPrade1986:possbook}). Both measures takes values from the interval [0,1]. Value 1 means complete truthfulness of the statement, 0 means absolute untruthfulness and values in between describe partial truthfulness.
 
-If there are two fuzzy numbers $X$ and $Y$ then the possibility ($\Pi$) and necessity ($\mathcal{N}$) of $X>=Y$ (named exceedance in \package{FuzzyNumbers}) is given by these equations \cite{DuboisPrade1983:rankfn}: 
+If there are two fuzzy numbers $X$ and $Y$ then the possibility ($\Pi$) and necessity ($\mathcal{N}$) of $X>=Y$ (named exceedance in \package{FuzzyNumbers}) is given by these equations \cite{DuboisPrade1983:rankfn}:
 \begin{equation}
 \Pi_{X}( [ Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ),
-\end{equation} 
+\end{equation}
 \begin{equation}
 \mathcal{N}_{X}( [ Y,\infty )) = \underset{x}{\inf} \max ( 1 - \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ).
-\end{equation} 
+\end{equation}
 
 The possiblity and necessity of $X>Y$ (named strict exceedance in \package{FuzzyNumbers}) are defined as\cite{DuboisPrade1983:rankfn}:
 \begin{equation}
 \Pi_{X}( ] Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ),
-\end{equation} 
+\end{equation}
 \begin{equation}
 \mathcal{N}_{X}( ] Y,\infty )) = \underset{x}{\inf} \max ( 1-\mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ).
-\end{equation} 
+\end{equation}
 
 Changing the $[ Y,\infty )$ to $( - \infty, Y ]$ etc. in these formulas will produce other four indices indicating $X<=Y$ and $X<Y$ \cite{DuboisPrade1983:rankfn,DuboisPrade1986:possbook}.
 
@@ -2087,9 +2091,9 @@ The image image above shows that there is no clear domination of one of the fuzz
 To assess the inverse situations $X<=Y$ and $X<Y$ the following code can be used.
 <<compareXY1c3,dependson='compareXY1'>>=
 possibilityUndervaluation(x,y)
-necessityUndervaluation(x,y)  
+necessityUndervaluation(x,y)
 possibilityStrictUndervaluation(x,y)
-necessityStrictUndervaluation(x,y)  
+necessityStrictUndervaluation(x,y)
 @
 The results show that again there is no strict domination of one fuzzy number by another (in such case all the indices would be either 1 or 0). But the values of all indices are higher for $X<=Y$,$X<Y$ than in cases $X>=Y$, $X>Y$. Such outcome can be interpred as $X$ being generally smaller then $Y$ but the result is not conclusive. The amount of uncertainty is desribed by these indices.
 
@@ -2106,23 +2110,23 @@ necessityExceedance(x,y)
 possibilityStrictExceedance(x,y)
 necessityStrictExceedance(x,y)
 possibilityUndervaluation(x,y)
-necessityUndervaluation(x,y)  
+necessityUndervaluation(x,y)
 possibilityStrictUndervaluation(x,y)
-necessityStrictUndervaluation(x,y)  
+necessityStrictUndervaluation(x,y)
 @
 
 \section{Minimum and Maximum of Fuzzy Numbers}
 
-In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number. 
+In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number.
 
-The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}: 
+The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}:
 \begin{equation}
 A_\alpha \wedge B_\alpha = [A_L(\alpha) \wedge B_L(\alpha), A_U(\alpha) \wedge B_U(\alpha)],
-\end{equation} 
+\end{equation}
 while the maximum is defined as:
 \begin{equation}
 A_\alpha \vee B_\alpha = [A_L(\alpha) \vee B_L(\alpha), A_U(\alpha) \vee B_U(\alpha)].
-\end{equation} 
+\end{equation}
 
 
 The definition allows determination of minimum and maximum only for Piecewise Linear Fuzzy Numbers. As such the result is only an approximation, which may cause problems with the result is the number of knots is too small (please see examples in the package help for the functions).
@@ -2234,8 +2238,7 @@ legend('topright', expression(min, max), lty=c(1,1), col=c(4,6))
 This document has been generated with \LaTeX and the \package{knitr}
 package for \R.
 Their authors' wonderful work is fully appreciated.
-Many thanks to Jan Caha for contributions to the package's source code,
-and also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
+Many thanks to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
 and Pablo Villacorta Iglesias for stimulating discussion.
 
 
@@ -2286,8 +2289,8 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 \bibitem{CoroianuETALXXXX:piecewise2}
 {\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
-\newblock Nearest piecewise linear approximation of fuzzy numbers -- {G}eneral
-  case, 2014.
+\newblock Piecewise linear approximation of fuzzy numbers --
+a discussion on algorithms, arithmetic operations and stability of fuzzy number characteristics, 2014.
 \newblock Submitted paper.
 
 \bibitem{CoroianuETAL2014:piecewise1suppcore}

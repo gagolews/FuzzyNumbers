@@ -1,12 +1,33 @@
-#' 
+## This file is part of the FuzzyNumbers library.
+##
+## Copyright 2012-2014 Marek Gagolewski
+##
+##
+## FuzzyNumbers is free software: you can redistribute it and/or modify
+## it under the terms of the GNU Lesser General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## FuzzyNumbers is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU Lesser General Public License for more details.
+##
+## You should have received a copy of the GNU Lesser General Public License
+## along with FuzzyNumbers. If not, see <http://www.gnu.org/licenses/>.
+
+
+
 #' @title
 #' Arc-tangent
 #'
 #' @description
 #' The arc-tangent of two arguments arctan2(y, x) returns the angle between 
 #' the x-axis and the vector from the origin to (x, y) for PiecewiseLinearFuzzyNumbers.
-#' Resulting values are no longer from interval [-pi,pi] but [-1.5pi,pi], in order to
-#' provide valid fuzzy numbers as result.
+#' 
+#' @details
+#' Note that resulting values are no longer from interval [-pi,pi] but 
+#' [-1.5pi,pi], in order to provide valid fuzzy numbers as result.
 #' 
 #' 
 #' @param y a PiecewiseLinearFuzzyNumber
@@ -84,12 +105,14 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Integer power of fuzzy number
 #'
 #' @description
 #' For fuzzy numbers the equality of \code{X*X == X^2} does not hold. 
+#' 
+#' @details
 #' This function calculates integer power of a PiecewiseLinearFuzzyNumber according
 #' to the reference below.
 #' 
@@ -101,7 +124,8 @@ setMethod(
 #' @return Returns a fuzzy number of the class \linkS4class{PiecewiseLinearFuzzyNumber}
 #' indicating \code{e1^e2}. 
 #'
-#' @references KAUFMANN, A., GUPTA, M. M. (1985) Introduction to Fuzzy Arithmetic. New York : Van Nostrand Reinhold Company. ISBN 044230079. 
+#' @references KAUFMANN, A., GUPTA, M. M. (1985) Introduction to Fuzzy Arithmetic. 
+#' New York : Van Nostrand Reinhold Company. ISBN 044230079. 
 #'
 #' @docType methods
 #' @family extension_principle

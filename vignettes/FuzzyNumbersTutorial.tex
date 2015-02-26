@@ -152,7 +152,9 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 
 
 \begin{center}
-{\LARGE\sf A Guide to the \package{FuzzyNumbers} {0.4-1} Package for \R}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
+
+{\Large\sf (FuzzyNumbers version {0.4-1}) }
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -163,14 +165,16 @@ ul. Newelska 6, 01-447 Warsaw, Poland
 
 ${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
 
-\href{http://FuzzyNumbers.rexamine.com/}%
-{http://FuzzyNumbers.rexamine.com}
-
 {\large Jan Caha${}^{3}$}
 
 ${}^{3}$ Institute of Geoinformatics, VŠB - Technical University of Ostrava
 
 Email: \texttt{jan.caha@klikni.cz}
+
+\bigskip
+
+\href{http://FuzzyNumbers.rexamine.com/}%
+{http://FuzzyNumbers.rexamine.com}
 
 \bigskip
 \today
@@ -431,7 +435,7 @@ To depict $A_1$ we call:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/A1ex5-1} 
+{\centering \includegraphics[width=4.5in]{figure/A1ex5} 
 
 }
 
@@ -519,7 +523,7 @@ now with arbitrary support and core.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ExFconvert4-1} 
+{\centering \includegraphics[width=4.5in]{figure/ExFconvert4} 
 
 }
 
@@ -585,7 +589,7 @@ An example:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/alphacutEx2-1} 
+{\centering \includegraphics[width=4.5in]{figure/alphacutEx2} 
 
 }
 
@@ -641,7 +645,7 @@ complaints. However\dots
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/A3deffig2-1} 
+{\centering \includegraphics[width=4.5in]{figure/A3deffig2} 
 
 }
 
@@ -733,15 +737,17 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \hlstd{A2[}\hlstr{'left'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## function(x)  rep(NA_real_, length(x))
-## <environment: 0x000000000a460bb0>
+## function (x) 
+## rep(NA_real_, length(x))
+## <environment: 0x2c32e38>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## function(x) rep(NA_real_, length(x))
-## <environment: 0x000000000a460bb0>
+## function (x) 
+## rep(NA_real_, length(x))
+## <environment: 0x2c32e38>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -920,7 +926,7 @@ To depict $T_1$ we call:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/TrapEx1d-1} 
+{\centering \includegraphics[width=4.5in]{figure/TrapEx1d} 
 
 }
 
@@ -953,32 +959,36 @@ do it not like with $A_1$ but rather as with $T_1$.
 \hlstd{T1[}\hlstr{'lower'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## function(alpha) alpha
-## <bytecode: 0x0000000008cd58f0>
+## function (alpha) 
+## alpha
+## <bytecode: 0x2116bf0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
 \hlstd{T1[}\hlstr{'upper'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## function(alpha) 1-alpha
-## <bytecode: 0x0000000008cd6070>
+## function (alpha) 
+## 1 - alpha
+## <bytecode: 0x2116cd0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
 \hlstd{T1[}\hlstr{'left'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## function(x) x
-## <bytecode: 0x0000000008eec1e8>
+## function (x) 
+## x
+## <bytecode: 0x2116988>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
 \hlstd{T1[}\hlstr{'right'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## function(x) 1-x
-## <bytecode: 0x0000000008eed120>
+## function (x) 
+## 1 - x
+## <bytecode: 0x2116a68>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -1135,7 +1145,7 @@ PLFNs in our package are represented by the \texttt{PiecewiseLinearFuzzyNumber} 
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/PLFNEx1b-1} 
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx1b} 
 
 }
 
@@ -1272,7 +1282,7 @@ we would do that by calling:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/PLFNEx2b-1} 
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx2b} 
 
 }
 
@@ -1354,7 +1364,7 @@ An example:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/PowerEx1b-1} 
+{\centering \includegraphics[width=4.5in]{figure/PowerEx1b} 
 
 }
 
@@ -1422,7 +1432,7 @@ Let us consider the following FN:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1b-1} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1b} 
 
 }
 
@@ -1458,7 +1468,7 @@ function of the same fuzzy number, but with different accuracy.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1d-1} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1d} 
 
 }
 
@@ -1492,7 +1502,7 @@ If we want, for some reasons, to use $\alpha$-cuts, then we may do as follows:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1f-1} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1f} 
 
 }
 
@@ -1516,7 +1526,7 @@ We may also illustrate an $\alpha$-cut representation of a fuzzy number:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1h-1} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1h} 
 
 }
 
@@ -1646,7 +1656,7 @@ example from one of our papers:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting2b-1} 
+{\centering \includegraphics[width=4.5in]{figure/depicting2b} 
 
 }
 
@@ -2052,7 +2062,7 @@ as defined in \cite{KlirYuan1995:fuzzybook}.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/additionFig-1} 
+{\centering \includegraphics[width=4.5in]{figure/additionFig} 
 
 }
 
@@ -2128,7 +2138,7 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/fapplyFig-1} 
+{\centering \includegraphics[width=4.5in]{figure/fapplyFig} 
 
 }
 
@@ -2144,10 +2154,10 @@ vectorized \R function object.
 \subsubsection{Special Functions}
 
 There are several functions that are not monotonic but useful for
-calculation. Amongst those integer powers of fuzzy numbers are 
+calculation. Amongst those integer powers of fuzzy numbers are
 probably the best example. While the odd powers could be implemented
-as monotonic functions it can not be done for even powers if the 
-fuzzy number containts 0. Because of this issue the power is 
+as monotonic functions it can not be done for even powers if the
+fuzzy number containts 0. Because of this issue the power is
 implemented as special function.
 
 \begin{knitrout}\small
@@ -2290,7 +2300,7 @@ core and support as $A$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naive2-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naive2} 
 
 }
 
@@ -2345,7 +2355,7 @@ always exists and is unique.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2} 
 
 }
 
@@ -2473,7 +2483,7 @@ cf.~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_ExpInt3Fig-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_ExpInt3Fig} 
 
 }
 
@@ -2518,7 +2528,7 @@ and each point that surely does not belong to $A$ also does not belong to $\math
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2} 
 
 }
 
@@ -2599,7 +2609,7 @@ of $A$ at given $\alpha$-cuts.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNaive2-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNaive2} 
 
 }
 
@@ -2660,7 +2670,7 @@ may be slow.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2} 
 
 }
 
@@ -2754,7 +2764,7 @@ Let us study the convergence behavior for our exemplary $A$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearestConv2-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearestConv2} 
 
 }
 
@@ -2790,7 +2800,7 @@ i.e.~the $D_{A}(\alpha)$ function.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest4-1} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest4} 
 
 }
 
@@ -2824,11 +2834,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.460012779     20 *0.363071715* 0.650344350
-## 0.070508919     26 *0.363094087* 0.650345321
-## 0.321203033     82 *0.363338521* 0.650322682
-## 0.811732033     25 *0.363068108* 0.650344092
-## 0.358588831    107 *0.363231512* 0.650343978
+## 0.398644546     21 *0.363080778* 0.650344834
+## 0.117179028     18 *0.362897469* 0.650336546
+## 0.694235381     25 *0.363079985* 0.650344798
+## 0.042517054     22 *0.363041758* 0.650345342
+## 0.323939143     75 *0.363338970* 0.650322688
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2910,7 +2920,7 @@ PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a3-1} 
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a3} 
 
 }
 
@@ -2946,7 +2956,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5-1} 
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5} 
 
 }
 
@@ -2959,21 +2969,21 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 
 There are several possible approaches towards ranking of fuzzy numbers. Dubois and Prade \cite{DuboisPrade1983:rankfn} point out that some are counterintuitive or consider only one point of view on comparing fuzzy numbers. To overcome this issue the set of ranking indices was proposed by Dubois and Prade \cite{DuboisPrade1983:rankfn}. The ranking is done within the framework of Possibility theory which means that for each comparison operator <=, >=, <,> there is a measure of possibility and necessity assessing the truthfulness of the statement (Possibility theory is in detail desribed in \cite{DuboisPrade1986:possbook}). Both measures takes values from the interval [0,1]. Value 1 means complete truthfulness of the statement, 0 means absolute untruthfulness and values in between describe partial truthfulness.
 
-If there are two fuzzy numbers $X$ and $Y$ then the possibility ($\Pi$) and necessity ($\mathcal{N}$) of $X>=Y$ (named exceedance in \package{FuzzyNumbers}) is given by these equations \cite{DuboisPrade1983:rankfn}: 
+If there are two fuzzy numbers $X$ and $Y$ then the possibility ($\Pi$) and necessity ($\mathcal{N}$) of $X>=Y$ (named exceedance in \package{FuzzyNumbers}) is given by these equations \cite{DuboisPrade1983:rankfn}:
 \begin{equation}
 \Pi_{X}( [ Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ),
-\end{equation} 
+\end{equation}
 \begin{equation}
 \mathcal{N}_{X}( [ Y,\infty )) = \underset{x}{\inf} \max ( 1 - \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ).
-\end{equation} 
+\end{equation}
 
 The possiblity and necessity of $X>Y$ (named strict exceedance in \package{FuzzyNumbers}) are defined as\cite{DuboisPrade1983:rankfn}:
 \begin{equation}
 \Pi_{X}( ] Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ),
-\end{equation} 
+\end{equation}
 \begin{equation}
 \mathcal{N}_{X}( ] Y,\infty )) = \underset{x}{\inf} \max ( 1-\mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ).
-\end{equation} 
+\end{equation}
 
 Changing the $[ Y,\infty )$ to $( - \infty, Y ]$ etc. in these formulas will produce other four indices indicating $X<=Y$ and $X<Y$ \cite{DuboisPrade1983:rankfn,DuboisPrade1986:possbook}.
 
@@ -3140,16 +3150,16 @@ A slightly more illustrative example is provided below. Note that third and four
 
 \section{Minimum and Maximum of Fuzzy Numbers}
 
-In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number. 
+In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number.
 
-The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}: 
+The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}:
 \begin{equation}
 A_\alpha \wedge B_\alpha = [A_L(\alpha) \wedge B_L(\alpha), A_U(\alpha) \wedge B_U(\alpha)],
-\end{equation} 
+\end{equation}
 while the maximum is defined as:
 \begin{equation}
 A_\alpha \vee B_\alpha = [A_L(\alpha) \vee B_L(\alpha), A_U(\alpha) \vee B_U(\alpha)].
-\end{equation} 
+\end{equation}
 
 
 The definition allows determination of minimum and maximum only for Piecewise Linear Fuzzy Numbers. As such the result is only an approximation, which may cause problems with the result is the number of knots is too small (please see examples in the package help for the functions).
@@ -3273,8 +3283,7 @@ The definition allows determination of minimum and maximum only for Piecewise Li
 This document has been generated with \LaTeX and the \package{knitr}
 package for \R.
 Their authors' wonderful work is fully appreciated.
-Many thanks to Jan Caha for contributions to the package's source code,
-and also to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
+Many thanks to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
 and Pablo Villacorta Iglesias for stimulating discussion.
 
 
@@ -3325,8 +3334,8 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 \bibitem{CoroianuETALXXXX:piecewise2}
 {\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
-\newblock Nearest piecewise linear approximation of fuzzy numbers -- {G}eneral
-  case, 2014.
+\newblock Piecewise linear approximation of fuzzy numbers --
+a discussion on algorithms, arithmetic operations and stability of fuzzy number characteristics, 2014.
 \newblock Submitted paper.
 
 \bibitem{CoroianuETAL2014:piecewise1suppcore}
