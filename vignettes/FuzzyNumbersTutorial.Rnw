@@ -99,7 +99,7 @@ if (as.integer(substring(FNver, nchar(FNver))) == "0") {
 \fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most
 recent development version
 of \package{FuzzyNumbers} available on
-\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.\newline
+\href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}.\newline
 If you use the ``official'' CRAN release, some of the features may be unavailable.}
 \fi
 
@@ -193,7 +193,7 @@ opts_chunk$set(
    fig.height=6/sqrt(3),
 #    fig.path='figures-knitr/',
 #    cache.path='cache-knitr/',
-   cache=TRUE,
+   cache=FALSE,
    tidy=FALSE,
 #    dev='cairo_pdf',
 #    dev.args=list(pointsize=11),
@@ -280,7 +280,7 @@ package available on \textit{CRAN} we type%
 \footnote{You are viewing the \textbf{development} version of the tutorial.
 Some of the features presented in this document may be missing
 in the current \textit{CRAN} release. Please, upgrade to the \textbf{latest} development version from
-\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}
+\href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}
 if you need the new functionality.}\ignorespaces
 \fi%
 :
@@ -291,12 +291,12 @@ install.packages('FuzzyNumbers')
 
 \noindent
 Alternatively, we may fetch its current development snapshot
-from \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}:
+from \href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}:
 
 <<eval=FALSE>>=
 install.packages('devtools')
 library('devtools')
-install_github('FuzzyNumbers', 'Rexamine')
+install_github('FuzzyNumbers', 'gagolews')
 @
 
 
@@ -2341,7 +2341,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 \bibitem{Gagolewski:fuzzynumberspackage}
 {\sc Gagolewski, M.}
 \newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
-  \textsf{R}}, 2014.
+  \textsf{R}}, 2018.
 \newblock {h}ttp://FuzzyNumbers.rexamine.com.
 
 \bibitem{Grzegorzewski1998:metricsordersfn}
@@ -2360,7 +2360,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 {\sc Grzegorzewski, P., and Pasternak-Winiarska, K.}
 \newblock Trapezoidal approximations of fuzzy numbers with restrictions on the
   support and core.
-\newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantic Press,
+\newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantis Press,
   pp.~749--756.
 
 \bibitem{KaufmannGupta1985:fuzzybook}

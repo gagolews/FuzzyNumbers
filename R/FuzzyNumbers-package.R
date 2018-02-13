@@ -95,66 +95,66 @@
 #'  with contributions from Jan Caha
 #' @references
 #' \pkg{FuzzyNumbers} Homepage, \url{http://FuzzyNumbers.rexamine.com/}.
-#' 
+#'
 #' Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
 #' preserving the expected interval, Fuzzy Sets and Systems 159, pp. 1327-1344.
-#' 
+#'
 #' Ban A.I. (2009), On the nearest parametric approximation of a fuzzy number - Revisited,
 #' Fuzzy Sets and Systems 160, pp. 3027-3047.
-#' 
+#'
 #' Bodjanova S. (2005), Median value and median interval of a fuzzy number,
 #' Information Sciences 172, pp. 73-89.
-#' 
+#'
 #' Chanas S. (2001), On the interval approximation of a fuzzy number,
 #' Fuzzy Sets and Systems 122, pp. 353-356.
-#' 
+#'
 #' Coroianu L., Gagolewski M., Grzegorzewski P. (2013),
 #' Nearest Piecewise Linear Approximation of Fuzzy Numbers,
 #' Fuzzy Sets and Systems 233, pp. 26-51.
-#' 
+#'
 #' Coroianu L., Gagolewski M., Grzegorzewski P.,
 #' Adabitabar Firozja M., Houlari T. (2014),
-#' Piecewise linear approximation of fuzzy numbers preserving 
-#' the support and core, In: Laurent A. et al. (Eds.), 
-#' Information Processing and Management of Uncertainty in 
+#' Piecewise linear approximation of fuzzy numbers preserving
+#' the support and core, In: Laurent A. et al. (Eds.),
+#' Information Processing and Management of Uncertainty in
 #' Knowledge-Based Systems, Part II (CCIS 443), Springer, pp. 244-254.
-#' 
-#' Delgado M., Vila M.A., Voxman W. (1998), 
+#'
+#' Delgado M., Vila M.A., Voxman W. (1998),
 #' On a canonical representation of a fuzzy number,
 #' Fuzzy Sets and Systems 93, pp. 125-135.
-#' 
-#' Dubois D., Prade H. (1978), Operations on fuzzy numbers, 
+#'
+#' Dubois D., Prade H. (1978), Operations on fuzzy numbers,
 #' Int. J. Syst. Sci. 9, pp. 613-626.
-#' 
-#' Dubois D., Prade H. (1987a), The mean value of a fuzzy number, 
+#'
+#' Dubois D., Prade H. (1987a), The mean value of a fuzzy number,
 #' Fuzzy Sets and Systems 24, pp. 279-300.
-#' 
+#'
 #' Dubois D., Prade H. (1987b), Fuzzy numbers: An overview, In: Analysis of Fuzzy
 #' Information. Mathematical Logic, vol. I, CRC Press, pp. 3-39.
-#' 
+#'
 #' Grzegorzewski P. (2010), Algorithms for trapezoidal approximations of fuzzy numbers
 #' preserving the expected interval, In: Bouchon-Meunier B. et al (Eds.),
 #' Foundations of Reasoning Under Uncertainty, Springer, pp. 85-98.
-#' 
+#'
 #' Grzegorzewski P. (1998), Metrics and orders in space of fuzzy numbers,
 #' Fuzzy Sets and Systems 97, pp. 83-94.
-#' 
-#' Grzegorzewski P,. Pasternak-Winiarska K. (2011), 
+#'
+#' Grzegorzewski P,. Pasternak-Winiarska K. (2011),
 #' Trapezoidal approximations of fuzzy numbers
 #' with restrictions on the support and core,
-#'  Proc. EUSFLAT/LFA 2011, Atlantic Press, pp. 749-756.
-#' 
-#' Klir G.J., Yuan B. (1995), Fuzzy sets and fuzzy logic. 
+#'  Proc. EUSFLAT/LFA 2011, Atlantis Press, pp. 749-756.
+#'
+#' Klir G.J., Yuan B. (1995), Fuzzy sets and fuzzy logic.
 #' Theory and applications, Prentice Hall, New Jersey.
-#' 
-#' Stefanini L., Sorini L. (2009), Fuzzy arithmetic with 
+#'
+#' Stefanini L., Sorini L. (2009), Fuzzy arithmetic with
 #' parametric LR fuzzy numbers,
 #' In: Proc. IFSA/EUSFLAT 2009, pp. 600-605.
-#' 
-#' Yeh C.-T. (2008), Trapezoidal and triangular approximations 
+#'
+#' Yeh C.-T. (2008), Trapezoidal and triangular approximations
 #' preserving the expected interval,
 #' Fuzzy Sets and Systems 159, pp. 1345-1353.
-#' 
+#'
 #' @import methods
 #' @import grDevices
 #' @import graphics

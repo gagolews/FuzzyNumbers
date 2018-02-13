@@ -26,6 +26,7 @@
 \newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
 \newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
 \newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
 
 \usepackage{framed}
 \makeatletter
@@ -142,7 +143,7 @@
 \fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most
 recent development version
 of \package{FuzzyNumbers} available on
-\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}.\newline
+\href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}.\newline
 If you use the ``official'' CRAN release, some of the features may be unavailable.}
 \fi
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -154,7 +155,7 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 \begin{center}
 {\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
 
-{\Large\sf (FuzzyNumbers version {0.4-1}) }
+{\Large\sf (FuzzyNumbers version {0.4-2}) }
 
 \bigskip
 {\large Marek Gagolewski${}^{1,2}$}
@@ -268,7 +269,7 @@ package available on \textit{CRAN} we type%
 \footnote{You are viewing the \textbf{development} version of the tutorial.
 Some of the features presented in this document may be missing
 in the current \textit{CRAN} release. Please, upgrade to the \textbf{latest} development version from
-\href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}
+\href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}
 if you need the new functionality.}\ignorespaces
 \fi%
 :
@@ -283,14 +284,14 @@ if you need the new functionality.}\ignorespaces
 
 \noindent
 Alternatively, we may fetch its current development snapshot
-from \href{https://github.com/Rexamine/FuzzyNumbers}{\textit{GitHub}}:
+from \href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}:
 
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{install.packages}\hlstd{(}\hlstr{'devtools'}\hlstd{)}
 \hlkwd{library}\hlstd{(}\hlstr{'devtools'}\hlstd{)}
-\hlkwd{install_github}\hlstd{(}\hlstr{'FuzzyNumbers'}\hlstd{,} \hlstr{'Rexamine'}\hlstd{)}
+\hlkwd{install_github}\hlstd{(}\hlstr{'FuzzyNumbers'}\hlstd{,} \hlstr{'gagolews'}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -435,7 +436,7 @@ To depict $A_1$ we call:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/A1ex5} 
+{\centering \includegraphics[width=4.5in]{figure/A1ex5-1} 
 
 }
 
@@ -523,7 +524,7 @@ now with arbitrary support and core.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ExFconvert4} 
+{\centering \includegraphics[width=4.5in]{figure/ExFconvert4-1} 
 
 }
 
@@ -589,7 +590,7 @@ An example:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/alphacutEx2} 
+{\centering \includegraphics[width=4.5in]{figure/alphacutEx2-1} 
 
 }
 
@@ -645,7 +646,7 @@ complaints. However\dots
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/A3deffig2} 
+{\centering \includegraphics[width=4.5in]{figure/A3deffig2-1} 
 
 }
 
@@ -726,12 +727,14 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pbeta(alpha, 5, 9)
+## <bytecode: 0x5613b87afd60>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'upper'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pexp(1/alpha-1)
+## <bytecode: 0x5613b8897030>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'left'}\hlstd{]}
@@ -739,7 +742,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x2c32e38>
+## <environment: 0x5613b6633060>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
@@ -747,7 +750,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x2c32e38>
+## <environment: 0x5613b6633060>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -926,7 +929,7 @@ To depict $T_1$ we call:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/TrapEx1d} 
+{\centering \includegraphics[width=4.5in]{figure/TrapEx1d-1} 
 
 }
 
@@ -961,7 +964,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x2116bf0>
+## <bytecode: 0x5613b6f2a540>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -970,7 +973,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x2116cd0>
+## <bytecode: 0x5613b6f2a658>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -979,7 +982,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x2116988>
+## <bytecode: 0x5613b6f2b1d0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -988,7 +991,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x2116a68>
+## <bytecode: 0x5613b6f2b2e8>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -1145,7 +1148,7 @@ PLFNs in our package are represented by the \texttt{PiecewiseLinearFuzzyNumber} 
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/PLFNEx1b} 
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx1b-1} 
 
 }
 
@@ -1282,7 +1285,7 @@ we would do that by calling:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/PLFNEx2b} 
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx2b-1} 
 
 }
 
@@ -1364,7 +1367,7 @@ An example:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/PowerEx1b} 
+{\centering \includegraphics[width=4.5in]{figure/PowerEx1b-1} 
 
 }
 
@@ -1432,7 +1435,7 @@ Let us consider the following FN:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1b} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1b-1} 
 
 }
 
@@ -1468,7 +1471,7 @@ function of the same fuzzy number, but with different accuracy.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1d} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1d-1} 
 
 }
 
@@ -1502,7 +1505,7 @@ If we want, for some reasons, to use $\alpha$-cuts, then we may do as follows:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1f} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1f-1} 
 
 }
 
@@ -1526,7 +1529,7 @@ We may also illustrate an $\alpha$-cut representation of a fuzzy number:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting1h} 
+{\centering \includegraphics[width=4.5in]{figure/depicting1h-1} 
 
 }
 
@@ -1656,7 +1659,7 @@ example from one of our papers:
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/depicting2b} 
+{\centering \includegraphics[width=4.5in]{figure/depicting2b-1} 
 
 }
 
@@ -2062,7 +2065,7 @@ as defined in \cite{KlirYuan1995:fuzzybook}.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/additionFig} 
+{\centering \includegraphics[width=4.5in]{figure/additionFig-1} 
 
 }
 
@@ -2138,7 +2141,7 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/fapplyFig} 
+{\centering \includegraphics[width=4.5in]{figure/fapplyFig-1} 
 
 }
 
@@ -2300,7 +2303,7 @@ core and support as $A$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naive2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naive2-1} 
 
 }
 
@@ -2355,7 +2358,7 @@ always exists and is unique.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2-1} 
 
 }
 
@@ -2483,7 +2486,7 @@ cf.~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_ExpInt3Fig} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_ExpInt3Fig-1} 
 
 }
 
@@ -2528,7 +2531,7 @@ and each point that surely does not belong to $A$ also does not belong to $\math
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2-1} 
 
 }
 
@@ -2609,7 +2612,7 @@ of $A$ at given $\alpha$-cuts.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNaive2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNaive2-1} 
 
 }
 
@@ -2670,7 +2673,7 @@ may be slow.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2-1} 
 
 }
 
@@ -2764,7 +2767,7 @@ Let us study the convergence behavior for our exemplary $A$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearestConv2} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearestConv2-1} 
 
 }
 
@@ -2800,7 +2803,7 @@ i.e.~the $D_{A}(\alpha)$ function.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest4} 
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest4-1} 
 
 }
 
@@ -2834,11 +2837,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.398644546     21 *0.363080778* 0.650344834
-## 0.117179028     18 *0.362897469* 0.650336546
-## 0.694235381     25 *0.363079985* 0.650344798
-## 0.042517054     22 *0.363041758* 0.650345342
-## 0.323939143     75 *0.363338970* 0.650322688
+## 0.240763798     49 *0.363080763* 0.650344833
+## 0.620345437     22 *0.363035732* 0.650345318
+## 0.152540508     47 *0.363090838* 0.650345217
+## 0.617319523     52 *0.363076442* 0.650344626
+## 0.179268566     47 *0.363078759* 0.650344741
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2920,7 +2923,7 @@ PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a3} 
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a3-1} 
 
 }
 
@@ -2956,7 +2959,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5} 
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5-1} 
 
 }
 
@@ -3386,7 +3389,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 \bibitem{Gagolewski:fuzzynumberspackage}
 {\sc Gagolewski, M.}
 \newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
-  \textsf{R}}, 2014.
+  \textsf{R}}, 2018.
 \newblock {h}ttp://FuzzyNumbers.rexamine.com.
 
 \bibitem{Grzegorzewski1998:metricsordersfn}
@@ -3405,7 +3408,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 {\sc Grzegorzewski, P., and Pasternak-Winiarska, K.}
 \newblock Trapezoidal approximations of fuzzy numbers with restrictions on the
   support and core.
-\newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantic Press,
+\newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantis Press,
   pp.~749--756.
 
 \bibitem{KaufmannGupta1985:fuzzybook}

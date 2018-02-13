@@ -1,4 +1,3 @@
-#' 
 #' @title
 #' Possibility of exceedance
 #'
@@ -69,7 +68,7 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Necessity of exceedance
 #'
@@ -139,7 +138,7 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Possibility of strict exceedance
 #'
@@ -210,7 +209,7 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Necessity of strict exceedance
 #'
@@ -286,7 +285,7 @@ setMethod(
 
 
 
-#' 
+
 #' @title
 #' Possibility of undervaluation
 #'
@@ -357,7 +356,7 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Necessity of undervaluation
 #'
@@ -428,7 +427,7 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Possibility of strict undervaluation
 #'
@@ -499,7 +498,7 @@ setMethod(
   }
 )
 
-#' 
+
 #' @title
 #' Necessity of strict undervaluation
 #'

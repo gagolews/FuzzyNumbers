@@ -3,11 +3,17 @@
 
 ***************************************************************************
 
+0.4-2 (2018-02-13)
+
+* updated manual & package metadata
+
+***************************************************************************
+
 0.4-1 /2015-02-26/
 
-* added possibility and necessity functions that represent comparison 
+* added possibility and necessity functions that represent comparison
   operators <=,<,>,>= (with tests and description in vignette)
-  
+
 * added functions to determine minimum and maximum of two fuzzy numbers
   (description in vignette)
 

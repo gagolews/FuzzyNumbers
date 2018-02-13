@@ -7,23 +7,25 @@ Authors@R: c(
     person("Jan", "Caha", role = "ctb",
     email = "jan.caha@klikni.cz"))
 Description: S4 classes and methods
-    to deal with fuzzy numbers. With them you can compute any arithmetic
-    operations (e.g. by using the Zadeh extension principle),
-    perform approximation of arbitrary FNs by trapezoidal and piecewise
-    linear FNs, prepare plots of FNs for publications, calculate 
+    to deal with fuzzy numbers. They allow for computing any arithmetic
+    operations (e.g., by using the Zadeh extension principle),
+    performing approximation of arbitrary FNs by trapezoidal and piecewise
+    linear FNs, preparing plots of FNs for publications, computing
     possibility and necessity values for comparisons, etc.
-Version: 0.4-1
-Date: 2015-02-26
+Version: 0.4-2
+Date: 2018-02-13
 URL: http://FuzzyNumbers.rexamine.com
-BugReports: http://github.com/Rexamine/FuzzyNumbers/issues
+BugReports: http://github.com/gagolews/FuzzyNumbers/issues
 License: LGPL (>= 3)
 ByteCompile: TRUE
 VignetteBuilder: knitr
 Suggests:
-    knitr
+    knitr,
+    digest
 Depends:
     R (>= 3.0.0),
     methods,
     grDevices,
     graphics,
     stats
+RoxygenNote: 5.0.1
