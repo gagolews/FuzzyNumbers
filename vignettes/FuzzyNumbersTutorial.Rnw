@@ -199,6 +199,8 @@ opts_chunk$set(
 #    dev.args=list(pointsize=11),
 #    dev='tikz',
 #    external=TRUE,
+    warning=FALSE,
+    message=FALSE,
    fig.align='center',
    size='small'
 )

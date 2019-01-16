@@ -3,7 +3,7 @@
 
 ***************************************************************************
 
-0.4-4 /2019-01-15/
+0.4-5 /2019-01-15/
 
 * [BUGFIX] #14 `as.PiecewiseLinearFuzzyNumber` used to fail for some
 TriangularFuzzyNumbers

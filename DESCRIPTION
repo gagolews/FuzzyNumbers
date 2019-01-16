@@ -12,7 +12,7 @@ Description: S4 classes and methods
     performing approximation of arbitrary fuzzy numbers by trapezoidal
     and piecewise linear ones, preparing plots for publications, computing
     possibility and necessity values for comparisons, etc.
-Version: 0.4-4
+Version: 0.4-5
 Date: 2019-01-16
 URL: http://FuzzyNumbers.rexamine.com
 BugReports: http://github.com/gagolews/FuzzyNumbers/issues

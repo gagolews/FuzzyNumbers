@@ -154,7 +154,7 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 \begin{center}
 {\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
 
-{\Large\sf (FuzzyNumbers version {0.4-4}) }
+{\Large\sf (FuzzyNumbers version {0.4-5}) }
 
 \bigskip
 {\large Marek Gagolewski${}^{1}$}
@@ -724,14 +724,14 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pbeta(alpha, 5, 9)
-## <bytecode: 0x5616dde7eeb0>
+## <bytecode: 0x5653317097d8>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'upper'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pexp(1/alpha-1)
-## <bytecode: 0x5616dc99dbd0>
+## <bytecode: 0x565330221c10>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'left'}\hlstd{]}
@@ -739,7 +739,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x5616dea6d338>
+## <environment: 0x5653322f5b90>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
@@ -747,7 +747,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x5616dea6d338>
+## <environment: 0x5653322f5b90>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -961,7 +961,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x5616dd3168f8>
+## <bytecode: 0x565330b6bfc8>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -970,7 +970,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x5616dd316a10>
+## <bytecode: 0x565330b6c0e0>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -979,7 +979,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x5616dd31fa00>
+## <bytecode: 0x565330b6bcb8>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -988,7 +988,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x5616dd316738>
+## <bytecode: 0x565330b6be08>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -1266,7 +1266,7 @@ we would do that by calling:
 \begin{verbatim}
 ## Piecewise linear fuzzy number with 3 knot(s),
 ##    support=[1,7],
-##       core=[2.5,4].
+##       core=[2.5,7].
 \end{verbatim}
 \begin{alltt}
 \hlkwd{plot}\hlstd{(P3,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{9}\hlstd{,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{8}\hlstd{))}
@@ -1304,7 +1304,7 @@ to a direct \texttt{FuzzyNumber} class instance if needed
 \begin{verbatim}
 ## Fuzzy number with:
 ##    support=[1,7],
-##       core=[2.5,4].
+##       core=[2.5,7].
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1753,10 +1753,10 @@ To compute arbitrary $\alpha$-cuts we use:
 \hlstd{(a} \hlkwb{<-} \hlkwd{alphacut}\hlstd{(A,} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{0.5}\hlstd{,} \hlnum{1}\hlstd{)))}
 \end{alltt}
 \begin{verbatim}
-##             L      U
-## 0.0 -5.000000 20.000
-## 0.5 -4.583591  6.875
-## 1.0  3.000000  6.000
+##             L  U
+## 0.0 -5.000000 20
+## 0.5 -4.583591 20
+## 1.0  3.000000 20
 \end{verbatim}
 \begin{alltt}
 \hlstd{a[}\hlnum{1}\hlstd{, ]}
@@ -1769,7 +1769,7 @@ To compute arbitrary $\alpha$-cuts we use:
 \hlstd{a[}\hlnum{2}\hlstd{,} \hlnum{2}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
-## [1] 6.875
+## [1] 20
 \end{verbatim}
 \begin{alltt}
 \hlstd{a[,} \hlstr{"L"}\hlstd{]}
@@ -2110,7 +2110,7 @@ the results should be satisfactory.
 \begin{verbatim}
 ## Piecewise linear fuzzy number with 60 knot(s),
 ##    support=[3,9],
-##       core=[5,7].
+##       core=[5,9].
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2834,11 +2834,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.272862650     49 *0.363082780* 0.650344920
-## 0.138621644     22 *0.363065644* 0.650343881
-## 0.608635892     26 *0.363013648* 0.650345255
-## 0.329356510     88 *0.363338520* 0.650322682
-## 0.764122176     23 *0.363064597* 0.650343781
+## 0.251742577     26 *0.363081506* 0.650344866
+## 0.877298308     48 *0.363098078* 0.650345441
+## 0.534334391     23 *0.363016137* 0.650345261
+## 0.422001465     25 *0.363062407* 0.650343547
+## 0.947241471     30 *0.363097136* 0.650345413
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2896,7 +2896,7 @@ PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 ##             L      U
 ## 0.0 0.3416417 5.0782
 ## 0.2 1.4633436 5.0782
-## 1.0 3.0854103 4.2577
+## 1.0 3.0854103 5.0782
 \end{verbatim}
 \begin{alltt}
 \hlkwd{distance}\hlstd{(A, P2)}
@@ -2911,7 +2911,7 @@ PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 ##            L U
 ## 0.0 0.000000 5
 ## 0.2 1.531672 5
-## 1.0 3.000000 4
+## 1.0 3.000000 5
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -3019,7 +3019,7 @@ The comparison if $X>=Y$ is done using functions \func{possibilityExceedance()} 
 \hlkwd{possibilityExceedance}\hlstd{(x,y)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.7777778
+## numeric(0)
 \end{verbatim}
 \begin{alltt}
 \hlkwd{necessityExceedance}\hlstd{(x,y)}
@@ -3036,7 +3036,7 @@ In the same way we can determine the truthfulness of statement $X>Y$ with functi
 \hlkwd{possibilityStrictExceedance}\hlstd{(x,y)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.4545455
+## [1] NA
 \end{verbatim}
 \begin{alltt}
 \hlkwd{necessityStrictExceedance}\hlstd{(x,y)}
@@ -3061,7 +3061,7 @@ To assess the inverse situations $X<=Y$ and $X<Y$ the following code can be used
 \hlkwd{necessityUndervaluation}\hlstd{(x,y)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.5454545
+## numeric(0)
 \end{verbatim}
 \begin{alltt}
 \hlkwd{possibilityStrictUndervaluation}\hlstd{(x,y)}
@@ -3073,7 +3073,7 @@ To assess the inverse situations $X<=Y$ and $X<Y$ the following code can be used
 \hlkwd{necessityStrictUndervaluation}\hlstd{(x,y)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.2222222
+## [1] 0
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -3119,13 +3119,13 @@ A slightly more illustrative example is provided below. Note that third and four
 \hlkwd{necessityStrictExceedance}\hlstd{(x,y)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.6428571
+## [1] 0.5
 \end{verbatim}
 \begin{alltt}
 \hlkwd{possibilityUndervaluation}\hlstd{(x,y)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.3571429
+## [1] 0.5
 \end{verbatim}
 \begin{alltt}
 \hlkwd{necessityUndervaluation}\hlstd{(x,y)}
