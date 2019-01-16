@@ -9,11 +9,11 @@ Authors@R: c(
 Description: S4 classes and methods
     to deal with fuzzy numbers. They allow for computing any arithmetic
     operations (e.g., by using the Zadeh extension principle),
-    performing approximation of arbitrary FNs by trapezoidal and piecewise
-    linear FNs, preparing plots of FNs for publications, computing
+    performing approximation of arbitrary fuzzy numbers by trapezoidal 
+    and piecewise linear ones, preparing plots for publications, computing
     possibility and necessity values for comparisons, etc.
-Version: 0.4-2
-Date: 2018-02-13
+Version: 0.4-3
+Date: 2019-01-16
 URL: http://FuzzyNumbers.rexamine.com
 BugReports: http://github.com/gagolews/FuzzyNumbers/issues
 License: LGPL (>= 3)
@@ -28,4 +28,5 @@ Depends:
     grDevices,
     graphics,
     stats
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8

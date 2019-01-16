@@ -1,3 +1,5 @@
+Meta
+doc
 # Roxygen-generated man pages
 man/*.Rd
 
@@ -6,20 +8,15 @@ FuzzyNumbers.Rproj
 .Rproj.user
 .Rhistory
 .RData
-
 # SVN
 .svn
-
 # compiled/precompiled files
 *.o
 *.so
-
 # backup files
 *~
 *.backup
 *.bak
-
-
 # LaTeX/knitr aux stuff
 cache-knitr
 figures-knitr

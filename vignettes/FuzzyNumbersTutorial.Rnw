@@ -68,7 +68,7 @@
 \addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
 
 
-\setlength{\topsep}{1pt} % wplywa m.in. na odstep dla verbatim
+\setlength{\topsep}{1pt}
 \tolerance=500
 \predisplaypenalty=0
 \clubpenalty=1000
@@ -77,16 +77,16 @@
 
 \newif\ifDevelopmentVersion
 
-<<FNver,echo=FALSE,results='asis',cache=FALSE>>=
+<<FNver,echo=FALSE,results='asis'>>=
 FNver <- packageDescription("FuzzyNumbers")$Version
-if (as.integer(substring(FNver, nchar(FNver))) == "0") {
-   cat("\\DevelopmentVersiontrue\n")
-} else {
-   cat("\\DevelopmentVersionfalse\n")
-}
+#if (as.integer(substring(FNver, nchar(FNver))) == "0") {
+#   cat("\\DevelopmentVersiontrue\n")
+#} else {
+#   cat("\\DevelopmentVersionfalse\n")
+#}
 @
 
-
+\DevelopmentVersionfalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,17 +114,17 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 {\Large\sf (FuzzyNumbers version {\Sexpr{FNver}}) }
 
 \bigskip
-{\large Marek Gagolewski${}^{1,2}$}
+{\large Marek Gagolewski${}^{1}$}
 
 ${}^{1}$ Systems Research Institute, Polish Academy of Sciences
 
 ul. Newelska 6, 01-447 Warsaw, Poland
 
-${}^{2}$ Rexamine, Email: \texttt{gagolews@rexamine.com}
+Email: \texttt{gagolews@rexamine.com}
 
 {\large Jan Caha${}^{3}$}
 
-${}^{3}$ Institute of Geoinformatics, VŠB - Technical University of Ostrava
+${}^{3}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
 
 Email: \texttt{jan.caha@klikni.cz}
 
@@ -138,8 +138,8 @@ Email: \texttt{jan.caha@klikni.cz}
 
 
 
-\medskip
-\textit{Any suggestions and contributions are welcome!}
+% \medskip
+% \textit{Any suggestions and contributions are welcome!}
 \end{center}
 
 
@@ -149,7 +149,7 @@ Email: \texttt{jan.caha@klikni.cz}
 \bigskip\hrule\bigskip
 \tableofcontents
 
-<<echo=FALSE,results='hide',warning=FALSE,message=FALSE,cache=FALSE>>=
+<<echo=FALSE,results='hide',warning=FALSE,message=FALSE>>=
 options(digits=7)
 options(width=73)
 require('knitr')
@@ -231,45 +231,44 @@ opts_chunk$set(
 
 \section{Getting Started}
 
-Fuzzy set theory lets us quite intuitively represent
+Fuzzy set theory gives one of many ways to represent
 imprecise or vague information. Fuzzy numbers (FNs), introduced
 by Dubois and Prade in \cite{DuboisPrade1978:opfn}, form a particular
 subclass of fuzzy sets of the real line.
 Formally, a fuzzy set $A$
 with membership function $\mu_A:\mathbb{R}\to[0,1]$
-is a fuzzy number, if it possess at least the three following properties:
+is a fuzzy number, if it enjoys the following properties:
 \begin{itemize}
 \item[(i)] it is a normalized fuzzy set,
-i.e.~$\mu_A(x_0)=1$ for some $x_0\in\mathbb{R}$,
-\item[(ii)] it is fuzzy convex, i.e.~for any $x_1,x_2\in\mathbb{R}$
+i.e., $\mu_A(x_0)=1$ for some $x_0\in\mathbb{R}$,
+\item[(ii)] it is fuzzy convex, i.e., for any $x_1,x_2\in\mathbb{R}$
 and $\lambda\in[0,1]$ it holds
 $\mu_A(\lambda x_1 + (1-\lambda) x_2) \ge \mu_A(x_1)\wedge \mu_A(x_2)$,
 \item[(iii)] the support of $A$ is bounded,
 where $\mathrm{supp}(A) = \mathrm{cl}(\{x\in\mathbb{R}: \mu_A(x)>0\})$.
 \end{itemize}
-Fuzzy numbers play a significant role
-in many practical applications
-(cf.~\cite{KlirYuan1995:fuzzybook})
+Fuzzy numbers aims to play a role in some applications
+(see \cite{KlirYuan1995:fuzzybook}),
 since we often describe our knowledge about objects
-through numbers, e.g. ``I'm about 180 cm tall''
-or ``The rocket was launched between 2 and 3 p.m.''.
+through numbers, e.g., ``I'm about 180 cm tall''
+or ``The event occurred between 2 and 3 p.m.''.
 
 
 
 
 \bigskip
-\package{FuzzyNumbers} is an Open Source (licensed under GNU LGPL 3)
+\package{FuzzyNumbers} is an Open Source (licensed under the GNU LGPL 3)
 package for \R{} -- a free software environment
 for statistical computing and graphics, which
 % includes an implementation
 % of a very powerful and quite popular high-level language called \lang{S}.
-runs on all major operating systems, i.e.~\os{Windows},
+runs on all major operating systems, i.e., \os{Windows},
 \os{Linux}, and \os{MacOS X}\footnote{%
-Please visit \R Project's homepage at \href{http://www.R-project.org}{www.R-project.org}
+Please visit \R{} Project's homepage at \href{http://www.R-project.org}{www.R-project.org}
 for more details.
 Perhaps you may also wish to install  \program{RStudio},
-a convenient development environment for \R.
-It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
+a convenient development environment for \R.}
+% It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
 
 
 \package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
@@ -309,7 +308,7 @@ library('FuzzyNumbers') # Load the package
 @
 
 \bigskip
-To view the main page of the manual we type:
+To view the main page of the manual, we type:
 
 <<helpFuzzyNumbers,eval=FALSE>>=
 library(help='FuzzyNumbers')
@@ -317,8 +316,7 @@ library(help='FuzzyNumbers')
 
 \noindent
 For more information please visit the package's homepage
-\cite{Gagolewski:fuzzynumberspackage}. In case of any problems, comments,
-or suggestions feel free to contact the author. Good luck!
+\cite{Gagolewski:fuzzynumberspackage}.
 
 
 
@@ -338,7 +336,7 @@ or suggestions feel free to contact the author. Good luck!
 A fuzzy number $A$ may be defined by specifying
 its core, support, and either its left/right side functions
 or lower/upper $\alpha$-cut bounds. Please note that many algorithms that
-deal with FNs assume we provide at least the latter, i.e.~$\alpha$-cuts.
+deal with FNs assume we provide at least the latter, i.e., $\alpha$-cuts.
 
 \subsubsection{Definition by Side Functions}
 
@@ -382,7 +380,7 @@ A1 <- FuzzyNumber(1, 2, 4, 7,
 \noindent
 This object is an instance of the following \R class:
 
-<<A1ex2,dependson='A1ex'>>=
+<<A1ex2>>=
 class(A1)
 @
 
@@ -390,19 +388,19 @@ class(A1)
 We may print some basic information on $A_1$ by calling \texttt{\func{print}(A1)} or
 simply by typing:
 
-<<A1ex3,dependson='A1ex'>>=
+<<A1ex3>>=
 A1
 @
 
 \noindent
 To depict $A_1$ we call:
 
-<<A1ex4,dependson='A1ex',fig.keep='none'>>=
+<<A1ex4,fig.keep='none'>>=
 plot(A1)
 @
 
 \begin{center}
-<<A1ex5,dependson='A1ex',echo=FALSE>>=
+<<A1ex5,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A1, xlab=expression(x), ylab=expression(alpha), main='')
 @
@@ -421,7 +419,7 @@ Please note that by using side generating functions defined on $[0,1]$
 % and $r_A(x)=\frac{x-\mathtt{a3}}{\mathtt{a4-a3}}$)
 we really make (in the author's humble opinion) the process of generating
 examples for our publications much easier.
-A similar concept was used e.g.~in \cite{StefaniniSorini2009:eusflat}
+A similar concept was used, e.g., in \cite{StefaniniSorini2009:eusflat}
 (LR-fuzzy numbers).
 
 Assume, however, that we are given two fancy side
@@ -440,7 +438,7 @@ This may easily be done with the \func{convertSide()}
 function. It returns a new function that calls
 the original one with linearly transformed input.
 
-<<ExFconvert2,dependson='ExFconvert'>>=
+<<ExFconvert2>>=
 convertSide(f, -4, -2)(c(0,1))
 convertSide(g, -1, 10)(c(0,1))
 convertSide(g, 10, -1)(c(0,1)) # interesting!
@@ -450,7 +448,7 @@ convertSide(g, 10, -1)(c(0,1)) # interesting!
 These functions may be used to define a fuzzy number,
 now with arbitrary support and core.
 
-<<ExFconvert3,dependson='ExFconvert2',fig.keep='none'>>=
+<<ExFconvert3,fig.keep='none'>>=
 B <- FuzzyNumber(10,20,20,30,
     left=convertSide(f, -4, -2),
    right=convertSide(g, -1, 10)
@@ -459,7 +457,7 @@ plot(B, xlab=expression(x), ylab=expression(alpha))
 @
 
 \begin{center}
-<<ExFconvert4,dependson='ExFconvert3',echo=FALSE>>=
+<<ExFconvert4,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 <<ExFconvert3>>
 @
@@ -515,7 +513,7 @@ legend('topright', c(expression(mu[A1]), expression(mu[A2])),
 @
 
 \begin{center}
-<<alphacutEx2,dependson='alphacutEx',echo=FALSE>>=
+<<alphacutEx2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A1, col='blue', xlab=expression(x), ylab=expression(alpha))
 plot(A2, col='red', lty=2, add=TRUE)
@@ -550,12 +548,12 @@ A3
 The object seems to be defined correctly: \R does not make any
 complaints. However\dots
 
-<<A3deffig,dependson='A3def',fig.keep='none'>>=
+<<A3deffig,fig.keep='none'>>=
 plot(A3)
 @
 
 \begin{center}
-<<A3deffig2,dependson='A3def',echo=FALSE>>=
+<<A3deffig2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A3, xlab=expression(x), ylab=expression(alpha), shadowcol='gray')
 @
@@ -571,7 +569,7 @@ with generating functions always returning \texttt{NA}
 Does it mean that when we define a FN solely by side generators, we
 cannot compute its $\alpha$-cuts? Indeed!
 
-<<alphacutEx3,dependson='alphacutEx'>>=
+<<alphacutEx3>>=
 alphacut(A2, 0.5) # A2 has alpha-cut generators defined
 alphacut(A1, 0.5) # A1 hasn't got them
 @
@@ -579,7 +577,7 @@ alphacut(A1, 0.5) # A1 hasn't got them
 \noindent
 Another example: evaluation of the membership function.
 
-<<alphacutEx4,dependson='alphacutEx'>>=
+<<alphacutEx4>>=
 evaluate(A1, 6.5) # A1 has side generators defined
 evaluate(A2, 6.5) # A2 hasn't got them
 @
@@ -598,7 +596,7 @@ by using the \func{uniroot()} function), then an inexperienced user
 would have used it in his/her algorithms and wondered why everything
 runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 
-<<alphacutEx5,dependson='alphacutEx'>>=
+<<alphacutEx5>>=
 A2['lower']
 A2['upper']
 A2['left']
@@ -610,7 +608,7 @@ Note that all generators are properly vectorized (for
 input vectors of length $n$ they always give output of the
 same length).
 Thus, general rules are as follows.
-If you want $\alpha$-cuts (e.g.~for finding
+If you want $\alpha$-cuts (e.g., for finding
 trapezoidal approximations of FNs), specify them.
 If you would like to calculate the membership function (by the way,
 the \func{plot()} function
@@ -709,7 +707,7 @@ T1 <- TrapezoidalFuzzyNumber(1, 1.5, 4, 7)
 \noindent
 Thus, we have:
 \begin{quote}
-<<TrapEx1f,dependson='TrapEx1e',results='asis',echo=FALSE>>=
+<<TrapEx1f,results='asis',echo=FALSE>>=
 cat(as.character(T1, toLaTeX=TRUE, varnameLaTeX='T_1'))
 @
 \end{quote}
@@ -723,19 +721,19 @@ see Sec.~\ref{Sec:Depicting}.
 \noindent
 The \texttt{T1} object is an instance of the following \R class:
 
-<<TrapEx1b,dependson='TrapEx1a'>>=
+<<TrapEx1b>>=
 class(T1)
 @
 
 \noindent
 To depict $T_1$ we call:
 
-<<TrapEx1c,dependson='TrapEx1b',fig.keep='none'>>=
+<<TrapEx1c,fig.keep='none'>>=
 plot(T1)
 @
 
 \begin{center}
-<<TrapEx1d,dependson='TrapEx1c',echo=FALSE>>=
+<<TrapEx1d,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(T1, xlab=expression(x), ylab=expression(alpha))
 @
@@ -759,7 +757,7 @@ so there is no need to provide them manually
 Thus, is we wanted to define a trapezoidal FN next time, we would
 do it not like with $A_1$ but rather as with $T_1$.
 
-<<TrapEx1e,dependson='TrapEx1d'>>=
+<<TrapEx1e>>=
 T1['lower']
 T1['upper']
 T1['left']
@@ -791,7 +789,7 @@ as.TrapezoidalFuzzyNumber(5)      # the same
 \subsection{Piecewise Linear Fuzzy Numbers}
 
 Trapezoidal fuzzy numbers are generalized by piecewise linear FNs (PLFNs),
-i.e.~fuzzy numbers which side generating functions and $\alpha$-cut
+i.e., fuzzy numbers which side generating functions and $\alpha$-cut
 generators are piecewise linear functions.
 Each PLFN is given by:
 \begin{itemize*}
@@ -845,7 +843,7 @@ plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
 @
 
 \begin{center}
-<<PLFNEx1b,dependson='PLFNEx1a',echo=FALSE>>=
+<<PLFNEx1b,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(P1, type='b', xlab=expression(x), ylab=expression(alpha), from=0, to=5, xlim=c(0.5,4.5))
 plot(P2, type='b', col=2, lty=2, pch=2, add=TRUE, from=0, to=5)
@@ -856,14 +854,14 @@ The following operators return matrices with all knots of a PLFN.
 Each matrix has three columns: $\alpha$-cuts,
 left side coordinates, and right side coordinates.
 
-<<PLFNEx1c,dependson='PLFNEx1b',>>=
+<<PLFNEx1c,>>=
 P1['knots']
 P1['allknots'] # including a1,a2,a3,a4
 @
 
 We have, for example:
 \begin{quote}
-<<PLFNEx1d,dependson='PLFNEx1c',results='asis',echo=FALSE>>=
+<<PLFNEx1d,results='asis',echo=FALSE>>=
 cat(as.character(P1, toLaTeX=TRUE, varnameLaTeX='P_1'))
 @
 \end{quote}
@@ -908,7 +906,7 @@ text(7.5, alpha, sprintf('a=%g', alpha), pos=3)
 @
 
 \begin{center}
-<<PLFNEx2b,dependson='PLFNEx2a',echo=FALSE>>=
+<<PLFNEx2b,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(P3, type='b', xlab=expression(x), ylab=expression(alpha), from=-1, to=9, xlim=c(0,8))
 abline(h=alpha, col='gray', lty=2)
@@ -923,7 +921,7 @@ More generally, each PLFN or TFN may be converted
 to a direct \texttt{FuzzyNumber} class instance if needed
 (hope we will never not).
 
-<<PLFNEx2c,dependson='PLFNEx2b',>>=
+<<PLFNEx2c,>>=
 (as.FuzzyNumber(P3))
 @
 
@@ -961,7 +959,7 @@ plot(X)
 @
 
 \begin{center}
-<<PowerEx1b,dependson='PowerEx1a',echo=FALSE>>=
+<<PowerEx1b,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(X, type='l', xlab=expression(x), ylab=expression(alpha))
 @
@@ -969,7 +967,7 @@ plot(X, type='l', xlab=expression(x), ylab=expression(alpha))
 
 We have:
 \begin{quote}
-<<PowerEx1c,dependson='PowerEx1b',results='asis',echo=FALSE>>=
+<<PowerEx1c,results='asis',echo=FALSE>>=
 cat(as.character(X, toLaTeX=TRUE, varnameLaTeX='X'))
 @
 \end{quote}
@@ -1007,7 +1005,7 @@ plot(A)
 @
 
 \begin{center}
-<<depicting1b,dependson='depicting1a',echo=FALSE>>=
+<<depicting1b,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 @
@@ -1020,20 +1018,20 @@ approximated by piecewise linear functions with equidistant knots
 at one of the axes. Therefore, if we probe them
 at too few points, we may obtain very rough graphical representations.
 To control the number of points at which the interpolation takes place,
-we use the \argument{n} argument (which defaults to \texttt{101}, i.e.~``quite
+we use the \argument{n} argument (which defaults to \texttt{101}, i.e., ``quite
 accurate'').
 
 All three calls to the \func{plot()} method below depict the membership
 function of the same fuzzy number, but with different accuracy.
 
-<<depicting1c,dependson='depicting1b',fig.keep='none'>>=
+<<depicting1c,fig.keep='none'>>=
 plot(A, n=3, type='b')
 plot(A, n=6, add=TRUE,  lty=2, col=2, type='b', pch=2)
 plot(A, n=101, add=TRUE, lty=4, col=4) # default n
 @
 
 \begin{center}
-<<depicting1d,dependson='depicting1c',echo=FALSE>>=
+<<depicting1d,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, n=3, type='b', xlab=expression(x), ylab=expression(alpha))
 plot(A, n=6, add=TRUE, lty=2, col=2, type='b', pch=2)
@@ -1053,13 +1051,13 @@ representation of the FN and use the kind representation it has.
 It both types of generators are given, then side functions are used.
 If we want, for some reasons, to use $\alpha$-cuts, then we may do as follows:
 
-<<depicting1e,dependson='depicting1d',fig.keep='none'>>=
+<<depicting1e,fig.keep='none'>>=
 plot(A, n=3, at.alpha=numeric(0), type='b') # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use sides
 @
 
 \begin{center}
-<<depicting1f,dependson='depicting1e',echo=FALSE>>=
+<<depicting1f,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, n=3, at.alpha=numeric(0), type='b', xlab=expression(x), ylab=expression(alpha)) # use alpha-cuts
 plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
@@ -1069,12 +1067,12 @@ plot(A, n=3, type='b', col=2, lty=2, pch=2, add=TRUE) # use side generators
 \bigskip
 We may also illustrate an $\alpha$-cut representation of a fuzzy number:
 
-<<depicting1g,dependson='depicting1f',fig.keep='none'>>=
+<<depicting1g,fig.keep='none'>>=
 plot(A, draw.alphacuts=TRUE)
 @
 
 \begin{center}
-<<depicting1h,dependson='depicting1g',echo=FALSE>>=
+<<depicting1h,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, draw.alphacuts=TRUE, ylab=expression(x), xlab=expression(alpha))
 @
@@ -1085,10 +1083,10 @@ plot(A, draw.alphacuts=TRUE, ylab=expression(x), xlab=expression(alpha))
 
 \paragraph{Exporting figures.}
 If we would like to generate figures for our publications,
-then we will surely be interested in storing them e.g.~as PDF files.
+then we will surely be interested in storing them, e.g., as PDF files.
 This may be done by calling:
 
-<<A1ex6,dependson='A1ex',eval=FALSE>>=
+<<A1ex6,eval=FALSE>>=
 pdf('figure1.pdf', width=8, height=5) # create file
 plot(A)
 dev.off() # close graphical device and save the file
@@ -1103,7 +1101,7 @@ to \func{pdf()} for the call to the \func{postcript()} function.
 Another way to depict a FN is to\dots give a mathematical expression
 which defines it.
 
-<<depicting1i,dependson='depicting1h',eval=FALSE>>=
+<<depicting1i,eval=FALSE>>=
 cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 
@@ -1111,7 +1109,7 @@ cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 \begin{knitrout}\small
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-<<depicting1i2,dependson='depicting1i',results='asis',echo=FALSE>>=
+<<depicting1i2,results='asis',echo=FALSE>>=
 cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 \end{verbatim}
@@ -1121,7 +1119,7 @@ cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 \noindent \dots and, after compiling:
 
 \begin{quote}
-<<depicting1i3,dependson='depicting1i',results='asis',echo=FALSE>>=
+<<depicting1i3,results='asis',echo=FALSE>>=
 cat(as.character(A, toLaTeX=TRUE, varnameLaTeX='A'))
 @
 \end{quote}
@@ -1154,7 +1152,7 @@ plot(X, add=TRUE, type='p', from=-1, to=6)
 @
 
 \begin{center}
-<<depicting2b,dependson='depicting2a',echo=FALSE>>=
+<<depicting2b,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 <<depicting2a>>
 @
@@ -1192,25 +1190,25 @@ A <- FuzzyNumber(-5, 3, 6, 20,
 
 \subsection{Support and Core, and Other $\alpha$-cuts}
 
-The support of $A$, i.e.~$\mathrm{supp}(A)=[\mathtt{a1}, \mathtt{a4}]$,
+The support of $A$, i.e., $\mathrm{supp}(A)=[\mathtt{a1}, \mathtt{a4}]$,
 may be obtained by calling:
 
-<<comput1b,dependson='comput1a'>>=
+<<comput1b>>=
 supp(A)
 @
 
 \noindent
-We get the core of $A$, i.e.~$\mathrm{core}(A)=[\mathtt{a2}, \mathtt{a3}]$,
+We get the core of $A$, i.e., $\mathrm{core}(A)=[\mathtt{a2}, \mathtt{a3}]$,
 with:
 
-<<comput1c,dependson='comput1b'>>=
+<<comput1c>>=
 core(A)
 @
 
 \noindent
 To compute arbitrary $\alpha$-cuts we use:
 
-<<comput1d,dependson='comput1c'>>=
+<<comput1d>>=
 alphacut(A, 0) # same as supp(A) (if alpha-cut generators are defined)
 alphacut(A, 1) # same as core(A)
 (a <- alphacut(A, c(0, 0.5, 1)))
@@ -1231,7 +1229,7 @@ or $\alpha=1$.
 If side generators are defined, we may calculate
 the values of the membership function at different points by calling:
 
-<<comput1e,dependson='comput1d'>>=
+<<comput1e>>=
 evaluate(A, 1)
 evaluate(A, c(-3,0,3))
 evaluate(A, seq(-1, 2, by=0.5))
@@ -1257,7 +1255,7 @@ Let us first introduce the notion of the \textit{expected interval} of $A$
 \noindent
 To compute the expected interval of $A$ we call:
 
-<<comput1f,dependson='comput1e'>>=
+<<comput1f>>=
 expectedInterval(A)
 @
 
@@ -1269,7 +1267,7 @@ and its accuracy (quite fine by default)
 may be controlled by the \argument{subdivisions},
 \argument{rel.tol}, and \argument{abs.tol} parameters
 (call \texttt{?integrate} for more details).
-On the other hand, for e.g.~TFNs and PLFs this method returns exact results.
+On the other hand, for, e.g., TFNs and PLFs this method returns exact results.
 
 \bigskip
 The midpoint of the expected interval is called the \textit{expected value}
@@ -1281,7 +1279,7 @@ of a fuzzy number. It is given by:
 \noindent
 Let us calculate $\mathrm{EV}(A)$.
 
-<<comput1g,dependson='comput1f'>>=
+<<comput1g>>=
 expectedValue(A)
 @
 
@@ -1301,7 +1299,7 @@ It is easily seen that $\mathrm{EV}_{0.5}(A)=\mathrm{EV}(A)$.
 \noindent
 Some examples:
 
-<<comput1h,dependson='comput1g'>>=
+<<comput1h>>=
 weightedExpectedValue(A, 0.5) # equivalent to expectedValue(A)
 weightedExpectedValue(A, 0.25)
 @
@@ -1315,7 +1313,7 @@ The \textit{value} of $A$ \cite{DelgadoETAL1998:canonicalfn} is defined by:
 \noindent
 It may be calculated by calling:
 
-<<comput1i,dependson='comput1h'>>=
+<<comput1i>>=
 value(A)
 @
 
@@ -1335,7 +1333,7 @@ The \textit{width} of $A$ \cite{Chanas2001:intervapproxfn} is defined as:
 \noindent
 An example:
 
-<<comput1j,dependson='comput1i'>>=
+<<comput1j>>=
 width(A)
 @
 
@@ -1345,15 +1343,15 @@ The \textit{ambiguity} of $A$ \cite{DelgadoETAL1998:canonicalfn} is defined as:
 \mathrm{amb}(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha.
 \end{equation}
 
-<<comput1k,dependson='comput1j'>>=
+<<comput1k>>=
 ambiguity(A)
 @
 
 \bigskip
 Additionally, to express ``nonspecificity'' of a fuzzy number
-we may use e.g.~the width of its support:
+we may use, e.g., the width of its support:
 
-<<comput1l,dependson='comput1k'>>=
+<<comput1l>>=
 diff(supp(A))
 @
 
@@ -1419,7 +1417,7 @@ plot(A+B, add=TRUE, col=4, lty=4)
 
 
 \begin{center}
-<<additionFig,dependson='addition',echo=FALSE,results='hide'>>=
+<<additionFig,echo=FALSE,results='hide'>>=
 par(mar=c(4,4,2,1))
 plot(A, xlim=c(0,6), xlab=expression(x), ylab=expression(alpha))
 plot(B, add=TRUE, col=2, lty=2)
@@ -1435,7 +1433,7 @@ and addition and scalar multiplication
 is also implemented for trapezoidal FNs.
 Note that the computer arithmetic has anyway
 a discrete nature, and a PLFN with large number
-of knots often approximates (cf.~Sec.~\ref{Sec:Approximation})
+of knots often approximates (see Sec.~\ref{Sec:Approximation})
 an arbitrary FN sufficiently well.
 The computations are always exact (well, up to the computer
 floating-point arithmetic errors) at knots.
@@ -1472,7 +1470,7 @@ plot(fapply(A, function(x) sqrt(log(x+1))))
 @
 
 \begin{center}
-<<fapplyFig,dependson='fapply',echo=FALSE,results='hide'>>=
+<<fapplyFig,echo=FALSE,results='hide'>>=
 par(mar=c(4,4,2,1))
 plot(fapply(A, function(x) log(x+1)^0.5), xlab=expression(x), ylab=expression(alpha))
 legend('topleft', expression(sqrt(log(A+1))), lty=1)
@@ -1500,7 +1498,7 @@ plot(A^3, add=TRUE, col=4, lty=4)
 @
 
 \begin{center}
-<<exponentialFig,dependson='exponential',echo=FALSE,results='hide'>>=
+<<exponentialFig,echo=FALSE,results='hide'>>=
 par(mar=c(4,4,2,1))
 plot(A, xlim=c(-8,8), xlab=expression(x), ylab=expression(alpha))
 plot(A^2, add=TRUE, col=2, lty=2)
@@ -1533,7 +1531,7 @@ computing.
 
 It seems that the most suitable metric for approximation problems
 is an extension of the Euclidean ($L_2$) distance
-(cf.~\cite{Grzegorzewski1998:metricsordersfn}), $d$, defined by the equation:
+(see~\cite{Grzegorzewski1998:metricsordersfn}), $d$, defined by the equation:
 \begin{equation}
 d_E^2(A,B) = \int_0^1 \left(A_L(\alpha)-B_L(\alpha)\right)^2\,d\alpha
          + \int_0^1 \left(A_U(\alpha)-B_U(\alpha)\right)^2\,d\alpha.
@@ -1586,13 +1584,13 @@ The \str{"{}Naive"{}} \argument{method} just
 generates a trapezoidal FN with the same
 core and support as $A$.
 
-<<ApproxExA_naive,dependson='ApproxExA',fig.keep='none'>>=
+<<ApproxExA_naive,fig.keep='none'>>=
 (T1 <- trapezoidalApproximation(A, method='Naive'))
 distance(A, T1)
 @
 
 \begin{center}
-<<ApproxExA_naive2,dependson='ApproxExA_naive',echo=FALSE>>=
+<<ApproxExA_naive2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T1, col='red', lty=2, add=TRUE)
@@ -1617,20 +1615,20 @@ approach.
 The \str{"{}NearestEuclidean"{}} \argument{method}
 gives the nearest $L_2$-approximation of $A$
 \cite[Corollary 8]{Ban2009:nearestfnrev},
-i.e.~a trapezoidal fuzzy number $\mathcal{T}(A)$ such that
+i.e., a trapezoidal fuzzy number $\mathcal{T}(A)$ such that
 \[
 \mathcal{T}(A)=\min\limits_{T\in \mathrm{TFN}}d_E(A,T).
 \]
 It may be shown that the solution to this problem
 always exists and is unique.
 
-<<ApproxExA_L2n,dependson='ApproxExA',fig.keep='none'>>=
+<<ApproxExA_L2n,fig.keep='none'>>=
 (T2 <- trapezoidalApproximation(A, method='NearestEuclidean'))
 distance(A, T2)
 @
 
 \begin{center}
-<<ApproxExA_naiveL2n2,dependson='ApproxExA_L2n',echo=FALSE>>=
+<<ApproxExA_naiveL2n2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T2, col='red', lty=2, add=TRUE)
@@ -1647,7 +1645,7 @@ Note that the implementation relies on numeric integration.
 The \str{"{}ExpectedIntervalPreserving"{}} method
 gives the nearest $L_2$-approximation of $A$
 preserving the expected interval \cite{Ban2008:approxpresexpint,Grzegorzewski2010:trapfnapproxexpint,Yeh2008:traptriapprox},
-i.e.~we get $\mathcal{T}(A)$ such that $\mathrm{EI}(A)=\mathrm{EI}(\mathcal{T}(A))$.
+i.e., we get $\mathcal{T}(A)$ such that $\mathrm{EI}(A)=\mathrm{EI}(\mathcal{T}(A))$.
 
 First of all, it may be shown that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
 we obtain the same result as in
@@ -1655,7 +1653,7 @@ the \str{"{}NearestEuclidean"{}} method.
 
 % TO BE DONE...
 
-<<ApproxExA_ExpInt,dependson='ApproxExA',fig.keep='none'>>=
+<<ApproxExA_ExpInt,fig.keep='none'>>=
 ambiguity(A)
 width(A)/3
 (T3 <- trapezoidalApproximation(A, method='ExpectedIntervalPreserving'))
@@ -1665,7 +1663,7 @@ expectedInterval(T3)
 @
 
 % \begin{center}
-<<ApproxExA_ExpInt2,dependson='ApproxExA_ExpInt',eval=FALSE,echo=FALSE>>=
+<<ApproxExA_ExpInt2,eval=FALSE,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T3, col='red', lty=2, add=TRUE)
@@ -1674,12 +1672,12 @@ plot(T3, col='red', lty=2, add=TRUE)
 
 On the other hand, for highly skewed membership functions this method
 (as well as the previous one)  sometimes reveals quite unfavorable
-behavior. E.g.~if $B$ is a FN such that
+behavior. E.g., if $B$ is a FN such that
 $\mathrm{val}(B) < \mathrm{EV}_{1/3}(B)$
 or $\mathrm{val}(B) > \mathrm{EV}_{2/3}(B)$,
 then it may happen that the cores of the output
 and of the original fuzzy number $B$ are disjoint,
-cf.~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
+see~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 
 <<ApproxExA_ExpInt3,fig.keep='none'>>=
 (B  <- FuzzyNumber(1, 2, 3, 45,
@@ -1692,7 +1690,7 @@ distance(B, TB2)
 @
 
 \begin{center}
-<<ApproxExA_ExpInt3Fig,dependson='ApproxExA_ExpInt3',echo=FALSE>>=
+<<ApproxExA_ExpInt3Fig,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(B, xlab=expression(x), ylab=expression(alpha), log='x', xlim=c(0.9,46))
 plot(TB1, col='red',  lty=2, add=TRUE)
@@ -1712,16 +1710,16 @@ It gives the $L_2$-nearest trapezoidal approximation $\mathcal{T}(A)$
 with constraints:
 $\mathrm{core}(A) \subseteq \mathrm{core}(\mathcal{T}(A))$
 and $\mathrm{supp}(\mathcal{T}(A)) \subseteq \mathrm{supp}(A)$,
-i.e.~for which each point that surely belongs to $A$ also belongs to $\mathcal{T}(A)$,
+i.e., for which each point that surely belongs to $A$ also belongs to $\mathcal{T}(A)$,
 and each point that surely does not belong to $A$ also does not belong to $\mathcal{T}(A)$.
 
-<<ApproxExA_RestrSuppCore,dependson='ApproxExA',fig.keep='none'>>=
+<<ApproxExA_RestrSuppCore,fig.keep='none'>>=
 (T4 <- trapezoidalApproximation(A, method='SupportCoreRestricted'))
 distance(A, T4)
 @
 
 \begin{center}
-<<ApproxExA_RestrSuppCore2,dependson='ApproxExA_RestrSuppCore',echo=FALSE>>=
+<<ApproxExA_RestrSuppCore2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(T4, col='red', lty=2, add=TRUE)
@@ -1737,7 +1735,7 @@ legend('topright', legend=expression(A, 'Supp&core restr.'),
 
 When approximating arbitrary fuzzy numbers by trapezoidal ones we
 generally take care for the core and support of a fuzzy number
-(i.e.~for values that surely belong or do not belong at all to the
+(i.e., for values that surely belong or do not belong at all to the
 set under study), while the sides of a fuzzy number corresponding
 to all intermediate degrees of membership are linearized. This
 approach may not be suitable if we are also interested in focusing
@@ -1772,7 +1770,7 @@ The \str{"{}Naive"{}} \argument{method} generates a PLFN with the same
 core and support as $A$ and with sides interpolating the membership function
 of $A$ at given $\alpha$-cuts.
 
-<<ApproxPLFNNaive,dependson='ApproxExAPLFN',fig.keep='none'>>=
+<<ApproxPLFNNaive,fig.keep='none'>>=
 P1 <- piecewiseLinearApproximation(A, method='Naive',
          knot.n=1, knot.alpha=0.5)
 P1['allknots']
@@ -1780,7 +1778,7 @@ print(distance(A, P1), 8)
 @
 
 \begin{center}
-<<ApproxPLFNNaive2,dependson='ApproxPLFNNaive',echo=FALSE>>=
+<<ApproxPLFNNaive2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(P1, col='red', lty=2, add=TRUE)
@@ -1791,7 +1789,7 @@ legend('topright', legend=expression(A, 'Naive approx.'),
 
 \noindent
 The approximation error may be quite high.
-However, it may be shown that e.g.~for equidistant knots if
+However, it may be shown that, e.g., for equidistant knots if
 $\mathtt{knot.n}\to\infty$,
 then it approaches $0$.
 
@@ -1813,7 +1811,7 @@ and \cite{CoroianuETALXXXX:piecewise2}.
 This implementation relies on numeric integration, so for large \argument{knot.n}
 may be slow.
 
-<<ApproxPLFNNearest,dependson='ApproxExAPLFN',fig.keep='none'>>=
+<<ApproxPLFNNearest,fig.keep='none'>>=
 P2 <- piecewiseLinearApproximation(A,
    method='NearestEuclidean', knot.n=3, knot.alpha=c(0.25,0.5,0.75))
 print(P2['allknots'], 6)
@@ -1821,7 +1819,7 @@ print(distance(A, P2), 12)
 @
 
 \begin{center}
-<<ApproxPLFNNearest2,dependson='ApproxPLFNNearest',echo=FALSE>>=
+<<ApproxPLFNNearest2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(P2, col='red', lty=2, add=TRUE)
@@ -1873,7 +1871,7 @@ legend('topright', legend=expression(A, L[2]-"nearest approx."),
 % % .. TO DO.....
 %
 % \begin{center}
-% <<PLFNApproxNeares_error2,dependson='PLFNApproxNeares_error',echo=FALSE>>=
+% <<PLFNApproxNeares_error2,echo=FALSE>>=
 % matplot(a, cbind(d1, d2), type='l', xlab='$\\alpha$', ylab='')
 % legend('top', c('$d(A_1,P_1)$', '$d(A_2,P_2)$'), lty=c(1,2), col=c(1,2))
 % @
@@ -1885,7 +1883,7 @@ As the na\"{i}ve approximator's error approaches 0 as $\text{\argument{knot.n}}\
 for equidistant knots, so does the error of the nearest $L_2$ approximator.
 Let us study the convergence behavior for our exemplary $A$.
 
-<<ApproxPLFNNearestConv1,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
+<<ApproxPLFNNearestConv1,fig.keep='none'>>=
 n <- 1:27
 d <- matrix(NA, ncol=4, nrow=length(n))
 # d[,1] - Naive approximator's error for given knot.n
@@ -1908,7 +1906,7 @@ matplot(n, d, type='l', log="y", lty=c(1,2,4), col=c(1,2,4))
 @
 
 \begin{center}
-<<ApproxPLFNNearestConv2,dependson='ApproxPLFNNearestConv1',echo=FALSE>>=
+<<ApproxPLFNNearestConv2,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 matplot(n, d, type='l', xlab=expression(n), ylab=expression(d(A, '*')), log="y", lty=c(1,2,4), col=c(1,2,4))
 legend(x=19, y=3.2, expression(d(A, {N^n}(A)), d(A, {Pi^n}(A)), 'upper bound'),
@@ -1920,10 +1918,10 @@ legend(x=19, y=3.2, expression(d(A, {N^n}(A)), d(A, {Pi^n}(A)), 'upper bound'),
 for $\text{\argument{knot.n}}=1$ numerically.}
 The approximation problem is stated using a fixed
 \argument{knit.alpha}.
-However, we may e.g.~depict the ``best'' $L_2$ distance as a function of $\alpha$,
-i.e.~the $D_{A}(\alpha)$ function.
+However, we may, e.g., depict the ``best'' $L_2$ distance as a function of $\alpha$,
+i.e., the $D_{A}(\alpha)$ function.
 
-<<ApproxPLFNNearest3,dependson='ApproxPLFNNearest2',fig.keep='none'>>=
+<<ApproxPLFNNearest3,fig.keep='none'>>=
 a <- seq(1e-9, 1-1e-9, length.out=100) # many alphas from (0,1)
 d <- numeric(length(a)) # distances /to be calculated/
 for (i in seq_along(a))
@@ -1936,7 +1934,7 @@ plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)))
 @
 
 \begin{center}
-<<ApproxPLFNNearest4,dependson='ApproxPLFNNearest3',echo=FALSE>>=
+<<ApproxPLFNNearest4,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(a, d, type='l', xlab=expression(alpha), ylab=expression(D[A](alpha)))
 @
@@ -1949,7 +1947,7 @@ but in general the minimum is not necessarily unique.
 % TO DO.....
 
 
-<<ApproxPLFNNearest5,dependson='ApproxPLFNNearest4',warning=FALSE>>=
+<<ApproxPLFNNearest5,warning=FALSE>>=
 for (i in 1:5) # 5 iterations
 {
    a0 <- runif(1,0,1) # random starting point
@@ -1995,7 +1993,7 @@ A <- FuzzyNumber(0, 3, 4, 5,
 Here are its unrestricted ($P_1$) and supp-core-restricted ($P_2$)
 PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 
-<<suppcoreplfn1a2,dependson='suppcoreplfn1a'>>=
+<<suppcoreplfn1a2>>=
 knot.alpha <- 0.2
 P1 <- piecewiseLinearApproximation(A, knot.alpha=knot.alpha)
 P2 <- piecewiseLinearApproximation(A, method="SupportCorePreserving",
@@ -2007,7 +2005,7 @@ print(alphacut(P2, c(0, knot.alpha, 1)))
 @
 
 \begin{center}
-<<suppcoreplfn1a3,dependson='suppcoreplfn1a2',echo=FALSE>>=
+<<suppcoreplfn1a3,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 plot(A, xlab=expression(x), ylab=expression(alpha))
 plot(P1, col=2, add=TRUE, lty=2)
@@ -2020,7 +2018,7 @@ legend("topleft", legend=expression(A, P[1], P[2]), lty=c(1,2,4), col=c(1,2,4), 
 Let us find $\alpha_0$ for which we get the minimal approximation
 distance (error).
 
-<<suppcoreplfn1a4,dependson='suppcoreplfn1a'>>=
+<<suppcoreplfn1a4>>=
 D <- function(a) distance(A,
    piecewiseLinearApproximation(A, method="SupportCorePreserving", knot.alpha=a))
 optimize(D, lower=0, upper=1)
@@ -2030,7 +2028,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 \cite{CoroianuETAL2014:piecewise1suppcore} for discussion.
 
 \begin{center}
-<<suppcoreplfn1a5,dependson='suppcoreplfn1a4',echo=FALSE>>=
+<<suppcoreplfn1a5,echo=FALSE>>=
 par(mar=c(4,4,2,1))
 a <- seq(0, 1, length.out=1001)
 Da <- sapply(a, D)
@@ -2072,24 +2070,24 @@ x = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0.2, 1.0, 2.8))
 y = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(0, 1.8, 2.2))
 @
 We can visualized them together.
-<<compareXY1plot,dependson='compareXY1'>>=
+<<compareXY1plot>>=
 plot(x, col=2)
 plot(y, col=4, add=TRUE)
 @
 The comparison if $X>=Y$ is done using functions \func{possibilityExceedance()} and \func{necessityExceedance()}.
-<<compareXY1c1,dependson='compareXY1'>>=
+<<compareXY1c1>>=
 possibilityExceedance(x,y)
 necessityExceedance(x,y)
 @
 In the same way we can determine the truthfulness of statement $X>Y$ with functions \func{possibilityStrictExceedance()} and \func{necessityStrictExceedance()}.
-<<compareXY1c2,dependson='compareXY1'>>=
+<<compareXY1c2>>=
 possibilityStrictExceedance(x,y)
 necessityStrictExceedance(x,y)
 @
 The image image above shows that there is no clear domination of one of the fuzzy numbers and so tell us the indices.
 
 To assess the inverse situations $X<=Y$ and $X<Y$ the following code can be used.
-<<compareXY1c3,dependson='compareXY1'>>=
+<<compareXY1c3>>=
 possibilityUndervaluation(x,y)
 necessityUndervaluation(x,y)
 possibilityStrictUndervaluation(x,y)
@@ -2145,7 +2143,7 @@ plot(maxFN, col=6, add=TRUE)
 @
 
 \begin{center}
-<<minmaxXYFig,dependson='minmaxXY',echo=FALSE,results='hide'>>=
+<<minmaxXYFig,echo=FALSE,results='hide'>>=
 par(mar=c(4,4,2,1))
 plot(x, col=1, xlim = c(min,max))
 plot(y, col=2, add=TRUE)
@@ -2167,7 +2165,7 @@ legend('topright', expression(min, max), lty=c(1,1), col=c(4,6))
 %
 % TO BE DONE... WORK  ON AN EXACT ALGORITHM IS ALMOST FINISHED.....
 %
-% <<ApproxMethodPLFN1,dependson='ApproxExAPLFN',fig.keep='none'>>=
+% <<ApproxMethodPLFN1,fig.keep='none'>>=
 % system.time(P3 <- piecewiseLinearApproximation(A,
 %    method='ApproximateNearestEuclidean', knot.n=1, knot.alpha=0.5))
 % print(P3['allknots'], 6)
@@ -2179,14 +2177,14 @@ legend('topright', expression(min, max), lty=c(1,1), col=c(4,6))
 %
 % Another example:
 %
-% <<ApproxMethodPLFN2,dependson='ApproxExAPLFN',fig.keep='none'>>=
+% <<ApproxMethodPLFN2,fig.keep='none'>>=
 % system.time(P4 <- piecewiseLinearApproximation(A,
 %    method='ApproximateNearestEuclidean', knot.n=4,
 %    knot.alpha=c(0.2, 0.3, 0.7, 0.9), verbose=TRUE))
 % @
 %
 % \begin{center}
-% <<ApproxMethodPLFN3,dependson='ApproxMethodPLFN2',echo=FALSE>>=
+% <<ApproxMethodPLFN3,echo=FALSE>>=
 % plot(A, xlab=expression(x), ylab=expression(alpha))
 % plot(P4, col='red', lty=2, add=TRUE)
 % print(distance(A, P4), digits=12)
@@ -2341,7 +2339,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 \bibitem{Gagolewski:fuzzynumberspackage}
 {\sc Gagolewski, M.}
 \newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
-  \textsf{R}}, 2018.
+  \textsf{R}}, 2019.
 \newblock {h}ttp://FuzzyNumbers.rexamine.com.
 
 \bibitem{Grzegorzewski1998:metricsordersfn}
