@@ -74,10 +74,10 @@
 \usepackage{lmodern}
 
 \usepackage{amsmath,amssymb,amsfonts}
-\RequirePackage{graphicx,verbatim,longtable}
-\usepackage{mdwlist}
-\usepackage[nottoc]{tocbibind}
-\usepackage{rotating}
+\RequirePackage{graphicx,verbatim}
+% \usepackage{mdwlist}
+% \usepackage[nottoc]{tocbibind}
+% \usepackage{rotating}
 
 \newcommand{\email}[1]{\href{mailto:#1}{#1}}
 \renewcommand{\emph}[1]{\textsl{#1}}
@@ -154,7 +154,7 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 \begin{center}
 {\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
 
-{\Large\sf (FuzzyNumbers version {0.4-3}) }
+{\Large\sf (FuzzyNumbers version {0.4-4}) }
 
 \bigskip
 {\large Marek Gagolewski${}^{1}$}
@@ -724,14 +724,14 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pbeta(alpha, 5, 9)
-## <bytecode: 0x55e232408cb0>
+## <bytecode: 0x5616dde7eeb0>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'upper'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pexp(1/alpha-1)
-## <bytecode: 0x55e230f23270>
+## <bytecode: 0x5616dc99dbd0>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'left'}\hlstd{]}
@@ -739,7 +739,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x55e232ffb2c0>
+## <environment: 0x5616dea6d338>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
@@ -747,7 +747,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x55e232ffb2c0>
+## <environment: 0x5616dea6d338>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -961,7 +961,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x55e2318a1700>
+## <bytecode: 0x5616dd3168f8>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -970,7 +970,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x55e2318a1818>
+## <bytecode: 0x5616dd316a10>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -979,7 +979,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x55e2318aa798>
+## <bytecode: 0x5616dd31fa00>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -988,7 +988,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x55e2318aa8b0>
+## <bytecode: 0x5616dd316738>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -1066,7 +1066,7 @@ Trapezoidal fuzzy numbers are generalized by piecewise linear FNs (PLFNs),
 i.e., fuzzy numbers which side generating functions and $\alpha$-cut
 generators are piecewise linear functions.
 Each PLFN is given by:
-\begin{itemize*}
+\begin{itemize}
 \item four coefficients $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$
 defining its support and core,
 \item the number of ``knots'', \argument{knot.n}$\ge 0$,
@@ -1075,7 +1075,7 @@ defining its support and core,
 defining interpolation points for the left side function, and
 \item a nondecreasingly sorted vector \argument{knot.right} consisting of \argument{knot.n} elements $\in[\mathtt{a2},\mathtt{a3}]$,
 defining interpolation points for the right side function.
-\end{itemize*}
+\end{itemize}
 
 If \argument{knot.n}$\ge 1$, then the membership function of
 a piecewise linear fuzzy number $P$ is defined as:
@@ -2834,11 +2834,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.054939263     43 *0.363078878* 0.650344747
-## 0.204889807     37 *0.363231498* 0.650343978
-## 0.226272855     23 *0.363013427* 0.650345255
-## 0.393095251     49 *0.363081407* 0.650344862
-## 0.585269921     26 *0.363088009* 0.650345120
+## 0.272862650     49 *0.363082780* 0.650344920
+## 0.138621644     22 *0.363065644* 0.650343881
+## 0.608635892     26 *0.363013648* 0.650345255
+## 0.329356510     88 *0.363338520* 0.650322682
+## 0.764122176     23 *0.363064597* 0.650343781
 \end{verbatim}
 \end{kframe}
 \end{knitrout}

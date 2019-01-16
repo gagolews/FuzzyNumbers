@@ -24,10 +24,10 @@
 \usepackage{lmodern}
 
 \usepackage{amsmath,amssymb,amsfonts}
-\RequirePackage{graphicx,verbatim,longtable}
-\usepackage{mdwlist}
-\usepackage[nottoc]{tocbibind}
-\usepackage{rotating}
+\RequirePackage{graphicx,verbatim}
+% \usepackage{mdwlist}
+% \usepackage[nottoc]{tocbibind}
+% \usepackage{rotating}
 
 \newcommand{\email}[1]{\href{mailto:#1}{#1}}
 \renewcommand{\emph}[1]{\textsl{#1}}
@@ -792,7 +792,7 @@ Trapezoidal fuzzy numbers are generalized by piecewise linear FNs (PLFNs),
 i.e., fuzzy numbers which side generating functions and $\alpha$-cut
 generators are piecewise linear functions.
 Each PLFN is given by:
-\begin{itemize*}
+\begin{itemize}
 \item four coefficients $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$
 defining its support and core,
 \item the number of ``knots'', \argument{knot.n}$\ge 0$,
@@ -801,7 +801,7 @@ defining its support and core,
 defining interpolation points for the left side function, and
 \item a nondecreasingly sorted vector \argument{knot.right} consisting of \argument{knot.n} elements $\in[\mathtt{a2},\mathtt{a3}]$,
 defining interpolation points for the right side function.
-\end{itemize*}
+\end{itemize}
 
 If \argument{knot.n}$\ge 1$, then the membership function of
 a piecewise linear fuzzy number $P$ is defined as:
