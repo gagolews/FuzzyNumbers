@@ -3,8 +3,10 @@
 
 ***************************************************************************
 
-0.4-3 /2019-01-15/
+0.4-4 /2019-01-15/
 
+* [BUGFIX] #14 `as.PiecewiseLinearFuzzyNumber` used to fail for some
+TriangularFuzzyNumbers
 * updated manual & package metadata
 
 ***************************************************************************

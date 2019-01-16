@@ -63,7 +63,7 @@ setMethod(
             object@a1+(object@a2-object@a1)*object@lower(alpha[wh]),
             object@a3+(object@a4-object@a3)*object@upper(alpha[wh])
          )
-
+      x[wh,2] <- max(x[wh,1], x[wh,2]) # avoid numeric inaccuracies
       x
    }
 )

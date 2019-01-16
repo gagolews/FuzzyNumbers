@@ -9,10 +9,10 @@ Authors@R: c(
 Description: S4 classes and methods
     to deal with fuzzy numbers. They allow for computing any arithmetic
     operations (e.g., by using the Zadeh extension principle),
-    performing approximation of arbitrary fuzzy numbers by trapezoidal 
+    performing approximation of arbitrary fuzzy numbers by trapezoidal
     and piecewise linear ones, preparing plots for publications, computing
     possibility and necessity values for comparisons, etc.
-Version: 0.4-3
+Version: 0.4-4
 Date: 2019-01-16
 URL: http://FuzzyNumbers.rexamine.com
 BugReports: http://github.com/gagolews/FuzzyNumbers/issues

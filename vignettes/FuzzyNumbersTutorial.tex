@@ -1,0 +1,3435 @@
+%\VignetteIndexEntry{A Guide to the FuzzyNumbers Package}
+%\VignetteEngine{knitr::knitr}
+%\VignetteKeyword{fuzzy number}
+%\VignetteKeyword{extension principle}
+%\VignetteKeyword{S4}
+\documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[dvips,a4paper,left=2.5cm,right=2.5cm,foot=1.0cm,
+   headheight=1.0cm,top=2.0cm,margin=2.5cm]{geometry}
+\linespread{1.1}
+
+\usepackage{fancyhdr}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\selectlanguage{english}
+\usepackage{xspace}
+\usepackage{lmodern}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\RequirePackage{graphicx,verbatim,longtable}
+\usepackage{mdwlist}
+\usepackage[nottoc]{tocbibind}
+\usepackage{rotating}
+
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+\renewcommand{\emph}[1]{\textsl{#1}}
+\newcommand{\indicator}{\text{\bf 1}}
+\renewcommand{\Pr}{\mathrm{P}}
+\renewcommand{\ln}{\mathrm{ln}\,}
+
+\newcommand{\package}[1]{\textsf{#1}\xspace}
+\newcommand{\program}[1]{\textsf{#1}\xspace}
+\newcommand{\os}[1]{\textsf{#1}\xspace}
+\newcommand{\lang}[1]{\textsf{#1}\xspace}
+\newcommand{\Cpp}{\lang{C++}}
+\newcommand{\R}{\lang{R}}
+
+\newcommand{\func}[1]{\texttt{\hlkwd{#1}}}
+\newcommand{\argument}[1]{\texttt{\hlkwc{#1}}}
+\newcommand{\str}[1]{\texttt{\hlstr{#1}}}
+\newcommand{\key}[1]{{$\langle$\texttt{#1}$\rangle$}\xspace} % skrot klawiszowy
+
+\setlength{\pdfpagewidth}{\paperwidth}
+\setlength{\pdfpageheight}{\paperheight}
+
+
+\usepackage{xcolor}
+\definecolor{blue2}{rgb}{0,0.2,0.7}
+\definecolor{red2}{rgb}{0.4,0.1,0.1}
+\usepackage{colortbl}
+\definecolor{navy}{rgb}{0,0.0,0.4}
+\definecolor{navy2}{rgb}{0.4,0.1,0.3}
+\definecolor{red2}{rgb}{0.6,0.1,0.2}
+\definecolor{green2}{rgb}{0.1,0.4,0.2}
+
+\usepackage{hyperref}
+
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,labelsep=period,justification=centering}
+\addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
+\addto\captionsenglish{\renewcommand{\tablename}{Tab.}}
+
+
+\setlength{\topsep}{1pt}
+\tolerance=500
+\predisplaypenalty=0
+\clubpenalty=1000
+\widowpenalty=1000
+
+
+\newif\ifDevelopmentVersion
+
+
+
+\DevelopmentVersionfalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\ifDevelopmentVersion
+\pagestyle{fancy}
+\fancyhead[L]{}
+\fancyhead[R]{}
+\fancyhead[C]{\footnotesize\sf This tutorial reflects the state of the most
+recent development version
+of \package{FuzzyNumbers} available on
+\href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}.\newline
+If you use the ``official'' CRAN release, some of the features may be unavailable.}
+\fi
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+
+
+
+\begin{center}
+{\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
+
+{\Large\sf (FuzzyNumbers version {0.4-3}) }
+
+\bigskip
+{\large Marek Gagolewski${}^{1}$}
+
+${}^{1}$ Systems Research Institute, Polish Academy of Sciences
+
+ul. Newelska 6, 01-447 Warsaw, Poland
+
+Email: \texttt{gagolews@rexamine.com}
+
+{\large Jan Caha${}^{3}$}
+
+${}^{3}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
+
+Email: \texttt{jan.caha@klikni.cz}
+
+\bigskip
+
+\href{http://FuzzyNumbers.rexamine.com/}%
+{http://FuzzyNumbers.rexamine.com}
+
+\bigskip
+\today
+
+
+
+% \medskip
+% \textit{Any suggestions and contributions are welcome!}
+\end{center}
+
+
+
+
+
+\bigskip\hrule\bigskip
+\tableofcontents
+
+
+
+% \definecolor{fgcolor}{gray}{0}
+% \renewcommand{\hlnumber}[1]{\textcolor[gray]{0.2}{#1}}%
+% \renewcommand{\hlfunctioncall}[1]{\textbf{#1}}%
+% \renewcommand{\hlstring}[1]{\textcolor[gray]{0.2}{\textit{#1}}}%
+% \renewcommand{\hlkeyword}[1]{\textbf{#1}}%
+% \renewcommand{\hlargument}[1]{\textcolor[rgb]{0.2,0.2,0.2}{\textsl{#1}}}%
+% \renewcommand{\hlcomment}[1]{\textcolor[gray]{0.5}{\it\textsf{#1}}}%
+% \renewcommand{\hlroxygencomment}[1]{\textcolor[gray]{0.5}{\it\textsf{#1}}}%
+% \renewcommand{\hlformalargs}[1]{\textcolor[rgb]{0.69,0.25,0.03}{#1}}%
+% \renewcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.69,0.25,0.03}{#1}}%
+% \renewcommand{\hlassignement}[1]{\textcolor[gray]{0}{\textbf{#1}}}%
+% \renewcommand{\hlpackage}[1]{\textcolor[rgb]{0.59,0.71,0.15}{#1}}%
+% \renewcommand{\hlslot}[1]{\textit{#1}}%
+% \renewcommand{\hlsymbol}[1]{\textcolor[cmyk]{0,0,0,1}{#1}}%
+% \renewcommand{\hlprompt}[1]{\textcolor[cmyk]{0,0,0,0.5}{#1}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\section{Getting Started}
+
+Fuzzy set theory gives one of many ways to represent
+imprecise or vague information. Fuzzy numbers (FNs), introduced
+by Dubois and Prade in \cite{DuboisPrade1978:opfn}, form a particular
+subclass of fuzzy sets of the real line.
+Formally, a fuzzy set $A$
+with membership function $\mu_A:\mathbb{R}\to[0,1]$
+is a fuzzy number, if it enjoys the following properties:
+\begin{itemize}
+\item[(i)] it is a normalized fuzzy set,
+i.e., $\mu_A(x_0)=1$ for some $x_0\in\mathbb{R}$,
+\item[(ii)] it is fuzzy convex, i.e., for any $x_1,x_2\in\mathbb{R}$
+and $\lambda\in[0,1]$ it holds
+$\mu_A(\lambda x_1 + (1-\lambda) x_2) \ge \mu_A(x_1)\wedge \mu_A(x_2)$,
+\item[(iii)] the support of $A$ is bounded,
+where $\mathrm{supp}(A) = \mathrm{cl}(\{x\in\mathbb{R}: \mu_A(x)>0\})$.
+\end{itemize}
+Fuzzy numbers aims to play a role in some applications
+(see \cite{KlirYuan1995:fuzzybook}),
+since we often describe our knowledge about objects
+through numbers, e.g., ``I'm about 180 cm tall''
+or ``The event occurred between 2 and 3 p.m.''.
+
+
+
+
+\bigskip
+\package{FuzzyNumbers} is an Open Source (licensed under the GNU LGPL 3)
+package for \R{} -- a free software environment
+for statistical computing and graphics, which
+% includes an implementation
+% of a very powerful and quite popular high-level language called \lang{S}.
+runs on all major operating systems, i.e., \os{Windows},
+\os{Linux}, and \os{MacOS X}\footnote{%
+Please visit \R{} Project's homepage at \href{http://www.R-project.org}{www.R-project.org}
+for more details.
+Perhaps you may also wish to install  \program{RStudio},
+a convenient development environment for \R.}
+% It is available at \href{http://www.rstudio.com/ide/}{www.rsudio.com/ide}.}.
+
+
+\package{FuzzyNumbers} has been created in order to deal with fuzzy numbers
+conveniently and effectively.
+To install latest ``official'' release of the
+package available on \textit{CRAN} we type%
+\ifDevelopmentVersion%
+\footnote{You are viewing the \textbf{development} version of the tutorial.
+Some of the features presented in this document may be missing
+in the current \textit{CRAN} release. Please, upgrade to the \textbf{latest} development version from
+\href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}
+if you need the new functionality.}\ignorespaces
+\fi%
+:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{'FuzzyNumbers'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Alternatively, we may fetch its current development snapshot
+from \href{https://github.com/gagolews/FuzzyNumbers}{\textit{GitHub}}:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{'devtools'}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{'devtools'}\hlstd{)}
+\hlkwd{install_github}\hlstd{(}\hlstr{'FuzzyNumbers'}\hlstd{,} \hlstr{'gagolews'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\bigskip
+Each session with \package{FuzzyNumbers} should be preceded by
+a call to:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlstr{'FuzzyNumbers'}\hlstd{)} \hlcom{# Load the package}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\bigskip
+To view the main page of the manual, we type:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlkwc{help}\hlstd{=}\hlstr{'FuzzyNumbers'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+For more information please visit the package's homepage
+\cite{Gagolewski:fuzzynumberspackage}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{How to Create Instances of Fuzzy Numbers}
+
+
+\subsection{Arbitrary Fuzzy Numbers}
+
+A fuzzy number $A$ may be defined by specifying
+its core, support, and either its left/right side functions
+or lower/upper $\alpha$-cut bounds. Please note that many algorithms that
+deal with FNs assume we provide at least the latter, i.e., $\alpha$-cuts.
+
+\subsubsection{Definition by Side Functions}
+
+A fuzzy number $A$ specified by side functions\footnote{Side functions
+  are sometimes called branches or shape functions in the literature.}
+has membership function of the form:
+\begin{equation}
+\mu_A(x) = \left\{\begin{array}{ll}
+0 & \text{if } \phantom{\mathtt{a2}\le\ } x<\mathtt{a1}, \\
+\mathtt{left}\left( \frac{x-\mathtt{a1}}{\mathtt{a2-a1}} \right)  & \text{if } \mathtt{a1} \le x < \mathtt{a2}, \\
+1 & \text{if } \mathtt{a2}\le x\le\mathtt{a3}, \\
+\mathtt{right}\left( \frac{x-\mathtt{a3}}{\mathtt{a4-a3}} \right)  & \text{if } \mathtt{a3} < x \le \mathtt{a4}, \\
+0 & \text{if } \mathtt{a4}<x, \\
+\end{array}\right.
+\end{equation}
+where $\mathtt{a1},\mathtt{a2},\mathtt{a3},\mathtt{a4}\in\mathbb{R}$,
+$\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$,
+$\mathtt{left}: [0,1]\to[0,1]$ is a nondecreasing function
+(called the \textit{left side generator of $A$}),
+and $\mathtt{right}: [0,1]\to[0,1]$ is a nonincreasing function
+(\textit{right side generator of $A$}).
+In our package, it is assumed that these functions fulfill the conditions
+$\mathtt{left}(0)\ge 0$, $\mathtt{left}(1)\le 1$,
+$\mathtt{right}(0)\le 1$, and $\mathtt{right}(1)\ge 0$.
+Note that this is a so-called L-R representation of FNs,
+see \cite{DuboisPrade1987:fnoverview}.
+
+
+
+\bigskip
+An example: a fuzzy number $A_1$ with linear sides
+(a trapezoidal fuzzy number, see also Sec.~\ref{Sec:TFNdef}).
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A1} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{,}
+    \hlkwc{left}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) x,}
+   \hlkwc{right}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+This object is an instance of the following \R class:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{class}\hlstd{(A1)}
+\end{alltt}
+\begin{verbatim}
+## [1] "FuzzyNumber"
+## attr(,"package")
+## [1] "FuzzyNumbers"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+We may print some basic information on $A_1$ by calling \texttt{\func{print}(A1)} or
+simply by typing:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A1}
+\end{alltt}
+\begin{verbatim}
+## Fuzzy number with:
+##    support=[1,7],
+##       core=[2,4].
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+To depict $A_1$ we call:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(A1)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/A1ex5-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+
+
+
+
+\paragraph{Remark.}
+Please note that by using side generating functions defined on $[0,1]$
+% (instead of the most common approach, i.e.~ordinary side functions
+% such that $l_A(x)=\frac{x-\mathtt{a1}}{\mathtt{a2-a1}}$
+% and $r_A(x)=\frac{x-\mathtt{a3}}{\mathtt{a4-a3}}$)
+we really make (in the author's humble opinion) the process of generating
+examples for our publications much easier.
+A similar concept was used, e.g., in \cite{StefaniniSorini2009:eusflat}
+(LR-fuzzy numbers).
+
+Assume, however, that we are given two fancy side
+functions $f: [a_1,a_2]=[-4,-2]\to[0,1]$,
+and $g: [a_3,a_4]=[-1,10]\to[1,0]$,
+for example:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{f} \hlkwb{<-} \hlkwd{splinefun}\hlstd{(}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{4}\hlstd{,}\hlopt{-}\hlnum{3.5}\hlstd{,}\hlopt{-}\hlnum{3}\hlstd{,}\hlopt{-}\hlnum{2.2}\hlstd{,}\hlopt{-}\hlnum{2}\hlstd{),} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0.4}\hlstd{,}\hlnum{0.7}\hlstd{,}\hlnum{0.9}\hlstd{,}\hlnum{1}\hlstd{),} \hlkwc{method}\hlstd{=}\hlstr{'monoH.FC'}\hlstd{)}
+\hlstd{g} \hlkwb{<-} \hlkwd{splinefun}\hlstd{(}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{10}\hlstd{),} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{0.5}\hlstd{,}\hlnum{0}\hlstd{),} \hlkwc{method}\hlstd{=}\hlstr{'monoH.FC'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+We should convert them to side \textit{generating} functions, which shall be
+defined on the interval $[0,1]$.
+This may easily be done with the \func{convertSide()}
+function. It returns a new function that calls
+the original one with linearly transformed input.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{convertSide}\hlstd{(f,} \hlopt{-}\hlnum{4}\hlstd{,} \hlopt{-}\hlnum{2}\hlstd{)(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] 0 1
+\end{verbatim}
+\begin{alltt}
+\hlkwd{convertSide}\hlstd{(g,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{convertSide}\hlstd{(g,} \hlnum{10}\hlstd{,} \hlopt{-}\hlnum{1}\hlstd{)(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))} \hlcom{# interesting!}
+\end{alltt}
+\begin{verbatim}
+## [1] 0 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+These functions may be used to define a fuzzy number,
+now with arbitrary support and core.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{B} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{10}\hlstd{,}\hlnum{20}\hlstd{,}\hlnum{20}\hlstd{,}\hlnum{30}\hlstd{,}
+    \hlkwc{left}\hlstd{=}\hlkwd{convertSide}\hlstd{(f,} \hlopt{-}\hlnum{4}\hlstd{,} \hlopt{-}\hlnum{2}\hlstd{),}
+   \hlkwc{right}\hlstd{=}\hlkwd{convertSide}\hlstd{(g,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{10}\hlstd{)}
+\hlstd{)}
+\hlkwd{plot}\hlstd{(B,} \hlkwc{xlab}\hlstd{=}\hlkwd{expression}\hlstd{(x),} \hlkwc{ylab}\hlstd{=}\hlkwd{expression}\hlstd{(alpha))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ExFconvert4-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+\subsubsection{Definition by $\alpha$-cut Bounds}
+
+Alternatively, a fuzzy number $A$ may be defined by specifying
+its $\alpha$-cuts. We have (for $\alpha\in(0,1)$ and
+$\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$):
+\begin{eqnarray}
+A_\alpha & := & [A_L(\alpha), A_U(\alpha)]\\
+ & = & \big[
+   \mathtt{a1}+(\mathtt{a2}-\mathtt{a1})\cdot\mathtt{lower}(\alpha),
+   \mathtt{a3}+(\mathtt{a4}-\mathtt{a3})\cdot\mathtt{upper}(\alpha)
+\big],
+\end{eqnarray}
+where $\mathtt{lower}: [0,1]\to[0,1]$ is a nondecreasing function
+(called \textit{lower $\alpha$-cut bound generator of $A$}),
+and $\mathtt{upper}: [0,1]\to[0,1]$ is a nonincreasing function
+(\textit{upper bound generator}).
+In our package, we assume that
+$\mathtt{lower}(0)=0$, $\mathtt{lower}(1)=1$,
+$\mathtt{upper}(0)=1$, and $\mathtt{upper}(1)=0$.
+
+It is easily seen that for $\alpha\in(0,1)$ we have the following
+relationship between generating functions:
+\begin{eqnarray}
+\mathtt{lower}(\alpha) & = & \inf\{x: \mathtt{left}(x)\ge\alpha\}, \\
+\mathtt{upper}(\alpha) & = & \sup\{x: \mathtt{right}(x)\ge\alpha\}.
+\end{eqnarray}
+Moreover, if side generating functions are continuous and strictly
+monotonic, then $\alpha$-cut bound generators are their inverses.
+
+\bigskip\noindent
+An example:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A1} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{,}
+    \hlkwc{left}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{) x,}
+   \hlkwc{right}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}
+\hlstd{)}
+\hlstd{A2} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{,}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{)} \hlkwd{pbeta}\hlstd{(alpha,} \hlnum{5}\hlstd{,} \hlnum{9}\hlstd{),} \hlcom{# CDF of a beta distr.}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{)} \hlkwd{pexp}\hlstd{(}\hlnum{1}\hlopt{/}\hlstd{alpha}\hlopt{-}\hlnum{1}\hlstd{)} \hlcom{# transformed CDF of an exp. distr.}
+\hlstd{)}
+\hlkwd{plot}\hlstd{(A1,} \hlkwc{col}\hlstd{=}\hlstr{'blue'}\hlstd{)}
+\hlkwd{plot}\hlstd{(A2,} \hlkwc{col}\hlstd{=}\hlstr{'red'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlkwd{legend}\hlstd{(}\hlstr{'topright'}\hlstd{,} \hlkwd{c}\hlstd{(}\hlkwd{expression}\hlstd{(mu[A1]),} \hlkwd{expression}\hlstd{(mu[A2])),}
+   \hlkwc{col}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{'blue'}\hlstd{,} \hlstr{'red'}\hlstd{),} \hlkwc{lty}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/alphacutEx2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+
+\paragraph{Remark.}
+The \func{convertAlpha()} function
+works similarly to \func{convertSide()}.
+It scales the output values
+of a given function, thus it may be used to create
+an $\alpha$-cut generator conveniently.
+
+\subsubsection{Definition with Generating Functions Omitted: Shadowed Sets}
+
+In the above examples
+either side generating functions or $\alpha$-cut generators
+were passed to the \func{FuzzyNumber()} function.
+Let us note what will happen if we omit both of them.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A3} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{5}\hlstd{)}
+\hlstd{A3}
+\end{alltt}
+\begin{verbatim}
+## Fuzzy number with:
+##    support=[1,5],
+##       core=[2,4].
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+The object seems to be defined correctly: \R does not make any
+complaints. However\dots
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(A3)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/A3deffig2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\noindent
+It turns out that we have obtained a \textit{shadowed set}!
+Indeed, this behavior is quite reasonable: we have provided no information
+on the ``partial knowledge'' part of our fuzzy number.
+In fact, the object has been initialized
+with generating functions always returning \texttt{NA}
+(\textit{Not-Available} or \textit{any} value).
+Does it mean that when we define a FN solely by side generators, we
+cannot compute its $\alpha$-cuts? Indeed!
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{alphacut}\hlstd{(A2,} \hlnum{0.5}\hlstd{)} \hlcom{# A2 has alpha-cut generators defined}
+\end{alltt}
+\begin{verbatim}
+##            L        U
+## 0.5 2.733154 5.896362
+\end{verbatim}
+\begin{alltt}
+\hlkwd{alphacut}\hlstd{(A1,} \hlnum{0.5}\hlstd{)} \hlcom{# A1 hasn't got them}
+\end{alltt}
+\begin{verbatim}
+##      L  U
+## 0.5 NA NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Another example: evaluation of the membership function.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{evaluate}\hlstd{(A1,} \hlnum{6.5}\hlstd{)} \hlcom{# A1 has side generators defined}
+\end{alltt}
+\begin{verbatim}
+##       6.5 
+## 0.1666667
+\end{verbatim}
+\begin{alltt}
+\hlkwd{evaluate}\hlstd{(A2,} \hlnum{6.5}\hlstd{)} \hlcom{# A2 hasn't got them}
+\end{alltt}
+\begin{verbatim}
+## 6.5 
+##  NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\subsection{Using Numeric Approximations of $\alpha$-cut or Side Generators}
+
+The reason for setting
+\texttt{NA}s\footnote{To be precise, it's \texttt{NA\_real\_}.}
+as return values of omitted generators
+is simple. Finding a function inverse numerically
+requires lengthy computations and is always done locally
+(for a given point, not for ``whole'' the function at once).
+\R is not a symbolic mathematical solver.
+If we had defined such procedures (it is really easy to do
+by using the \func{uniroot()} function), then an inexperienced user
+would have used it in his/her algorithms and wondered why everything
+runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A2[}\hlstr{'lower'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function(alpha) pbeta(alpha, 5, 9)
+## <bytecode: 0x55e232408cb0>
+\end{verbatim}
+\begin{alltt}
+\hlstd{A2[}\hlstr{'upper'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function(alpha) pexp(1/alpha-1)
+## <bytecode: 0x55e230f23270>
+\end{verbatim}
+\begin{alltt}
+\hlstd{A2[}\hlstr{'left'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function (x) 
+## rep(NA_real_, length(x))
+## <environment: 0x55e232ffb2c0>
+\end{verbatim}
+\begin{alltt}
+\hlstd{A2[}\hlstr{'right'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function (x) 
+## rep(NA_real_, length(x))
+## <environment: 0x55e232ffb2c0>
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Note that all generators are properly vectorized (for
+input vectors of length $n$ they always give output of the
+same length).
+Thus, general rules are as follows.
+If you want $\alpha$-cuts (e.g., for finding
+trapezoidal approximations of FNs), specify them.
+If you would like to calculate the membership function (by the way,
+the \func{plot()} function
+automatically detects what kind of knowledge we have),
+assure the side generators are provided.
+
+
+However, we also provide a convenient short-cut method
+to \textit{interpolate} generating functions of one type
+to get some crude numeric approximations of their inverses:
+the \func{approxInvert()}
+function\footnote{The
+\argument{n} argument, which sets the number of interpolation points,
+controls the trade-off between accuracy and computation speed.
+Well, world's not ideal, remember that ``some'' is better than ``nothing''
+sometimes.}, which may
+of course be applied on results returned by
+\func{convertAlpha()}
+and \func{convertSide()}.
+This is a simple wrapper to \R's \func{approxfun()}
+(piecewise linear interpolation,
+the \str{'{}linear'{}} \argument{method})
+and \func{splinefun()} (monotonic
+splines: \argument{method}s \str{'{}hyman{}'}
+and \str{'{}monoH.FC'{}}; the latter is
+default and recommended).
+
+
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{l} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{pbeta}\hlstd{(x,} \hlnum{1}\hlstd{,} \hlnum{2}\hlstd{)}
+\hlstd{r} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlkwd{pbeta}\hlstd{(x,} \hlnum{1}\hlstd{,} \hlnum{0.1}\hlstd{)}
+\hlstd{A4} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{2}\hlstd{,} \hlnum{0}\hlstd{,} \hlnum{0}\hlstd{,} \hlnum{2}\hlstd{,}
+   \hlkwc{left}  \hlstd{= l,}
+   \hlkwc{right} \hlstd{= r,}
+   \hlkwc{lower} \hlstd{=} \hlkwd{approxInvert}\hlstd{(l),}
+   \hlkwc{upper} \hlstd{=} \hlkwd{approxInvert}\hlstd{(r)}
+\hlstd{)}
+
+\hlstd{x} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlkwc{length.out}\hlstd{=}\hlnum{1e5}\hlstd{)}
+\hlkwd{max}\hlstd{(}\hlkwd{abs}\hlstd{(}\hlkwd{qbeta}\hlstd{(x,} \hlnum{1}\hlstd{,} \hlnum{2}\hlstd{)} \hlopt{-} \hlstd{A4[}\hlstr{'lower'}\hlstd{](x)))}     \hlcom{# sup-error estimator}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0001389811
+\end{verbatim}
+\begin{alltt}
+\hlkwd{max}\hlstd{(}\hlkwd{abs}\hlstd{(}\hlkwd{qbeta}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{x,} \hlnum{1}\hlstd{,} \hlnum{0.1}\hlstd{)} \hlopt{-} \hlstd{A4[}\hlstr{'upper'}\hlstd{](x)))} \hlcom{# sup-error estimator}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0008607773
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+% \subsection{Fuzzy Numbers with Discontinuities}\label{Sec:discontdef}
+%
+% We may also consider fuzzy numbers with discontinuous side
+% functions or $\alpha$-cut generators.
+% To avoid extensive numerical integration inaccuracies
+% (i.e.~in approximation tasks, see Sec.~\ref{Sec:Approximation})
+% we use objects from the \texttt{DiscontinuousFuzzyNumber} class.
+% Further on we will present some examples.
+
+
+% % or plotting problems....
+%
+% % TODO add plot for \texttt{DiscontinuousFuzzyNumber}
+% % A1 <- FuzzyNumber(0,1,1,1,
+% %          lower=function(a) floor(3*a)/3,
+% %          upper=function(a) 1-a
+% % ) # no info on discontinuities
+%
+% <<ExDiscontinuous>>=
+% A2 <- DiscontinuousFuzzyNumber(2,3,3,3,
+%          lower=function(a) floor(3*a)/3,
+%          upper=function(a) 1-a,
+%          discontinuities.lower=c(0, 1/3, 2/3, 1),
+%          discontinuities.upper=numeric(0)
+% ) # discontinuities info included
+%
+% integrateAlpha(A2, "lower", 0, 1)
+% integrateAlpha(as.FuzzyNumber(A2), "lower", 0, 1)
+% @
+%
+% % plots.....
+%
+% % integration errors without this info.... (!)
+%
+% ... TO BE DONE ....
+
+
+\subsection{Trapezoidal Fuzzy Numbers}\label{Sec:TFNdef}
+
+A trapezoidal fuzzy number (TFN) is a FN which has linear
+side generators and linear $\alpha$-cut bound generators.
+To create a trapezoidal fuzzy number $T_1$
+with, for example, $\mathrm{core}(T_1)=[1.5,4]$
+and $\mathrm{supp}(T_1)=[1,7]$ we call:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{T1} \hlkwb{<-} \hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{1.5}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Thus, we have:
+\begin{quote}
+\[
+\mu_{T_1}(x) = \left\{
+\begin{array}{lll}
+0      & \text{for} & x\in(-\infty,1), \\
+(x-1)/0.5 & \text{for} & x\in[1,1.5), \\
+1      & \text{for} & x\in[1.5,4], \\
+(7-x)/3 & \text{for} & x\in(4,7], \\
+0      & \text{for} & x\in(7,+\infty). \\
+\end{array}
+\right.
+\]
+
+\[
+{T_1}_\alpha = [1+0.5\,\alpha, 7-3\,\alpha].
+\]
+\end{quote}
+
+\noindent
+Note that the above equations have been automatically generated by \package{knitr}
+and \LaTeX{} by
+calling \texttt{\func{cat}(\func{as.character}(T1, \argument{toLaTeX=}TRUE, \argument{varnameLaTeX=}\str{'{}T\_1'{}}))},
+see Sec.~\ref{Sec:Depicting}.
+
+\noindent
+The \texttt{T1} object is an instance of the following \R class:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{class}\hlstd{(T1)}
+\end{alltt}
+\begin{verbatim}
+## [1] "TrapezoidalFuzzyNumber"
+## attr(,"package")
+## [1] "FuzzyNumbers"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+To depict $T_1$ we call:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(T1)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/TrapEx1d-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+
+
+\bigskip
+$T_1$ is (roughly) equivalent to the trapezoidal fuzzy number $A_1$
+defined in the previous subsection.
+The \texttt{Trapezo\-idalFuzzyNumber}
+class inherits all the goodies from the \texttt{FuzzyNumber} class,
+but is more specific (guarantees faster computations,
+contains more detailed information, etc.).
+Of course, in this case the generating functions are known \textit{a priori}
+($A_1$ had no $\alpha$-cut generators)
+so there is no need to provide them manually
+(what is more, this has been disallowed for safety reasons).
+Thus, is we wanted to define a trapezoidal FN next time, we would
+do it not like with $A_1$ but rather as with $T_1$.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{T1[}\hlstr{'lower'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function (alpha) 
+## alpha
+## <bytecode: 0x55e2318a1700>
+## <environment: namespace:FuzzyNumbers>
+\end{verbatim}
+\begin{alltt}
+\hlstd{T1[}\hlstr{'upper'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function (alpha) 
+## 1 - alpha
+## <bytecode: 0x55e2318a1818>
+## <environment: namespace:FuzzyNumbers>
+\end{verbatim}
+\begin{alltt}
+\hlstd{T1[}\hlstr{'left'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function (x) 
+## x
+## <bytecode: 0x55e2318aa798>
+## <environment: namespace:FuzzyNumbers>
+\end{verbatim}
+\begin{alltt}
+\hlstd{T1[}\hlstr{'right'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## function (x) 
+## 1 - x
+## <bytecode: 0x55e2318aa8b0>
+## <environment: namespace:FuzzyNumbers>
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\bigskip
+Trapezoidal fuzzy numbers are among the simplest FNs.
+Despite their simplicity, however, they include triangular FNs,
+``crisp'' real intervals, and ``crisp'' reals.
+Please note that currently no separate classes for these particular TFNs types
+are implemented in the package.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{)}   \hlcom{# triangular FN}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[1,3],
+##       core=[2,2].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{)}      \hlcom{# the same}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[1,3],
+##       core=[2,2].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{3}\hlstd{)}   \hlcom{# `crisp' interval}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[2,3],
+##       core=[2,3].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{as.TrapezoidalFuzzyNumber}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{))} \hlcom{# the same}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[2,3],
+##       core=[2,3].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{5}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{5}\hlstd{)}   \hlcom{# `crisp' real}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[5,5],
+##       core=[5,5].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{as.TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{5}\hlstd{)}      \hlcom{# the same}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[5,5],
+##       core=[5,5].
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+
+
+\subsection{Piecewise Linear Fuzzy Numbers}
+
+Trapezoidal fuzzy numbers are generalized by piecewise linear FNs (PLFNs),
+i.e., fuzzy numbers which side generating functions and $\alpha$-cut
+generators are piecewise linear functions.
+Each PLFN is given by:
+\begin{itemize*}
+\item four coefficients $\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$
+defining its support and core,
+\item the number of ``knots'', \argument{knot.n}$\ge 0$,
+\item a vector of $\alpha$-cut coordinates, \argument{knot.alpha}, consisting of \argument{knot.n} elements $\in[0,1]$,
+\item a nondecreasingly sorted vector \argument{knot.left} consisting of \argument{knot.n} elements $\in[\mathtt{a1},\mathtt{a2}]$,
+defining interpolation points for the left side function, and
+\item a nondecreasingly sorted vector \argument{knot.right} consisting of \argument{knot.n} elements $\in[\mathtt{a2},\mathtt{a3}]$,
+defining interpolation points for the right side function.
+\end{itemize*}
+
+If \argument{knot.n}$\ge 1$, then the membership function of
+a piecewise linear fuzzy number $P$ is defined as:
+\begin{equation}
+\mu_P(x) = \left\{\begin{array}{ll}
+0 & \text{if } \phantom{\mathtt{a2}\le\ } x<\mathtt{a1}, \\
+\alpha_i+(\alpha_{i+1}-\alpha_i) \left(\frac{x-l_i}{l_{i+1}-l_i}\right)  & \text{if }\ \, l_i \le x < l_{i+1}\\
+& \text{ for some } i\in\{1,\dots,n+1\}, \\
+1 & \text{if } \mathtt{a2}\le x\le\mathtt{a3}, \\
+\alpha_{n-i+2}+(\alpha_{n-i+3}-\alpha_{n-i+2}) \left(1-\frac{x-r_i}{r_{i+1}-r_i}\right)  & \text{if}\ \, r_i < x \le r_{i+1} \\
+& \text{ for some } i\in\{1,\dots,n+1\}, \\
+0 & \text{if } \mathtt{a4}<x,
+\end{array}\right.
+\end{equation}
+and its $\alpha$-cuts for $\alpha\in[\alpha_i, \alpha_{i+1}]$
+(for some $i\in\{1,\dots,n+1\}$) are given by:
+\begin{eqnarray}
+P_L(\alpha) & = & l_i+(l_{i+1}-l_i)\left(\frac{\alpha-\alpha_i}{\alpha_{i+1}-\alpha_i}\right), \\
+P_U,(\alpha) & = & r_{n-i+2}+(r_{n-i+3}-r_{n-i+2})\left(1-\frac{\alpha-\alpha_i}{\alpha_{i+1}-\alpha_i}\right),
+\end{eqnarray}
+where $n=\mathtt{knot.n}$, $(l_1,\dots,l_{n+2}) = (\mathtt{a1},\mathtt{knot.left},\mathtt{a2})$,
+$(r_1,\dots,r_{n+2}) = (\mathtt{a3},\mathtt{knot.right},\mathtt{a4})$,
+and $(\alpha_1,\dots,\alpha_{n+2})=(0,\mathtt{knot.alpha},1)$.
+
+\bigskip
+PLFNs in our package are represented by the \texttt{PiecewiseLinearFuzzyNumber} class.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{P1} \hlkwb{<-} \hlkwd{PiecewiseLinearFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{4}\hlstd{,}
+   \hlkwc{knot.n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=}\hlnum{0.25}\hlstd{,} \hlkwc{knot.left}\hlstd{=}\hlnum{1.5}\hlstd{,} \hlkwc{knot.right}\hlstd{=}\hlnum{3.25}\hlstd{)}
+\hlkwd{class}\hlstd{(P1)}
+\end{alltt}
+\begin{verbatim}
+## [1] "PiecewiseLinearFuzzyNumber"
+## attr(,"package")
+## [1] "FuzzyNumbers"
+\end{verbatim}
+\begin{alltt}
+\hlstd{P1}
+\end{alltt}
+\begin{verbatim}
+## Piecewise linear fuzzy number with 1 knot(s),
+##    support=[1,4],
+##       core=[2,3].
+\end{verbatim}
+\begin{alltt}
+\hlstd{P2} \hlkwb{<-} \hlkwd{PiecewiseLinearFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{4}\hlstd{,}
+   \hlkwc{knot.n}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0.25}\hlstd{,}\hlnum{0.6}\hlstd{),}
+   \hlkwc{knot.left}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1.5}\hlstd{,}\hlnum{1.8}\hlstd{),} \hlkwc{knot.right}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{3.25}\hlstd{,} \hlnum{3.5}\hlstd{))}
+\hlstd{P2}
+\end{alltt}
+\begin{verbatim}
+## Piecewise linear fuzzy number with 2 knot(s),
+##    support=[1,4],
+##       core=[2,3].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(P1,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0.5}\hlstd{,}\hlnum{4.5}\hlstd{))}
+\hlkwd{plot}\hlstd{(P2,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{pch}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{from}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{5}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx1b-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+The following operators return matrices with all knots of a PLFN.
+Each matrix has three columns: $\alpha$-cuts,
+left side coordinates, and right side coordinates.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{P1[}\hlstr{'knots'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##        alpha   L    U
+## knot_1  0.25 1.5 3.25
+\end{verbatim}
+\begin{alltt}
+\hlstd{P1[}\hlstr{'allknots'}\hlstd{]} \hlcom{# including a1,a2,a3,a4}
+\end{alltt}
+\begin{verbatim}
+##        alpha   L    U
+## supp    0.00 1.0 4.00
+## knot_1  0.25 1.5 3.25
+## core    1.00 2.0 3.00
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+We have, for example:
+\begin{quote}
+\[
+\mu_{P_1}(x) = \left\{
+\begin{array}{lll}
+0      & \text{for} & x\in(-\infty,1), \\
+0+0.25\,(x+1)/0.5 & \text{for} & x\in[1,1.5), \\
+0.25+0.75\,(x+1.5)/0.5 & \text{for} & x\in[1.5,2), \\
+1      & \text{for} & x\in[2,3], \\
+0.25+0.75\,(3.25-x)/0.25 & \text{for} & x\in[3,3.25), \\
+0+0.25\,(4-x)/0.75 & \text{for} & x\in[3.25,4), \\
+0      & \text{for} & x\in(4,+\infty). \\
+\end{array}
+\right.
+\]
+
+\[
+{P_1}_\alpha = [{P_1}_L(\alpha), {P_1}_U(\alpha)],
+\]
+where
+\[
+{P_1}_L(\alpha) = \left\{
+\begin{array}{lll}
+1+0.5\,(\alpha-0)/0.25 & \text{for} & \alpha\in[0,0.25], \\
+1.5+0.5\,(\alpha-0.25)/0.75 & \text{for} & \alpha\in[0.25,1], \\
+\end{array}
+\right.
+\]
+\[
+{P_1}_U(\alpha) = \left\{
+\begin{array}{lll}
+3.25+0.75\,(0.25-\alpha)/0.25 & \text{for} & \alpha\in[0,0.25], \\
+3+0.25\,(1-\alpha)/0.75 & \text{for} & \alpha\in[0.25,1]. \\
+\end{array}
+\right.
+\]
+\end{quote}
+
+\bigskip
+If you want to obtain a PLFN with equally distributed knots, then
+you may use the more convenient version of
+the \func{PiecewiseLinearFuzzyNumber()} function.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwc{knot.left}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0.5}\hlstd{,}\hlnum{0.7}\hlstd{,}\hlnum{1}\hlstd{),}
+                           \hlkwc{knot.right}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2.2}\hlstd{,}\hlnum{2.4}\hlstd{,}\hlnum{3}\hlstd{))[}\hlstr{'allknots'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##            alpha   L   U
+## supp   0.0000000 0.0 3.0
+## knot_1 0.3333333 0.5 2.4
+## knot_2 0.6666667 0.7 2.2
+## core   1.0000000 1.0 2.0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Note that if $a_1,\dots, a_4$ are omitted, then they are taken
+from \argument{knot.left} and \argument{knot.right}
+(their lengths should then be equal to \argument{knot.n}+2).
+
+\bigskip
+If \argument{knot.n} is equal to 0 or all left and right knots lie on common lines,
+then a PLFN reduces to a TFN.
+Please note that, however, the \texttt{TrapezoidalFuzzyNumber} class
+does not inherit from \texttt{PiecewiseLinearFuzzyNumber}
+for efficiency reasons.
+If, however, we wanted to convert an object
+of the first mentioned class to the other,
+we would do that by calling:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{alpha} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{0.3}\hlstd{,} \hlnum{0.5}\hlstd{,} \hlnum{0.7}\hlstd{)}
+\hlstd{P3} \hlkwb{<-} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}
+   \hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2.5}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{7}\hlstd{),}
+         \hlkwc{knot.n}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=alpha}
+\hlstd{)}
+\hlstd{P3}
+\end{alltt}
+\begin{verbatim}
+## Piecewise linear fuzzy number with 3 knot(s),
+##    support=[1,7],
+##       core=[2.5,4].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(P3,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{9}\hlstd{,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{8}\hlstd{))}
+\hlkwd{abline}\hlstd{(}\hlkwc{h}\hlstd{=alpha,} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{v}\hlstd{=P3[}\hlstr{'knot.left'}\hlstd{],} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{3}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{v}\hlstd{=P3[}\hlstr{'knot.right'}\hlstd{],} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{3}\hlstd{)}
+\hlkwd{text}\hlstd{(}\hlnum{7.5}\hlstd{, alpha,} \hlkwd{sprintf}\hlstd{(}\hlstr{'a=%g'}\hlstd{, alpha),} \hlkwc{pos}\hlstd{=}\hlnum{3}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/PLFNEx2b-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\noindent
+More generally, each PLFN or TFN may be converted
+to a direct \texttt{FuzzyNumber} class instance if needed
+(hope we will never not).
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(}\hlkwd{as.FuzzyNumber}\hlstd{(P3))}
+\end{alltt}
+\begin{verbatim}
+## Fuzzy number with:
+##    support=[1,7],
+##       core=[2.5,4].
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+On the other hand, to ``convert'' (with possible information loss)
+more general FNs to TFNs or PLFNs, we may use the approximation
+procedures described in Sec.~\ref{Sec:Approximation}.
+
+
+
+\subsection{Fuzzy Numbers with Sides Given by Power Functions}\label{Sec:powerdef}
+
+Bodjanova-type \cite{Bodjanova2005:medianfn}
+fuzzy numbers which sides are given by power functions
+are defined using four coefficients
+$\mathtt{a1}\le\mathtt{a2}\le\mathtt{a3}\le\mathtt{a4}$,
+and parameters $\mathtt{p.left}, \mathtt{p.right}>0$ which determine
+exponents for the side functions:
+\begin{eqnarray}
+\mathtt{left}(x)&=&x^{\mathtt{p.left}},\\
+\mathtt{right}(x)&=&(1-x)^{\mathtt{p.right}}.
+\end{eqnarray}
+We also have:
+\begin{eqnarray}
+\mathtt{lower}(\alpha)&=&\sqrt[\mathtt{p.left}]{\alpha},\\
+\mathtt{upper}(\alpha)&=&1-\sqrt[\mathtt{p.right}]{\alpha}.
+\end{eqnarray}
+These fuzzy numbers are another natural generalization of trapezoidal FNs.
+
+An example:
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X} \hlkwb{<-} \hlkwd{PowerFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{3}\hlstd{,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{3}\hlstd{,} \hlkwc{p.left}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{p.right}\hlstd{=}\hlnum{0.1}\hlstd{)}
+\hlkwd{class}\hlstd{(X)}
+\end{alltt}
+\begin{verbatim}
+## [1] "PowerFuzzyNumber"
+## attr(,"package")
+## [1] "FuzzyNumbers"
+\end{verbatim}
+\begin{alltt}
+\hlstd{X}
+\end{alltt}
+\begin{verbatim}
+## Fuzzy number given by power functions, and:
+##    support=[-3,3],
+##       core=[-1,1].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(X)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/PowerEx1b-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+We have:
+\begin{quote}
+\[
+\mu_{X}(x) = \left\{
+\begin{array}{lll}
+0      & \text{for} & x\in(-\infty,-3), \\
+((x+3)/2)^{2} & \text{for} & x\in[-3,-1), \\
+1      & \text{for} & x\in[-1,1], \\
+((3-x)/2)^{0.1} & \text{for} & x\in(1,3], \\
+0      & \text{for} & x\in(3,+\infty), \\
+\end{array}
+\right.
+\]
+
+\[
+{X}_\alpha = [-3+2\,\alpha^{0.5}, 1+2\,(1-\alpha^{10})].
+\]
+\end{quote}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\section{Depicting Fuzzy Numbers}\label{Sec:Depicting}
+
+
+To draw FNs we call the \func{plot()} method,
+which uses similar parameters as the \R-built-in
+\func{curve()} function / \func{plot.default()} method.
+If you are new to \R, you may wish
+to read the manual on the most popular graphical routines by
+calling \texttt{?plot}, \texttt{?plot.default}, \texttt{?curve},
+\texttt{?abline}, \texttt{?par}, \texttt{?lines}, \texttt{?points},
+\texttt{?legend}, \texttt{?text} (some of these functions have
+already been called in this tutorial).
+
+Let us consider the following FN:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{20}\hlstd{,}
+    \hlkwc{left}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{pbeta}\hlstd{(x,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{right}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}\hlopt{^}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{4}\hlstd{),}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{)} \hlkwd{qbeta}\hlstd{(alpha,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{) (}\hlnum{1}\hlopt{-}\hlstd{alpha)}\hlopt{^}\hlnum{4}
+\hlstd{)}
+\hlkwd{plot}\hlstd{(A)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/depicting1b-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\paragraph{Plotting issues: discretization.}
+Side functions or $\alpha$-cut bounds of objects of the \texttt{FuzzyNumber}
+class (not including its derivatives) when plotted are na\"{i}vely
+approximated by piecewise linear functions with equidistant knots
+at one of the axes. Therefore, if we probe them
+at too few points, we may obtain very rough graphical representations.
+To control the number of points at which the interpolation takes place,
+we use the \argument{n} argument (which defaults to \texttt{101}, i.e., ``quite
+accurate'').
+
+All three calls to the \func{plot()} method below depict the membership
+function of the same fuzzy number, but with different accuracy.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{n}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{)}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{n}\hlstd{=}\hlnum{6}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,}  \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{,} \hlkwc{pch}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{n}\hlstd{=}\hlnum{101}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{)} \hlcom{# default n}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/depicting1d-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+
+\paragraph{Making use of different generating functions' types.}
+Please note (if you have not already) that to draw the membership
+function we do not need to provide necessarily the FN with side generators:
+the $\alpha$-cuts will also suffice.
+The function is smart enough to detect the internal
+representation of the FN and use the kind representation it has.
+It both types of generators are given, then side functions are used.
+If we want, for some reasons, to use $\alpha$-cuts, then we may do as follows:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{n}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{at.alpha}\hlstd{=}\hlkwd{numeric}\hlstd{(}\hlnum{0}\hlstd{),} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{)} \hlcom{# use alpha-cuts}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{n}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'b'}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{pch}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)} \hlcom{# use sides}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/depicting1f-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\bigskip
+We may also illustrate an $\alpha$-cut representation of a fuzzy number:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{draw.alphacuts}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/depicting1h-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+
+\paragraph{Exporting figures.}
+If we would like to generate figures for our publications,
+then we will surely be interested in storing them, e.g., as PDF files.
+This may be done by calling:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{pdf}\hlstd{(}\hlstr{'figure1.pdf'}\hlstd{,} \hlkwc{width}\hlstd{=}\hlnum{8}\hlstd{,} \hlkwc{height}\hlstd{=}\hlnum{5}\hlstd{)} \hlcom{# create file}
+\hlkwd{plot}\hlstd{(A)}
+\hlkwd{dev.off}\hlstd{()} \hlcom{# close graphical device and save the file}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Postscript (PS) files are generated by substituting the call
+to \func{pdf()} for the call to the \func{postcript()} function.
+
+
+\paragraph{Conversion to \LaTeX.}
+Another way to depict a FN is to\dots give a mathematical expression
+which defines it.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{cat}\hlstd{(}\hlkwd{as.character}\hlstd{(A,} \hlkwc{toLaTeX}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{varnameLaTeX}\hlstd{=}\hlstr{'A'}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\noindent This gives the following \LaTeX{} code\dots
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+\[
+\mu_{A}(x) = \left\{
+\begin{array}{lll}
+0      & \text{for} & x\in(-\infty,-5), \\
+l_{A}(x) & \text{for} & x\in[-5,3), \\
+1      & \text{for} & x\in[3,6], \\
+r_{A}(x) & \text{for} & x\in(6,20], \\
+0      & \text{for} & x\in(20,+\infty), \\
+\end{array}
+\right.
+\]
+where $l_{A}=\mathtt{left}_A((x+5)/8)$,
+$r_{A}=\mathtt{right}_A((x-6)/14)$.
+
+\[
+{A}_\alpha = [{A}_L(\alpha), {A}_U(\alpha)],
+\]
+where ${A}_L(\alpha)=-5+8\,\mathtt{lower}_{A}(\alpha)$,
+${A}_U(\alpha)=6+14\,\mathtt{upper}_{A}(\alpha)$.
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent \dots and, after compiling:
+
+\begin{quote}
+\[
+\mu_{A}(x) = \left\{
+\begin{array}{lll}
+0      & \text{for} & x\in(-\infty,-5), \\
+l_{A}(x) & \text{for} & x\in[-5,3), \\
+1      & \text{for} & x\in[3,6], \\
+r_{A}(x) & \text{for} & x\in(6,20], \\
+0      & \text{for} & x\in(20,+\infty), \\
+\end{array}
+\right.
+\]
+where $l_{A}=\mathtt{left}_A((x+5)/8)$,
+$r_{A}=\mathtt{right}_A((x-6)/14)$.
+
+\[
+{A}_\alpha = [{A}_L(\alpha), {A}_U(\alpha)],
+\]
+where ${A}_L(\alpha)=-5+8\,\mathtt{lower}_{A}(\alpha)$,
+${A}_U(\alpha)=6+14\,\mathtt{upper}_{A}(\alpha)$.
+\end{quote}
+
+\noindent
+The code may of course be modified manually to suit your needs.
+
+\paragraph{Tuning your figures.}
+Finally, we leave you with a quite more complex graphical
+example from one of our papers:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X} \hlkwb{<-} \hlkwd{PiecewiseLinearFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{5}\hlstd{,} \hlkwc{knot.n}\hlstd{=}\hlnum{1}\hlstd{,}
+   \hlkwc{knot.alpha}\hlstd{=}\hlnum{0.6}\hlstd{,} \hlkwc{knot.left}\hlstd{=}\hlnum{0.3}\hlstd{,} \hlkwc{knot.right}\hlstd{=}\hlnum{4}\hlstd{)}
+
+\hlkwd{plot.default}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{xlab}\hlstd{=}\hlkwd{expression}\hlstd{(x),} \hlkwc{ylab}\hlstd{=}\hlkwd{expression}\hlstd{(mu[S](x)),}
+   \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{0.3}\hlstd{,}\hlnum{5.3}\hlstd{),} \hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{))} \hlcom{# empty window}
+
+\hlstd{xpos} \hlkwb{<-} \hlkwd{c}\hlstd{(X[}\hlstr{'a1'}\hlstd{], X[}\hlstr{'knot.left'}\hlstd{],  X[}\hlstr{'a2'}\hlstd{],}
+          \hlstd{X[}\hlstr{'a3'}\hlstd{], X[}\hlstr{'knot.right'}\hlstd{], X[}\hlstr{'a4'}\hlstd{])}
+\hlstd{xlab} \hlkwb{<-} \hlkwd{expression}\hlstd{(s[}\hlnum{1}\hlstd{], s[}\hlnum{2}\hlstd{], s[}\hlnum{3}\hlstd{], s[}\hlnum{4}\hlstd{], s[}\hlnum{5}\hlstd{], s[}\hlnum{6}\hlstd{])}
+\hlkwd{abline}\hlstd{(}\hlkwc{v}\hlstd{=xpos,} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{3}\hlstd{)}
+\hlkwd{text}\hlstd{(xpos,} \hlnum{1.05}\hlstd{, xlab,} \hlkwc{pos}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{xpd}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+
+\hlkwd{abline}\hlstd{(}\hlkwc{h}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{, X[}\hlstr{'knot.alpha'}\hlstd{],} \hlnum{1}\hlstd{),} \hlkwc{col}\hlstd{=}\hlstr{'gray'}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{text}\hlstd{(}\hlnum{5.1}\hlstd{, X[}\hlstr{'knot.alpha'}\hlstd{],} \hlkwd{expression}\hlstd{(alpha[}\hlnum{0}\hlstd{]),} \hlkwc{pos}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{xpd}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+
+\hlkwd{plot}\hlstd{(X,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'l'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{6}\hlstd{)}
+\hlkwd{plot}\hlstd{(X,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{'p'}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{6}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/depicting2b-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+%\noindent
+%Please note that we use \TeX{} commands in plot labels.
+%They are interpreted by the \package{tikzDevice} package for \R
+%to generate beautiful figures, but setting this all up requires
+%higher level of skills\dots and patience.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\section{Basic Computations on and Characteristics of Fuzzy Numbers}
+
+
+In this section we consider the following FN:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{20}\hlstd{,}
+    \hlkwc{left}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{pbeta}\hlstd{(x,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{right}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}\hlopt{^}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{4}\hlstd{),}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{)} \hlkwd{qbeta}\hlstd{(alpha,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{) (}\hlnum{1}\hlopt{-}\hlstd{alpha)}\hlopt{^}\hlnum{4}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\subsection{Support and Core, and Other $\alpha$-cuts}
+
+The support of $A$, i.e., $\mathrm{supp}(A)=[\mathtt{a1}, \mathtt{a4}]$,
+may be obtained by calling:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{supp}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] -5 20
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+We get the core of $A$, i.e., $\mathrm{core}(A)=[\mathtt{a2}, \mathtt{a3}]$,
+with:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{core}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 3 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+To compute arbitrary $\alpha$-cuts we use:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{alphacut}\hlstd{(A,} \hlnum{0}\hlstd{)} \hlcom{# same as supp(A) (if alpha-cut generators are defined)}
+\end{alltt}
+\begin{verbatim}
+##    L  U
+## 0 -5 20
+\end{verbatim}
+\begin{alltt}
+\hlkwd{alphacut}\hlstd{(A,} \hlnum{1}\hlstd{)} \hlcom{# same as core(A)}
+\end{alltt}
+\begin{verbatim}
+##   L U
+## 1 3 6
+\end{verbatim}
+\begin{alltt}
+\hlstd{(a} \hlkwb{<-} \hlkwd{alphacut}\hlstd{(A,} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{0.5}\hlstd{,} \hlnum{1}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##             L      U
+## 0.0 -5.000000 20.000
+## 0.5 -4.583591  6.875
+## 1.0  3.000000  6.000
+\end{verbatim}
+\begin{alltt}
+\hlstd{a[}\hlnum{1}\hlstd{, ]}
+\end{alltt}
+\begin{verbatim}
+##  L  U 
+## -5 20
+\end{verbatim}
+\begin{alltt}
+\hlstd{a[}\hlnum{2}\hlstd{,} \hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 6.875
+\end{verbatim}
+\begin{alltt}
+\hlstd{a[,} \hlstr{"L"}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##       0.0       0.5       1.0 
+## -5.000000 -4.583591  3.000000
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Note that \func{alphacut()} always outputs a matrix with two columns.
+The matrix has named dimensions (names stand for only auxiliary information).
+The \func{alphacut()} method may only be used when $\alpha$-cut generators are
+provided by the user during the declaration of $A$, even for $\alpha=0$
+or $\alpha=1$.
+
+\subsection{Membership Function Evaluation}
+
+If side generators are defined, we may calculate
+the values of the membership function at different points by calling:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{evaluate}\hlstd{(A,} \hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##         1 
+## 0.9960291
+\end{verbatim}
+\begin{alltt}
+\hlkwd{evaluate}\hlstd{(A,} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{3}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{3}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##        -3         0         3 
+## 0.8371139 0.9855322 1.0000000
+\end{verbatim}
+\begin{alltt}
+\hlkwd{evaluate}\hlstd{(A,} \hlkwd{seq}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlkwc{by}\hlstd{=}\hlnum{0.5}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##      -1.0      -0.5       0.0       0.5       1.0       1.5       2.0 
+## 0.9624800 0.9760168 0.9855322 0.9919531 0.9960291 0.9983815 0.9995357
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+% \noindent The vector has named elements (these ``labels''
+% provide only auxiliary information).
+% \noindent
+% As wee see, this method needs a numeric vector (possibly of length 1)
+% as its second parameter.
+
+
+\subsection{``Typical'' Value}
+
+
+Let us first introduce the notion of the \textit{expected interval} of $A$
+\cite{DuboisPrade1987:meanfn}.
+\begin{eqnarray}
+\mathrm{EI}(A) & := & [\mathrm{EI}_L(A), \mathrm{EI}_U(A)] \\
+               & = & \left[ \int_0^1 A_L(\alpha)\,d\alpha, \int_0^1 A_U(\alpha)\,d\alpha \right].
+\end{eqnarray}
+
+\noindent
+To compute the expected interval of $A$ we call:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{expectedInterval}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] -4.058824  8.800000
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+In case of objects of
+the \texttt{FuzzyNumber} class, the expected interval is approximated
+by numerical integration. This method calls the \func{integrate()} function
+and its accuracy (quite fine by default)
+may be controlled by the \argument{subdivisions},
+\argument{rel.tol}, and \argument{abs.tol} parameters
+(call \texttt{?integrate} for more details).
+On the other hand, for, e.g., TFNs and PLFs this method returns exact results.
+
+\bigskip
+The midpoint of the expected interval is called the \textit{expected value}
+of a fuzzy number. It is given by:
+\begin{equation}
+\mathrm{EV}(A) := \frac{\mathrm{EI}_L(A) + \mathrm{EI}_U(A)}{2}.
+\end{equation}
+
+\noindent
+Let us calculate $\mathrm{EV}(A)$.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{expectedValue}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.370588
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Note that this method uses a call to \texttt{\func{expectedInterval}(A)},
+thus in case of \texttt{FuzzyNumber} class instances it also uses
+numerical approximation.
+
+Sometimes a generalization of the expected value,
+called \textit{weighted expected value}, is useful.
+For given $w\in[0,1]$ it is defined as:
+\begin{equation}
+\mathrm{EV}_w(A) := (1-w)\mathrm{EI}_L(A) + w\mathrm{EI}_U(A).
+\end{equation}
+It is easily seen that $\mathrm{EV}_{0.5}(A)=\mathrm{EV}(A)$.
+
+\noindent
+Some examples:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{weightedExpectedValue}\hlstd{(A,} \hlnum{0.5}\hlstd{)} \hlcom{# equivalent to expectedValue(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.370588
+\end{verbatim}
+\begin{alltt}
+\hlkwd{weightedExpectedValue}\hlstd{(A,} \hlnum{0.25}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] -0.8441176
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\bigskip
+The \textit{value} of $A$ \cite{DelgadoETAL1998:canonicalfn} is defined by:
+\begin{equation}
+\mathrm{val}(A) := \int_0^1 \alpha\left(A_L(\alpha)+A_U(\alpha)\right)\,d\alpha.
+\end{equation}
+
+\noindent
+It may be calculated by calling:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{value}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.736177
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent
+Please note that the expected value or  value
+may be used for example to ``defuzzify'' $A$.
+
+
+\subsection{Measures of ``Nonspecificity''}
+
+
+The \textit{width} of $A$ \cite{Chanas2001:intervapproxfn} is defined as:
+\begin{equation}
+\mathrm{width}(A) := \mathrm{EI}_U(A) - \mathrm{EI}_L(A).
+\end{equation}
+
+\noindent
+An example:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{width}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 12.85882
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\bigskip
+The \textit{ambiguity} of $A$ \cite{DelgadoETAL1998:canonicalfn} is defined as:
+\begin{equation}
+\mathrm{amb}(A) := \int_0^1 \alpha\left(A_U(\alpha)-A_L(\alpha)\right)\,d\alpha.
+\end{equation}
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ambiguity}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5.197157
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\bigskip
+Additionally, to express ``nonspecificity'' of a fuzzy number
+we may use, e.g., the width of its support:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{diff}\hlstd{(}\hlkwd{supp}\hlstd{(A))}
+\end{alltt}
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Operations on Fuzzy Numbers}\label{Sec:Operations}
+
+\subsection{Arithmetic Operations}
+
+The basic binary arithmetic operations for FNs are often defined
+by means of the so-called extension principle
+(see \cite{KlirYuan1995:fuzzybook})
+and interval arithmetic.
+For each $\alpha\in[0,1]$:
+\[
+   (A \circledast B)_\alpha
+   = A_\alpha \circledast B_\alpha,
+\]
+where $\circledast=+,-,*$ or $/$,
+and $A,B$ are arbitrary FNs.
+
+For example, we define the sum $A+B$  for every
+$\alpha \in \lbrack 0,1]$ as:%
+\[
+\left( A+B\right) _{\alpha }=A_{\alpha }+B_{\alpha }=\left[ A_{L}\left(
+\alpha \right) +B_{L}\left( \alpha \right) ,A_{U}\left( \alpha \right)
++B_{U}\left( \alpha \right) \right],
+\]%
+see \cite{DuboisPrade1978:opfn,DiamondKloeden1994:metricspacesfs}.
+Moreover, for $\lambda \in \mathbb{R}$,
+the scalar multiplication is given by:
+\[
+\left( \lambda \cdot A\right) _{\alpha }=\lambda A_{\alpha }=\left\{
+\begin{array}{ll}
+\left[ \lambda A_{L}\left( \alpha \right) ,\lambda A_{U}\left( \alpha
+\right) \right] , & \text{if }\lambda \geq 0, \\
+\left[ \lambda A_{U}\left( \alpha \right) ,\lambda A_{L}\left( \alpha
+\right) \right] , & \text{if }\lambda <0,%
+\end{array}%
+\right.
+\]%
+for each $\alpha \in \lbrack 0,1]$.
+
+
+
+In the \package{FuzzyNumbers} package we have defined
+the \texttt{+}, \texttt{-}, \texttt{*} and \texttt{/} operators,
+which implements the basic arithmetic operations
+as defined in \cite{KlirYuan1995:fuzzybook}.
+
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{2}\hlstd{)}
+\hlstd{B} \hlkwb{<-} \hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{)}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{6}\hlstd{))}
+\hlkwd{plot}\hlstd{(B,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{plot}\hlstd{(A}\hlopt{+}\hlstd{B,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{4}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/additionFig-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+Currently all the operations are available
+for piecewise linear FNs only,
+and addition and scalar multiplication
+is also implemented for trapezoidal FNs.
+Note that the computer arithmetic has anyway
+a discrete nature, and a PLFN with large number
+of knots often approximates (see Sec.~\ref{Sec:Approximation})
+an arbitrary FN sufficiently well.
+The computations are always exact (well, up to the computer
+floating-point arithmetic errors) at knots.
+
+In theory the class of PLFNs is not closed
+under the operations \texttt{*} and \texttt{/}.
+However, if you operate on a large number of knots,
+the results should be satisfactory.
+
+
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(}\hlkwd{PowerFuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{4}\hlstd{,}\hlkwc{p.left}\hlstd{=}\hlnum{2}\hlstd{,}\hlkwc{p.right}\hlstd{=}\hlnum{0.5}\hlstd{),}
+   \hlkwc{method}\hlstd{=}\hlstr{"Naive"}\hlstd{,} \hlkwc{knot.n}\hlstd{=}\hlnum{20}\hlstd{)}
+\hlstd{B} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(}\hlkwd{PowerFuzzyNumber}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{5}\hlstd{,}\hlkwc{p.left}\hlstd{=}\hlnum{0.1}\hlstd{,}\hlkwc{p.right}\hlstd{=}\hlnum{3}\hlstd{),}
+   \hlkwc{method}\hlstd{=}\hlstr{"Naive"}\hlstd{,} \hlkwc{knot.n}\hlstd{=}\hlnum{40}\hlstd{)}
+\hlstd{A}\hlopt{+}\hlstd{A} \hlcom{# the same as 2*A}
+\end{alltt}
+\begin{verbatim}
+## Piecewise linear fuzzy number with 20 knot(s),
+##    support=[2,8],
+##       core=[4,6].
+\end{verbatim}
+\begin{alltt}
+\hlstd{A}\hlopt{+}\hlstd{B} \hlcom{# note the number of knots has increased}
+\end{alltt}
+\begin{verbatim}
+## Piecewise linear fuzzy number with 60 knot(s),
+##    support=[3,9],
+##       core=[5,7].
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+
+
+\subsection{Applying Functions}
+
+
+To apply a monotonic transformation on a piecewise linear fuzzy number
+(using the extension principle) we call \func{fapply()}.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{),} \hlkwc{knot.n}\hlstd{=}\hlnum{100}\hlstd{)}
+\hlkwd{plot}\hlstd{(}\hlkwd{fapply}\hlstd{(A,} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{sqrt}\hlstd{(}\hlkwd{log}\hlstd{(x}\hlopt{+}\hlnum{1}\hlstd{))))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/fapplyFig-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\noindent
+The operation being applied should be a properly
+vectorized \R function object.
+
+\subsubsection{Special Functions}
+
+There are several functions that are not monotonic but useful for
+calculation. Amongst those integer powers of fuzzy numbers are
+probably the best example. While the odd powers could be implemented
+as monotonic functions it can not be done for even powers if the
+fuzzy number containts 0. Because of this issue the power is
+implemented as special function.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{2}\hlstd{,}\hlopt{-}\hlnum{1}\hlstd{,}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{),} \hlkwc{knot.n}\hlstd{=}\hlnum{10}\hlstd{)}
+\hlkwd{plot}\hlstd{(A,} \hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{8}\hlstd{,}\hlnum{8}\hlstd{))}
+\hlkwd{plot}\hlstd{(A}\hlopt{^}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{plot}\hlstd{(A}\hlopt{^}\hlnum{3}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlnum{4}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/exponentialFig-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{Approximation of Fuzzy Numbers}\label{Sec:Approximation}
+
+
+Complicated membership functions
+are often very inconvenient for processing imprecise information modeled by
+fuzzy numbers. Moreover, handling too complex membership
+functions entails difficulties in interpretation of the results
+too. This is the reason why a suitable approximation of fuzzy
+numbers is so important. We would like to deal
+with functions that are
+simpler or more regular and hence more convenient for
+computing.
+
+\subsection{Metrics in the Space of Fuzzy Numbers}
+
+It seems that the most suitable metric for approximation problems
+is an extension of the Euclidean ($L_2$) distance
+(see~\cite{Grzegorzewski1998:metricsordersfn}), $d$, defined by the equation:
+\begin{equation}
+d_E^2(A,B) = \int_0^1 \left(A_L(\alpha)-B_L(\alpha)\right)^2\,d\alpha
+         + \int_0^1 \left(A_U(\alpha)-B_U(\alpha)\right)^2\,d\alpha.
+\end{equation}
+
+% TO BE DONE...
+
+The following metric \argument{type}s are currently
+available in the \func{distance()} method: \str{"{}Euclidean"{}} (default),
+\str{"{}EuclideanSquared"{}}.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{T1} \hlkwb{<-} \hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{20}\hlstd{)}
+\hlstd{T2} \hlkwb{<-} \hlkwd{TrapezoidalFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{4}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{21}\hlstd{)}
+\hlkwd{distance}\hlstd{(T1, T2,} \hlkwc{type}\hlstd{=}\hlstr{'Euclidean'}\hlstd{)} \hlcom{# L2 distance /default/}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.414214
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(T1, T2,} \hlkwc{type}\hlstd{=}\hlstr{'EuclideanSquared'}\hlstd{)} \hlcom{# Squared L2 distance}
+\end{alltt}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+
+
+
+
+\subsection{Approximation by Trapezoidal Fuzzy Numbers}
+
+Our main task in this section is to, given a fuzzy number $A$,
+seek for a trapezoidal fuzzy number $\mathcal{T}(A)$
+that fulfills some desired properties.
+We will use the following FN
+for the sake of illustration:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{20}\hlstd{,}
+   \hlkwc{left}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{pbeta}\hlstd{(x,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{right}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}\hlopt{^}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{4}\hlstd{),}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{)} \hlkwd{qbeta}\hlstd{(alpha,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{) (}\hlnum{1}\hlopt{-}\hlstd{alpha)}\hlopt{^}\hlnum{4}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The approximation procedure has been implemented
+in \func{trapezoidalApproximation()}.
+The \argument{method} argument selects the algorithm used
+to project $A$ into the space of TFNs.
+
+\subsubsection{Na\"{i}ve Approximation}
+
+The \str{"{}Naive"{}} \argument{method} just
+generates a trapezoidal FN with the same
+core and support as $A$.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(T1} \hlkwb{<-} \hlkwd{trapezoidalApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'Naive'}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[-5,20],
+##       core=[3,6].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(A, T1)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5.761482
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naive2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+It is easily seen that the na\"{i}ve approximator
+may not represent $A$ well.
+Thus, we will often need some more reasonable
+approach.
+
+
+\subsubsection{$L_2$-nearest Approximation}
+
+
+
+
+% $L_2$ distance....
+
+The \str{"{}NearestEuclidean"{}} \argument{method}
+gives the nearest $L_2$-approximation of $A$
+\cite[Corollary 8]{Ban2009:nearestfnrev},
+i.e., a trapezoidal fuzzy number $\mathcal{T}(A)$ such that
+\[
+\mathcal{T}(A)=\min\limits_{T\in \mathrm{TFN}}d_E(A,T).
+\]
+It may be shown that the solution to this problem
+always exists and is unique.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(T2} \hlkwb{<-} \hlkwd{trapezoidalApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'NearestEuclidean'}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[-5.85235,14.4],
+##       core=[-2.26529,3.2].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(A, T2)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.98043
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+Note that the implementation relies on numeric integration.
+
+\subsubsection{Expected Interval Preserving Approximation}
+
+
+The \str{"{}ExpectedIntervalPreserving"{}} method
+gives the nearest $L_2$-approximation of $A$
+preserving the expected interval \cite{Ban2008:approxpresexpint,Grzegorzewski2010:trapfnapproxexpint,Yeh2008:traptriapprox},
+i.e., we get $\mathcal{T}(A)$ such that $\mathrm{EI}(A)=\mathrm{EI}(\mathcal{T}(A))$.
+
+First of all, it may be shown that if $\mathrm{amb}(A) \ge \mathrm{width}(A)/3$, then
+we obtain the same result as in
+the \str{"{}NearestEuclidean"{}} method.
+
+% TO BE DONE...
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ambiguity}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5.197157
+\end{verbatim}
+\begin{alltt}
+\hlkwd{width}\hlstd{(A)}\hlopt{/}\hlnum{3}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.286275
+\end{verbatim}
+\begin{alltt}
+\hlstd{(T3} \hlkwb{<-} \hlkwd{trapezoidalApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'ExpectedIntervalPreserving'}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[-5.85235,14.4],
+##       core=[-2.26529,3.2].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(A, T3)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.98043
+\end{verbatim}
+\begin{alltt}
+\hlkwd{expectedInterval}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] -4.058824  8.800000
+\end{verbatim}
+\begin{alltt}
+\hlkwd{expectedInterval}\hlstd{(T3)}
+\end{alltt}
+\begin{verbatim}
+## [1] -4.058824  8.800000
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+% \begin{center}
+
+% \end{center}
+
+On the other hand, for highly skewed membership functions this method
+(as well as the previous one)  sometimes reveals quite unfavorable
+behavior. E.g., if $B$ is a FN such that
+$\mathrm{val}(B) < \mathrm{EV}_{1/3}(B)$
+or $\mathrm{val}(B) > \mathrm{EV}_{2/3}(B)$,
+then it may happen that the cores of the output
+and of the original fuzzy number $B$ are disjoint,
+see~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(B}  \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{45}\hlstd{,}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{sqrt}\hlstd{(x),}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlkwd{sqrt}\hlstd{(x)))}
+\end{alltt}
+\begin{verbatim}
+## Fuzzy number with:
+##    support=[1,45],
+##       core=[2,3].
+\end{verbatim}
+\begin{alltt}
+\hlstd{(TB1} \hlkwb{<-} \hlkwd{trapezoidalApproximation}\hlstd{(B,} \hlstr{'NearestEuclidean'}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[1.37333,33.2133],
+##       core=[1.37333,1.37333].
+\end{verbatim}
+\begin{alltt}
+\hlstd{(TB2} \hlkwb{<-} \hlkwd{trapezoidalApproximation}\hlstd{(B,} \hlstr{'ExpectedIntervalPreserving'}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[1.66667,32.3333],
+##       core=[1.66667,1.66667].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(B, TB1)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.098994
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(B, TB2)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.166239
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_ExpInt3Fig-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+\subsubsection{Approximation with Restrictions on Support and Core}
+
+
+The \str{"{}SupportCoreRestricted"{}} \argument{method}
+was proposed in \cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
+It gives the $L_2$-nearest trapezoidal approximation $\mathcal{T}(A)$
+with constraints:
+$\mathrm{core}(A) \subseteq \mathrm{core}(\mathcal{T}(A))$
+and $\mathrm{supp}(\mathcal{T}(A)) \subseteq \mathrm{supp}(A)$,
+i.e., for which each point that surely belongs to $A$ also belongs to $\mathcal{T}(A)$,
+and each point that surely does not belong to $A$ also does not belong to $\mathcal{T}(A)$.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(T4} \hlkwb{<-} \hlkwd{trapezoidalApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'SupportCoreRestricted'}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## Trapezoidal fuzzy number with:
+##    support=[-5,11.6],
+##       core=[-3.11765,6].
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(A, T4)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.603383
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+
+\subsection{Approximation by Piecewise Linear Fuzzy Numbers}
+
+When approximating arbitrary fuzzy numbers by trapezoidal ones we
+generally take care for the core and support of a fuzzy number
+(i.e., for values that surely belong or do not belong at all to the
+set under study), while the sides of a fuzzy number corresponding
+to all intermediate degrees of membership are linearized. This
+approach may not be suitable if we are also interested in focusing
+on some other degrees of uncertainty except for 0 or 1.
+
+Thus, given a fuzzy number $A$ and a fixed
+\argument{knot.alpha}=$\boldsymbol\alpha$ vector, we are interested in
+finding a piecewise linear fuzzy number $\mathcal{P}(A)$
+that has some desirable properties.
+
+In this subsection we will use the following fuzzy number $A$
+for the sake of illustration:
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{20}\hlstd{,}
+   \hlkwc{left}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{pbeta}\hlstd{(x,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{right}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}\hlopt{^}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{4}\hlstd{),}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{)} \hlkwd{qbeta}\hlstd{(alpha,}\hlnum{0.4}\hlstd{,}\hlnum{3}\hlstd{),}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{alpha}\hlstd{) (}\hlnum{1}\hlopt{-}\hlstd{alpha)}\hlopt{^}\hlnum{4}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+The approximation procedure has been implemented
+in \func{piecewiseLinearApproximation()}.
+The \argument{method} argument selects the algorithm used
+to project $A$ into the space of PLFNs (for given \argument{knot.alpha}).
+
+\subsubsection{Na\"{i}ve Approximation}
+
+The \str{"{}Naive"{}} \argument{method} generates a PLFN with the same
+core and support as $A$ and with sides interpolating the membership function
+of $A$ at given $\alpha$-cuts.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{P1} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'Naive'}\hlstd{,}
+         \hlkwc{knot.n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=}\hlnum{0.5}\hlstd{)}
+\hlstd{P1[}\hlstr{'allknots'}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##        alpha         L      U
+## supp     0.0 -5.000000 20.000
+## knot_1   0.5 -4.583591  6.875
+## core     1.0  3.000000  6.000
+\end{verbatim}
+\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{distance}\hlstd{(A, P1),} \hlnum{8}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.4753305
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNaive2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\noindent
+The approximation error may be quite high.
+However, it may be shown that, e.g., for equidistant knots if
+$\mathtt{knot.n}\to\infty$,
+then it approaches $0$.
+
+\subsubsection{$L_2$-nearest Approximation}
+
+% \paragraph{Exact algorithm for fixed \argument{knot.alpha}.}
+
+Similarly to the $L_2$-nearest TFN case, here we are looking for
+\[
+\mathcal{P}(A)=\min\limits_{T\in \mathrm{PLFN}(\boldsymbol\alpha)}d_E(A,T).
+\]
+It may be shown that the solution to this problem
+always exists and is unique, see \cite{CoroianuETAL2013:piecewise1}
+and \cite{CoroianuETALXXXX:piecewise2}.
+
+The \str{"{}NearestEuclidean"{}} \argument{method}
+uses the algorithm described in \cite{CoroianuETAL2013:piecewise1}
+and \cite{CoroianuETALXXXX:piecewise2}.
+This implementation relies on numeric integration, so for large \argument{knot.n}
+may be slow.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{P2} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,}
+   \hlkwc{method}\hlstd{=}\hlstr{'NearestEuclidean'}\hlstd{,} \hlkwc{knot.n}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0.25}\hlstd{,}\hlnum{0.5}\hlstd{,}\hlnum{0.75}\hlstd{))}
+\hlkwd{print}\hlstd{(P2[}\hlstr{'allknots'}\hlstd{],} \hlnum{6}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##        alpha         L        U
+## supp    0.00 -5.003841 19.22964
+## knot_1  0.25 -4.966165  9.91416
+## knot_2  0.50 -4.578596  6.66686
+## knot_3  0.75 -3.941608  6.00278
+## core    1.00 -0.494012  6.00278
+\end{verbatim}
+\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{distance}\hlstd{(A, P2),} \hlnum{12}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.28896014678
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+
+
+% \bigskip
+% Beware of numerical error in integration e.g.~due to discontinuity
+% in $\alpha$-cuts........
+% ..... TO BE DONE....
+%
+% <<PLFNApproxNeares_error,fig.keep='none',warning=FALSE>>=
+% A1 <- FuzzyNumber(0,1,1,1,
+%          lower=function(a) floor(3*a)/3,
+%          upper=function(a) 1-a
+% ) # no info on discontinuities
+%
+% A2 <- DiscontinuousFuzzyNumber(0,1,1,1,
+%          lower=function(a) floor(3*a)/3,
+%          upper=function(a) 1-a,
+%          discontinuities.lower=c(0, 1/3, 2/3, 1),
+%          discontinuities.upper=numeric(0)
+% ) # discontinuities info included
+%
+% a <- seq(1e-9, 1-1e-9, length.out=100) # many alphas from (0,1)
+% d1 <- numeric(length(a)) # distances #1 (to be calculated)
+% d2 <- numeric(length(a)) # distances #2 (to be calculated)
+% for (i in 1:length(a))
+% {
+%    P1 <- piecewiseLinearApproximation(A1, method='NearestEuclidean',
+%             knot.n=1, knot.alpha=a[i])
+%    P2 <- piecewiseLinearApproximation(A2, method='NearestEuclidean',
+%             knot.n=1, knot.alpha=a[i])
+%
+%    d1[i] <- distance(A1, P1)
+%    d2[i] <- distance(A2, P2)
+% }
+% @
+%
+% We note that in the first case the distance for $\alpha=0$ (trapezoidal
+% approximation) is
+% smaller than e.g.~for $\alpha\simeq 0.05$, which, theoretically,
+% is not possible. Moreover, the distance is not continuous
+% at some $\alpha$ (but it is in theory).
+% % .. TO DO.....
+%
+% \begin{center}
+% <<PLFNApproxNeares_error2,echo=FALSE>>=
+% matplot(a, cbind(d1, d2), type='l', xlab='$\\alpha$', ylab='')
+% legend('top', c('$d(A_1,P_1)$', '$d(A_2,P_2)$'), lty=c(1,2), col=c(1,2))
+% @
+% \end{center}
+
+
+\paragraph{Example: Convergence.}
+As the na\"{i}ve approximator's error approaches 0 as $\text{\argument{knot.n}}\to \infty$
+for equidistant knots, so does the error of the nearest $L_2$ approximator.
+Let us study the convergence behavior for our exemplary $A$.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{n} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{27}
+\hlstd{d} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{NA}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlkwd{length}\hlstd{(n))}
+\hlcom{# d[,1] - Naive approximator's error for given knot.n}
+\hlcom{# d[,2] - Best L2 approximator's error}
+\hlcom{# d[,3] - theoretical upper bound}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlkwd{seq_along}\hlstd{(n))}
+\hlstd{\{}
+   \hlstd{P1} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'Naive'}\hlstd{,}
+            \hlkwc{knot.n}\hlstd{=n[i])} \hlcom{# equidistant knots}
+   \hlstd{P2} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'NearestEuclidean'}\hlstd{,}
+            \hlkwc{knot.n}\hlstd{=n[i])} \hlcom{# equidistant knots}
+   \hlstd{d[i,}\hlnum{1}\hlstd{]} \hlkwb{<-} \hlkwd{distance}\hlstd{(A, P1)}
+   \hlstd{d[i,}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlkwd{distance}\hlstd{(A, P2)}
+
+   \hlstd{acut} \hlkwb{<-} \hlkwd{alphacut}\hlstd{(A,} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlkwc{length.out}\hlstd{=n[i]}\hlopt{+}\hlnum{2}\hlstd{))}
+   \hlcom{# d[i,3] <- sqrt(sum((c(diff(acut[,1]), diff(acut[,2]))^2)/(n[i]+1))) # beter ubound}
+   \hlstd{d[i,}\hlnum{3}\hlstd{]} \hlkwb{<-} \hlkwd{sqrt}\hlstd{(}\hlnum{2}\hlstd{)}\hlopt{*}\hlkwd{max}\hlstd{(}\hlkwd{abs}\hlstd{(}\hlkwd{c}\hlstd{(}\hlkwd{diff}\hlstd{(acut[,}\hlnum{1}\hlstd{]),} \hlkwd{diff}\hlstd{(acut[,}\hlnum{2}\hlstd{]))))}
+\hlstd{\}}
+\hlkwd{matplot}\hlstd{(n, d,} \hlkwc{type}\hlstd{=}\hlstr{'l'}\hlstd{,} \hlkwc{log}\hlstd{=}\hlstr{"y"}\hlstd{,} \hlkwc{lty}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{4}\hlstd{),} \hlkwc{col}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{4}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearestConv2-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\paragraph{Example: Finding best \argument{knot.alpha}
+for $\text{\argument{knot.n}}=1$ numerically.}
+The approximation problem is stated using a fixed
+\argument{knit.alpha}.
+However, we may, e.g., depict the ``best'' $L_2$ distance as a function of $\alpha$,
+i.e., the $D_{A}(\alpha)$ function.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{a} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1e-9}\hlstd{,} \hlnum{1}\hlopt{-}\hlnum{1e-9}\hlstd{,} \hlkwc{length.out}\hlstd{=}\hlnum{100}\hlstd{)} \hlcom{# many alphas from (0,1)}
+\hlstd{d} \hlkwb{<-} \hlkwd{numeric}\hlstd{(}\hlkwd{length}\hlstd{(a))} \hlcom{# distances /to be calculated/}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlkwd{seq_along}\hlstd{(a))}
+\hlstd{\{}
+   \hlstd{P1} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'NearestEuclidean'}\hlstd{,}
+            \hlkwc{knot.n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=a[i])}
+   \hlstd{d[i]} \hlkwb{<-} \hlkwd{distance}\hlstd{(A, P1)}
+\hlstd{\}}
+\hlkwd{plot}\hlstd{(a, d,} \hlkwc{type}\hlstd{=}\hlstr{'l'}\hlstd{,} \hlkwc{xlab}\hlstd{=}\hlkwd{expression}\hlstd{(alpha),} \hlkwc{ylab}\hlstd{=}\hlkwd{expression}\hlstd{(D[A](alpha)))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest4-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+For $\text{\argument{knot.n}}=1$ we may find best \argument{knot.alpha} using numerical optimization.
+It may be shown, see \cite{CoroianuETAL2013:piecewise1},
+that the distance function $D_{A}(\alpha)$ is continuous,
+but in general the minimum is not necessarily unique.
+% TO DO.....
+
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{5}\hlstd{)} \hlcom{# 5 iterations}
+\hlstd{\{}
+   \hlstd{a0} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{)} \hlcom{# random starting point}
+   \hlkwd{optim}\hlstd{(a0,}
+      \hlkwa{function}\hlstd{(}\hlkwc{a}\hlstd{)}
+      \hlstd{\{}
+         \hlstd{P1} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{'NearestEuclidean'}\hlstd{,}
+                                             \hlkwc{knot.n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=a)}
+
+         \hlkwd{distance}\hlstd{(A, P1)}
+      \hlstd{\},} \hlkwc{method}\hlstd{=}\hlstr{'L-BFGS-B'}\hlstd{,} \hlkwc{lower}\hlstd{=}\hlnum{1e-9}\hlstd{,} \hlkwc{upper}\hlstd{=}\hlnum{1}\hlopt{-}\hlnum{1e-9}\hlstd{)} \hlkwb{->} \hlstd{res}
+   \hlkwd{cat}\hlstd{(}\hlkwd{sprintf}\hlstd{(}\hlstr{'%.9f %6g *%.9f* %.9f\textbackslash{}n'}\hlstd{, a0, res}\hlopt{$}\hlstd{counts[}\hlnum{1}\hlstd{], res}\hlopt{$}\hlstd{par, res}\hlopt{$}\hlstd{value))}
+\hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+## 0.054939263     43 *0.363078878* 0.650344747
+## 0.204889807     37 *0.363231498* 0.650343978
+## 0.226272855     23 *0.363013427* 0.650345255
+## 0.393095251     49 *0.363081407* 0.650344862
+## 0.585269921     26 *0.363088009* 0.650345120
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\subsubsection{$L_2$-nearest Approximation Preserving Support and Core}
+
+Fix $\boldsymbol\alpha$. The next method searches for:
+\[
+\mathcal{P}(A)=\min\limits_{T\in \mathrm{PLFN}(\boldsymbol\alpha)}d_E(A,T).
+\]
+such that $\mathrm{supp}(A)=\mathrm{supp}(\mathcal{P}(A))$
+and $\mathrm{core}(A)=\mathrm{core}(\mathcal{P}(A))$, see
+\cite{CoroianuETAL2014:piecewise1suppcore}.
+
+The \str{"{}SupportCorePreserving"{}} \argument{method}
+of the \func{piecewiseLinearApproximation()} function
+currently implements only the \texttt{\argument{knot.n}==1} case.
+
+
+\paragraph{Example 1.}
+Let us consider the following FN.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{FuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{5}\hlstd{,}
+   \hlkwc{lower}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{qbeta}\hlstd{(x,} \hlnum{2}\hlstd{,} \hlnum{1}\hlstd{),}
+   \hlkwc{upper}\hlstd{=}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlnum{1}\hlopt{-}\hlstd{x}\hlopt{^}\hlnum{3}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Here are its unrestricted ($P_1$) and supp-core-restricted ($P_2$)
+PLFN approximations for $\boldsymbol\alpha=(0.2)$.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{knot.alpha} \hlkwb{<-} \hlnum{0.2}
+\hlstd{P1} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{knot.alpha}\hlstd{=knot.alpha)}
+\hlstd{P2} \hlkwb{<-} \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{"SupportCorePreserving"}\hlstd{,}
+   \hlkwc{knot.alpha}\hlstd{=knot.alpha)}
+\hlkwd{distance}\hlstd{(A, P1)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1050667
+\end{verbatim}
+\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{alphacut}\hlstd{(P1,} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{, knot.alpha,} \hlnum{1}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##             L      U
+## 0.0 0.3416417 5.0782
+## 0.2 1.4633436 5.0782
+## 1.0 3.0854103 4.2577
+\end{verbatim}
+\begin{alltt}
+\hlkwd{distance}\hlstd{(A, P2)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2124758
+\end{verbatim}
+\begin{alltt}
+\hlkwd{print}\hlstd{(}\hlkwd{alphacut}\hlstd{(P2,} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{, knot.alpha,} \hlnum{1}\hlstd{)))}
+\end{alltt}
+\begin{verbatim}
+##            L U
+## 0.0 0.000000 5
+## 0.2 1.531672 5
+## 1.0 3.000000 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a3-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+Let us find $\alpha_0$ for which we get the minimal approximation
+distance (error).
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{D} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{a}\hlstd{)} \hlkwd{distance}\hlstd{(A,}
+   \hlkwd{piecewiseLinearApproximation}\hlstd{(A,} \hlkwc{method}\hlstd{=}\hlstr{"SupportCorePreserving"}\hlstd{,} \hlkwc{knot.alpha}\hlstd{=a))}
+\hlkwd{optimize}\hlstd{(D,} \hlkwc{lower}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{upper}\hlstd{=}\hlnum{1}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## $minimum
+## [1] 0.2989562
+## 
+## $objective
+## [1] 0.1987527
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving function, see
+\cite{CoroianuETAL2014:piecewise1suppcore} for discussion.
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5-1} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+
+\section{Ranking Fuzzy Numbers in the Setting of Possibility Theory}
+
+There are several possible approaches towards ranking of fuzzy numbers. Dubois and Prade \cite{DuboisPrade1983:rankfn} point out that some are counterintuitive or consider only one point of view on comparing fuzzy numbers. To overcome this issue the set of ranking indices was proposed by Dubois and Prade \cite{DuboisPrade1983:rankfn}. The ranking is done within the framework of Possibility theory which means that for each comparison operator <=, >=, <,> there is a measure of possibility and necessity assessing the truthfulness of the statement (Possibility theory is in detail desribed in \cite{DuboisPrade1986:possbook}). Both measures takes values from the interval [0,1]. Value 1 means complete truthfulness of the statement, 0 means absolute untruthfulness and values in between describe partial truthfulness.
+
+If there are two fuzzy numbers $X$ and $Y$ then the possibility ($\Pi$) and necessity ($\mathcal{N}$) of $X>=Y$ (named exceedance in \package{FuzzyNumbers}) is given by these equations \cite{DuboisPrade1983:rankfn}:
+\begin{equation}
+\Pi_{X}( [ Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ),
+\end{equation}
+\begin{equation}
+\mathcal{N}_{X}( [ Y,\infty )) = \underset{x}{\inf} \max ( 1 - \mu_{X}(x), \underset{y \leq x}{\sup} \ \mu_{Y} (y) ).
+\end{equation}
+
+The possiblity and necessity of $X>Y$ (named strict exceedance in \package{FuzzyNumbers}) are defined as\cite{DuboisPrade1983:rankfn}:
+\begin{equation}
+\Pi_{X}( ] Y,\infty )) = \underset{x}{\sup} \min ( \mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ),
+\end{equation}
+\begin{equation}
+\mathcal{N}_{X}( ] Y,\infty )) = \underset{x}{\inf} \max ( 1-\mu_{X}(x), \underset{y \geq x}{\inf} 1 - \mu_{Y} (y) ).
+\end{equation}
+
+Changing the $[ Y,\infty )$ to $( - \infty, Y ]$ etc. in these formulas will produce other four indices indicating $X<=Y$ and $X<Y$ \cite{DuboisPrade1983:rankfn,DuboisPrade1986:possbook}.
+
+Now lets create two \texttt{PiecewiseLinearFuzzyNumber}s that we will be comparing.
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlnum{0.2}\hlstd{,} \hlnum{1.0}\hlstd{,} \hlnum{2.8}\hlstd{))}
+\hlstd{y} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1.8}\hlstd{,} \hlnum{2.2}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+We can visualized them together.
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=4.5in]{figure/compareXY1plot-1} 
+
+}
+
+
+
+\end{knitrout}
+The comparison if $X>=Y$ is done using functions \func{possibilityExceedance()} and \func{necessityExceedance()}.
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{possibilityExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.7777778
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3846154
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+In the same way we can determine the truthfulness of statement $X>Y$ with functions \func{possibilityStrictExceedance()} and \func{necessityStrictExceedance()}.
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{possibilityStrictExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.4545455
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityStrictExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+The image image above shows that there is no clear domination of one of the fuzzy numbers and so tell us the indices.
+
+To assess the inverse situations $X<=Y$ and $X<Y$ the following code can be used.
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{possibilityUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.5454545
+\end{verbatim}
+\begin{alltt}
+\hlkwd{possibilityStrictUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6153846
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityStrictUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2222222
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+The results show that again there is no strict domination of one fuzzy number by another (in such case all the indices would be either 1 or 0). But the values of all indices are higher for $X<=Y$,$X<Y$ than in cases $X>=Y$, $X>Y$. Such outcome can be interpred as $X$ being generally smaller then $Y$ but the result is not conclusive. The amount of uncertainty is desribed by these indices.
+
+A slightly more illustrative example is provided below. Note that third and fourth line provide limits for visualization of fuzzy numbers.
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlnum{1.7}\hlstd{,} \hlnum{2.7}\hlstd{,} \hlnum{2.8}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlstd{y} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1.8}\hlstd{,} \hlnum{2.2}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlstd{min} \hlkwb{=} \hlkwd{min}\hlstd{(x}\hlopt{@}\hlkwc{a1}\hlstd{,y}\hlopt{@}\hlkwc{a1}\hlstd{)}
+\hlstd{max} \hlkwb{=} \hlkwd{max}\hlstd{(x}\hlopt{@}\hlkwc{a4}\hlstd{,y}\hlopt{@}\hlkwc{a4}\hlstd{)}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(min,max))}
+\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=4.5in]{figure/compareXY2-1} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlkwd{possibilityExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9642857
+\end{verbatim}
+\begin{alltt}
+\hlkwd{possibilityStrictExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityStrictExceedance}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6428571
+\end{verbatim}
+\begin{alltt}
+\hlkwd{possibilityUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3571429
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{possibilityStrictUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.03571429
+\end{verbatim}
+\begin{alltt}
+\hlkwd{necessityStrictUndervaluation}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\section{Minimum and Maximum of Fuzzy Numbers}
+
+In the same way as a minimum and maximum of two crisp numbers can be determined, a minimum and a maximum of two fuzzy numbers can be calculated \cite{KaufmannGupta1985:fuzzybook}. A minimum and maximum of two fuzzy numbers is also a fuzzy number.
+
+The minimum of fuzzy numbers is defined for $\alpha$ cuts as \cite{KaufmannGupta1985:fuzzybook}:
+\begin{equation}
+A_\alpha \wedge B_\alpha = [A_L(\alpha) \wedge B_L(\alpha), A_U(\alpha) \wedge B_U(\alpha)],
+\end{equation}
+while the maximum is defined as:
+\begin{equation}
+A_\alpha \vee B_\alpha = [A_L(\alpha) \vee B_L(\alpha), A_U(\alpha) \vee B_U(\alpha)].
+\end{equation}
+
+
+The definition allows determination of minimum and maximum only for Piecewise Linear Fuzzy Numbers. As such the result is only an approximation, which may cause problems with the result is the number of knots is too small (please see examples in the package help for the functions).
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{4.8}\hlstd{,} \hlopt{-}\hlnum{3} \hlstd{,} \hlopt{-}\hlnum{1.5}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlstd{y} \hlkwb{=} \hlkwd{as.PiecewiseLinearFuzzyNumber}\hlstd{(}\hlkwd{TriangularFuzzyNumber}\hlstd{(}\hlopt{-}\hlnum{5.5}\hlstd{,} \hlopt{-}\hlnum{2.5}\hlstd{,} \hlopt{-}\hlnum{1.1}\hlstd{),} \hlkwc{knot.n} \hlstd{=} \hlnum{9}\hlstd{)}
+\hlstd{min} \hlkwb{=} \hlkwd{min}\hlstd{(x}\hlopt{@}\hlkwc{a1}\hlstd{,y}\hlopt{@}\hlkwc{a1}\hlstd{)}
+\hlstd{max} \hlkwb{=} \hlkwd{max}\hlstd{(x}\hlopt{@}\hlkwc{a4}\hlstd{,y}\hlopt{@}\hlkwc{a4}\hlstd{)}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{col}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(min,max))}
+\hlkwd{plot}\hlstd{(y,} \hlkwc{col}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{maxFN} \hlkwb{=} \hlkwd{maximum}\hlstd{(x,y)}
+\hlstd{minFN} \hlkwb{=} \hlkwd{minimum}\hlstd{(x,y)}
+\hlkwd{plot}\hlstd{(minFN,} \hlkwc{col}\hlstd{=}\hlnum{4}\hlstd{)}
+\hlkwd{plot}\hlstd{(maxFN,} \hlkwc{col}\hlstd{=}\hlnum{6}\hlstd{,} \hlkwc{add}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=4.5in]{figure/minmaxXYFig-1} 
+
+}
+
+
+
+
+{\centering \includegraphics[width=4.5in]{figure/minmaxXYFig-2} 
+
+}
+
+
+
+\end{knitrout}
+\end{center}
+% \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
+%
+% This method uses a constrained version of the Nelder-Mead algorithm.
+% The procedure minimizes the target function numerically
+% by calling the \func{optim()} function.
+% There is thus no guarantee that it will find to the global minimum
+% (it may fall into a neighborhood of a local minimum
+% or even fail to converge).
+% However, this approach may be used for any number of knots.
+%
+% TO BE DONE... WORK  ON AN EXACT ALGORITHM IS ALMOST FINISHED.....
+%
+% <<ApproxMethodPLFN1,fig.keep='none'>>=
+% system.time(P3 <- piecewiseLinearApproximation(A,
+%    method='ApproximateNearestEuclidean', knot.n=1, knot.alpha=0.5))
+% print(P3['allknots'], 6)
+% print(distance(A, P3), digits=12)
+% @
+% \noindent
+% Compare with exact solution......
+% Please note that a call to this method may be time-consuming.
+%
+% Another example:
+%
+% <<ApproxMethodPLFN2,fig.keep='none'>>=
+% system.time(P4 <- piecewiseLinearApproximation(A,
+%    method='ApproximateNearestEuclidean', knot.n=4,
+%    knot.alpha=c(0.2, 0.3, 0.7, 0.9), verbose=TRUE))
+% @
+%
+% \begin{center}
+% <<ApproxMethodPLFN3,echo=FALSE>>=
+% plot(A, xlab=expression(x), ylab=expression(alpha))
+% plot(P4, col='red', lty=2, add=TRUE)
+% print(distance(A, P4), digits=12)
+% @
+% \end{center}
+%
+% If the method fails to converge, you may try to call it
+% e.g.~with the \texttt{\argument{optim.control}=\func{list}(\argument{maxit}=\allowbreak{}5000)} parameter
+% to allow for greater number of iterations.
+%
+%
+%
+% <<fig.keep='none',echo=FALSE,exec=FALSE>>=
+% # B <- FuzzyNumber(0, 1, 1, 3,
+% #    lower=function(x) sqrt(x), upper=function(x) (1-x)^10)
+% #
+% # X1 <- piecewiseLinearApproximation(B, knot.n=1, knot.alpha=c(0.5),
+% #    method='NearestEuclidean', verbose=TRUE)
+% # round(X1['allknots'],3)
+% # distance(B, X1)
+% #
+% # X2 <- piecewiseLinearApproximation(B,
+% #    knot.n=1, knot.alpha=c(0.5),
+% #    method='ApproximateNearestEuclidean',
+% #    optim.control=list(maxit=5000), verbose=TRUE)
+% # round(X2['allknots'],3)
+% # distance(B, X2) # :-(
+% #
+% # plot(B, lwd=2)
+% # plot(X2, add=TRUE, col=4, lty=2)
+% # plot(X1, add=TRUE, col=2)
+% # legend('topright',
+% #    c('Original', 'Best PLFN (approximate)', 'Best PLFN (exact)'),
+% #    col=c(1,4,2), lty=c(1,2,1), lwd=c(2,1,1))
+% @
+
+
+
+% % \clearpage
+% \section{NEWS/CHANGELOG}
+%
+% % \begin{verbatim}
+% <<NEWSread,comment='',echo=FALSE,cache=FALSE>>=
+% cat(readLines('../../../NEWS'), sep='\n')
+% @
+% % \end{verbatim}
+
+\paragraph{Acknowledgments.}
+This document has been generated with \LaTeX and the \package{knitr}
+package for \R.
+Their authors' wonderful work is fully appreciated.
+Many thanks to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
+and Pablo Villacorta Iglesias for stimulating discussion.
+
+
+
+The contribution of Marek Gagolewski was partially supported
+by the European Union from resources of the European Social Fund, Project PO KL
+``Information technologies: Research and their interdisciplinary
+applications'', agreement UDA-POKL.04.01.01-00-051/10-00 (March-June 2013),
+and by FNP START Scholarship from the Foundation for Polish Science (2013).
+
+
+
+% % \clearpage
+% \bibliographystyle{acm}
+% % see https://github.com/gagolews/bibliography
+% % add 'export BIBINPUTS="/home/gagolews/Publikacje/bibliography"'
+% %     to .bashrc
+% \bibliography{gagolewski,gagolewski_temp,aggregation,probstat,r,unsorted,fuzzynumbers}
+
+\begin{thebibliography}{10}
+
+\bibitem{Ban2008:approxpresexpint}
+{\sc Ban, A.}
+\newblock Approximation of fuzzy numbers by trapezoidal fuzzy numbers
+  preserving the expected interval.
+\newblock {\em Fuzzy Sets and Systems 159\/} (2008), 1327--1344.
+
+\bibitem{Ban2009:nearestfnrev}
+{\sc Ban, A.}
+\newblock On the nearest parametric approximation of a fuzzy number --
+  revisited.
+\newblock {\em Fuzzy Sets and Systems 160\/} (2009), 3027--3047.
+
+\bibitem{Bodjanova2005:medianfn}
+{\sc Bodjanova, S.}
+\newblock Median value and median interval of a fuzzy number.
+\newblock {\em Information Sciences 172\/} (2005), 73--89.
+
+\bibitem{Chanas2001:intervapproxfn}
+{\sc Chanas, S.}
+\newblock On the interval approximation of a fuzzy number.
+\newblock {\em Fuzzy Sets and Systems 122\/} (2001), 353--356.
+
+\bibitem{CoroianuETAL2013:piecewise1}
+{\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
+\newblock Nearest piecewise linear approximation of fuzzy numbers.
+\newblock {\em Fuzzy Sets and Systems 233\/} (2013), 26--51.
+
+\bibitem{CoroianuETALXXXX:piecewise2}
+{\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
+\newblock Piecewise linear approximation of fuzzy numbers --
+a discussion on algorithms, arithmetic operations and stability of fuzzy number characteristics, 2014.
+\newblock Submitted paper.
+
+\bibitem{CoroianuETAL2014:piecewise1suppcore}
+{\sc Coroianu, L., Gagolewski, M., Grzegorzewski, P., {Adabitabar Firozja}, M.,
+  and Houlari, T.}
+\newblock Piecewise linear approximation of fuzzy numbers preserving the
+  support and core.
+\newblock In {\em Information Processing and Management of Uncertainty in
+  Knowledge-Based Systems, Part II\/} (2014), A.~Laurent et~al., Eds.,
+  vol.~443, Springer, pp.~244--254.
+
+\bibitem{DelgadoETAL1998:canonicalfn}
+{\sc Delgado, M., Vila, M., and Voxman, W.}
+\newblock On a canonical representation of a fuzzy number.
+\newblock {\em Fuzzy Sets and Systems 93\/} (1998), 125--135.
+
+\bibitem{DiamondKloeden1994:metricspacesfs}
+{\sc Diamond, P., and Kloeden, P.}
+\newblock {\em Metric spaces of fuzzy sets. {T}heory and applications}.
+\newblock World Scientific, Singapore, 1994.
+
+\bibitem{DuboisPrade1978:opfn}
+{\sc Dubois, D., and Prade, H.}
+\newblock Operations on fuzzy numbers.
+\newblock {\em Int. J. Syst. Sci. 9\/} (1978), 613--626.
+
+\bibitem{DuboisPrade1983:rankfn}
+{\sc Dubois, D., and Prade, H.}
+\newblock Ranking Fuzzy Numbers in the Setting of Possibility Theory.
+\newblock {\em Information Sciences. 30\/} (1983), 183--224.
+
+\bibitem{DuboisPrade1986:possbook}
+{\sc Dubois, D., and Prade, H.}
+\newblock {\em {P}ossibility {T}heory: {A}n approach to {C}omputerized {P}rocessing of {U}ncertainty.}.
+\newblock Plenum Press, New York, 1986.
+
+\bibitem{DuboisPrade1987:fnoverview}
+{\sc Dubois, D., and Prade, H.}
+\newblock Fuzzy numbers: An overview.
+\newblock In {\em In: Analysis of Fuzzy Information. Mathematical Logic, vol.
+  I}. CRC Press, 1987, pp.~3--39.
+
+\bibitem{DuboisPrade1987:meanfn}
+{\sc Dubois, D., and Prade, H.}
+\newblock The mean value of a fuzzy number.
+\newblock {\em Fuzzy Sets and Systems 24\/} (1987), 279--300.
+
+\bibitem{Gagolewski:fuzzynumberspackage}
+{\sc Gagolewski, M.}
+\newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
+  \textsf{R}}, 2019.
+\newblock {h}ttp://FuzzyNumbers.rexamine.com.
+
+\bibitem{Grzegorzewski1998:metricsordersfn}
+{\sc Grzegorzewski, P.}
+\newblock Metrics and orders in space of fuzzy numbers.
+\newblock {\em Fuzzy Sets and Systems 97\/} (1998), 83--94.
+
+\bibitem{Grzegorzewski2010:trapfnapproxexpint}
+{\sc Grzegorzewski, P.}
+\newblock Algorithms for trapezoidal approximations of fuzzy numbers preserving
+  the expected interval.
+\newblock In {\em Foundations of Reasoning Under Uncertainty\/} (2010),
+  B.-M.~B. et~al, Ed., Springer, pp.~85--98.
+
+\bibitem{GrzegorzewskiPasternak2011:trapapproxsupcore}
+{\sc Grzegorzewski, P., and Pasternak-Winiarska, K.}
+\newblock Trapezoidal approximations of fuzzy numbers with restrictions on the
+  support and core.
+\newblock In {\em Proc. EUSFLAT/LFA 2011\/} (2011), Atlantis Press,
+  pp.~749--756.
+
+\bibitem{KaufmannGupta1985:fuzzybook}
+{\sc Kaufmann, A., and Gupta, M.~M.}
+\newblock {\em Introduction to {F}uzzy {A}rithmetic}.
+\newblock van Nostrand Reinhold Company, New York, 1985.
+
+\bibitem{KlirYuan1995:fuzzybook}
+{\sc Klir, G.~J., and Yuan, B.}
+\newblock {\em Fuzzy sets and fuzzy logic. {T}heory and applications}.
+\newblock Prentice Hall PTR, New Jersey, 1995.
+
+\bibitem{StefaniniSorini2009:eusflat}
+{\sc Stefanini, L., and Sorini, L.}
+\newblock Fuzzy arithmetic with parametric {LR} fuzzy numbers.
+\newblock In {\em Proc. IFSA/EUSFLAT 2009\/} (2009), pp.~600--605.
+
+\bibitem{Yeh2008:traptriapprox}
+{\sc Yeh, C.-T.}
+\newblock Trapezoidal and triangular approximations preserving the expected
+  interval.
+\newblock {\em Fuzzy Sets and Systems 159\/} (2008), 1345--1353.
+
+\end{thebibliography}
+
+
+\end{document}
