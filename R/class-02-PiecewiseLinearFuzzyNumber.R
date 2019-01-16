@@ -93,13 +93,13 @@ setClass(
          if (is.unsorted(object@knot.left))  return("`knot.left' should be sorted nondecreasingly")
          if (is.unsorted(object@knot.right)) return("`knot.right' should be sorted nondecreasingly")
 
-         if (!is.finite(object@knot.left)  || any(object@knot.left < object@a1 | object@knot.left > object@a2))
+         if (any(!is.finite(object@knot.left))  || any(object@knot.left < object@a1 | object@knot.left > object@a2))
             return("`knot.left' should be a vector with elements in [a1,a2]")
-         if (!is.finite(object@knot.right) || any(object@knot.right < object@a3 | object@knot.left > object@a4))
+         if (any(!is.finite(object@knot.right)) || any(object@knot.right < object@a3 | object@knot.left > object@a4))
             return("`knot.right' should be a vector with elements in [a3,a4]")
 
          if (any(diff(object@knot.alpha) <= 0)) return("`knot.alpha' should be sorted nondecreasingly and be unique");
-         if (!is.finite(object@knot.alpha) || any(object@knot.alpha < 0 | object@knot.alpha > 1))
+         if (any(!is.finite(object@knot.alpha)) || any(object@knot.alpha < 0 | object@knot.alpha > 1))
             return("`knot.alpha' should be a vector with elements in [0,1]")
       }
 
