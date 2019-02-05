@@ -1,6 +1,6 @@
-## This file is part of the FuzzyNumbers library.
+## This file is part of the FuzzyNumbers package
 ##
-## Copyright 2012-2014 Marek Gagolewski
+## Copyright 2012-2019 Marek Gagolewski
 ##
 ##
 ## FuzzyNumbers is free software: you can redistribute it and/or modify

@@ -9,11 +9,12 @@ classes and methods to deal with fuzzy numbers. The package may be used
 by researchers in FN theory, e.g., for preparing figures,
 generating numerical examples, or testing new algorithms.
 
-Fuzzy set theory give one of many ways to represent imprecise or vague
-information. Fuzzy numbers, which form a particular subclass of fuzzy sets
-of the real line, play a significant role in many important both theoretical
-and practical considerations. This is because we often describe our knowledge
-about objects through numbers, e.g., "I'm about 180 cm tall" or
+Fuzzy set theory gives one of many ways (in particular, see Bayesian
+probabilities) to represent imprecise 
+information. Fuzzy numbers form a particular subclass of fuzzy sets
+of the real line. The main idea behind this concept is motivated by
+the observation that people tend to describe their knowledge
+about objects through vague numbers, e.g., "I'm about 180 cm tall" or
 "The event happened between 2 and 3 p.m.".
 
 The **FuzzyNumbers** package aims to provide the following functionality:
@@ -29,7 +30,7 @@ and piecewise linear fuzzy numbers,
 
 * Basic arithmetic operations,
 
-* Ranking of fuzzy numbers (implemented operators <=,<,>,>= in forms
+* Ranking of fuzzy numbers (implemented operators <=, <, >, >= in forms
 of possibility and necessity functions - works only for
 `PiecewiseLinearFuzzyNumbers` for now)
 
@@ -37,23 +38,22 @@ of possibility and necessity functions - works only for
 
 * * *
 
-**Homepage**: http://FuzzyNumbers.rexamine.com/
+**Homepage**: http://gagolewski.com/software/
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
 **Tutorial**:
-Gagolewski M., Caha J., [A Guide to the FuzzyNumbers Package for R](https://github.com/Rexamine/FuzzyNumbers/raw/master/devel/tutorial/FuzzyNumbers-Tutorial_current.pdf), 2019.
+Gagolewski M., Caha J., [A Guide to the FuzzyNumbers Package for R](https://cran.r-project.org/web/packages/FuzzyNumbers/vignettes/FuzzyNumbersTutorial.pdf), 2019.
 
-**On-line manual**: http://docs.rexamine.com/R-man/FuzzyNumbers/FuzzyNumbers-package.html
 
 * * *
 
-**Author**: [Marek Gagolewski](http://gagolewski.rexamine.com/), with contributions from Jan Caha
+**Author**: [Marek Gagolewski](http://www.gagolewski.com/), with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
 > "Gagolewski M., Caha J. (2019). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.
-http://FuzzyNumbers.rexamine.com/."
+http://www.gagolewski.com/software/."
 
 A BibTeX entry for LaTeX users is:
 
@@ -62,6 +62,6 @@ A BibTeX entry for LaTeX users is:
    title = {FuzzyNumbers Package: Tools to deal with fuzzy numbers in R},
    author = {Marek Gagolewski},
    year = {2019},
-   url = {http://FuzzyNumbers.rexamine.com/}
+   url = {http://www.gagolewski.com/software/}
 }
 ```

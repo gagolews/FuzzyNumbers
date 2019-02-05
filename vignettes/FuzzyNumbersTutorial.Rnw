@@ -120,13 +120,11 @@ ${}^{1}$ Systems Research Institute, Polish Academy of Sciences
 
 ul. Newelska 6, 01-447 Warsaw, Poland
 
-Email: \texttt{gagolews@rexamine.com}
 
-{\large Jan Caha${}^{3}$}
+{\large Jan Caha${}^{2}$}
 
-${}^{3}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
+${}^{2}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
 
-Email: \texttt{jan.caha@klikni.cz}
 
 \bigskip
 
@@ -233,7 +231,8 @@ opts_chunk$set(
 
 \section{Getting Started}
 
-Fuzzy set theory gives one of many ways to represent
+Fuzzy set theory gives one of many ways (in particular, see Bayesian
+probabilities)  to represent
 imprecise or vague information. Fuzzy numbers (FNs), introduced
 by Dubois and Prade in \cite{DuboisPrade1978:opfn}, form a particular
 subclass of fuzzy sets of the real line.
@@ -250,9 +249,10 @@ $\mu_A(\lambda x_1 + (1-\lambda) x_2) \ge \mu_A(x_1)\wedge \mu_A(x_2)$,
 where $\mathrm{supp}(A) = \mathrm{cl}(\{x\in\mathbb{R}: \mu_A(x)>0\})$.
 \end{itemize}
 Fuzzy numbers aims to play a role in some applications
-(see \cite{KlirYuan1995:fuzzybook}),
-since we often describe our knowledge about objects
-through numbers, e.g., ``I'm about 180 cm tall''
+(see \cite{KlirYuan1995:fuzzybook}).
+The main idea behind this concept is motivated by
+the observation that people tend to describe their knowledge
+about objects through numbers, e.g., ``I'm about 180 cm tall''
 or ``The event occurred between 2 and 3 p.m.''.
 
 
