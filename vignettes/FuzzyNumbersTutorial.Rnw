@@ -128,8 +128,8 @@ ${}^{2}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
 
 \bigskip
 
-\href{http://FuzzyNumbers.rexamine.com/}%
-{http://FuzzyNumbers.rexamine.com}
+\href{https://cran.r-project.org/web/packages/FuzzyNumbers/}%
+{https://cran.r-project.org/web/packages/FuzzyNumbers/}
 
 \bigskip
 \today
@@ -2149,10 +2149,10 @@ plot(maxFN, col=6, add=TRUE)
 par(mar=c(4,4,2,1))
 plot(x, col=1, xlim = c(min,max))
 plot(y, col=2, add=TRUE)
-legend('topright', expression(x, y), lty=c(1,1), col=c(1,2))
+legend('bottom', expression(x, y), lty=c(1,1), col=c(1,2))
 plot(minFN, col=4)
 plot(maxFN, col=6, add=TRUE)
-legend('topright', expression(min, max), lty=c(1,1), col=c(4,6))
+legend('bottom', expression(min, max), lty=c(1,1), col=c(4,6))
 @
 \end{center}
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
@@ -2235,7 +2235,7 @@ legend('topright', expression(min, max), lty=c(1,1), col=c(4,6))
 % % \end{verbatim}
 
 \paragraph{Acknowledgments.}
-This document has been generated with \LaTeX and the \package{knitr}
+This document has been generated with \LaTeX{} and the \package{knitr}
 package for \R.
 Their authors' wonderful work is fully appreciated.
 Many thanks to Przemys\l{}aw Grzegorzewski, Lucian Coroianu
@@ -2342,7 +2342,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 {\sc Gagolewski, M.}
 \newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
   \textsf{R}}, 2019.
-\newblock {h}ttp://FuzzyNumbers.rexamine.com.
+\newblock {h}ttps://cran.r-project.org/web/packages/FuzzyNumbers/.
 
 \bibitem{Grzegorzewski1998:metricsordersfn}
 {\sc Grzegorzewski, P.}

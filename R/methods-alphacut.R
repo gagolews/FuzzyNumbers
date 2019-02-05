@@ -18,15 +18,15 @@
 
 
 #' @title
-#' Calculate Alpha-Cuts
+#' Compute Alpha-Cuts
 #'
 #' @description
-#' If \eqn{A} is a fuzzy numbers, then its \eqn{\alpha}-cuts are
+#' If \eqn{A} is a fuzzy number, then its \eqn{\alpha}-cuts are
 #' always in form of intervals.
 #' Moreover, the \eqn{\alpha}-cuts form a nonincreasing
 #' chain w.r.t. \eqn{alpha}.
 #'
-#' @param object a fuzzy numbers
+#' @param object a fuzzy number
 #' @param alpha numeric vector with elements in [0,1]
 #'
 #' @return Returns a matrix with two columns (left and right alha cut bounds).
@@ -63,7 +63,7 @@ setMethod(
             object@a1+(object@a2-object@a1)*object@lower(alpha[wh]),
             object@a3+(object@a4-object@a3)*object@upper(alpha[wh])
          )
-      x[wh,2] <- max(x[wh,1], x[wh,2]) # avoid numeric inaccuracies
+      x[wh,2] <- pmax(x[wh,1], x[wh,2]) # avoid numeric inaccuracies
       x
    }
 )

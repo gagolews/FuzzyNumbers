@@ -55,10 +55,7 @@
 #'      \code{\link{piecewiseLinearApproximation}}),
 #'    \item Visualization of FNs (see \code{\link{plot}}, \code{\link{as.character}}),
 #'    \item Basic operations on FNs (see e.g. \code{\link{fapply}} and \link{Arithmetic}),
-#'    \item Aggregation of FNs **TO DO**,
-#'    \item Ranking of FNs **TO DO**,
-#'    \item Random FN generation **TO DO**,
-#'    \item \dots
+#'    \item etc.
 #' }
 #'
 #'

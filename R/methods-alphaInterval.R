@@ -22,7 +22,7 @@
 
 
 #' @title
-#' Calculate the Alpha-Interval of a Fuzzy Number
+#' Compute the Alpha-Interval of a Fuzzy Number
 #'
 #' @description
 #' We have \eqn{\alpha-Int(A) := [\int_0^1 \alpha A_L(\alpha)\,d\alpha, \int_0^1 \alpha A_U(\alpha)\,d\alpha]
