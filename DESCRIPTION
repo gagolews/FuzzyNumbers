@@ -3,7 +3,8 @@ Title: Tools to Deal with Fuzzy Numbers
 Type: Package
 Authors@R: c(
     person("Marek", "Gagolewski", role = c("aut", "cre"),
-    email = "gagolews@rexamine.com"),
+    email = "marek@gagolewski.com",
+    comment = c(ORCID = "0000-0003-0637-6028")),
     person("Jan", "Caha", role = "ctb",
     email = "jan.caha@klikni.cz"))
 Description: S4 classes and methods
