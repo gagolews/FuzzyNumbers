@@ -14,7 +14,7 @@ Description: S4 classes and methods
     and piecewise linear ones, preparing plots for publications, computing
     possibility and necessity values for comparisons, etc.
 Version: 0.4-6
-Date: 2019-02-05
+Date: 2019-03-13
 URL: http://www.gagolewski.com/software/
 BugReports: http://github.com/gagolews/FuzzyNumbers/issues
 License: LGPL (>= 3)
