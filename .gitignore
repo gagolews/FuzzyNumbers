@@ -1,7 +1,6 @@
 Meta
 doc
-# Roxygen-generated man pages
-man/*.Rd
+
 
 # R/RStudio files:
 FuzzyNumbers.Rproj
