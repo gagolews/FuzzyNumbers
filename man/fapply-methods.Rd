@@ -32,27 +32,34 @@ For other types of fuzzy numbers, consider using
 \code{\link{piecewiseLinearApproximation}}.
 }
 \seealso{
-Other PiecewiseLinearFuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{PiecewiseLinearFuzzyNumber-class}},
-  \code{\link{PiecewiseLinearFuzzyNumber}},
-  \code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
-  \code{\link{alphaInterval}}, \code{\link{arctan2}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}},
-  \code{\link{expectedInterval}}, \code{\link{maximum}},
-  \code{\link{minimum}}, \code{\link{necessityExceedance}},
-  \code{\link{necessityStrictExceedance}},
-  \code{\link{necessityStrictUndervaluation}},
-  \code{\link{necessityUndervaluation}},
-  \code{\link{plot}}, \code{\link{possibilityExceedance}},
-  \code{\link{possibilityStrictExceedance}},
-  \code{\link{possibilityStrictUndervaluation}},
-  \code{\link{possibilityUndervaluation}}
+Other PiecewiseLinearFuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{PiecewiseLinearFuzzyNumber-class}},
+\code{\link{PiecewiseLinearFuzzyNumber}},
+\code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
+\code{\link{alphaInterval}()},
+\code{\link{arctan2}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{expectedInterval}()},
+\code{\link{maximum}()},
+\code{\link{minimum}()},
+\code{\link{necessityExceedance}()},
+\code{\link{necessityStrictExceedance}()},
+\code{\link{necessityStrictUndervaluation}()},
+\code{\link{necessityUndervaluation}()},
+\code{\link{plot}()},
+\code{\link{possibilityExceedance}()},
+\code{\link{possibilityStrictExceedance}()},
+\code{\link{possibilityStrictUndervaluation}()},
+\code{\link{possibilityUndervaluation}()}
 
-Other extension_principle: \code{\link{Arithmetic}},
-  \code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}}
+Other extension_principle: 
+\code{\link{Arithmetic}},
+\code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}}
 }
 \concept{PiecewiseLinearFuzzyNumber-method}
 \concept{extension_principle}

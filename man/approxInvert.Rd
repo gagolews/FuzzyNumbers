@@ -27,7 +27,8 @@ Thus, interpolation is used.
 \seealso{
 \code{\linkS4class{FuzzyNumber}}
 
-Other auxiliary: \code{\link{convertAlpha}},
-  \code{\link{convertSide}}
+Other auxiliary: 
+\code{\link{convertAlpha}()},
+\code{\link{convertSide}()}
 }
 \concept{auxiliary}

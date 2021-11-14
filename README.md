@@ -2,15 +2,13 @@
 
 ### Tools to Deal with Fuzzy Numbers in R
 
-[![Build Status](https://travis-ci.org/gagolews/FuzzyNumbers.svg?branch=master)](https://travis-ci.org/gagolews/FuzzyNumbers)
-
 **FuzzyNumbers** is an open source (LGPL 3) package for R. It provides S4
 classes and methods to deal with fuzzy numbers. The package may be used
 by researchers in FN theory, e.g., for preparing figures,
 generating numerical examples, or testing new algorithms.
 
 Fuzzy set theory gives one of many ways (in particular, see Bayesian
-probabilities) to represent imprecise 
+probabilities) to represent imprecise
 information. Fuzzy numbers form a particular subclass of fuzzy sets
 of the real line. The main idea behind this concept is motivated by
 the observation that people tend to describe their knowledge
@@ -32,13 +30,11 @@ and piecewise linear fuzzy numbers,
 
 * Ranking of fuzzy numbers (implemented operators <=, <, >, >= in forms
 of possibility and necessity functions - works only for
-`PiecewiseLinearFuzzyNumbers` for now)
+`PiecewiseLinearFuzzyNumbers` for now),
 
 * and many more.
 
 * * *
-
-**Homepage**: http://gagolewski.com/software/
 
 Package record on **CRAN**: http://cran.r-project.org/web/packages/FuzzyNumbers/
 
@@ -48,12 +44,13 @@ Gagolewski M., Caha J., [A Guide to the FuzzyNumbers Package for R](https://cran
 
 * * *
 
-**Author**: [Marek Gagolewski](http://www.gagolewski.com/), with contributions from Jan Caha
+**Author**: [Marek Gagolewski](https://www.gagolewski.com/), with contributions from Jan Caha
 
 To **cite** package **FuzzyNumbers** in publications please use:
 
-> "Gagolewski M., Caha J. (2019). *FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.
-http://www.gagolewski.com/software/."
+> "Gagolewski M., Caha J. (2021).
+*FuzzyNumbers Package: Tools to deal with fuzzy numbers in R*.
+https://github.com/gagolews/FuzzyNumbers/."
 
 A BibTeX entry for LaTeX users is:
 
@@ -61,7 +58,7 @@ A BibTeX entry for LaTeX users is:
 @Manual{FuzzyNumbersPkgR,
    title = {FuzzyNumbers Package: Tools to deal with fuzzy numbers in R},
    author = {Marek Gagolewski},
-   year = {2019},
-   url = {http://www.gagolewski.com/software/}
+   year = {2021},
+   url = {https://github.com/gagolews/FuzzyNumbers/}
 }
 ```

@@ -33,32 +33,39 @@ necessityStrictExceedance(a,b)
 DUBOIS, Didier and PRADE, Henri, 1983, Ranking Fuzzy Numbers in the Setting of Possibility Theory. Information Sciences. 1983. Vol. 30, no. 3, p. 183--224.
 }
 \seealso{
-Other comparison-operators: \code{\link{necessityExceedance}},
-  \code{\link{necessityStrictUndervaluation}},
-  \code{\link{necessityUndervaluation}},
-  \code{\link{possibilityExceedance}},
-  \code{\link{possibilityStrictExceedance}},
-  \code{\link{possibilityStrictUndervaluation}},
-  \code{\link{possibilityUndervaluation}}
+Other comparison-operators: 
+\code{\link{necessityExceedance}()},
+\code{\link{necessityStrictUndervaluation}()},
+\code{\link{necessityUndervaluation}()},
+\code{\link{possibilityExceedance}()},
+\code{\link{possibilityStrictExceedance}()},
+\code{\link{possibilityStrictUndervaluation}()},
+\code{\link{possibilityUndervaluation}()}
 
-Other PiecewiseLinearFuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{PiecewiseLinearFuzzyNumber-class}},
-  \code{\link{PiecewiseLinearFuzzyNumber}},
-  \code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
-  \code{\link{alphaInterval}}, \code{\link{arctan2}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}},
-  \code{\link{expectedInterval}}, \code{\link{fapply}},
-  \code{\link{maximum}}, \code{\link{minimum}},
-  \code{\link{necessityExceedance}},
-  \code{\link{necessityStrictUndervaluation}},
-  \code{\link{necessityUndervaluation}},
-  \code{\link{plot}}, \code{\link{possibilityExceedance}},
-  \code{\link{possibilityStrictExceedance}},
-  \code{\link{possibilityStrictUndervaluation}},
-  \code{\link{possibilityUndervaluation}}
+Other PiecewiseLinearFuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{PiecewiseLinearFuzzyNumber-class}},
+\code{\link{PiecewiseLinearFuzzyNumber}},
+\code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
+\code{\link{alphaInterval}()},
+\code{\link{arctan2}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{expectedInterval}()},
+\code{\link{fapply}()},
+\code{\link{maximum}()},
+\code{\link{minimum}()},
+\code{\link{necessityExceedance}()},
+\code{\link{necessityStrictUndervaluation}()},
+\code{\link{necessityUndervaluation}()},
+\code{\link{plot}()},
+\code{\link{possibilityExceedance}()},
+\code{\link{possibilityStrictExceedance}()},
+\code{\link{possibilityStrictUndervaluation}()},
+\code{\link{possibilityUndervaluation}()}
 }
 \concept{PiecewiseLinearFuzzyNumber-method}
 \concept{comparison-operators}

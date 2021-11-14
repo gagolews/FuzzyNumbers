@@ -19,27 +19,36 @@ We have \eqn{\mathrm{core}(A) := [a2,a3]}{core(A) := [a2,a3]}.
 This gives the values that a fuzzy number necessarily represents.
 }
 \seealso{
-Other FuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{FuzzyNumber-class}},
-  \code{\link{FuzzyNumber}}, \code{\link{alphaInterval}},
-  \code{\link{alphacut}}, \code{\link{ambiguity}},
-  \code{\link{as.FuzzyNumber}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}, \code{\link{distance}},
-  \code{\link{evaluate}}, \code{\link{expectedInterval}},
-  \code{\link{expectedValue}},
-  \code{\link{integrateAlpha}},
-  \code{\link{piecewiseLinearApproximation}},
-  \code{\link{plot}}, \code{\link{show}},
-  \code{\link{supp}},
-  \code{\link{trapezoidalApproximation}},
-  \code{\link{value}}, \code{\link{weightedExpectedValue}},
-  \code{\link{width}}
+Other FuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{FuzzyNumber-class}},
+\code{\link{FuzzyNumber}},
+\code{\link{alphaInterval}()},
+\code{\link{alphacut}()},
+\code{\link{ambiguity}()},
+\code{\link{as.FuzzyNumber}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{distance}()},
+\code{\link{evaluate}()},
+\code{\link{expectedInterval}()},
+\code{\link{expectedValue}()},
+\code{\link{integrateAlpha}()},
+\code{\link{piecewiseLinearApproximation}()},
+\code{\link{plot}()},
+\code{\link{show}()},
+\code{\link{supp}()},
+\code{\link{trapezoidalApproximation}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 
-Other alpha_cuts: \code{\link{alphacut}},
-  \code{\link{supp}}
+Other alpha_cuts: 
+\code{\link{alphacut}()},
+\code{\link{supp}()}
 }
 \concept{FuzzyNumber-method}
 \concept{alpha_cuts}

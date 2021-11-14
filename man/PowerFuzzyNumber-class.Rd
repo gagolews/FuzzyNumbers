@@ -48,11 +48,13 @@ Information Sciences 172, pp. 73-89.
 
 \code{\link{PowerFuzzyNumber}} for a convenient constructor
 
-Other PowerFuzzyNumber-method: \code{\link{PowerFuzzyNumber}},
-  \code{\link{alphaInterval}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}},
-  \code{\link{expectedInterval}}
+Other PowerFuzzyNumber-method: 
+\code{\link{Extract}},
+\code{\link{PowerFuzzyNumber}},
+\code{\link{alphaInterval}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{expectedInterval}()}
 }
 \concept{PowerFuzzyNumber-method}

@@ -114,13 +114,17 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 {\Large\sf (FuzzyNumbers version {\Sexpr{FNver}}) }
 
 \bigskip
-{\large Marek Gagolewski${}^{1}$}
+{\large Marek Gagolewski${}^{1,2,3}$}
 
-${}^{1}$ Systems Research Institute, Polish Academy of Sciences
+${}^{1}$ Deakin University, School of IT, Geelong, VIC, Australia
 
+${}^{2}$ Warsaw University of Technology, Faculty of Mathematics
+and Information Science,\\ ul. Koszykowa 75, 00-662 Warsaw, Poland
+
+${}^{3}$ Systems Research Institute, Polish Academy of Sciences,\\
 ul. Newelska 6, 01-447 Warsaw, Poland
 
-
+\medskip
 {\large Jan Caha${}^{2}$}
 
 ${}^{2}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
@@ -2031,6 +2035,7 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 
 \begin{center}
 <<suppcoreplfn1a5,echo=FALSE>>=
+suppressWarnings({
 par(mar=c(4,4,2,1))
 a <- seq(0, 1, length.out=1001)
 Da <- sapply(a, D)
@@ -2041,6 +2046,7 @@ points(c(0, 1), Da[c(1,length(a))], pch=16)
 opt <- optimize(D, interval=c(0,1))
 abline(v=opt$minimum, col="grey", lty=3)
 abline(h=opt$objective, col="grey", lty=3)
+})
 @
 \end{center}
 
@@ -2289,9 +2295,8 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 \bibitem{CoroianuETALXXXX:piecewise2}
 {\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
-\newblock Piecewise linear approximation of fuzzy numbers --
-a discussion on algorithms, arithmetic operations and stability of fuzzy number characteristics, 2014.
-\newblock Submitted paper.
+\newblock Piecewise linear approximation of fuzzy numbers: Algorithms, arithmetic operations and stability of characteristics.
+\newblock {\em Soft Computing 23(19)\/} (2019), 9491--9505.
 
 \bibitem{CoroianuETAL2014:piecewise1suppcore}
 {\sc Coroianu, L., Gagolewski, M., Grzegorzewski, P., {Adabitabar Firozja}, M.,
@@ -2341,7 +2346,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 \bibitem{Gagolewski:fuzzynumberspackage}
 {\sc Gagolewski, M.}
 \newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
-  \textsf{R}}, 2019.
+  \textsf{R}}, 2021.
 \newblock {h}ttps://cran.r-project.org/web/packages/FuzzyNumbers/.
 
 \bibitem{Grzegorzewski1998:metricsordersfn}

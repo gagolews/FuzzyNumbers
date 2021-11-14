@@ -28,29 +28,38 @@ work much faster and are more precise. This function shouldn't be
 used in normal computations.
 }
 \seealso{
-Other FuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{FuzzyNumber-class}},
-  \code{\link{FuzzyNumber}}, \code{\link{alphaInterval}},
-  \code{\link{alphacut}}, \code{\link{ambiguity}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}, \code{\link{core}},
-  \code{\link{distance}}, \code{\link{evaluate}},
-  \code{\link{expectedInterval}},
-  \code{\link{expectedValue}},
-  \code{\link{integrateAlpha}},
-  \code{\link{piecewiseLinearApproximation}},
-  \code{\link{plot}}, \code{\link{show}},
-  \code{\link{supp}},
-  \code{\link{trapezoidalApproximation}},
-  \code{\link{value}}, \code{\link{weightedExpectedValue}},
-  \code{\link{width}}
+Other FuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{FuzzyNumber-class}},
+\code{\link{FuzzyNumber}},
+\code{\link{alphaInterval}()},
+\code{\link{alphacut}()},
+\code{\link{ambiguity}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{core}()},
+\code{\link{distance}()},
+\code{\link{evaluate}()},
+\code{\link{expectedInterval}()},
+\code{\link{expectedValue}()},
+\code{\link{integrateAlpha}()},
+\code{\link{piecewiseLinearApproximation}()},
+\code{\link{plot}()},
+\code{\link{show}()},
+\code{\link{supp}()},
+\code{\link{trapezoidalApproximation}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 
-Other conversion: \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}
+Other conversion: 
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()}
 }
 \concept{FuzzyNumber-method}
 \concept{conversion}

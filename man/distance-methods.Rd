@@ -43,28 +43,39 @@ Grzegorzewski P., Metrics and orders in space of fuzzy numbers,
 Fuzzy Sets and Systems 97, 1998, pp. 83-94.
 }
 \seealso{
-Other FuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{FuzzyNumber-class}},
-  \code{\link{FuzzyNumber}}, \code{\link{alphaInterval}},
-  \code{\link{alphacut}}, \code{\link{ambiguity}},
-  \code{\link{as.FuzzyNumber}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}, \code{\link{core}},
-  \code{\link{evaluate}}, \code{\link{expectedInterval}},
-  \code{\link{expectedValue}},
-  \code{\link{integrateAlpha}},
-  \code{\link{piecewiseLinearApproximation}},
-  \code{\link{plot}}, \code{\link{show}},
-  \code{\link{supp}},
-  \code{\link{trapezoidalApproximation}},
-  \code{\link{value}}, \code{\link{weightedExpectedValue}},
-  \code{\link{width}}
+Other FuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{FuzzyNumber-class}},
+\code{\link{FuzzyNumber}},
+\code{\link{alphaInterval}()},
+\code{\link{alphacut}()},
+\code{\link{ambiguity}()},
+\code{\link{as.FuzzyNumber}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{core}()},
+\code{\link{evaluate}()},
+\code{\link{expectedInterval}()},
+\code{\link{expectedValue}()},
+\code{\link{integrateAlpha}()},
+\code{\link{piecewiseLinearApproximation}()},
+\code{\link{plot}()},
+\code{\link{show}()},
+\code{\link{supp}()},
+\code{\link{trapezoidalApproximation}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 
-Other DiscontinuousFuzzyNumber-method: \code{\link{DiscontinuousFuzzyNumber-class}},
-  \code{\link{DiscontinuousFuzzyNumber}},
-  \code{\link{integrateAlpha}}, \code{\link{plot}}
+Other DiscontinuousFuzzyNumber-method: 
+\code{\link{DiscontinuousFuzzyNumber-class}},
+\code{\link{DiscontinuousFuzzyNumber}},
+\code{\link{Extract}},
+\code{\link{integrateAlpha}()},
+\code{\link{plot}()}
 }
 \concept{DiscontinuousFuzzyNumber-method}
 \concept{FuzzyNumber-method}

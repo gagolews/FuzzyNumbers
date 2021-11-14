@@ -26,31 +26,42 @@ The expected value of \eqn{A} is defined as
 where \eqn{EI} is the \code{\link{expectedInterval}.}
 }
 \seealso{
-Other FuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{FuzzyNumber-class}},
-  \code{\link{FuzzyNumber}}, \code{\link{alphaInterval}},
-  \code{\link{alphacut}}, \code{\link{ambiguity}},
-  \code{\link{as.FuzzyNumber}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}, \code{\link{core}},
-  \code{\link{distance}}, \code{\link{evaluate}},
-  \code{\link{expectedInterval}},
-  \code{\link{integrateAlpha}},
-  \code{\link{piecewiseLinearApproximation}},
-  \code{\link{plot}}, \code{\link{show}},
-  \code{\link{supp}},
-  \code{\link{trapezoidalApproximation}},
-  \code{\link{value}}, \code{\link{weightedExpectedValue}},
-  \code{\link{width}}
+Other FuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{FuzzyNumber-class}},
+\code{\link{FuzzyNumber}},
+\code{\link{alphaInterval}()},
+\code{\link{alphacut}()},
+\code{\link{ambiguity}()},
+\code{\link{as.FuzzyNumber}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{core}()},
+\code{\link{distance}()},
+\code{\link{evaluate}()},
+\code{\link{expectedInterval}()},
+\code{\link{integrateAlpha}()},
+\code{\link{piecewiseLinearApproximation}()},
+\code{\link{plot}()},
+\code{\link{show}()},
+\code{\link{supp}()},
+\code{\link{trapezoidalApproximation}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 
-Other deffuzification: \code{\link{value}},
-  \code{\link{weightedExpectedValue}}
+Other deffuzification: 
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()}
 
-Other characteristics: \code{\link{ambiguity}},
-  \code{\link{value}}, \code{\link{weightedExpectedValue}},
-  \code{\link{width}}
+Other characteristics: 
+\code{\link{ambiguity}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 }
 \concept{FuzzyNumber-method}
 \concept{characteristics}

@@ -37,13 +37,15 @@ showMethods(classes="TrapezoidalFuzzyNumber")
 \code{\link{as.TrapezoidalFuzzyNumber}} for conversion of objects to this class,
 and \code{\link{trapezoidalApproximation}} for approximation routines.
 
-Other TrapezoidalFuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{TrapezoidalFuzzyNumber}},
-  \code{\link{TriangularFuzzyNumber}},
-  \code{\link{alphaInterval}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{expectedInterval}}, \code{\link{plot}}
+Other TrapezoidalFuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{TrapezoidalFuzzyNumber}},
+\code{\link{TriangularFuzzyNumber}()},
+\code{\link{alphaInterval}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{expectedInterval}()},
+\code{\link{plot}()}
 }
 \concept{TrapezoidalFuzzyNumber-method}

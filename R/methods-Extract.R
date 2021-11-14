@@ -44,10 +44,10 @@
 #' @name Extract
 #' @rdname Extract-methods
 #' @docType methods
-#' @family FuzzyNumber,character-method
-#' @family PiecewiseLinearFuzzyNumber,character-method
-#' @family PowerFuzzyNumber,character-method
-#' @family DiscontinuousFuzzyNumber,character-method
+#' @family FuzzyNumber-method
+#' @family PiecewiseLinearFuzzyNumber-method
+#' @family PowerFuzzyNumber-method
+#' @family DiscontinuousFuzzyNumber-method
 #' @exportMethod [
 #' @aliases [,FuzzyNumber,character-method
 #'          [,PiecewiseLinearFuzzyNumber,character-method

@@ -35,7 +35,7 @@
 #' @param x a fuzzy number
 #' @param toLaTeX logical; should LaTeX code be output?
 #' @param varnameLaTeX character; variable name to be included in equations
-#' 
+#'
 #' @return Returns a character vector.
 #'
 #' @usage
@@ -185,8 +185,7 @@ setMethod(
             "{%s}_L(\\alpha) = \\left\\{",
             "\\begin{array}{lll}",
             sep="\n"),
-            varnameLaTeX,
-            x@a1
+            varnameLaTeX
          ), sep="\n")
 
          for (i in 1:(n+1))
@@ -204,8 +203,7 @@ setMethod(
             "{%s}_U(\\alpha) = \\left\\{",
             "\\begin{array}{lll}",
             sep="\n"),
-              varnameLaTeX,
-              x@a1
+              varnameLaTeX
          ), sep="\n")
 
          for (i in 1:(n+1))

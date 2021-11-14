@@ -4,8 +4,8 @@
 %\VignetteKeyword{extension principle}
 %\VignetteKeyword{S4}
 \documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -154,16 +154,20 @@ If you use the ``official'' CRAN release, some of the features may be unavailabl
 \begin{center}
 {\LARGE\sf A Guide to the \package{FuzzyNumbers} Package for \R}
 
-{\Large\sf (FuzzyNumbers version {0.4-6}) }
+{\Large\sf (FuzzyNumbers version {0.4-7}) }
 
 \bigskip
-{\large Marek Gagolewski${}^{1}$}
+{\large Marek Gagolewski${}^{1,2,3}$}
 
-${}^{1}$ Systems Research Institute, Polish Academy of Sciences
+${}^{1}$ Deakin University, School of IT, Geelong, VIC, Australia
 
+${}^{2}$ Warsaw University of Technology, Faculty of Mathematics
+and Information Science,\\ ul. Koszykowa 75, 00-662 Warsaw, Poland
+
+${}^{3}$ Systems Research Institute, Polish Academy of Sciences,\\
 ul. Newelska 6, 01-447 Warsaw, Poland
 
-
+\medskip
 {\large Jan Caha${}^{2}$}
 
 ${}^{2}$ Institute of Geoinformatics, VŠB -- Technical University of Ostrava
@@ -438,7 +442,6 @@ To depict $A_1$ we call:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -526,7 +529,6 @@ now with arbitrary support and core.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -592,7 +594,6 @@ An example:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -646,7 +647,6 @@ complaints. However\dots
 {\centering \includegraphics[width=4.5in]{figure/A3deffig2-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -724,14 +724,14 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pbeta(alpha, 5, 9)
-## <bytecode: 0x5615cef3a5b0>
+## <bytecode: 0x556fbc441a48>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'upper'}\hlstd{]}
 \end{alltt}
 \begin{verbatim}
 ## function(alpha) pexp(1/alpha-1)
-## <bytecode: 0x5615cda56850>
+## <bytecode: 0x556fbc50abf8>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'left'}\hlstd{]}
@@ -739,7 +739,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x5615cfb275a8>
+## <environment: 0x556fbc21afb8>
 \end{verbatim}
 \begin{alltt}
 \hlstd{A2[}\hlstr{'right'}\hlstd{]}
@@ -747,7 +747,7 @@ runs so slow. To get more insight, let us look at the internals of \texttt{A2}:
 \begin{verbatim}
 ## function (x) 
 ## rep(NA_real_, length(x))
-## <environment: 0x5615cfb275a8>
+## <environment: 0x556fbc21afb8>
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -931,7 +931,6 @@ To depict $T_1$ we call:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -961,7 +960,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## alpha
-## <bytecode: 0x5615ce39df90>
+## <bytecode: 0x556fb941ee98>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -970,7 +969,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (alpha) 
 ## 1 - alpha
-## <bytecode: 0x5615ce39e0a8>
+## <bytecode: 0x556fb941ed48>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -979,7 +978,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## x
-## <bytecode: 0x5615ce39dc80>
+## <bytecode: 0x556fb941f218>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \begin{alltt}
@@ -988,7 +987,7 @@ do it not like with $A_1$ but rather as with $T_1$.
 \begin{verbatim}
 ## function (x) 
 ## 1 - x
-## <bytecode: 0x5615ce39ddd0>
+## <bytecode: 0x556fb941f100>
 ## <environment: namespace:FuzzyNumbers>
 \end{verbatim}
 \end{kframe}
@@ -1150,7 +1149,6 @@ PLFNs in our package are represented by the \texttt{PiecewiseLinearFuzzyNumber} 
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -1287,7 +1285,6 @@ we would do that by calling:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -1369,7 +1366,6 @@ An example:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -1437,7 +1433,6 @@ Let us consider the following FN:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -1473,7 +1468,6 @@ function of the same fuzzy number, but with different accuracy.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -1507,7 +1501,6 @@ If we want, for some reasons, to use $\alpha$-cuts, then we may do as follows:
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -1529,7 +1522,6 @@ We may also illustrate an $\alpha$-cut representation of a fuzzy number:
 {\centering \includegraphics[width=4.5in]{figure/depicting1h-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -1659,7 +1651,6 @@ example from one of our papers:
 {\centering \includegraphics[width=4.5in]{figure/depicting2b-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -2067,7 +2058,6 @@ as defined in \cite{KlirYuan1995:fuzzybook}.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2143,7 +2133,6 @@ To apply a monotonic transformation on a piecewise linear fuzzy number
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2178,7 +2167,6 @@ implemented as special function.
 {\centering \includegraphics[width=4.5in]{figure/exponentialFig-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -2305,7 +2293,6 @@ core and support as $A$.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2358,7 +2345,6 @@ always exists and is unique.
 {\centering \includegraphics[width=4.5in]{figure/ApproxExA_naiveL2n2-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -2488,7 +2474,6 @@ see~\cite{GrzegorzewskiPasternak2011:trapapproxsupcore}.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2531,7 +2516,6 @@ and each point that surely does not belong to $A$ also does not belong to $\math
 {\centering \includegraphics[width=4.5in]{figure/ApproxExA_RestrSuppCore2-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -2614,7 +2598,6 @@ of $A$ at given $\alpha$-cuts.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2673,7 +2656,6 @@ may be slow.
 {\centering \includegraphics[width=4.5in]{figure/ApproxPLFNNearest2-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -2769,7 +2751,6 @@ Let us study the convergence behavior for our exemplary $A$.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2805,7 +2786,6 @@ i.e., the $D_{A}(\alpha)$ function.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2834,11 +2814,11 @@ but in general the minimum is not necessarily unique.
 \hlstd{\}}
 \end{alltt}
 \begin{verbatim}
-## 0.660908551     24 *0.363097106* 0.650345412
-## 0.081525025     46 *0.363027266* 0.650345290
-## 0.710703289     30 *0.363231499* 0.650343978
-## 0.213518749     70 *0.363232666* 0.650343982
-## 0.185264868     26 *0.362897714* 0.650336546
+## 0.479953664     23 *0.363013386* 0.650345255
+## 0.365030065     58 *0.363232647* 0.650343982
+## 0.167672616     19 *0.363065427* 0.650343861
+## 0.982972596     24 *0.362988747* 0.650345226
+## 0.225371778     28 *0.362901069* 0.650336546
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2925,7 +2905,6 @@ PLFN approximations for $\boldsymbol\alpha=(0.2)$.
 }
 
 
-
 \end{knitrout}
 \end{center}
 
@@ -2959,7 +2938,6 @@ Note that $D(\alpha)=d_E(A,\mathcal{P}_\alpha(A))$ may not be a well-behaving fu
 {\centering \includegraphics[width=4.5in]{figure/suppcoreplfn1a5-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -3008,7 +2986,6 @@ We can visualized them together.
 {\centering \includegraphics[width=4.5in]{figure/compareXY1plot-1} 
 
 }
-
 
 
 \end{knitrout}
@@ -3197,7 +3174,6 @@ The definition allows determination of minimum and maximum only for Piecewise Li
 }
 
 
-
 \end{knitrout}
 \end{center}
 % \paragraph{Approximate algorithm [TO BE REMOVED] for fixed \argument{knot.alpha}.}
@@ -3334,9 +3310,8 @@ and by FNP START Scholarship from the Foundation for Polish Science (2013).
 
 \bibitem{CoroianuETALXXXX:piecewise2}
 {\sc Coroianu, L., Gagolewski, M., and Grzegorzewski, P.}
-\newblock Piecewise linear approximation of fuzzy numbers --
-a discussion on algorithms, arithmetic operations and stability of fuzzy number characteristics, 2014.
-\newblock Submitted paper.
+\newblock Piecewise linear approximation of fuzzy numbers: Algorithms, arithmetic operations and stability of characteristics.
+\newblock {\em Soft Computing 23(19)\/} (2019), 9491--9505.
 
 \bibitem{CoroianuETAL2014:piecewise1suppcore}
 {\sc Coroianu, L., Gagolewski, M., Grzegorzewski, P., {Adabitabar Firozja}, M.,
@@ -3386,7 +3361,7 @@ a discussion on algorithms, arithmetic operations and stability of fuzzy number 
 \bibitem{Gagolewski:fuzzynumberspackage}
 {\sc Gagolewski, M.}
 \newblock {\em {\texttt{FuzzyNumbers}}: {T}ools to deal with fuzzy numbers in
-  \textsf{R}}, 2019.
+  \textsf{R}}, 2021.
 \newblock {h}ttps://cran.r-project.org/web/packages/FuzzyNumbers/.
 
 \bibitem{Grzegorzewski1998:metricsordersfn}

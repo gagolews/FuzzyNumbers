@@ -38,8 +38,11 @@ showMethods(classes="DiscontinuousFuzzyNumber")
 \seealso{
 \code{\link{DiscontinuousFuzzyNumber}} for a convenient constructor
 
-Other DiscontinuousFuzzyNumber-method: \code{\link{DiscontinuousFuzzyNumber}},
-  \code{\link{distance}}, \code{\link{integrateAlpha}},
-  \code{\link{plot}}
+Other DiscontinuousFuzzyNumber-method: 
+\code{\link{DiscontinuousFuzzyNumber}},
+\code{\link{Extract}},
+\code{\link{distance}()},
+\code{\link{integrateAlpha}()},
+\code{\link{plot}()}
 }
 \concept{DiscontinuousFuzzyNumber-method}

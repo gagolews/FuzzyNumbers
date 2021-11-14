@@ -32,25 +32,30 @@ x = as.PiecewiseLinearFuzzyNumber(TriangularFuzzyNumber(-4.8, -4, 1.5), knot.n =
 arctan2(y,x)
 }
 \seealso{
-Other PiecewiseLinearFuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{PiecewiseLinearFuzzyNumber-class}},
-  \code{\link{PiecewiseLinearFuzzyNumber}},
-  \code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
-  \code{\link{alphaInterval}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}},
-  \code{\link{expectedInterval}}, \code{\link{fapply}},
-  \code{\link{maximum}}, \code{\link{minimum}},
-  \code{\link{necessityExceedance}},
-  \code{\link{necessityStrictExceedance}},
-  \code{\link{necessityStrictUndervaluation}},
-  \code{\link{necessityUndervaluation}},
-  \code{\link{plot}}, \code{\link{possibilityExceedance}},
-  \code{\link{possibilityStrictExceedance}},
-  \code{\link{possibilityStrictUndervaluation}},
-  \code{\link{possibilityUndervaluation}}
+Other PiecewiseLinearFuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{PiecewiseLinearFuzzyNumber-class}},
+\code{\link{PiecewiseLinearFuzzyNumber}},
+\code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
+\code{\link{alphaInterval}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{expectedInterval}()},
+\code{\link{fapply}()},
+\code{\link{maximum}()},
+\code{\link{minimum}()},
+\code{\link{necessityExceedance}()},
+\code{\link{necessityStrictExceedance}()},
+\code{\link{necessityStrictUndervaluation}()},
+\code{\link{necessityUndervaluation}()},
+\code{\link{plot}()},
+\code{\link{possibilityExceedance}()},
+\code{\link{possibilityStrictExceedance}()},
+\code{\link{possibilityStrictUndervaluation}()},
+\code{\link{possibilityUndervaluation}()}
 }
 \concept{PiecewiseLinearFuzzyNumber-method}
 \concept{special-method}

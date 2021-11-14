@@ -26,7 +26,8 @@ The function works for x1<x2 and x1>x2.
 \seealso{
 \code{\linkS4class{FuzzyNumber}}
 
-Other auxiliary: \code{\link{approxInvert}},
-  \code{\link{convertAlpha}}
+Other auxiliary: 
+\code{\link{approxInvert}()},
+\code{\link{convertAlpha}()}
 }
 \concept{auxiliary}

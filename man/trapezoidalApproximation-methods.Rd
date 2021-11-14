@@ -90,25 +90,35 @@ preserving the expected interval,
 Fuzzy Sets and Systems 159, pp. 1345-1353.
 }
 \seealso{
-Other approximation: \code{\link{piecewiseLinearApproximation}}
+Other approximation: 
+\code{\link{piecewiseLinearApproximation}()}
 
-Other FuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{FuzzyNumber-class}},
-  \code{\link{FuzzyNumber}}, \code{\link{alphaInterval}},
-  \code{\link{alphacut}}, \code{\link{ambiguity}},
-  \code{\link{as.FuzzyNumber}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}, \code{\link{core}},
-  \code{\link{distance}}, \code{\link{evaluate}},
-  \code{\link{expectedInterval}},
-  \code{\link{expectedValue}},
-  \code{\link{integrateAlpha}},
-  \code{\link{piecewiseLinearApproximation}},
-  \code{\link{plot}}, \code{\link{show}},
-  \code{\link{supp}}, \code{\link{value}},
-  \code{\link{weightedExpectedValue}}, \code{\link{width}}
+Other FuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{FuzzyNumber-class}},
+\code{\link{FuzzyNumber}},
+\code{\link{alphaInterval}()},
+\code{\link{alphacut}()},
+\code{\link{ambiguity}()},
+\code{\link{as.FuzzyNumber}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{core}()},
+\code{\link{distance}()},
+\code{\link{evaluate}()},
+\code{\link{expectedInterval}()},
+\code{\link{expectedValue}()},
+\code{\link{integrateAlpha}()},
+\code{\link{piecewiseLinearApproximation}()},
+\code{\link{plot}()},
+\code{\link{show}()},
+\code{\link{supp}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 }
 \concept{FuzzyNumber-method}
 \concept{approximation}

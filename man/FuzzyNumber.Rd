@@ -4,9 +4,16 @@
 \alias{FuzzyNumber}
 \title{Creates a Fuzzy Number}
 \usage{
-FuzzyNumber(a1, a2, a3, a4, lower = function(a) rep(NA_real_, length(a)),
-  upper = function(a) rep(NA_real_, length(a)), left = function(x)
-  rep(NA_real_, length(x)), right = function(x) rep(NA_real_, length(x)))
+FuzzyNumber(
+  a1,
+  a2,
+  a3,
+  a4,
+  lower = function(a) rep(NA_real_, length(a)),
+  upper = function(a) rep(NA_real_, length(a)),
+  left = function(x) rep(NA_real_, length(x)),
+  right = function(x) rep(NA_real_, length(x))
+)
 }
 \arguments{
 \item{a1}{a number specyfing left bound of the support}
@@ -33,23 +40,31 @@ For convenience, objects of class \code{\linkS4class{FuzzyNumber}}
 may be created with this function.
 }
 \seealso{
-Other FuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{FuzzyNumber-class}},
-  \code{\link{alphaInterval}}, \code{\link{alphacut}},
-  \code{\link{ambiguity}}, \code{\link{as.FuzzyNumber}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}}, \code{\link{core}},
-  \code{\link{distance}}, \code{\link{evaluate}},
-  \code{\link{expectedInterval}},
-  \code{\link{expectedValue}},
-  \code{\link{integrateAlpha}},
-  \code{\link{piecewiseLinearApproximation}},
-  \code{\link{plot}}, \code{\link{show}},
-  \code{\link{supp}},
-  \code{\link{trapezoidalApproximation}},
-  \code{\link{value}}, \code{\link{weightedExpectedValue}},
-  \code{\link{width}}
+Other FuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{FuzzyNumber-class}},
+\code{\link{alphaInterval}()},
+\code{\link{alphacut}()},
+\code{\link{ambiguity}()},
+\code{\link{as.FuzzyNumber}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{core}()},
+\code{\link{distance}()},
+\code{\link{evaluate}()},
+\code{\link{expectedInterval}()},
+\code{\link{expectedValue}()},
+\code{\link{integrateAlpha}()},
+\code{\link{piecewiseLinearApproximation}()},
+\code{\link{plot}()},
+\code{\link{show}()},
+\code{\link{supp}()},
+\code{\link{trapezoidalApproximation}()},
+\code{\link{value}()},
+\code{\link{weightedExpectedValue}()},
+\code{\link{width}()}
 }
 \concept{FuzzyNumber-method}

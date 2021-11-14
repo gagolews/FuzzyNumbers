@@ -9,3 +9,4 @@
 ^\.gitignore$
 ^\.travis\.yml$
 ^vignettes/.*[^Rp][^nd][^wf]$
+^Makefile$

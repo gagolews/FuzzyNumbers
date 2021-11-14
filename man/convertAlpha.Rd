@@ -23,7 +23,8 @@ linearly scales its output.
 \seealso{
 \code{\linkS4class{FuzzyNumber}}
 
-Other auxiliary: \code{\link{approxInvert}},
-  \code{\link{convertSide}}
+Other auxiliary: 
+\code{\link{approxInvert}()},
+\code{\link{convertSide}()}
 }
 \concept{auxiliary}

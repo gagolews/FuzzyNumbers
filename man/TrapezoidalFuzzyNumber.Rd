@@ -23,13 +23,15 @@ For convenience, objects of class \code{\linkS4class{TrapezoidalFuzzyNumber}}
 may be created with this function.
 }
 \seealso{
-Other TrapezoidalFuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{TrapezoidalFuzzyNumber-class}},
-  \code{\link{TriangularFuzzyNumber}},
-  \code{\link{alphaInterval}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{expectedInterval}}, \code{\link{plot}}
+Other TrapezoidalFuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{TrapezoidalFuzzyNumber-class}},
+\code{\link{TriangularFuzzyNumber}()},
+\code{\link{alphaInterval}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{expectedInterval}()},
+\code{\link{plot}()}
 }
 \concept{TrapezoidalFuzzyNumber-method}

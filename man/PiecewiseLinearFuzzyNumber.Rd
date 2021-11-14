@@ -4,9 +4,16 @@
 \alias{PiecewiseLinearFuzzyNumber}
 \title{Creates a Piecewise Linear Fuzzy Number}
 \usage{
-PiecewiseLinearFuzzyNumber(a1, a2, a3, a4, knot.n = 0,
-  knot.alpha = numeric(0), knot.left = numeric(0),
-  knot.right = numeric(0))
+PiecewiseLinearFuzzyNumber(
+  a1,
+  a2,
+  a3,
+  a4,
+  knot.n = 0,
+  knot.alpha = numeric(0),
+  knot.left = numeric(0),
+  knot.right = numeric(0)
+)
 }
 \arguments{
 \item{a1}{a number specyfing left bound of the support}
@@ -41,23 +48,29 @@ If \code{knot.alpha} is missing, then the knots will be equally distributed
 on the interval [0,1].
 }
 \seealso{
-Other PiecewiseLinearFuzzyNumber-method: \code{\link{Arithmetic}},
-  \code{\link{PiecewiseLinearFuzzyNumber-class}},
-  \code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
-  \code{\link{alphaInterval}}, \code{\link{arctan2}},
-  \code{\link{as.PiecewiseLinearFuzzyNumber}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}},
-  \code{\link{expectedInterval}}, \code{\link{fapply}},
-  \code{\link{maximum}}, \code{\link{minimum}},
-  \code{\link{necessityExceedance}},
-  \code{\link{necessityStrictExceedance}},
-  \code{\link{necessityStrictUndervaluation}},
-  \code{\link{necessityUndervaluation}},
-  \code{\link{plot}}, \code{\link{possibilityExceedance}},
-  \code{\link{possibilityStrictExceedance}},
-  \code{\link{possibilityStrictUndervaluation}},
-  \code{\link{possibilityUndervaluation}}
+Other PiecewiseLinearFuzzyNumber-method: 
+\code{\link{Arithmetic}},
+\code{\link{Extract}},
+\code{\link{PiecewiseLinearFuzzyNumber-class}},
+\code{\link{^,PiecewiseLinearFuzzyNumber,numeric-method}},
+\code{\link{alphaInterval}()},
+\code{\link{arctan2}()},
+\code{\link{as.PiecewiseLinearFuzzyNumber}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{expectedInterval}()},
+\code{\link{fapply}()},
+\code{\link{maximum}()},
+\code{\link{minimum}()},
+\code{\link{necessityExceedance}()},
+\code{\link{necessityStrictExceedance}()},
+\code{\link{necessityStrictUndervaluation}()},
+\code{\link{necessityUndervaluation}()},
+\code{\link{plot}()},
+\code{\link{possibilityExceedance}()},
+\code{\link{possibilityStrictExceedance}()},
+\code{\link{possibilityStrictUndervaluation}()},
+\code{\link{possibilityUndervaluation}()}
 }
 \concept{PiecewiseLinearFuzzyNumber-method}

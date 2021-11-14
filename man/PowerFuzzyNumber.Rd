@@ -27,11 +27,13 @@ For convenience, objects of class \code{\linkS4class{PowerFuzzyNumber}}
 may be created with this function.
 }
 \seealso{
-Other PowerFuzzyNumber-method: \code{\link{PowerFuzzyNumber-class}},
-  \code{\link{alphaInterval}},
-  \code{\link{as.PowerFuzzyNumber}},
-  \code{\link{as.TrapezoidalFuzzyNumber}},
-  \code{\link{as.character}},
-  \code{\link{expectedInterval}}
+Other PowerFuzzyNumber-method: 
+\code{\link{Extract}},
+\code{\link{PowerFuzzyNumber-class}},
+\code{\link{alphaInterval}()},
+\code{\link{as.PowerFuzzyNumber}()},
+\code{\link{as.TrapezoidalFuzzyNumber}()},
+\code{\link{as.character}()},
+\code{\link{expectedInterval}()}
 }
 \concept{PowerFuzzyNumber-method}
