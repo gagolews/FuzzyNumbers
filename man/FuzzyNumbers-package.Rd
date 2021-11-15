@@ -13,7 +13,7 @@ generating numerical examples, preparing figures).
 }
 \details{
 Fuzzy set theory gives one of many ways (in particular, see Bayesian
-probabilities) to represent imprecise 
+probabilities) to represent imprecise
 information. Fuzzy numbers form a particular subclass of fuzzy sets
 of the real line. The main idea behind this concept is motivated by
 the observation that people tend to describe their knowledge
@@ -66,8 +66,6 @@ Przemyslaw Grzegorzewski, Lucian Coroianu, and Pablo Villacorta Iglesias
  applications'', agreement UDA-POKL.04.01.01-00-051/10-00.
 }
 \references{
-\pkg{FuzzyNumbers} Homepage, \url{http://www.gagolewski.com/software/}.
-
 Ban A.I. (2008), Approximation of fuzzy numbers by trapezoidal fuzzy numbers
 preserving the expected interval, Fuzzy Sets and Systems 159, pp. 1327-1344.
 
